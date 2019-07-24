@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BusinessUnits">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="BusinessUnitId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="BusinessUnitId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="NTN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="STRN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="GST" Type="float" Nullable="false" />
+    <Property Name="Logo" Type="image" />
+    <Property Name="ShowName" Type="bit" Nullable="false" />
+    <Property Name="ShowLogo" Type="bit" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CurrencyRate" Type="float" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Symbol" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="LastModifiedBy" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="BusinessUnitId" Type="int" Nullable="false" />
+    <Property Name="RegionId" Type="int" />
+    <Property Name="ZoneId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="BusinessLine" Type="nvarchar" MaxLength="50" />
+    <Property Name="Discount" Type="float" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactPerson" Type="varchar" MaxLength="255" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="255" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountNo" Type="varchar" MaxLength="50" />
+    <Property Name="NTN" Type="varchar" MaxLength="50" />
+    <Property Name="STRN" Type="varchar" MaxLength="50" />
+    <Property Name="CNIC" Type="varchar" MaxLength="50" />
+    <Property Name="AccountCode" Type="varchar" MaxLength="50" />
+    <Property Name="RegDate" Type="datetime" />
+    <Property Name="Remarks" Type="varchar(max)" />
+    <Property Name="Address" Type="varchar" MaxLength="255" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="Region" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="CreditLimit" Type="float" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="FinancialYearDefination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="BusinessUnitId" Type="int" Nullable="false" />
+    <Property Name="FYearTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FYearStartDate" Type="datetime" Nullable="false" />
+    <Property Name="FYearEndDate" Type="datetime" Nullable="false" />
+    <Property Name="FYearActive" Type="bit" />
+    <Property Name="FYearLocked" Type="bit" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="ModuleCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="70" />
+    <Property Name="moduleId" Type="int" />
+    <Property Name="CssClass" Type="varchar" MaxLength="50" />
+    <Property Name="OrderBy" Type="float" />
+    <Property Name="Project" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="ModuleForms">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="formName" Type="varchar" MaxLength="70" />
+    <Property Name="formAlias" Type="varchar" MaxLength="70" />
+    <Property Name="moduleId" Type="int" />
+    <Property Name="moduleCategoryId" Type="int" />
+    <Property Name="Navigation" Type="bit" />
+    <Property Name="OrderBy" Type="float" />
+    <Property Name="Project" Type="varchar" MaxLength="3" />
+    <Property Name="IconClass" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Modules">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrderBy" Type="float" />
+    <Property Name="Project" Type="varchar" MaxLength="3" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="Icon" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abbreviation" Type="varchar" MaxLength="50" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="BusinessUnitId" Type="int" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="createdBy" Type="uniqueidentifier" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="modifiedBy" Type="uniqueidentifier" />
+    <Property Name="modifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RolesToUser">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="createdBy" Type="uniqueidentifier" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="modifiedBy" Type="uniqueidentifier" />
+    <Property Name="modifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Units">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="UnitMeasure" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessUnitId" Type="int" />
+    <Property Name="Title" Type="varchar" MaxLength="25" />
+    <Property Name="UnitMeasure" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abbreviation" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="OldPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NewPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="VendorId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="VendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VendorName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VendorType" Type="varchar" MaxLength="50" />
+    <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="FaxNo" Type="varchar" MaxLength="50" />
+    <Property Name="CNIC" Type="varchar" MaxLength="50" />
+    <Property Name="AccountNo" Type="varchar" MaxLength="50" />
+    <Property Name="NTN" Type="varchar" MaxLength="50" />
+    <Property Name="STRN" Type="varchar" MaxLength="50" />
+    <Property Name="CurrencyId" Type="int" Nullable="false" />
+    <Property Name="NatureOfBusinessId" Type="int" />
+    <Property Name="TypeOfBusinessId" Type="int" />
+    <Property Name="YearEstablished" Type="int" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="Remarks" Type="varchar(max)" />
+    <Property Name="AccountCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="CopyStatus" Type="bit" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="VendorsBusinessNature">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="BNatureName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="VendorsOrgType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="OrgTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="StatusId" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK_BusinessUnits_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="BusinessUnits" Type="Self.BusinessUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="BusinessUnits">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Province">
+    <End Role="Province" Type="Self.Province" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="ProvinceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FinancialYearDefination_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="FinancialYearDefination" Type="Self.FinancialYearDefination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="FinancialYearDefination">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="BusinessUnits" EntityType="Self.BusinessUnits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FinancialYearDefination" EntityType="Self.FinancialYearDefination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModuleCategory" EntityType="Self.ModuleCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModuleForms" EntityType="Self.ModuleForms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolesToUser" EntityType="Self.RolesToUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VendorsBusinessNature" EntityType="Self.VendorsBusinessNature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VendorsOrgType" EntityType="Self.VendorsOrgType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BusinessUnits_Company" Association="Self.FK_BusinessUnits_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="BusinessUnits" EntitySet="BusinessUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Province" Association="Self.FK_City_Province">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Self.FK_FinancialYearDefination_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="FinancialYearDefination" EntitySet="FinancialYearDefination" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

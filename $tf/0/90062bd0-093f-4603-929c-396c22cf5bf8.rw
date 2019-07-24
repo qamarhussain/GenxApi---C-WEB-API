@@ -1,0 +1,6 @@
+﻿namespace SMS.Data.Repositories.Payroll
+{
+    public class GenericPayrollCRUD<T>
+    {
+    }
+}

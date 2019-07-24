@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBB91F19-C7FA-4127-A5F0-8238E3B29375}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GENXAPI.Repisitory</RootNamespace>
+    <AssemblyName>GENXAPI.Repisitory</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Infrastructure\GenericCRUD.cs" />
+    <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\BusinessUnit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\City.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Company.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Country.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Currency.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Customer.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DropdownListDto.cs" />
+    <Compile Include="Model\FinancialYearDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GenxApiDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenxApiDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GenxApiDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GenxApiDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Module.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModuleCategory.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModuleForm.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Province.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Role.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RolesToUser.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Unit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Vendor.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VendorsBusinessNature.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VendorsOrgType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BusinessUnitRepo.cs" />
+    <Compile Include="Repositories\CityRepo.cs" />
+    <Compile Include="Repositories\CompanyRepo.cs" />
+    <Compile Include="Repositories\CurrencyRepo.cs" />
+    <Compile Include="Repositories\CustomerRepo.cs" />
+    <Compile Include="Repositories\FinancialYearDefination.cs" />
+    <Compile Include="Repositories\ModuleFormRepo.cs" />
+    <Compile Include="Repositories\ProvinceRepo.cs" />
+    <Compile Include="Repositories\UnitRepo.cs" />
+    <Compile Include="Repositories\UserRepo.cs" />
+    <Compile Include="Repositories\VendorOrgTypeRepo.cs" />
+    <Compile Include="Repositories\VendorRepo.cs" />
+    <Compile Include="Repositories\VendorsBusinessNatureRepo.cs" />
+    <Compile Include="Utilities\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Model\GenxApiDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GenxApiDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Model\GenxApiDataModel.edmx.diagram">
+      <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\GenxApiDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
+      <LastGenOutput>GenxApiDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\GenxApiDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
+      <LastGenOutput>GenxApiDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
