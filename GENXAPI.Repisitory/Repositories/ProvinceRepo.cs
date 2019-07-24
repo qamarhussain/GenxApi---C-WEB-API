@@ -13,7 +13,7 @@ namespace GENXAPI.Repisitory
 
         public IList<Province> GetAllActive()
         {
-            var result = GetAll();
+            var result = Find(m => m.StatusId == (byte)Status.Active);
             return result.ToList();
         }
 

@@ -17,3 +17,4 @@ D:\Genx-Backend\Genx-api\GENXAPI.Repisitory\bin\Debug\EntityFramework.xml
 D:\Genx-Backend\Genx-api\GENXAPI.Repisitory\bin\Debug\EntityFramework.SqlServer.xml
 D:\Genx-Backend\Genx-api\GENXAPI.Repisitory\obj\Debug\GENXAPI.Repisitory.dll
 D:\Genx-Backend\Genx-api\GENXAPI.Repisitory\obj\Debug\GENXAPI.Repisitory.pdb
+D:\Genx-Backend\Genx-api\GENXAPI.Repisitory\obj\Debug\GENXAPI.Repisitory.csprojResolveAssemblyReference.cache

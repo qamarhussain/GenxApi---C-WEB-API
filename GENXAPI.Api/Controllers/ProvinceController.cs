@@ -20,7 +20,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _provinceRepo.GetAll().ToList();
+                var result = _provinceRepo.GetAllActive();
                 return Ok(result);
             }
             catch (Exception)
