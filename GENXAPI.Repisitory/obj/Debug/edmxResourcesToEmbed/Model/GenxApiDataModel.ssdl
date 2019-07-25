@@ -129,6 +129,20 @@
     <Property Name="FYearLocked" Type="bit" />
     <Property Name="StatusId" Type="tinyint" />
   </EntityType>
+  <EntityType Name="FleetService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ServiceType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+    <Property Name="StatusId" Type="tinyint" />
+    <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="ModuleCategory">
     <Key>
       <PropertyRef Name="id" />
@@ -239,6 +253,22 @@
     <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Vehicles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Weight" Type="varchar" MaxLength="50" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="BusinessUnitId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="StatusId" Type="tinyint" />
+    <Property Name="LastModifiedDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="Vendor">
     <Key>
       <PropertyRef Name="VendorId" />
@@ -343,6 +373,7 @@
     <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FinancialYearDefination" EntityType="Self.FinancialYearDefination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FleetService" EntityType="Self.FleetService" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModuleCategory" EntityType="Self.ModuleCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModuleForms" EntityType="Self.ModuleForms" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
@@ -351,6 +382,7 @@
     <EntitySet Name="RolesToUser" EntityType="Self.RolesToUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VendorsBusinessNature" EntityType="Self.VendorsBusinessNature" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VendorsOrgType" EntityType="Self.VendorsOrgType" Schema="dbo" store:Type="Tables" />

@@ -79,6 +79,9 @@
     <Compile Include="Model\FinancialYearDefination.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\FleetService.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\GenxApiDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,6 +121,9 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Vehicle.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Vendor.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -138,6 +144,7 @@
     <Compile Include="Repositories\ProvinceRepo.cs" />
     <Compile Include="Repositories\UnitRepo.cs" />
     <Compile Include="Repositories\UserRepo.cs" />
+    <Compile Include="Repositories\VehicleRepo.cs" />
     <Compile Include="Repositories\VendorOrgTypeRepo.cs" />
     <Compile Include="Repositories\VendorRepo.cs" />
     <Compile Include="Repositories\VendorsBusinessNatureRepo.cs" />

@@ -26,6 +26,8 @@
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
         <AssociationConnector Association="Model.FK_City_Province" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
+        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="3.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="5.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
