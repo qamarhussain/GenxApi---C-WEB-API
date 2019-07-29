@@ -8,24 +8,25 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class ProvinceRepo : GenericCRUD<Province>
+    public class FleetServiceRepo : GenericCRUD<FleetService>
     {
 
-        public IList<Province> GetAllActive()
+        public IList<FleetService> GetAllActive()
         {
-            var result = Find(m => m.StatusId == (byte)Status.Active);
+            var result = GetAll();
             return result.ToList();
         }
 
-        public IList<DropdownListDto> GetKeyPairValue(int CompanyId, int BusinessUnitId)
+        public IList<DropdownListDto> GetKeyPairValue()
         {
-            var result = Find(m => m.StatusId == (byte)Status.Active && m.CompanyId == CompanyId && m.BusinessUnitId == BusinessUnitId).Select(r =>
+            var result = Find(m => m.StatusId == (byte)Status.Active).Select(r =>
             new DropdownListDto
             {
                 Value = r.Id.ToString(),
-                Text = r.Name
+                Text = r.ServiceName
             });
             return result.ToList();
+
         }
     }
 }

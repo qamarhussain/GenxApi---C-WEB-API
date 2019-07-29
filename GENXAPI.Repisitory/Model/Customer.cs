@@ -14,6 +14,14 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Tenders = new HashSet<Tender>();
+            this.TenderChilds = new HashSet<TenderChild>();
+            this.TenderDetails = new HashSet<TenderDetail>();
+        }
+    
         public int Id { get; set; }
         public int CompanyId { get; set; }
         public int BusinessUnitId { get; set; }
@@ -46,5 +54,13 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<double> CreditLimit { get; set; }
         public Nullable<byte> StatusId { get; set; }
+        public string Abbreviation { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tender> Tenders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TenderChild> TenderChilds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TenderDetail> TenderDetails { get; set; }
     }
 }

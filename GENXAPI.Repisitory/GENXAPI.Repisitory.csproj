@@ -115,6 +115,15 @@
     <Compile Include="Model\RolesToUser.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Tender.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TenderChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TenderDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Unit.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -140,8 +149,10 @@
     <Compile Include="Repositories\CurrencyRepo.cs" />
     <Compile Include="Repositories\CustomerRepo.cs" />
     <Compile Include="Repositories\FinancialYearDefination.cs" />
+    <Compile Include="Repositories\FleetServiceRepo.cs" />
     <Compile Include="Repositories\ModuleFormRepo.cs" />
     <Compile Include="Repositories\ProvinceRepo.cs" />
+    <Compile Include="Repositories\TenderRepo.cs" />
     <Compile Include="Repositories\UnitRepo.cs" />
     <Compile Include="Repositories\UserRepo.cs" />
     <Compile Include="Repositories\VehicleRepo.cs" />

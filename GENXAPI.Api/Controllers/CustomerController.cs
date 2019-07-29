@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Models;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System;
@@ -110,6 +111,7 @@ namespace GENXAPI.Api.Controllers
                 customerModel.STRN = customer.STRN;
                 customerModel.Type = customer.Type;
                 customerModel.ZoneId = customer.ZoneId;
+                customerModel.Abbreviation = customer.Abbreviation;
                 _customerRepo.Update(customerModel);
                 return Ok(customerModel);
             }
@@ -145,12 +147,12 @@ namespace GENXAPI.Api.Controllers
         }
 
         
-        [HttpGet]
-        public IHttpActionResult GetStartupKeyPair()
+        [HttpPost]
+        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                var keyPairValues = _customerRepo.GetKeyPairValue();
+                var keyPairValues = _customerRepo.GetKeyPairValue(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
                 return Ok(keyPairValues);
             }
             catch(Exception ex)

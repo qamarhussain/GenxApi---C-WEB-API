@@ -17,16 +17,29 @@ namespace GENXAPI.Repisitory
             return result.ToList();
         }
 
-        public IList<DropdownListDto> GetKeyPairValue()
+        public IList<DropdownListDto> GetKeyPairValue(int? ProvinceId)
         {
-            var result = Find(m => m.StatusId == (byte)Status.Active).Select(r =>
-            new DropdownListDto
+            var result = new List<DropdownListDto>();
+            if (ProvinceId != null)
             {
-                Value = r.Id.ToString(),
-                Text = r.Name 
-            });
-            return result.ToList();
+                result = Find(m => m.StatusId == (byte)Status.Active && m.ProvinceId == ProvinceId).Select(r =>
+         new DropdownListDto
+         {
+             Value = r.Id.ToString(),
+             Text = r.Name
+         }).ToList();
+            }
+            else
+            {
+                result = Find(m => m.StatusId == (byte)Status.Active).Select(r =>
+         new DropdownListDto
+         {
+             Value = r.Id.ToString(),
+             Text = r.Name
+         }).ToList();
+            }
 
+            return result.ToList();
         }
     }
 }

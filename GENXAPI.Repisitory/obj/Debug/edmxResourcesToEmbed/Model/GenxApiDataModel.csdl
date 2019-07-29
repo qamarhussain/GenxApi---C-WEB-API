@@ -6,16 +6,20 @@
     <EntitySet Name="Companies" EntityType="Model.Company" />
     <EntitySet Name="Countries" EntityType="Model.Country" />
     <EntitySet Name="Currencies" EntityType="Model.Currency" />
-    <EntitySet Name="Customers" EntityType="Model.Customer" />
     <EntitySet Name="FinancialYearDefinations" EntityType="Model.FinancialYearDefination" />
+    <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
     <EntitySet Name="ModuleCategories" EntityType="Model.ModuleCategory" />
     <EntitySet Name="ModuleForms" EntityType="Model.ModuleForm" />
     <EntitySet Name="Modules" EntityType="Model.Module" />
     <EntitySet Name="Provinces" EntityType="Model.Province" />
     <EntitySet Name="Roles" EntityType="Model.Role" />
     <EntitySet Name="RolesToUsers" EntityType="Model.RolesToUser" />
+    <EntitySet Name="Tenders" EntityType="Model.Tender" />
+    <EntitySet Name="TenderChilds" EntityType="Model.TenderChild" />
+    <EntitySet Name="TenderDetails" EntityType="Model.TenderDetail" />
     <EntitySet Name="Units" EntityType="Model.Unit" />
     <EntitySet Name="Users" EntityType="Model.User" />
+    <EntitySet Name="Vehicles" EntityType="Model.Vehicle" />
     <EntitySet Name="Vendors" EntityType="Model.Vendor" />
     <EntitySet Name="VendorsBusinessNatures" EntityType="Model.VendorsBusinessNature" />
     <EntitySet Name="VendorsOrgTypes" EntityType="Model.VendorsOrgType" />
@@ -31,8 +35,27 @@
       <End Role="Company" EntitySet="Companies" />
       <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
     </AssociationSet>
-    <EntitySet Name="Vehicles" EntityType="Model.Vehicle" />
-    <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
+    <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
+      <End Role="Tender" EntitySet="Tenders" />
+      <End Role="TenderChild" EntitySet="TenderChilds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
+      <End Role="Tender" EntitySet="Tenders" />
+      <End Role="TenderDetail" EntitySet="TenderDetails" />
+    </AssociationSet>
+    <EntitySet Name="Customers" EntityType="Model.Customer" />
+    <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Tender" EntitySet="Tenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenderChild_Customers" Association="Model.FK_TenderChild_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="TenderChild" EntitySet="TenderChilds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenderDetail_Customers" Association="Model.FK_TenderDetail_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="TenderDetail" EntitySet="TenderDetails" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="BusinessUnit">
     <Key>
@@ -116,43 +139,6 @@
     <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="StatusId" Type="Byte" Nullable="false" />
   </EntityType>
-  <EntityType Name="Customer">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
-    <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
-    <Property Name="RegionId" Type="Int32" />
-    <Property Name="ZoneId" Type="Int32" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="BusinessLine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Discount" Type="Double" Nullable="false" />
-    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ContactPerson" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="FaxNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="AccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RegDate" Type="DateTime" Precision="3" />
-    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="CreditLimit" Type="Double" />
-    <Property Name="StatusId" Type="Byte" />
-  </EntityType>
   <EntityType Name="FinancialYearDefination">
     <Key>
       <PropertyRef Name="Id" />
@@ -167,6 +153,20 @@
     <Property Name="FYearLocked" Type="Boolean" />
     <Property Name="StatusId" Type="Byte" />
     <NavigationProperty Name="Company" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="FinancialYearDefination" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="FleetService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="StatusId" Type="Byte" />
+    <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ModuleCategory">
     <Key>
@@ -243,6 +243,52 @@
     <Property Name="modifiedBy" Type="Guid" />
     <Property Name="modifiedDate" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="Tender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StatusId" Type="Byte" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
+    <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
+    <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="TenderChild">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="TenderId" Type="Int32" Nullable="false" />
+    <Property Name="VehicleType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
+    <NavigationProperty Name="Customer" Relationship="Model.FK_TenderChild_Customers" FromRole="TenderChild" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="TenderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenderId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="DestinationTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DestinationFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
+    <NavigationProperty Name="Customer" Relationship="Model.FK_TenderDetail_Customers" FromRole="TenderDetail" ToRole="Customer" />
+  </EntityType>
   <EntityType Name="Unit">
     <Key>
       <PropertyRef Name="CompanyId" />
@@ -278,6 +324,22 @@
     <Property Name="CreatedBy" Type="Int32" Nullable="false" />
     <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StatusId" Type="Byte" />
+    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Vendor">
     <Key>
@@ -375,34 +437,105 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Vehicle">
+  <Association Name="FK_TenderChild_Tender">
+    <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+    <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenderChild">
+        <PropertyRef Name="TenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenderDetail_Tender">
+    <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+    <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenderDetail">
+        <PropertyRef Name="TenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
     <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
+    <Property Name="RegionId" Type="Int32" />
+    <Property Name="ZoneId" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="BusinessLine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Discount" Type="Double" Nullable="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FaxNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegDate" Type="DateTime" Precision="3" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="StatusId" Type="Byte" />
     <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="FleetService">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreditLimit" Type="Double" />
     <Property Name="StatusId" Type="Byte" />
-    <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
+    <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Customers" FromRole="Customer" ToRole="TenderChild" />
+    <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Customers" FromRole="Customer" ToRole="TenderDetail" />
   </EntityType>
+  <Association Name="FK_Tender_Customers">
+    <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tender">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenderChild_Customers">
+    <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenderChild">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenderDetail_Customers">
+    <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenderDetail">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

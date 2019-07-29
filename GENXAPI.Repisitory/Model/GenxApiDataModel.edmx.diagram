@@ -5,29 +5,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cd41223231d2462ca97b9d3febfcf19e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="1.25" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8" PointY="1.25" />
-        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="5.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="7.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="5.875" />
-        <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="4.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="9.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="5.75" PointY="1" />
-        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="6.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="9.75" PointY="8.75" />
-        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="11.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="8.75" PointY="11.75" />
-        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="11.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="5" PointY="8.25" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="10" PointY="8.25" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="2.75" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="5" PointY="12.875" />
+        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="7.75" PointY="8" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="8.25" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="11.75" PointY="14.75" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
         <AssociationConnector Association="Model.FK_City_Province" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
-        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="3.375" PointY="13.75" />
-        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="5.375" PointY="13.75" />
+        <AssociationConnector Association="Model.FK_TenderChild_Tender" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="Model.FK_Tender_Customers" />
+        <AssociationConnector Association="Model.FK_TenderChild_Customers" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Customers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

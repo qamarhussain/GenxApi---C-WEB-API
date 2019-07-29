@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Models;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System;
@@ -122,16 +123,12 @@ namespace GENXAPI.Api.Controllers
         }
 
 
-        [HttpGet]
-        public IHttpActionResult GetStartupKeyPair()
+        [HttpPost]
+        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                var keyPairValues = _cityRepo.GetKeyPairValue();
-                if (keyPairValues == null)
-                {
-                    return NotFound();
-                }
+                var keyPairValues = _cityRepo.GetKeyPairValue(model.ProvinceId);
                 return Ok(keyPairValues);
             }
             catch (Exception ex)
