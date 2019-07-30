@@ -240,11 +240,12 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ItemCode" Type="varchar" MaxLength="50" />
-    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="CustomerId" Type="int" />
     <Property Name="TenderId" Type="int" Nullable="false" />
     <Property Name="VehicleType" Type="varchar" MaxLength="50" />
     <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="50" />
+    <Property Name="FleetServiceId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TenderDetail">
     <Key>
@@ -418,7 +419,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TenderChild_Customers">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
     <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customers">
@@ -426,6 +427,18 @@
       </Principal>
       <Dependent Role="TenderChild">
         <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TenderChild_FleetService">
+    <End Role="FleetService" Type="Self.FleetService" Multiplicity="1" />
+    <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FleetService">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TenderChild">
+        <PropertyRef Name="FleetServiceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -507,6 +520,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_TenderChild_Customers" Association="Self.FK_TenderChild_Customers">
       <End Role="Customers" EntitySet="Customers" />
+      <End Role="TenderChild" EntitySet="TenderChild" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TenderChild_FleetService" Association="Self.FK_TenderChild_FleetService">
+      <End Role="FleetService" EntitySet="FleetService" />
       <End Role="TenderChild" EntitySet="TenderChild" />
     </AssociationSet>
     <AssociationSet Name="FK_TenderChild_Tender" Association="Self.FK_TenderChild_Tender">

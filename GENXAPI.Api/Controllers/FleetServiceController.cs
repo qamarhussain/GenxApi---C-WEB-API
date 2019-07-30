@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Models;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System;
@@ -95,6 +96,21 @@ namespace GENXAPI.Api.Controllers
             {
                 return InternalServerError(ex);
             }
+        }
+
+        [HttpPost]
+        public IHttpActionResult FleetServiceGetKeyPair(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var keyPairValues = _fleetServiceRepo.GetKeyPairValue();
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
     }
 }

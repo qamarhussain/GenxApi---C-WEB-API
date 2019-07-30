@@ -11,18 +11,26 @@ namespace GENXAPI.Repisitory.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class TenderChild
     {
         public int Id { get; set; }
         public string ItemCode { get; set; }
-        public int CustomerId { get; set; }
+        public Nullable<int> CustomerId { get; set; }
         public int TenderId { get; set; }
         public string VehicleType { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string UnitOfMeasurement { get; set; }
-    
-        public virtual Tender Tender { get; set; }
+        public int FleetServiceId { get; set; }
+        [NotMapped]
+        public string FleetServiceName { get; set; }
+        [NotMapped]
+        public string ServiceType { get; set; }
+
+
         public virtual Customer Customer { get; set; }
+        public virtual FleetService FleetService { get; set; }
+        public virtual Tender Tender { get; set; }
     }
 }

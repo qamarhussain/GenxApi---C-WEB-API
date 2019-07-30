@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Models;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System;
@@ -14,13 +15,15 @@ namespace GENXAPI.Api.Controllers
     public class TenderController : ApiController
     {
         protected readonly TenderRepo _tenderRepo = new TenderRepo();
+        protected readonly CityRepo _cityRepo = new CityRepo();
+        protected readonly FleetServiceRepo _fleetServiceRepo = new FleetServiceRepo();
         // GET: api/Customer
         [HttpGet]
         public IHttpActionResult GetAllTenders()
         {
             try
             {
-                var result = _tenderRepo.GetAll().ToList();
+                var result = _tenderRepo.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).ToList();
                 return Ok(result);
             }
             catch (Exception)
@@ -36,14 +39,56 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var tender = _tenderRepo.Get(id);
+                var tender = _tenderRepo.AllIncluding(x=>x.TenderDetails, y=>y.TenderChilds, z=>z.Customer).Where(m=>m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    return Ok(tender);
+                    TenderCreateViewModel tenderViewModel = new TenderCreateViewModel();
+                    tenderViewModel.Id = tender.Id;
+                    tenderViewModel.CreatedBy = tender.CreatedBy;
+                    tenderViewModel.CreatedOn = tender.CreatedOn;
+                    tenderViewModel.CustomerId = tender.CustomerId;
+                    tenderViewModel.TenderReference = tender.TenderReference;
+                    tenderViewModel.TenderSource = tender.TenderSource;
+                    tenderViewModel.TenderTerm = tender.TenderTerm;
+                    #region Tender details
+                    foreach (var items in tender.TenderDetails)
+                    {
+                        TenderDetail tenderDetail = new TenderDetail();
+
+                        tenderDetail.TenderId = items.TenderId;
+                        tenderDetail.CustomerId = items.CustomerId;
+                        tenderDetail.DestinationTo = items.DestinationTo;
+                        tenderDetail.DestinationFrom = items.DestinationFrom;
+                        tenderDetail.DestinationFromName = _cityRepo.Get(Convert.ToInt32(items.DestinationFrom)).Name;
+                        tenderDetail.DestinationToName = _cityRepo.Get(Convert.ToInt32(items.DestinationTo)).Name;
+                        tenderDetail.ItemCode = items.ItemCode;
+                        tenderViewModel.TenderDetails.Add(tenderDetail);
+                    }
+                    #endregion End Tender details
+
+                    #region Tender Child.
+                    foreach (var items in tender.TenderChilds)
+                    {
+                        TenderChild tenderChild = new TenderChild();
+                        tenderChild.FleetServiceId = items.FleetServiceId;
+                        var fleetServiceObj = _fleetServiceRepo.Get(items.FleetServiceId);
+                        tenderChild.FleetServiceName = fleetServiceObj.ServiceName;
+                        tenderChild.ServiceType = fleetServiceObj.ServiceType;
+                        tenderChild.ItemCode = items.ItemCode;
+                        tenderChild.CustomerId = items.CustomerId;
+                        tenderChild.TenderId = items.TenderId;
+                        tenderChild.VehicleType = items.VehicleType;
+                        tenderChild.Amount = items.Amount;
+                        tenderChild.UnitOfMeasurement = items.UnitOfMeasurement;
+                        tenderViewModel.TenderChilds.Add(tenderChild);
+                    }
+
+                    #endregion
+                    return Ok(tenderViewModel);
                 }
             }
             catch (Exception ex)
@@ -73,7 +118,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateTender(int id, [FromBody]Tender tender)
+        public IHttpActionResult UpdateTender(int id, [FromBody]TenderCreateViewModel tender)
         {
             try
             {
@@ -83,7 +128,6 @@ namespace GENXAPI.Api.Controllers
                     return NotFound();
                 }
                 tenderModel.LastModifiedBy = tender.LastModifiedBy;
-                tenderModel.LastModifiedDate = tender.LastModifiedDate;
 
                 _tenderRepo.Update(tenderModel);
                 return Ok(tenderModel);
@@ -117,5 +161,59 @@ namespace GENXAPI.Api.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [HttpPost]
+        public IHttpActionResult TenderCreate([FromBody] TenderCreateViewModel createViewModel)
+        {
+            Tender tender = new Tender();
+
+            tender.CustomerId = createViewModel.CustomerId;
+            tender.IssuanceDate = createViewModel.IssuanceDate;
+            tender.TenderReference = createViewModel.TenderReference;
+            tender.TenderSource = createViewModel.TenderSource;
+            tender.TenderTerm = createViewModel.TenderTerm;
+            tender.StatusId = (byte)Status.Active;
+            tender.CreatedOn = DateTime.Now;
+            tender.LastModifiedDate = DateTime.Now;
+            tender.CreatedBy = createViewModel.CreatedBy;
+            tender.LastModifiedBy = createViewModel.LastModifiedBy;
+
+            var tenderDetailList = new List<TenderDetail>();
+
+            foreach (var items in createViewModel.TenderDetails)
+            {
+                TenderDetail tenderDetail = new TenderDetail();
+
+                tenderDetail.TenderId = items.TenderId;
+                tenderDetail.CustomerId = items.CustomerId;
+                tenderDetail.DestinationTo = items.DestinationTo;
+                tenderDetail.DestinationFrom = items.DestinationFrom;
+                tenderDetail.ItemCode = items.ItemCode;
+                tenderDetailList.Add(tenderDetail);
+            }
+
+            tender.TenderDetails = tenderDetailList;
+
+            var tenderChildList = new List<TenderChild>();
+
+            foreach (var items in createViewModel.TenderChilds)
+            {
+                TenderChild tenderChild = new TenderChild();
+                tenderChild.FleetServiceId = items.FleetServiceId;
+                tenderChild.ItemCode = items.ItemCode;
+                tenderChild.CustomerId = items.CustomerId;
+                tenderChild.TenderId = items.TenderId;
+                tenderChild.VehicleType = items.VehicleType;
+                tenderChild.Amount = items.Amount;
+                tenderChild.UnitOfMeasurement = items.UnitOfMeasurement;
+                tenderChildList.Add(tenderChild);
+            }
+
+            tender.TenderChilds = tenderChildList;
+
+            _tenderRepo.Create(tender);
+            return Ok(tender);
+        }
+
     }
 }

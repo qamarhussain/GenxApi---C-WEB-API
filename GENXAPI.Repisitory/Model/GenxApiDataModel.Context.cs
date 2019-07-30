@@ -30,6 +30,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<FinancialYearDefination> FinancialYearDefinations { get; set; }
         public virtual DbSet<FleetService> FleetServices { get; set; }
         public virtual DbSet<ModuleCategory> ModuleCategories { get; set; }
@@ -47,6 +48,5 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
     }
 }
