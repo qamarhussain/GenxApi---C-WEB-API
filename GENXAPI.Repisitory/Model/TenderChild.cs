@@ -23,14 +23,13 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<decimal> Amount { get; set; }
         public string UnitOfMeasurement { get; set; }
         public int FleetServiceId { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        public virtual FleetService FleetService { get; set; }
+        public virtual Tender Tender { get; set; }
         [NotMapped]
         public string FleetServiceName { get; set; }
         [NotMapped]
         public string ServiceType { get; set; }
-
-
-        public virtual Customer Customer { get; set; }
-        public virtual FleetService FleetService { get; set; }
-        public virtual Tender Tender { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace GENXAPI.Repisitory.Model
         }
     
         public int Id { get; set; }
+        public Nullable<int> BusinessUnitId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public string TenderReference { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public System.DateTime IssuanceDate { get; set; }

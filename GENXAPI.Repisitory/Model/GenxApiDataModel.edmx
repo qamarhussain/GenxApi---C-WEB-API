@@ -228,6 +228,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessUnitId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
           <Property Name="TenderReference" Type="varchar" MaxLength="50" />
           <Property Name="CustomerId" Type="int" />
           <Property Name="IssuanceDate" Type="datetime" Nullable="false" />
@@ -842,6 +844,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
           <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -1355,6 +1359,8 @@
                 <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

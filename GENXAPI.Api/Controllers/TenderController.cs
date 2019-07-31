@@ -118,19 +118,50 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateTender(int id, [FromBody]TenderCreateViewModel tender)
+        public IHttpActionResult UpdateTender(int id, [FromBody]TenderCreateViewModel createViewModel)
         {
             try
             {
-                var tenderModel = _tenderRepo.Get(id);
-                if (tenderModel == null)
+                var tender = _tenderRepo.Get(id);
+                if (tender == null)
                 {
                     return NotFound();
                 }
-                tenderModel.LastModifiedBy = tender.LastModifiedBy;
+                tender.CustomerId = createViewModel.CustomerId;
+                tender.IssuanceDate = createViewModel.IssuanceDate;
+                tender.TenderReference = createViewModel.TenderReference;
+                tender.TenderSource = createViewModel.TenderSource;
+                tender.TenderTerm = createViewModel.TenderTerm;
+                tender.StatusId = (byte)createViewModel.StatusId;
+                tender.LastModifiedDate = DateTime.Now;
+                tender.LastModifiedBy = createViewModel.LastModifiedBy;
+                tender.CompanyId = createViewModel.CompanyId;
+                tender.BusinessUnitId = createViewModel.BusinessUnitId;
+                foreach (var items in createViewModel.TenderDetails)
+                {
+                    TenderDetail tenderDetail = new TenderDetail();
 
-                _tenderRepo.Update(tenderModel);
-                return Ok(tenderModel);
+                    tenderDetail.TenderId = items.TenderId;
+                    tenderDetail.CustomerId = items.CustomerId;
+                    tenderDetail.DestinationTo = items.DestinationTo;
+                    tenderDetail.DestinationFrom = items.DestinationFrom;
+                    tenderDetail.ItemCode = items.ItemCode;
+                    tender.TenderDetails.Add(tenderDetail);
+                }
+                foreach (var items in createViewModel.TenderChilds)
+                {
+                    TenderChild tenderChild = new TenderChild();
+                    tenderChild.FleetServiceId = items.FleetServiceId;
+                    tenderChild.ItemCode = items.ItemCode;
+                    tenderChild.CustomerId = items.CustomerId;
+                    tenderChild.TenderId = items.TenderId;
+                    tenderChild.VehicleType = items.VehicleType;
+                    tenderChild.Amount = items.Amount;
+                    tenderChild.UnitOfMeasurement = items.UnitOfMeasurement;
+                    tender.TenderChilds.Add(tenderChild);
+                }
+                _tenderRepo.Update(tender);
+                return Ok(tender);
             }
             catch (Exception ex)
             {
@@ -177,6 +208,8 @@ namespace GENXAPI.Api.Controllers
             tender.LastModifiedDate = DateTime.Now;
             tender.CreatedBy = createViewModel.CreatedBy;
             tender.LastModifiedBy = createViewModel.LastModifiedBy;
+            tender.CompanyId = createViewModel.CompanyId;
+            tender.BusinessUnitId = createViewModel.BusinessUnitId;
 
             var tenderDetailList = new List<TenderDetail>();
 

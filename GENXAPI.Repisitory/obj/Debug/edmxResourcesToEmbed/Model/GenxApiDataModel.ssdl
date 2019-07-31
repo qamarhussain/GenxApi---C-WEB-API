@@ -223,6 +223,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BusinessUnitId" Type="int" />
+    <Property Name="CompanyId" Type="int" />
     <Property Name="TenderReference" Type="varchar" MaxLength="50" />
     <Property Name="CustomerId" Type="int" />
     <Property Name="IssuanceDate" Type="datetime" Nullable="false" />

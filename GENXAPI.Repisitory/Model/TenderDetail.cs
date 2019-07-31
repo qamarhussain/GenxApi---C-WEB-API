@@ -24,7 +24,6 @@ namespace GENXAPI.Repisitory.Model
     
         public virtual Customer Customer { get; set; }
         public virtual Tender Tender { get; set; }
-
         [NotMapped]
         public string DestinationFromName { get; set; }
         [NotMapped]
