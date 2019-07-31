@@ -28,5 +28,10 @@ namespace GENXAPI.Repisitory
             return result.ToList();
 
         }
+
+        public IList<FleetService> GetByIdCollection(List<int> ids)
+        {
+            return GetAll().Where(x => ids.Contains(x.Id)).ToList();
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace GENXAPI.Api.Controllers
     public class CustomerController : ApiController
     {
         protected readonly CustomerRepo _customerRepo = new CustomerRepo();
+        protected readonly TenderRepo _tenderRepo = new TenderRepo();
         // GET: api/Customer
         [HttpGet]
         public IHttpActionResult GetAllCustomers()
@@ -160,6 +161,26 @@ namespace GENXAPI.Api.Controllers
                 return InternalServerError(ex);
             }
            
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetCustomerTenderItemCode(int id)
+        {
+            try
+            {
+                var customer = _customerRepo.Get(id);
+                if(customer == null)
+                {
+                    return NotFound();
+                }
+                int customerTenderCount = _tenderRepo.Find(x => x.CustomerId == id).Count();
+                var code = customer.Abbreviation + "-" + (customerTenderCount + 1);
+                return Ok(code);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
     }

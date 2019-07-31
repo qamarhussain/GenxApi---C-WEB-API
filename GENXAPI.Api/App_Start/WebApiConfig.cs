@@ -26,6 +26,8 @@ namespace GENXAPI.Api
 
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
+
+
         }
     }
 }

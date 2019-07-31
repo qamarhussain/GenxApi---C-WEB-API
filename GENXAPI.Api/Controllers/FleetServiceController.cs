@@ -112,5 +112,30 @@ namespace GENXAPI.Api.Controllers
             }
 
         }
+
+        [HttpPost]
+        public IHttpActionResult GetByIdCollection(List<int> model)
+        {
+            try
+            {
+                var keyPairValues = _fleetServiceRepo.GetByIdCollection(model);
+                var fleetServices = new List<FleetServiceViewModel>();
+                foreach(var item in keyPairValues)
+                {
+                    fleetServices.Add(new FleetServiceViewModel
+                    {
+                        Id=item.Id,
+                        ServiceName=item.ServiceName,
+                        ServiceType=item.ServiceType,
+                        UnitOfMeasurement=item.UnitOfMeasurement
+                    });
+                }
+                return Ok(fleetServices);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }

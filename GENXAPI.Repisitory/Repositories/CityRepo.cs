@@ -41,5 +41,14 @@ namespace GENXAPI.Repisitory
 
             return result.ToList();
         }
+
+        public IList<City> GetByIdCollection(List<int> ids)
+        {
+            return GetAll().Where(x => ids.Contains(x.Id)).ToList();
+        }
+
     }
+
+   
+
 }

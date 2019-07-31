@@ -138,5 +138,31 @@ namespace GENXAPI.Api.Controllers
 
         }
 
+        [HttpPost]
+        public IHttpActionResult GetByIdCollection(List<int> model)
+        {
+            try
+            {
+                var keyPairValues = _cityRepo.GetByIdCollection(model);
+                var cities = new List<CityViewModel>();
+                foreach(var item in keyPairValues)
+                {
+                    cities.Add(new CityViewModel
+                    {
+                        Id=item.Id,
+                        Name=item.Name
+                    });
+                }
+                
+                return Ok(cities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+
+
     }
 }
