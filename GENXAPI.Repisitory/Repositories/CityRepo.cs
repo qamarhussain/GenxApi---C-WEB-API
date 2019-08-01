@@ -35,7 +35,8 @@ namespace GENXAPI.Repisitory
          new DropdownListDto
          {
              Value = r.Id.ToString(),
-             Text = r.Name
+             Text = r.Name,
+             ParentReferenceId=r.ProvinceId.ToString()
          }).ToList();
             }
 

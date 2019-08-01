@@ -103,9 +103,12 @@ namespace GENXAPI.Api.Controllers
                     tenderViewModel.CreatedBy = tender.CreatedBy;
                     tenderViewModel.CreatedOn = tender.CreatedOn;
                     tenderViewModel.CustomerId = tender.CustomerId;
+                    tenderViewModel.CustomerName = tender.Customer.Name;
                     tenderViewModel.TenderReference = tender.TenderReference;
                     tenderViewModel.TenderSource = tender.TenderSource;
                     tenderViewModel.TenderTerm = tender.TenderTerm;
+                    tenderViewModel.ProvinceId = tender.TenderDetails.First().ProvinceId;
+                    tenderViewModel.TenderNo = tender.TenderDetails.First().ItemCode.Remove(tender.TenderDetails.First().ItemCode.LastIndexOf('-'));
                     #region Tender details
                     foreach (var items in tender.TenderDetails)
                     {
@@ -129,6 +132,7 @@ namespace GENXAPI.Api.Controllers
                     foreach (var items in tender.TenderChilds)
                     {
                         TenderChild tenderChild = new TenderChild();
+                        tenderChild.Id = items.FleetServiceId;
                         tenderChild.FleetServiceId = items.FleetServiceId;
                         var fleetServiceObj = _fleetServiceRepo.Get(items.FleetServiceId);
                         tenderChild.ServiceName = fleetServiceObj.ServiceName;
