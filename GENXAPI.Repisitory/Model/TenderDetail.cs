@@ -21,6 +21,9 @@ namespace GENXAPI.Repisitory.Model
         public string DestinationTo { get; set; }
         public string DestinationFrom { get; set; }
         public string ItemCode { get; set; }
+        public int ProvinceId { get; set; }
+        [NotMapped]
+        public string ProvinceName { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Tender Tender { get; set; }

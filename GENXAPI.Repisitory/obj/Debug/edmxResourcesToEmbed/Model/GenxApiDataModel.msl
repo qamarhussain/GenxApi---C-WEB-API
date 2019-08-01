@@ -268,6 +268,7 @@
     <EntitySetMapping Name="TenderDetails">
       <EntityTypeMapping TypeName="Model.TenderDetail">
         <MappingFragment StoreEntitySet="TenderDetail">
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
           <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
           <ScalarProperty Name="DestinationFrom" ColumnName="DestinationFrom" />
           <ScalarProperty Name="DestinationTo" ColumnName="DestinationTo" />

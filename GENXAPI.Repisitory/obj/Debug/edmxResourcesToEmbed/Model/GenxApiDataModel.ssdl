@@ -259,6 +259,7 @@
     <Property Name="DestinationTo" Type="varchar" MaxLength="50" />
     <Property Name="DestinationFrom" Type="varchar" MaxLength="50" />
     <Property Name="ItemCode" Type="varchar" MaxLength="50" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Units">
     <Key>

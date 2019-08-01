@@ -264,6 +264,7 @@
           <Property Name="DestinationTo" Type="varchar" MaxLength="50" />
           <Property Name="DestinationFrom" Type="varchar" MaxLength="50" />
           <Property Name="ItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Units">
           <Key>
@@ -886,6 +887,7 @@
           <Property Name="DestinationTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DestinationFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Model.FK_TenderDetail_Customers" FromRole="TenderDetail" ToRole="Customer" />
           <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
         </EntityType>
@@ -1382,6 +1384,7 @@
           <EntitySetMapping Name="TenderDetails">
             <EntityTypeMapping TypeName="Model.TenderDetail">
               <MappingFragment StoreEntitySet="TenderDetail">
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="DestinationFrom" ColumnName="DestinationFrom" />
                 <ScalarProperty Name="DestinationTo" ColumnName="DestinationTo" />

@@ -19,6 +19,7 @@ namespace GENXAPI.Api.Models
         public int Id { get; set; }
         public string TenderReference { get; set; }
         public int? CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public DateTime IssuanceDate { get; set; }
         public string TenderSource { get; set; }
         public string TenderTerm { get; set; }
@@ -28,6 +29,7 @@ namespace GENXAPI.Api.Models
         public DateTime CreatedOn { get; set; }
         public int CompanyId { get; set; }
         public int BusinessUnitId { get; set; }
+        public string TenderNo { get; set; }
 
 
     }

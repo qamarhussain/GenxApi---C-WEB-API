@@ -11,8 +11,7 @@ namespace GENXAPI.Repisitory.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class TenderChild
     {
         public int Id { get; set; }
@@ -27,9 +26,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual Customer Customer { get; set; }
         public virtual FleetService FleetService { get; set; }
         public virtual Tender Tender { get; set; }
-        [NotMapped]
-        public string FleetServiceName { get; set; }
-        [NotMapped]
+        public string ServiceName { get; set; }
         public string ServiceType { get; set; }
     }
 }

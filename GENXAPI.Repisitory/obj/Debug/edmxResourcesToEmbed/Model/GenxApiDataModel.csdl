@@ -336,6 +336,7 @@
     <Property Name="DestinationTo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DestinationFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProvinceId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="Model.FK_TenderDetail_Customers" FromRole="TenderDetail" ToRole="Customer" />
     <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
   </EntityType>
