@@ -422,7 +422,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TenderChild_Customers">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customers">
@@ -434,7 +436,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TenderChild_FleetService">
-    <End Role="FleetService" Type="Self.FleetService" Multiplicity="1" />
+    <End Role="FleetService" Type="Self.FleetService" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FleetService">
@@ -446,7 +450,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TenderChild_Tender">
-    <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
+    <End Role="Tender" Type="Self.Tender" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tender">
@@ -458,7 +464,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TenderDetail_Customers">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customers">
@@ -470,7 +478,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TenderDetail_Tender">
-    <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
+    <End Role="Tender" Type="Self.Tender" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tender">

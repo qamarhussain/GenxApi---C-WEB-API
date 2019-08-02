@@ -25,11 +25,19 @@ namespace GENXAPI.Repisitory
             conn.Entry(obj).State = EntityState.Added;
             conn.SaveChanges();
         }
+
+        public virtual void InsertRange(List<TEntity> list)
+        {
+            foreach(var item in list)
+            {
+                conn.Entry(item).State = EntityState.Added;
+            }
+        }
         //Update Entity
         public virtual void Update(TEntity obj)
         {
             conn.Entry(obj).State = EntityState.Modified;
-            conn.SaveChanges();
+            //conn.SaveChanges();
         }
 
         //Delete Entity
@@ -37,8 +45,17 @@ namespace GENXAPI.Repisitory
         {
             var dbObj = conn.Set<TEntity>().Find(id);
             conn.Entry(dbObj).State = EntityState.Deleted;
-            conn.SaveChanges();
+            //conn.SaveChanges();
         }
+
+        public virtual void DeleteRange(List<TEntity> list)
+        {
+            foreach (var item in list)
+            {
+                conn.Entry(item).State = EntityState.Deleted;
+            }
+        }
+
         //Get Entity by Id
         public virtual TEntity Get(int id)
         {
@@ -65,6 +82,11 @@ namespace GENXAPI.Repisitory
                 query = query.Include(includeProperty);
             }
             return query;
+        }
+
+        public void SaveChanges()
+        {
+            conn.SaveChanges();
         }
 
     }

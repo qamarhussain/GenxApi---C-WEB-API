@@ -11,8 +11,7 @@ namespace GENXAPI.Repisitory.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class TenderDetail
     {
         public int Id { get; set; }
@@ -22,14 +21,11 @@ namespace GENXAPI.Repisitory.Model
         public string DestinationFrom { get; set; }
         public string ItemCode { get; set; }
         public int ProvinceId { get; set; }
-        [NotMapped]
-        public string ProvinceName { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Tender Tender { get; set; }
-        [NotMapped]
         public string DestinationFromName { get; set; }
-        [NotMapped]
         public string DestinationToName { get; set; }
+        public string ProvinceName { get; set; }
     }
 }

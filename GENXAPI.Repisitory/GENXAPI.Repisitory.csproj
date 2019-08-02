@@ -152,6 +152,8 @@
     <Compile Include="Repositories\FleetServiceRepo.cs" />
     <Compile Include="Repositories\ModuleFormRepo.cs" />
     <Compile Include="Repositories\ProvinceRepo.cs" />
+    <Compile Include="Repositories\TenderChildRepo.cs" />
+    <Compile Include="Repositories\TenderDetailRepo.cs" />
     <Compile Include="Repositories\TenderRepo.cs" />
     <Compile Include="Repositories\UnitRepo.cs" />
     <Compile Include="Repositories\UserRepo.cs" />
