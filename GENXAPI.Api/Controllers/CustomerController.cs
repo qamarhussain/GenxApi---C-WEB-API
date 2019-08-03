@@ -22,7 +22,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _customerRepo.GetAll().ToList();
+                var result = _customerRepo.AllIncluding(x => x.Tenders).ToList();
                 return Ok(result);
             }
             catch (Exception)

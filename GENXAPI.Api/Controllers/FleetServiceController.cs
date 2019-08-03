@@ -21,7 +21,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _fleetServiceRepo.GetAll().ToList();
+                var result = _fleetServiceRepo.AllIncluding(x => x.TenderChilds).ToList();
                 return Ok(result);
             }
             catch (Exception)
