@@ -18,7 +18,6 @@ namespace GENXAPI.Repisitory.Model
         public Customer()
         {
             this.Tenders = new HashSet<Tender>();
-            this.TenderDetails = new HashSet<TenderDetail>();
         }
     
         public int Id { get; set; }
@@ -57,7 +56,5 @@ namespace GENXAPI.Repisitory.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tender> Tenders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TenderDetail> TenderDetails { get; set; }
     }
 }

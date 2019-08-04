@@ -53,6 +53,7 @@ namespace GENXAPI.Repisitory
 
         public void Remove(TEntity entity)
         {
+            db.Entry(entity).State = EntityState.Deleted;
             db.Set<TEntity>().Remove(entity);
         }
 

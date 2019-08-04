@@ -18,11 +18,14 @@ namespace GENXAPI.Repisitory.Model
         public string ItemCode { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public int TenderId { get; set; }
-        public string VehicleType { get; set; }
+        public Nullable<int> VehicleId { get; set; }
         public Nullable<decimal> Amount { get; set; }
-        public string UnitOfMeasurement { get; set; }
-        public int FleetServiceId { get; set; }
+        public Nullable<int> FleetServiceId { get; set; }
+        public Nullable<int> TenderDetailId { get; set; }
     
+        public virtual FleetService FleetService { get; set; }
         public virtual Tender Tender { get; set; }
+        public virtual TenderDetail TenderDetail { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace GENXAPI.Api.Models
         public string CompanyId { get; set; }
         public string BusinessUnitId { get; set; }
         public int? ProvinceId { get; set; }
+        public int? CustomerId { get; set; }
     }
 }

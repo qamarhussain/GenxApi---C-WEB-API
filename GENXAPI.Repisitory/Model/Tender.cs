@@ -29,6 +29,7 @@ namespace GENXAPI.Repisitory.Model
         public System.DateTime IssuanceDate { get; set; }
         public string TenderSource { get; set; }
         public string TenderTerm { get; set; }
+        public string TenderNo { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
