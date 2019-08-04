@@ -25,16 +25,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://192.168.1.10:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = GENXAPI.Api\\GENXAPI.Api.csproj
-		SccProjectName1 = GENXAPI.Api
-		SccLocalPath1 = GENXAPI.Api
-		SccProjectUniqueName2 = GENXAPI.Repisitory\\GENXAPI.Repisitory.csproj
-		SccProjectName2 = GENXAPI.Repisitory
-		SccLocalPath2 = GENXAPI.Repisitory
-	EndGlobalSection
 EndGlobal

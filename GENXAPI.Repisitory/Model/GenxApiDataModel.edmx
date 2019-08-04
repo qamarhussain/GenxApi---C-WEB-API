@@ -426,34 +426,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TenderChild_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderChild_FleetService">
-          <End Role="FleetService" Type="Self.FleetService" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FleetService">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="FleetServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TenderChild_Tender">
           <End Role="Tender" Type="Self.Tender" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -536,14 +508,6 @@
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Tender" EntitySet="Tender" />
           </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Customers" Association="Self.FK_TenderChild_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="TenderChild" EntitySet="TenderChild" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_FleetService" Association="Self.FK_TenderChild_FleetService">
-            <End Role="FleetService" EntitySet="FleetService" />
-            <End Role="TenderChild" EntitySet="TenderChild" />
-          </AssociationSet>
           <AssociationSet Name="FK_TenderChild_Tender" Association="Self.FK_TenderChild_Tender">
             <End Role="Tender" EntitySet="Tender" />
             <End Role="TenderChild" EntitySet="TenderChild" />
@@ -601,17 +565,9 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Tender" EntitySet="Tenders" />
           </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Customers" Association="Model.FK_TenderChild_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
           <AssociationSet Name="FK_TenderDetail_Customers" Association="Model.FK_TenderDetail_Customers">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
-            <End Role="FleetService" EntitySet="FleetServices" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
           <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
             <End Role="Tender" EntitySet="Tenders" />
@@ -742,7 +698,6 @@
           <Property Name="StatusId" Type="Byte" />
           <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Customers" FromRole="Customer" ToRole="TenderChild" />
           <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Customers" FromRole="Customer" ToRole="TenderDetail" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
@@ -773,7 +728,6 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
         </EntityType>
         <EntityType Name="ModuleCategory">
           <Key>
@@ -883,8 +837,6 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FleetServiceId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Model.FK_TenderChild_Customers" FromRole="TenderChild" ToRole="Customer" />
-          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
           <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
         </EntityType>
         <EntityType Name="TenderDetail">
@@ -1061,20 +1013,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TenderChild_Customers">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TenderDetail_Customers">
           <End Type="Model.Customer" Role="Customer" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1086,20 +1024,6 @@
             </Principal>
             <Dependent Role="TenderDetail">
               <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderChild_FleetService">
-          <End Type="Model.FleetService" Role="FleetService" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FleetService">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="FleetServiceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -23,10 +23,6 @@ namespace GENXAPI.Repisitory.Model
         public string UnitOfMeasurement { get; set; }
         public int FleetServiceId { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual FleetService FleetService { get; set; }
         public virtual Tender Tender { get; set; }
-        public string ServiceName { get; set; }
-        public string ServiceType { get; set; }
     }
 }

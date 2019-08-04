@@ -55,7 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\CustomerRepository.cs" />
     <Compile Include="Infrastructure\GenericCRUD.cs" />
+    <Compile Include="Infrastructure\ICustomerRepository.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\ITenderDetailRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\ITenderChildRepository.cs" />
+    <Compile Include="Infrastructure\ITenderRepository.cs" />
+    <Compile Include="Infrastructure\Repository.cs" />
+    <Compile Include="Infrastructure\TenderChildRepository.cs" />
+    <Compile Include="Infrastructure\TenderDetailRepository.cs" />
+    <Compile Include="Infrastructure\TenderRepository.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BusinessUnit.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>

@@ -14,12 +14,6 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class FleetService
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FleetService()
-        {
-            this.TenderChilds = new HashSet<TenderChild>();
-        }
-    
         public int Id { get; set; }
         public string ServiceName { get; set; }
         public string ServiceType { get; set; }
@@ -29,8 +23,5 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public string UnitOfMeasurement { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TenderChild> TenderChilds { get; set; }
     }
 }
