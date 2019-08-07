@@ -37,7 +37,7 @@ namespace GENXAPI.Repisitory
         public virtual void Update(TEntity obj)
         {
             conn.Entry(obj).State = EntityState.Modified;
-            //conn.SaveChanges();
+            conn.SaveChanges();
         }
 
         //Delete Entity
@@ -45,7 +45,7 @@ namespace GENXAPI.Repisitory
         {
             var dbObj = conn.Set<TEntity>().Find(id);
             conn.Entry(dbObj).State = EntityState.Deleted;
-            //conn.SaveChanges();
+            conn.SaveChanges();
         }
 
         public virtual void DeleteRange(List<TEntity> list)

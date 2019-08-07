@@ -17,9 +17,9 @@ namespace GENXAPI.Repisitory
             return result.ToList();
         }
 
-        public IList<DropdownListDto> GetKeyPairValue(int? customerId)
+        public IList<DropdownListDto> GetKeyPairValue(int? customerId, int proceedStatus)
         {
-            var result = Find(m => m.StatusId == (byte)Status.Active  && m.CustomerId == customerId).Select(r =>
+            var result = Find(m => m.StatusId == (byte)Status.Active  && m.CustomerId == customerId && m.ProceedStatus == (byte)proceedStatus).Select(r =>
             new DropdownListDto
             {
                 Value = r.Id.ToString(),

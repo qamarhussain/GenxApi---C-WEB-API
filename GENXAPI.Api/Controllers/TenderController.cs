@@ -1,4 +1,5 @@
 ﻿using GENXAPI.Api.Models;
+using GENXAPI.Api.Utilities;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
@@ -36,7 +37,7 @@ namespace GENXAPI.Api.Controllers
                 var viewModel = new List<TenderCreateViewModel>();
                 //var result = _tenderRepo.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).ToList();
                 //var result = db.Tenders.AllIncluding(x=>x.Customer).ToList();
-                var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).ToList();
+                var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).Where(o=>o.ProceedStatus == (byte)TenderUtility.TenderState).ToList();
                 //foreach(var tender in result)
                 //{
                 //    TenderCreateViewModel tenderViewModel = new TenderCreateViewModel();
@@ -271,6 +272,7 @@ namespace GENXAPI.Api.Controllers
                 tender.CompanyId = createViewModel.CompanyId;
                 tender.BusinessUnitId = createViewModel.BusinessUnitId;
                 tender.TenderNo = createViewModel.TenderNo;
+                tender.ProceedStatus = (byte)TenderUtility.TenderState;
                 db.Tenders.Add(tender);
                 #region Tender Detail.
                 var tenderDetailList = new List<TenderDetail>();
@@ -317,11 +319,11 @@ namespace GENXAPI.Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
+        public IHttpActionResult GetKeyPairForContract(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                return Ok(_tenderRepo.GetKeyPairValue(model.CustomerId));
+                return Ok(_tenderRepo.GetKeyPairValue(model.CustomerId,(int)TenderUtility.TenderState));
             }
             catch(Exception ex)
             {

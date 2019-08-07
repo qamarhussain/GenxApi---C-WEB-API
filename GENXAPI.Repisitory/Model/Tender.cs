@@ -35,6 +35,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
+        public Nullable<byte> ProceedStatus { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

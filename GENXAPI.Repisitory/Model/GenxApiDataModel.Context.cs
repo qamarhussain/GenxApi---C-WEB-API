@@ -45,8 +45,8 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
-        public virtual DbSet<Tender> Tenders { get; set; }
         public virtual DbSet<TenderChild> TenderChilds { get; set; }
         public virtual DbSet<TenderDetail> TenderDetails { get; set; }
+        public virtual DbSet<Tender> Tenders { get; set; }
     }
 }

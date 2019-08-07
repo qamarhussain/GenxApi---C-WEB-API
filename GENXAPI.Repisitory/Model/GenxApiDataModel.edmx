@@ -241,6 +241,7 @@
           <Property Name="LastModifiedDate" Type="datetime" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProceedStatus" Type="tinyint" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -588,24 +589,11 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
           </AssociationSet>
-          <EntitySet Name="Tenders" EntityType="Model.Tender" />
           <EntitySet Name="TenderChilds" EntityType="Model.TenderChild" />
           <EntitySet Name="TenderDetails" EntityType="Model.TenderDetail" />
-          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Tender" EntitySet="Tenders" />
-          </AssociationSet>
           <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
             <End Role="FleetService" EntitySet="FleetServices" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_TenderChild_TenderDetail" Association="Model.FK_TenderChild_TenderDetail">
             <End Role="TenderDetail" EntitySet="TenderDetails" />
@@ -614,6 +602,19 @@
           <AssociationSet Name="FK_TenderChild_Vehicles" Association="Model.FK_TenderChild_Vehicles">
             <End Role="Vehicle" EntitySet="Vehicles" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <EntitySet Name="Tenders" EntityType="Model.Tender" />
+          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Tender" EntitySet="Tenders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BusinessUnit">
@@ -991,28 +992,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Tender">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BusinessUnitId" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
-          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
-        </EntityType>
         <EntityType Name="TenderChild">
           <Key>
             <PropertyRef Name="Id" />
@@ -1026,9 +1005,9 @@
           <Property Name="FleetServiceId" Type="Int32" />
           <Property Name="TenderDetailId" Type="Int32" />
           <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
           <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
           <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
         </EntityType>
         <EntityType Name="TenderDetail">
           <Key>
@@ -1044,21 +1023,9 @@
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
         </EntityType>
-        <Association Name="FK_Tender_Customers">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tender">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TenderChild_FleetService">
           <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
           <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
@@ -1068,30 +1035,6 @@
             </Principal>
             <Dependent Role="TenderChild">
               <PropertyRef Name="FleetServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderChild_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="TenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderDetail_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderDetail">
-              <PropertyRef Name="TenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1116,6 +1059,65 @@
             </Principal>
             <Dependent Role="TenderChild">
               <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenderNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProceedStatus" Type="Byte" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
+        </EntityType>
+        <Association Name="FK_Tender_Customers">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tender">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderChild_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderChild">
+              <PropertyRef Name="TenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="TenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1473,26 +1475,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tenders">
-            <EntityTypeMapping TypeName="Model.Tender">
-              <MappingFragment StoreEntitySet="Tender">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
-                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
-                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
-                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TenderChilds">
             <EntityTypeMapping TypeName="Model.TenderChild">
               <MappingFragment StoreEntitySet="TenderChild">
@@ -1519,6 +1501,27 @@
                 <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tenders">
+            <EntityTypeMapping TypeName="Model.Tender">
+              <MappingFragment StoreEntitySet="Tender">
+                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
+                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
+                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

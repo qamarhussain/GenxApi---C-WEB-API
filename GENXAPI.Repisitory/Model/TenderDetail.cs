@@ -31,8 +31,8 @@ namespace GENXAPI.Repisitory.Model
         public int ProvinceId { get; set; }
         public string ProvinceName { get; set; }
     
-        public virtual Tender Tender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderChild> TenderChilds { get; set; }
+        public virtual Tender Tender { get; set; }
     }
 }
