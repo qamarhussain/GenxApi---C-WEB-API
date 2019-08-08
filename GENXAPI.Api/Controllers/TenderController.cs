@@ -106,7 +106,7 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 //var tender = _tenderRepo.AllIncluding(z => z.Customer).Where(m => m.Id == id).FirstOrDefault();
-                var tender = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
+                var tender = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds.Select(q => q.FleetService)).Where(m => m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();
@@ -145,7 +145,17 @@ namespace GENXAPI.Api.Controllers
                     #endregion End Tender details
 
                     #region Tender Child.
+                    
                     tenderViewModel.TenderChilds = tender.TenderChilds.ToList();
+                    //if(tenderViewModel.TenderChilds.Count() > 0)
+                    //{
+                    //    foreach(var item in tenderViewModel.TenderChilds)
+                    //    {
+                    //        if(item.FleetServiceId  != null){
+                    //            item.FleetService = _fleetServiceRepo.Get(Convert.ToInt32(item.FleetServiceId));
+                    //        }
+                    //    }
+                    //}
                     //foreach (var items in tender.TenderChilds)
                     //{
                     //    TenderChildViewModel tenderChild = new TenderChildViewModel();

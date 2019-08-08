@@ -16,6 +16,7 @@ namespace GENXAPI.Repisitory
             if (conn == null)
             {
                 conn = new Entities();
+                conn.Configuration.LazyLoadingEnabled = false;
             }
         }
 
