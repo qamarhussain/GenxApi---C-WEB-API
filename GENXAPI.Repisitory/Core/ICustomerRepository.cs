@@ -9,6 +9,6 @@ namespace GENXAPI.Repisitory
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
-
+        IList<DropdownListDto> GetKeyPairValue(int CompanyId, int BusinessUnitId);
     }
 }

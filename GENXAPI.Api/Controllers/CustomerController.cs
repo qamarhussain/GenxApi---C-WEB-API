@@ -14,15 +14,21 @@ namespace GENXAPI.Api.Controllers
     [Authorize]
     public class CustomerController : ApiController
     {
-        protected readonly CustomerRepo _customerRepo = new CustomerRepo();
-        protected readonly TenderRepo _tenderRepo = new TenderRepo();
+        //protected readonly CustomerRepo _customerRepo = new CustomerRepo();
+        //protected readonly TenderRepo _tenderRepo = new TenderRepo();
+        IUnitOfWork _context;
+        public CustomerController()
+        {
+            _context = new UnitOfWork();
+        }
         // GET: api/Customer
         [HttpGet]
         public IHttpActionResult GetAllCustomers()
         {
             try
             {
-                var result = _customerRepo.AllIncluding(x => x.Tenders).ToList();
+                //var result = _customerRepo.AllIncluding(x => x.Tenders).ToList();
+                var result = _context.Customers.GetAll().ToList();
                 return Ok(result);
             }
             catch (Exception)
@@ -38,7 +44,9 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var customer = _customerRepo.Get(id);
+                //var customer = _customerRepo.Get(id);
+                var customer = _context.Customers.Get(id);
+
                 if (customer == null)
                 {
                     return NotFound();
@@ -63,7 +71,9 @@ namespace GENXAPI.Api.Controllers
                 customer.StatusId = (byte)Status.Active;
                 customer.CreatedOn = DateTime.Now;
                 customer.LastModifiedDate = DateTime.Now;
-                _customerRepo.Create(customer);
+                //_customerRepo.Create(customer);
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
                 return Ok(customer);
             }
             catch (Exception ex)
@@ -78,7 +88,8 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var customerModel = _customerRepo.Get(id);
+                //var customerModel = _customerRepo.Get(id);
+                var customerModel = _context.Customers.Get(id);
                 if (customerModel == null)
                 {
                     return NotFound();
@@ -113,7 +124,9 @@ namespace GENXAPI.Api.Controllers
                 customerModel.Type = customer.Type;
                 customerModel.ZoneId = customer.ZoneId;
                 customerModel.Abbreviation = customer.Abbreviation;
-                _customerRepo.Update(customerModel);
+                //_customerRepo.Update(customerModel);
+                _context.Customers.Update(customerModel);
+                _context.SaveChanges();
                 return Ok(customerModel);
             }
             catch(Exception ex)
@@ -124,28 +137,28 @@ namespace GENXAPI.Api.Controllers
         }
 
         // DELETE: api/Customer/5
-        [HttpDelete]
-        public IHttpActionResult DeleteCustomer(int id)
-        {
+        //[HttpDelete]
+        //public IHttpActionResult DeleteCustomer(int id)
+        //{
 
-            try
-            {
-                var customerModel = _customerRepo.Get(id);
-                if (customerModel == null)
-                {
-                    return NotFound();
-                }
+        //    try
+        //    {
+        //        var customerModel = _customerRepo.Get(id);
+        //        if (customerModel == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-                _customerRepo.Delete(id);
-                return Ok(customerModel);
-            }
+        //        _customerRepo.Delete(id);
+        //        return Ok(customerModel);
+        //    }
 
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+        //    catch (Exception ex)
+        //    {
+        //        return InternalServerError(ex);
+        //    }
 
-        }
+        //}
 
         
         [HttpPost]
@@ -153,7 +166,8 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var keyPairValues = _customerRepo.GetKeyPairValue(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
+                //var keyPairValues = _customerRepo.GetKeyPairValue(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
+                var keyPairValues = _context.Customers.GetKeyPairValue(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
                 return Ok(keyPairValues);
             }
             catch(Exception ex)
@@ -168,12 +182,14 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var customer = _customerRepo.Get(id);
-                if(customer == null)
+                //var customer = _customerRepo.Get(id);
+                var customer = _context.Customers.Get(id);
+                if (customer == null)
                 {
                     return NotFound();
                 }
-                int customerTenderCount = _tenderRepo.Find(x => x.CustomerId == id).Count();
+                //int customerTenderCount = _tenderRepo.Find(x => x.CustomerId == id).Count();
+                int customerTenderCount = _context.Tenders.Find(x => x.CustomerId == id).Count();
                 var code = customer.Abbreviation + "-" + (customerTenderCount + 1);
                 return Ok(code);
             }

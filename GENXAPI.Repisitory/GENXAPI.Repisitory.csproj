@@ -55,19 +55,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ICompanyRepository.cs" />
     <Compile Include="Infrastructure\CustomerRepository.cs" />
     <Compile Include="Infrastructure\GenericCRUD.cs" />
-    <Compile Include="Infrastructure\ICustomerRepository.cs" />
-    <Compile Include="Infrastructure\IRepository.cs" />
-    <Compile Include="Infrastructure\ITenderDetailRepository.cs" />
-    <Compile Include="Infrastructure\IUnitOfWork.cs" />
-    <Compile Include="Infrastructure\ITenderChildRepository.cs" />
-    <Compile Include="Infrastructure\ITenderRepository.cs" />
-    <Compile Include="Infrastructure\Repository.cs" />
-    <Compile Include="Infrastructure\TenderChildRepository.cs" />
-    <Compile Include="Infrastructure\TenderDetailRepository.cs" />
-    <Compile Include="Infrastructure\TenderRepository.cs" />
-    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Core\ICustomerRepository.cs" />
+    <Compile Include="Core\IRepository.cs" />
+    <Compile Include="Core\ITenderDetailRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\ITenderChildRepository.cs" />
+    <Compile Include="Core\ITenderRepository.cs" />
+    <Compile Include="Core\IVendorRepository.cs" />
+    <Compile Include="Persistance\CompanyRepository.cs" />
+    <Compile Include="Persistance\Repository.cs" />
+    <Compile Include="Persistance\TenderChildRepository.cs" />
+    <Compile Include="Persistance\TenderDetailRepository.cs" />
+    <Compile Include="Persistance\TenderRepository.cs" />
+    <Compile Include="Persistance\UnitOfWork.cs" />
+    <Compile Include="Persistance\VendorRepository.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BusinessUnit.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>

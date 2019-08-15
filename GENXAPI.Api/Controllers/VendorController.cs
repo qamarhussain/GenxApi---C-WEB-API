@@ -18,6 +18,12 @@ namespace GENXAPI.Api.Controllers
         protected readonly VendorOrgTypeRepo _vendorOrgTypeRepo = new VendorOrgTypeRepo();
         protected readonly VendorBusinessNatureRepo _vendorBusinessNatureRepo = new VendorBusinessNatureRepo();
 
+        IUnitOfWork _context;
+        public VendorController()
+        {
+            _context = new UnitOfWork();
+        }
+
         [HttpGet]
         public IHttpActionResult GetAllVendors()
         {
