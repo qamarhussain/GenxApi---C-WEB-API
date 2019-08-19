@@ -8,6 +8,7 @@ namespace GENXAPI.Api.Models
     public class ContractCreateViewModel
     {
         public int TenderId { get; set;}
+        public int ProceedStatus { get; set; }
         public List<ContractService> contractServices { get; set; }
         public List<ContractDetailVehicle> contractDetailVehicle { get; set; }
         public ContractCreateViewModel()

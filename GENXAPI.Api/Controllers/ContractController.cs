@@ -22,7 +22,7 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetAllContracts()
         {
-            var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus == (byte)TenderUtility.ContractState).ToList();
+            var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
             return Ok(result);
         }
 
@@ -100,6 +100,8 @@ namespace GENXAPI.Api.Controllers
                 };
                 db.TenderChilds.Add(obj);
             }
+            tender.ProceedStatus = (byte)model.ProceedStatus;
+            db.Tenders.Update(tender);
             db.SaveChanges();
             return Ok();
         }
