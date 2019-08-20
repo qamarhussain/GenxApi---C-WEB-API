@@ -18,7 +18,6 @@ namespace GENXAPI.Repisitory.Model
         public Vehicle()
         {
             this.TenderChilds = new HashSet<TenderChild>();
-            this.VendorQuotationChilds = new HashSet<VendorQuotationChild>();
         }
     
         public int Id { get; set; }
@@ -35,7 +34,5 @@ namespace GENXAPI.Repisitory.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderChild> TenderChilds { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VendorQuotationChild> VendorQuotationChilds { get; set; }
     }
 }

@@ -393,11 +393,8 @@
           </Key>
           <Property Name="VendorQuotationChildId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorQuotationId" Type="int" Nullable="false" />
-          <Property Name="VendorQuotationDetailId" Type="int" Nullable="false" />
-          <Property Name="ItemCode" Type="varchar" MaxLength="50" />
-          <Property Name="TenderId" Type="int" Nullable="false" />
-          <Property Name="VehicleId" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="VendorQuotationDetail">
           <Key>
@@ -607,30 +604,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VendorQuotationChild_Tender">
-          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="VendorQuotationChild">
-              <PropertyRef Name="TenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotationChild_Vehicles">
-          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehicles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="VendorQuotationChild">
-              <PropertyRef Name="VehicleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VendorQuotationChild_VendorQuotation">
           <End Role="VendorQuotation" Type="Self.VendorQuotation" Multiplicity="1" />
           <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
@@ -640,18 +613,6 @@
             </Principal>
             <Dependent Role="VendorQuotationChild">
               <PropertyRef Name="VendorQuotationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotationChild_VendorQuotationDetail">
-          <End Role="VendorQuotationDetail" Type="Self.VendorQuotationDetail" Multiplicity="1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VendorQuotationDetail">
-              <PropertyRef Name="VendorQuotationDetailId" />
-            </Principal>
-            <Dependent Role="VendorQuotationChild">
-              <PropertyRef Name="VendorQuotationDetailId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -763,20 +724,8 @@
             <End Role="Vendor" EntitySet="Vendor" />
             <End Role="VendorQuotation" EntitySet="VendorQuotation" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_Tender" Association="Self.FK_VendorQuotationChild_Tender">
-            <End Role="Tender" EntitySet="Tender" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_Vehicles" Association="Self.FK_VendorQuotationChild_Vehicles">
-            <End Role="Vehicles" EntitySet="Vehicles" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
-          </AssociationSet>
           <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Self.FK_VendorQuotationChild_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotation" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotationDetail" Association="Self.FK_VendorQuotationChild_VendorQuotationDetail">
-            <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetail" />
             <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
           </AssociationSet>
           <AssociationSet Name="FK_VendorQuotationDetail_Vendor" Association="Self.FK_VendorQuotationDetail_Vendor">
@@ -805,11 +754,19 @@
           <EntitySet Name="ModuleForms" EntityType="Model.ModuleForm" />
           <EntitySet Name="Modules" EntityType="Model.Module" />
           <EntitySet Name="Provinces" EntityType="Model.Province" />
+          <EntitySet Name="Regions" EntityType="Model.Region" />
           <EntitySet Name="Roles" EntityType="Model.Role" />
           <EntitySet Name="RolesToUsers" EntityType="Model.RolesToUser" />
+          <EntitySet Name="Tenders" EntityType="Model.Tender" />
+          <EntitySet Name="TenderChilds" EntityType="Model.TenderChild" />
+          <EntitySet Name="TenderDetails" EntityType="Model.TenderDetail" />
           <EntitySet Name="Units" EntityType="Model.Unit" />
           <EntitySet Name="Users" EntityType="Model.User" />
           <EntitySet Name="Vehicles" EntityType="Model.Vehicle" />
+          <EntitySet Name="Vendors" EntityType="Model.Vendor" />
+          <EntitySet Name="VendorQuotations" EntityType="Model.VendorQuotation" />
+          <EntitySet Name="VendorQuotationChilds" EntityType="Model.VendorQuotationChild" />
+          <EntitySet Name="VendorQuotationDetails" EntityType="Model.VendorQuotationDetail" />
           <EntitySet Name="VendorsBusinessNatures" EntityType="Model.VendorsBusinessNature" />
           <EntitySet Name="VendorsOrgTypes" EntityType="Model.VendorsOrgType" />
           <AssociationSet Name="FK_BusinessUnits_Company" Association="Model.FK_BusinessUnits_Company">
@@ -824,24 +781,25 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
           </AssociationSet>
-          <EntitySet Name="TenderChilds" EntityType="Model.TenderChild" />
-          <EntitySet Name="TenderDetails" EntityType="Model.TenderDetail" />
+          <AssociationSet Name="FK_Region_Company1" Association="Model.FK_Region_Company1">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotation_Company" Association="Model.FK_VendorQuotation_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Tender" EntitySet="Tenders" />
+          </AssociationSet>
           <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
             <End Role="FleetService" EntitySet="FleetServices" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_TenderDetail" Association="Model.FK_TenderChild_TenderDetail">
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Vehicles" Association="Model.FK_TenderChild_Vehicles">
-            <End Role="Vehicle" EntitySet="Vehicles" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <EntitySet Name="Tenders" EntityType="Model.Tender" />
-          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Tender" EntitySet="Tenders" />
+          <AssociationSet Name="FK_Region_Province" Association="Model.FK_Region_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="Region" EntitySet="Regions" />
           </AssociationSet>
           <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
             <End Role="Tender" EntitySet="Tenders" />
@@ -851,33 +809,25 @@
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
-          <EntitySet Name="Regions" EntityType="Model.Region" />
-          <EntitySet Name="VendorQuotations" EntityType="Model.VendorQuotation" />
-          <EntitySet Name="VendorQuotationChilds" EntityType="Model.VendorQuotationChild" />
-          <EntitySet Name="VendorQuotationDetails" EntityType="Model.VendorQuotationDetail" />
-          <AssociationSet Name="FK_Region_Company1" Association="Model.FK_Region_Company1">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Region" EntitySet="Regions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotation_Company" Association="Model.FK_VendorQuotation_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region_Province" Association="Model.FK_Region_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="Region" EntitySet="Regions" />
-          </AssociationSet>
           <AssociationSet Name="FK_VendorQuotation_Tender" Association="Model.FK_VendorQuotation_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_Tender" Association="Model.FK_VendorQuotationChild_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          <AssociationSet Name="FK_TenderChild_TenderDetail" Association="Model.FK_TenderChild_TenderDetail">
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_Vehicles" Association="Model.FK_VendorQuotationChild_Vehicles">
+          <AssociationSet Name="FK_TenderChild_Vehicles" Association="Model.FK_TenderChild_Vehicles">
             <End Role="Vehicle" EntitySet="Vehicles" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotation_Vendor" Association="Model.FK_VendorQuotation_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationDetail_Vendor" Association="Model.FK_VendorQuotationDetail_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Model.FK_VendorQuotationChild_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
@@ -887,20 +837,7 @@
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotationDetail" Association="Model.FK_VendorQuotationChild_VendorQuotationDetail">
-            <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
-          </AssociationSet>
-          <EntitySet Name="Vendors" EntityType="Model.Vendor" />
-          <AssociationSet Name="FK_VendorQuotation_Vendor" Association="Model.FK_VendorQuotation_Vendor">
-            <End Role="Vendor" EntitySet="Vendors" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationDetail_Vendor" Association="Model.FK_VendorQuotationDetail_Vendor">
-            <End Role="Vendor" EntitySet="Vendors" />
-            <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
-          </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="BusinessUnit">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -1108,6 +1045,24 @@
           <NavigationProperty Name="Cities" Relationship="Model.FK_City_Province" FromRole="Province" ToRole="City" />
           <NavigationProperty Name="Regions" Relationship="Model.FK_Region_Province" FromRole="Province" ToRole="Region" />
         </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" />
+          <NavigationProperty Name="Company" Relationship="Model.FK_Region_Company1" FromRole="Region" ToRole="Company" />
+          <NavigationProperty Name="Province" Relationship="Model.FK_Region_Province" FromRole="Region" ToRole="Province" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="id" />
@@ -1129,6 +1084,64 @@
           <Property Name="createdDate" Type="DateTime" Precision="3" />
           <Property Name="modifiedBy" Type="Guid" />
           <Property Name="modifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenderNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProceedStatus" Type="Byte" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
+          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
+        </EntityType>
+        <EntityType Name="TenderChild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TenderId" Type="Int32" Nullable="false" />
+          <Property Name="VehicleId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FleetServiceId" Type="Int32" />
+          <Property Name="TenderDetailId" Type="Int32" />
+          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
+          <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
+          <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
+        </EntityType>
+        <EntityType Name="TenderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenderId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationToId" Type="Int32" />
+          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationFromId" Type="Int32" />
+          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -1182,7 +1195,87 @@
           <Property Name="StatusId" Type="Byte" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Vehicles" FromRole="Vehicle" ToRole="TenderChild" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_Vehicles" FromRole="Vehicle" ToRole="VendorQuotationChild" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="VendorId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <Property Name="NatureOfBusinessId" Type="Int32" />
+          <Property Name="TypeOfBusinessId" Type="Int32" />
+          <Property Name="YearEstablished" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CopyStatus" Type="Boolean" />
+          <Property Name="StatusId" Type="Byte" />
+          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
+          <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="Vendor" ToRole="VendorQuotationDetail" />
+        </EntityType>
+        <EntityType Name="VendorQuotation">
+          <Key>
+            <PropertyRef Name="VendorQuotationId" />
+          </Key>
+          <Property Name="VendorQuotationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="TenderId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company" Relationship="Model.FK_VendorQuotation_Company" FromRole="VendorQuotation" ToRole="Company" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
+          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
+          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationChild" />
+          <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationDetail" />
+        </EntityType>
+        <EntityType Name="VendorQuotationChild">
+          <Key>
+            <PropertyRef Name="VendorQuotationChildId" />
+          </Key>
+          <Property Name="VendorQuotationChildId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorQuotationId" Type="Int32" Nullable="false" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotationChild" ToRole="VendorQuotation" />
+        </EntityType>
+        <EntityType Name="VendorQuotationDetail">
+          <Key>
+            <PropertyRef Name="VendorQuotationDetailId" />
+          </Key>
+          <Property Name="VendorQuotationDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorQuotationId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationToId" Type="Int32" />
+          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DestinationFromId" Type="Int32" />
+          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="VendorQuotationDetail" ToRole="Vendor" />
+          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotationDetail" ToRole="VendorQuotation" />
         </EntityType>
         <EntityType Name="VendorsBusinessNature">
           <Key>
@@ -1246,40 +1339,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TenderChild">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="TenderId" Type="Int32" Nullable="false" />
-          <Property Name="VehicleId" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="FleetServiceId" Type="Int32" />
-          <Property Name="TenderDetailId" Type="Int32" />
-          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
-          <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
-          <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
-        </EntityType>
-        <EntityType Name="TenderDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenderId" Type="Int32" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="DestinationToId" Type="Int32" />
-          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationFromId" Type="Int32" />
-          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
-          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
-        </EntityType>
+        <Association Name="FK_Region_Company1">
+          <End Type="Model.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model.Region" Role="Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotation_Company">
+          <End Type="Model.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="VendorQuotation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tender_Customers">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tender">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TenderChild_FleetService">
           <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
           <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
@@ -1292,64 +1387,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TenderChild_TenderDetail">
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="0..1" />
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+        <Association Name="FK_Region_Province">
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.Region" Role="Region" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TenderDetail">
+            <Principal Role="Province">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="TenderDetailId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderChild_Vehicles">
-          <End Type="Model.Vehicle" Role="Vehicle" Multiplicity="0..1" />
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehicle">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="VehicleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Tender">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BusinessUnitId" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProceedStatus" Type="Byte" />
-          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
-          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_Tender" FromRole="Tender" ToRole="VendorQuotationChild" />
-        </EntityType>
-        <Association Name="FK_Tender_Customers">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tender">
-              <PropertyRef Name="CustomerId" />
+            <Dependent Role="Region">
+              <PropertyRef Name="ProvinceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1377,113 +1423,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Region">
-          <Key>
-            <PropertyRef Name="RegionId" />
-          </Key>
-          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Company" Relationship="Model.FK_Region_Company1" FromRole="Region" ToRole="Company" />
-          <NavigationProperty Name="Province" Relationship="Model.FK_Region_Province" FromRole="Region" ToRole="Province" />
-        </EntityType>
-        <EntityType Name="VendorQuotation">
-          <Key>
-            <PropertyRef Name="VendorQuotationId" />
-          </Key>
-          <Property Name="VendorQuotationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="VendorId" Type="Int32" Nullable="false" />
-          <Property Name="TenderId" Type="Int32" Nullable="false" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Company" Relationship="Model.FK_VendorQuotation_Company" FromRole="VendorQuotation" ToRole="Company" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationChild" />
-          <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationDetail" />
-          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
-        </EntityType>
-        <EntityType Name="VendorQuotationChild">
-          <Key>
-            <PropertyRef Name="VendorQuotationChildId" />
-          </Key>
-          <Property Name="VendorQuotationChildId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorQuotationId" Type="Int32" Nullable="false" />
-          <Property Name="VendorQuotationDetailId" Type="Int32" Nullable="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderId" Type="Int32" Nullable="false" />
-          <Property Name="VehicleId" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotationChild_Tender" FromRole="VendorQuotationChild" ToRole="Tender" />
-          <NavigationProperty Name="Vehicle" Relationship="Model.FK_VendorQuotationChild_Vehicles" FromRole="VendorQuotationChild" ToRole="Vehicle" />
-          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotationChild" ToRole="VendorQuotation" />
-          <NavigationProperty Name="VendorQuotationDetail" Relationship="Model.FK_VendorQuotationChild_VendorQuotationDetail" FromRole="VendorQuotationChild" ToRole="VendorQuotationDetail" />
-        </EntityType>
-        <EntityType Name="VendorQuotationDetail">
-          <Key>
-            <PropertyRef Name="VendorQuotationDetailId" />
-          </Key>
-          <Property Name="VendorQuotationDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorQuotationId" Type="Int32" Nullable="false" />
-          <Property Name="VendorId" Type="Int32" Nullable="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationToId" Type="Int32" />
-          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DestinationFromId" Type="Int32" />
-          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotationDetail" ToRole="VendorQuotation" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_VendorQuotationDetail" FromRole="VendorQuotationDetail" ToRole="VendorQuotationChild" />
-          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="VendorQuotationDetail" ToRole="Vendor" />
-        </EntityType>
-        <Association Name="FK_Region_Company1">
-          <End Type="Model.Company" Role="Company" Multiplicity="1" />
-          <End Type="Model.Region" Role="Region" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Region">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotation_Company">
-          <End Type="Model.Company" Role="Company" Multiplicity="1" />
-          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="VendorQuotation">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Region_Province">
-          <End Type="Model.Province" Role="Province" Multiplicity="1" />
-          <End Type="Model.Region" Role="Region" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Province">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Region">
-              <PropertyRef Name="ProvinceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VendorQuotation_Tender">
           <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
           <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
@@ -1496,27 +1435,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VendorQuotationChild_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
+        <Association Name="FK_TenderChild_TenderDetail">
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tender">
+            <Principal Role="TenderDetail">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="VendorQuotationChild">
-              <PropertyRef Name="TenderId" />
+            <Dependent Role="TenderChild">
+              <PropertyRef Name="TenderDetailId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VendorQuotationChild_Vehicles">
-          <End Type="Model.Vehicle" Role="Vehicle" Multiplicity="1" />
-          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
+        <Association Name="FK_TenderChild_Vehicles">
+          <End Type="Model.Vehicle" Role="Vehicle" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vehicle">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="VendorQuotationChild">
+            <Dependent Role="TenderChild">
               <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotation_Vendor">
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="VendorId" />
+            </Principal>
+            <Dependent Role="VendorQuotation">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotationDetail_Vendor">
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="Model.VendorQuotationDetail" Role="VendorQuotationDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="VendorId" />
+            </Principal>
+            <Dependent Role="VendorQuotationDetail">
+              <PropertyRef Name="VendorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1541,77 +1504,6 @@
             </Principal>
             <Dependent Role="VendorQuotationDetail">
               <PropertyRef Name="VendorQuotationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotationChild_VendorQuotationDetail">
-          <End Type="Model.VendorQuotationDetail" Role="VendorQuotationDetail" Multiplicity="1" />
-          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VendorQuotationDetail">
-              <PropertyRef Name="VendorQuotationDetailId" />
-            </Principal>
-            <Dependent Role="VendorQuotationChild">
-              <PropertyRef Name="VendorQuotationDetailId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Vendor">
-          <Key>
-            <PropertyRef Name="VendorId" />
-          </Key>
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VendorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
-          <Property Name="NatureOfBusinessId" Type="Int32" />
-          <Property Name="TypeOfBusinessId" Type="Int32" />
-          <Property Name="YearEstablished" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CopyStatus" Type="Boolean" />
-          <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
-          <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="Vendor" ToRole="VendorQuotationDetail" />
-        </EntityType>
-        <Association Name="FK_VendorQuotation_Vendor">
-          <End Type="Model.Vendor" Role="Vendor" Multiplicity="1" />
-          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendor">
-              <PropertyRef Name="VendorId" />
-            </Principal>
-            <Dependent Role="VendorQuotation">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotationDetail_Vendor">
-          <End Type="Model.Vendor" Role="Vendor" Multiplicity="1" />
-          <End Type="Model.VendorQuotationDetail" Role="VendorQuotationDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendor">
-              <PropertyRef Name="VendorId" />
-            </Principal>
-            <Dependent Role="VendorQuotationDetail">
-              <PropertyRef Name="VendorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1828,6 +1720,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="Model.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="Model.Role">
               <MappingFragment StoreEntitySet="Roles">
@@ -1849,6 +1758,57 @@
                 <ScalarProperty Name="createdBy" ColumnName="createdBy" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tenders">
+            <EntityTypeMapping TypeName="Model.Tender">
+              <MappingFragment StoreEntitySet="Tender">
+                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
+                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
+                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TenderChilds">
+            <EntityTypeMapping TypeName="Model.TenderChild">
+              <MappingFragment StoreEntitySet="TenderChild">
+                <ScalarProperty Name="TenderDetailId" ColumnName="TenderDetailId" />
+                <ScalarProperty Name="FleetServiceId" ColumnName="FleetServiceId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TenderDetails">
+            <EntityTypeMapping TypeName="Model.TenderDetail">
+              <MappingFragment StoreEntitySet="TenderDetail">
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
+                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
+                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
+                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1906,146 +1866,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VendorsBusinessNatures">
-            <EntityTypeMapping TypeName="Model.VendorsBusinessNature">
-              <MappingFragment StoreEntitySet="VendorsBusinessNature">
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="BNatureName" ColumnName="BNatureName" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VendorsOrgTypes">
-            <EntityTypeMapping TypeName="Model.VendorsOrgType">
-              <MappingFragment StoreEntitySet="VendorsOrgType">
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TenderChilds">
-            <EntityTypeMapping TypeName="Model.TenderChild">
-              <MappingFragment StoreEntitySet="TenderChild">
-                <ScalarProperty Name="TenderDetailId" ColumnName="TenderDetailId" />
-                <ScalarProperty Name="FleetServiceId" ColumnName="FleetServiceId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TenderDetails">
-            <EntityTypeMapping TypeName="Model.TenderDetail">
-              <MappingFragment StoreEntitySet="TenderDetail">
-                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
-                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
-                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
-                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tenders">
-            <EntityTypeMapping TypeName="Model.Tender">
-              <MappingFragment StoreEntitySet="Tender">
-                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
-                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
-                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
-                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Regions">
-            <EntityTypeMapping TypeName="Model.Region">
-              <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VendorQuotations">
-            <EntityTypeMapping TypeName="Model.VendorQuotation">
-              <MappingFragment StoreEntitySet="VendorQuotation">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VendorQuotationChilds">
-            <EntityTypeMapping TypeName="Model.VendorQuotationChild">
-              <MappingFragment StoreEntitySet="VendorQuotationChild">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="VendorQuotationDetailId" ColumnName="VendorQuotationDetailId" />
-                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
-                <ScalarProperty Name="VendorQuotationChildId" ColumnName="VendorQuotationChildId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VendorQuotationDetails">
-            <EntityTypeMapping TypeName="Model.VendorQuotationDetail">
-              <MappingFragment StoreEntitySet="VendorQuotationDetail">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
-                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
-                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
-                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
-                <ScalarProperty Name="VendorQuotationDetailId" ColumnName="VendorQuotationDetailId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="Model.Vendor">
               <MappingFragment StoreEntitySet="Vendor">
@@ -2077,6 +1897,75 @@
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorQuotations">
+            <EntityTypeMapping TypeName="Model.VendorQuotation">
+              <MappingFragment StoreEntitySet="VendorQuotation">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorQuotationChilds">
+            <EntityTypeMapping TypeName="Model.VendorQuotationChild">
+              <MappingFragment StoreEntitySet="VendorQuotationChild">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
+                <ScalarProperty Name="VendorQuotationChildId" ColumnName="VendorQuotationChildId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorQuotationDetails">
+            <EntityTypeMapping TypeName="Model.VendorQuotationDetail">
+              <MappingFragment StoreEntitySet="VendorQuotationDetail">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
+                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
+                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
+                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
+                <ScalarProperty Name="VendorQuotationDetailId" ColumnName="VendorQuotationDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorsBusinessNatures">
+            <EntityTypeMapping TypeName="Model.VendorsBusinessNature">
+              <MappingFragment StoreEntitySet="VendorsBusinessNature">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BNatureName" ColumnName="BNatureName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorsOrgTypes">
+            <EntityTypeMapping TypeName="Model.VendorsOrgType">
+              <MappingFragment StoreEntitySet="VendorsOrgType">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

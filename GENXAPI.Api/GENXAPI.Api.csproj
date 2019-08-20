@@ -205,6 +205,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorQuotationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

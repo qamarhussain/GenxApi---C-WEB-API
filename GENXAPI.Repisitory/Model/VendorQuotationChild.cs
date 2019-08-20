@@ -16,15 +16,9 @@ namespace GENXAPI.Repisitory.Model
     {
         public int VendorQuotationChildId { get; set; }
         public int VendorQuotationId { get; set; }
-        public int VendorQuotationDetailId { get; set; }
         public string ItemCode { get; set; }
-        public int TenderId { get; set; }
-        public int VehicleId { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public decimal Amount { get; set; }
     
-        public virtual Tender Tender { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
         public virtual VendorQuotation VendorQuotation { get; set; }
-        public virtual VendorQuotationDetail VendorQuotationDetail { get; set; }
     }
 }

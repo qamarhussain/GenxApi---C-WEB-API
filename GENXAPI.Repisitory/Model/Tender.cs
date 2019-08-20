@@ -20,7 +20,6 @@ namespace GENXAPI.Repisitory.Model
             this.TenderChilds = new HashSet<TenderChild>();
             this.TenderDetails = new HashSet<TenderDetail>();
             this.VendorQuotations = new HashSet<VendorQuotation>();
-            this.VendorQuotationChilds = new HashSet<VendorQuotationChild>();
         }
     
         public int Id { get; set; }
@@ -46,7 +45,5 @@ namespace GENXAPI.Repisitory.Model
         public virtual ICollection<TenderDetail> TenderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotation> VendorQuotations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VendorQuotationChild> VendorQuotationChilds { get; set; }
     }
 }
