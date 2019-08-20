@@ -5,6 +5,6 @@ namespace GENXAPI.Repisitory
 {
     public interface ITenderRepository : IRepository<Tender>
     {
-         IList<DropdownListDto> GetContractKeyPair(int CompanyId, int BusinessUnitId);
+         IList<DropdownListDto> GetContractKeyPair(int CompanyId, int BusinessUnitId, int CustomerId);
     }
 }

@@ -34,61 +34,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var viewModel = new List<TenderCreateViewModel>();
-                //var result = _tenderRepo.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).ToList();
-                //var result = db.Tenders.AllIncluding(x=>x.Customer).ToList();
                 var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).Where(o=>o.ProceedStatus == (byte)TenderUtility.TenderState).ToList();
-                //foreach(var tender in result)
-                //{
-                //    TenderCreateViewModel tenderViewModel = new TenderCreateViewModel();
-                //    tenderViewModel.Id = tender.Id;
-                //    tenderViewModel.StatusId = (byte)tender.StatusId;
-                //    tenderViewModel.CreatedBy = tender.CreatedBy;
-                //    tenderViewModel.CreatedOn = tender.CreatedOn;
-                //    tenderViewModel.CustomerId = tender.CustomerId;
-                //    tenderViewModel.TenderReference = tender.TenderReference;
-                //    tenderViewModel.TenderSource = tender.TenderSource;
-                //    tenderViewModel.TenderTerm = tender.TenderTerm;
-                //    tenderViewModel.CustomerName = tender.Customer.Name;
-                //    tenderViewModel.TenderNo = tender.TenderDetails.First().ItemCode.Remove(tender.TenderDetails.First().ItemCode.LastIndexOf('-'));
-                //    #region Tender details
-                //    foreach (var items in tender.TenderDetails)
-                //    {
-                //        TenderDetail tenderDetail = new TenderDetail();
-                //        tenderDetail.Id = items.Id;
-                //        tenderDetail.TenderId = items.TenderId;
-                //        tenderDetail.CustomerId = items.CustomerId;
-                //        tenderDetail.DestinationTo = items.Id.ToString();
-                //        tenderDetail.DestinationFrom = items.DestinationFrom;
-                //        tenderDetail.DestinationFromName = _cityRepo.Get(Convert.ToInt32(items.DestinationFrom)).Name;
-                //        var cityTo = _cityRepo.Get(Convert.ToInt32(items.DestinationTo));
-                //        tenderDetail.DestinationToName = cityTo.Name;
-                //        tenderDetail.ProvinceName = cityTo.Province.Name;
-                //        tenderDetail.ProvinceId = items.ProvinceId;
-                //        tenderDetail.ItemCode = items.ItemCode;
-                //        tenderViewModel.TenderDetails.Add(tenderDetail);
-                //    }
-                //    #endregion End Tender details
-
-                //    #region Tender Child.
-                //    foreach (var items in tender.TenderChilds)
-                //    {
-                //        TenderChild tenderChild = new TenderChild();
-                //        tenderChild.FleetServiceId = items.FleetServiceId;
-                //        var fleetServiceObj = _fleetServiceRepo.Get(items.FleetServiceId);
-                //        tenderChild.ServiceName = fleetServiceObj.ServiceName;
-                //        tenderChild.ServiceType = fleetServiceObj.ServiceType;
-                //        tenderChild.ItemCode = items.ItemCode;
-                //        tenderChild.CustomerId = items.CustomerId;
-                //        tenderChild.TenderId = items.TenderId;
-                //        tenderChild.VehicleType = items.VehicleType;
-                //        tenderChild.Amount = items.Amount;
-                //        tenderChild.UnitOfMeasurement = items.UnitOfMeasurement;
-                //        tenderViewModel.TenderChilds.Add(tenderChild);
-                //    }
-                //    #endregion
-                //    viewModel.Add(tenderViewModel);
-                //}
                 return Ok(result);
 
             }

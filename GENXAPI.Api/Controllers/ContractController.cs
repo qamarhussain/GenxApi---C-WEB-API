@@ -108,11 +108,11 @@ namespace GENXAPI.Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
+        public IHttpActionResult GetKeyPairByCustomer(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                var keyPairValues = db.Tenders.GetContractKeyPair(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
+                var keyPairValues = db.Tenders.GetContractKeyPair(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId), Convert.ToInt32(model.CustomerId));
                 return Ok(keyPairValues);
             }
             catch (Exception ex)

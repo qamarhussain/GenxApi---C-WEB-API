@@ -216,6 +216,7 @@
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\StartupKeyPairViewModel.cs" />
     <Compile Include="Models\TenderCreateViewModel.cs" />
+    <Compile Include="Models\VendorQuotationCreateViewModel.cs" />
     <Compile Include="Models\VendorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenValidator.cs" />
