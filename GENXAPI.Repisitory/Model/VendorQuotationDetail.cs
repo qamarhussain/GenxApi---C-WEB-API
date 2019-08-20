@@ -12,30 +12,27 @@ namespace GENXAPI.Repisitory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Vehicle
+    public partial class VendorQuotationDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Vehicle()
+        public VendorQuotationDetail()
         {
-            this.TenderChilds = new HashSet<TenderChild>();
             this.VendorQuotationChilds = new HashSet<VendorQuotationChild>();
         }
     
-        public int Id { get; set; }
-        public string Type { get; set; }
-        public string Weight { get; set; }
-        public string Title { get; set; }
-        public int BusinessUnitId { get; set; }
-        public int CompanyId { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public string LastModifiedBy { get; set; }
-        public Nullable<byte> StatusId { get; set; }
-        public Nullable<System.DateTime> LastModifiedDate { get; set; }
+        public int VendorQuotationDetailId { get; set; }
+        public int VendorQuotationId { get; set; }
+        public int VendorId { get; set; }
+        public string ItemCode { get; set; }
+        public Nullable<int> DestinationToId { get; set; }
+        public string DestinationToName { get; set; }
+        public Nullable<int> DestinationFromId { get; set; }
+        public string DestinationFromName { get; set; }
+        public Nullable<decimal> Amount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TenderChild> TenderChilds { get; set; }
+        public virtual VendorQuotation VendorQuotation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotationChild> VendorQuotationChilds { get; set; }
+        public virtual Vendor Vendor { get; set; }
     }
 }

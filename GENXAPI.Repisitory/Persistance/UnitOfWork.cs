@@ -71,6 +71,46 @@ namespace GENXAPI.Repisitory
             }
         }
 
+        private IVendorQuotationRepository _vendorQuotation;
+
+        public IVendorQuotationRepository VendorQuotation
+        {
+            get
+            {
+                if (this._vendorQuotation == null)
+                {
+                    this._vendorQuotation = new VendorQuotationRepository(db);
+                }
+                return this._vendorQuotation;
+            }
+        }
+
+        private IVendorQuotationDetailRepository _vendorQuotationDetail;
+        public IVendorQuotationDetailRepository VendorQuotationDetail
+        {
+            get
+            {
+                if (this._vendorQuotationDetail == null)
+                {
+                    this._vendorQuotationDetail = new VendorQuotationDetailRepository(db);
+                }
+                return this._vendorQuotationDetail;
+            }
+        }
+
+        private IVendorQuotationChildRepository _vendorQuotationChild;
+        public IVendorQuotationChildRepository VendorQuotationChild
+        {
+            get
+            {
+                if (this._vendorQuotationChild == null)
+                {
+                    this._vendorQuotationChild = new VendorQuotationChildRepository(db);
+                }
+                return this._vendorQuotationChild;
+            }
+        }
+
         public int SaveChanges()
         {
             return db.SaveChanges();

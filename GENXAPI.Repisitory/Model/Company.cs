@@ -19,6 +19,8 @@ namespace GENXAPI.Repisitory.Model
         {
             this.BusinessUnits = new HashSet<BusinessUnit>();
             this.FinancialYearDefinations = new HashSet<FinancialYearDefination>();
+            this.Regions = new HashSet<Region>();
+            this.VendorQuotations = new HashSet<VendorQuotation>();
         }
     
         public int CompanyId { get; set; }
@@ -45,5 +47,9 @@ namespace GENXAPI.Repisitory.Model
         public virtual ICollection<BusinessUnit> BusinessUnits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinancialYearDefination> FinancialYearDefinations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Region> Regions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VendorQuotation> VendorQuotations { get; set; }
     }
 }

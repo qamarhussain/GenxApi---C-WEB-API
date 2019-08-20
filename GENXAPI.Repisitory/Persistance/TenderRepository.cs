@@ -1,4 +1,8 @@
-﻿using GENXAPI.Repisitory.Model;
+﻿using System;
+using System.Collections.Generic;
+using GENXAPI.Repisitory.Model;
+using GENXAPI.Utilities;
+using System.Linq;
 
 namespace GENXAPI.Repisitory
 {
@@ -17,6 +21,16 @@ namespace GENXAPI.Repisitory
         {
 
         }
-                
+
+        public IList<DropdownListDto> GetContractKeyPair(int CompanyId, int BusinessUnitId)
+        {
+            var result = Find(m => m.StatusId == (byte)Status.Active && m.CompanyId == CompanyId && m.BusinessUnitId == BusinessUnitId && m.ProceedStatus == (byte)TenderUtility.ContractApprovedState).Select(r =>
+          new DropdownListDto
+          {
+              Value = r.Id.ToString(),
+              Text = r.TenderNo
+          });
+            return result.ToList();
+        }
     }
 }

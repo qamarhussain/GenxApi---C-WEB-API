@@ -13,6 +13,10 @@ namespace GENXAPI.Repisitory
         ITenderChildRepository TenderChilds { get; }
         ICustomerRepository Customers { get; }
 
+        IVendorQuotationRepository VendorQuotation { get; }
+        IVendorQuotationDetailRepository VendorQuotationDetail { get; }
+        IVendorQuotationChildRepository VendorQuotationChild { get; }
+
 
         int SaveChanges();
     }

@@ -42,11 +42,15 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
         public virtual DbSet<TenderChild> TenderChilds { get; set; }
         public virtual DbSet<TenderDetail> TenderDetails { get; set; }
         public virtual DbSet<Tender> Tenders { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
+        public virtual DbSet<VendorQuotationChild> VendorQuotationChilds { get; set; }
+        public virtual DbSet<VendorQuotationDetail> VendorQuotationDetails { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
     }
 }

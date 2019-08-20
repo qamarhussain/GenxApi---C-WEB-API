@@ -134,12 +134,12 @@ namespace GENXAPI.Api.Controllers
                 return InternalServerError(ex);
             }
         }
-        [HttpGet]
-        public IHttpActionResult GetKeyPair()
+        [HttpPost]
+        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                var keyPairValues = _vendorRepo.GetKeyPairValue();
+                var keyPairValues = _vendorRepo.GetKeyPairValue(Convert.ToInt32(model.CompanyId),Convert.ToInt32(model.BusinessUnitId));
                 return Ok(keyPairValues);
             }
             catch(Exception ex)

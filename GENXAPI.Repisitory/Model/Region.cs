@@ -12,30 +12,21 @@ namespace GENXAPI.Repisitory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Province
+    public partial class Region
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Province()
-        {
-            this.Cities = new HashSet<City>();
-            this.Regions = new HashSet<Region>();
-        }
-    
-        public int Id { get; set; }
+        public int RegionId { get; set; }
         public string Name { get; set; }
         public string Abbreviation { get; set; }
-        public Nullable<int> CompanyId { get; set; }
-        public Nullable<int> BusinessUnitId { get; set; }
-        public int CountryId { get; set; }
+        public int ProvinceId { get; set; }
+        public int CompanyId { get; set; }
+        public int BusinessUnitId { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<byte> StatusId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<City> Cities { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Region> Regions { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual Province Province { get; set; }
     }
 }

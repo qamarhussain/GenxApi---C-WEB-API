@@ -2,6 +2,7 @@
 using GENXAPI.Api.Utilities;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
+using GENXAPI.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,6 +105,20 @@ namespace GENXAPI.Api.Controllers
             db.Tenders.Update(tender);
             db.SaveChanges();
             return Ok();
+        }
+
+        [HttpPost]
+        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var keyPairValues = db.Tenders.GetContractKeyPair(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
     }

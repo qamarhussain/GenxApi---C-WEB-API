@@ -10,7 +10,23 @@ using System.Drawing;
 
 namespace GENXAPI.Utilities
 {
-
+    public enum TenderUtility
+    {
+        [Description("TenderState")]
+        TenderState = 1,
+        [Description("ContractState")]
+        ContractState = 2,
+        [Description("ContractApprovedState")]
+        ContractApprovedState = 3,
+        [Description("ContractRejectedState")]
+        ContractRejectedState = 4,
+        [Description("TenderRunningState")]
+        TenderRunningState = 5,
+        [Description("TenderCancelState")]
+        TenderCancelState = 6,
+        [Description("TenderCompleteState")]
+        TenderCompleteState = 7,
+    }
     public enum Status
     {
         [Description("Active")]
