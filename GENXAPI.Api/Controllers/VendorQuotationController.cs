@@ -44,6 +44,31 @@ namespace GENXAPI.Api.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        public IHttpActionResult UpdateVendorQuotation(VendorQuotationCreateViewModel model)
+        {
+            try
+            {
+                var quotationModal = _unitOfWork.VendorQuotation.AllIncluding(x => x.VendorQuotationChilds).Where(e => e.VendorQuotationId == model.VendorQuotationId).FirstOrDefault();
+                if (quotationModal == null)
+                {
+                    return NotFound();
+                }
+                _unitOfWork.VendorQuotationChild.RemoveRange(quotationModal.VendorQuotationChilds.ToArray());
+                quotationModal.LastModifiedBy = model.LastModifiedBy;
+                quotationModal.LastModifiedDate = DateTime.Now;
+                quotationModal.VendorQuotationChilds = model.vendorQuotationChild;
+                _unitOfWork.VendorQuotation.Update(quotationModal);
+                _unitOfWork.SaveChanges();
+                return Ok(quotationModal);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+          
+        }
+
         [HttpGet]
         public IHttpActionResult GetQoutationByContractId(int Id)
         {

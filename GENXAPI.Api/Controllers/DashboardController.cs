@@ -24,7 +24,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _moduleFormRepo.GetAll().ToList();
+                var result = _moduleFormRepo.GetAll().OrderBy(x=>x.OrderBy).ToList();
                 return Ok(result);
             }
             catch (Exception ex)
