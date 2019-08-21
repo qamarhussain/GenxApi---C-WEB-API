@@ -101,7 +101,6 @@ namespace GENXAPI.Api.Controllers
                 };
                 db.TenderChilds.Add(obj);
             }
-            tender.ProceedStatus = (byte)model.ProceedStatus;
             db.Tenders.Update(tender);
             db.SaveChanges();
             return Ok();
@@ -119,6 +118,46 @@ namespace GENXAPI.Api.Controllers
             {
                 return InternalServerError(ex);
             }
+        }
+
+        [HttpPost]
+        public IHttpActionResult ApproveContract(TenderCreateViewModel model)
+        {
+            try
+            {
+                var contract = db.Tenders.Get(model.Id);
+                contract.ProceedStatus = (byte)TenderUtility.ContractApprovedState;
+                contract.LastModifiedDate = DateTime.Now;
+                contract.LastModifiedBy = model.LastModifiedBy;
+                db.Tenders.Update(contract);
+                db.SaveChanges();
+                return Ok();
+            }catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult CancelContract(ContractCancelation model)
+        {
+            try
+            {
+                model.CancelationDate = DateTime.Now;
+                db.ContractCancelation.Add(model);
+                var contract = db.Tenders.Get(model.ContractId);
+                contract.ProceedStatus = (byte)TenderUtility.ContractCancelState;
+                contract.LastModifiedDate = DateTime.Now;
+                contract.LastModifiedBy = model.CancelationBy.ToString();
+                db.Tenders.Update(contract);
+                db.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
 
     }

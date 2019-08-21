@@ -111,6 +111,19 @@ namespace GENXAPI.Repisitory
             }
         }
 
+        private IContractCancelationRepository _contractCancelation;
+        public IContractCancelationRepository ContractCancelation
+        {
+            get
+            {
+                if (this._contractCancelation == null)
+                {
+                    this._contractCancelation = new ContractCancelationRepository(db);
+                }
+                return this._contractCancelation;
+            }
+        }
+
         public int SaveChanges()
         {
             return db.SaveChanges();

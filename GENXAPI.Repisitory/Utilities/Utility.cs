@@ -18,8 +18,8 @@ namespace GENXAPI.Utilities
         ContractState = 2,
         [Description("ContractApprovedState")]
         ContractApprovedState = 3,
-        [Description("ContractRejectedState")]
-        ContractRejectedState = 4,
+        [Description("ContractCancelState")]
+        ContractCancelState = 4,
         [Description("TenderRunningState")]
         TenderRunningState = 5,
         [Description("TenderCancelState")]

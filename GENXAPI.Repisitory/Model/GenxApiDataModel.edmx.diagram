@@ -49,6 +49,8 @@
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
+        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="6" PointY="23.75" />
+        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

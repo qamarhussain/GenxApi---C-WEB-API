@@ -62,6 +62,16 @@
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="StatusId" Type="tinyint" />
         </EntityType>
+        <EntityType Name="ContractCancelation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="CancelationBy" Type="int" Nullable="false" />
+          <Property Name="CancelationDate" Type="datetime" Nullable="false" />
+          <Property Name="Reasion" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -460,6 +470,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ContractCancelation_Tender">
+          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
+          <End Role="ContractCancelation" Type="Self.ContractCancelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractCancelation">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinancialYearDefination_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="FinancialYearDefination" Type="Self.FinancialYearDefination" Multiplicity="*" />
@@ -644,6 +666,7 @@
           <EntitySet Name="BusinessUnits" EntityType="Self.BusinessUnits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractCancelation" EntityType="Self.ContractCancelation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
@@ -675,6 +698,10 @@
           <AssociationSet Name="FK_City_Province" Association="Self.FK_City_Province">
             <End Role="Province" EntitySet="Province" />
             <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Self.FK_ContractCancelation_Tender">
+            <End Role="Tender" EntitySet="Tender" />
+            <End Role="ContractCancelation" EntitySet="ContractCancelation" />
           </AssociationSet>
           <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Self.FK_FinancialYearDefination_Company">
             <End Role="Company" EntitySet="Company" />
@@ -836,6 +863,11 @@
           <AssociationSet Name="FK_VendorQuotationDetail_VendorQuotation" Association="Model.FK_VendorQuotationDetail_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
+          </AssociationSet>
+          <EntitySet Name="ContractCancelations" EntityType="Model.ContractCancelation" />
+          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BusinessUnit">
@@ -1108,6 +1140,7 @@
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
           <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
           <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
+          <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -1504,6 +1537,29 @@
             </Principal>
             <Dependent Role="VendorQuotationDetail">
               <PropertyRef Name="VendorQuotationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ContractCancelation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="CancelationBy" Type="Int32" Nullable="false" />
+          <Property Name="CancelationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reasion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_ContractCancelation_Tender" FromRole="ContractCancelation" ToRole="Tender" />
+        </EntityType>
+        <Association Name="FK_ContractCancelation_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.ContractCancelation" Role="ContractCancelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractCancelation">
+              <PropertyRef Name="ContractId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1965,6 +2021,17 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractCancelations">
+            <EntityTypeMapping TypeName="Model.ContractCancelation">
+              <MappingFragment StoreEntitySet="ContractCancelation">
+                <ScalarProperty Name="Reasion" ColumnName="Reasion" />
+                <ScalarProperty Name="CancelationDate" ColumnName="CancelationDate" />
+                <ScalarProperty Name="CancelationBy" ColumnName="CancelationBy" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

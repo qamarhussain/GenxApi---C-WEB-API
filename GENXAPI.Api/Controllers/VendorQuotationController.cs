@@ -25,6 +25,17 @@ namespace GENXAPI.Api.Controllers
             return Ok(_unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor, z => z.VendorQuotationChilds).ToList());
         }
 
+        [HttpGet]
+        public IHttpActionResult GetById(int id)
+        {
+            var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
         [HttpPost]
         public IHttpActionResult CreateVendorQuotation(VendorQuotationCreateViewModel model)
         {
