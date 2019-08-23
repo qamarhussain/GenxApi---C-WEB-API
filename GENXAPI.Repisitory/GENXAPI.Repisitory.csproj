@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Core\ICompanyRepository.cs" />
     <Compile Include="Core\IContractCancelationRepository.cs" />
+    <Compile Include="Core\ICustomerBusinessLineRepository.cs" />
     <Compile Include="Core\IRegionRepository.cs" />
     <Compile Include="Core\IVendorQuotationChildRepository.cs" />
     <Compile Include="Core\IVendorQuotationDetailRepository.cs" />
@@ -73,6 +74,9 @@
     <Compile Include="Model\ContractCancelation.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomerBusinessLine.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Region.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +91,7 @@
     </Compile>
     <Compile Include="Persistance\CompanyRepository.cs" />
     <Compile Include="Persistance\ContractCancelationRepository.cs" />
+    <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
     <Compile Include="Persistance\RegionRepository.cs" />
     <Compile Include="Persistance\Repository.cs" />
     <Compile Include="Persistance\TenderChildRepository.cs" />

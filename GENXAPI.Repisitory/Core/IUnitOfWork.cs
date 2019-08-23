@@ -14,6 +14,9 @@ namespace GENXAPI.Repisitory
         IVendorQuotationDetailRepository VendorQuotationDetail { get; }
         IVendorQuotationChildRepository VendorQuotationChild { get; }
         IContractCancelationRepository ContractCancelation { get; }
+        ICustomerBusinessLineRepository CustomerBusinessLine { get; }
+
+
         int SaveChanges();
     }
 }

@@ -94,6 +94,16 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StatusId" Type="tinyint" Nullable="false" />
         </EntityType>
+        <EntityType Name="CustomerBusinessLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="BusinessUnitId" Type="int" />
+          <Property Name="StatusId" Type="tinyint" />
+        </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
@@ -104,7 +114,7 @@
           <Property Name="RegionId" Type="int" />
           <Property Name="ZoneId" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="BusinessLine" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerBusinessLineId" Type="int" />
           <Property Name="Discount" Type="float" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactPerson" Type="varchar" MaxLength="255" Nullable="false" />
@@ -495,6 +505,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customers_CustomerBusinessLine">
+          <End Role="CustomerBusinessLine" Type="Self.CustomerBusinessLine" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerBusinessLine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CustomerBusinessLineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinancialYearDefination_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="FinancialYearDefination" Type="Self.FinancialYearDefination" Multiplicity="*" />
@@ -670,6 +692,7 @@
           <EntitySet Name="ContractCancelation" EntityType="Self.ContractCancelation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerBusinessLine" EntityType="Self.CustomerBusinessLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinancialYearDefination" EntityType="Self.FinancialYearDefination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FleetService" EntityType="Self.FleetService" Schema="dbo" store:Type="Tables" />
@@ -707,6 +730,10 @@
           <AssociationSet Name="FK_ContractCancelation_Tender" Association="Self.FK_ContractCancelation_Tender">
             <End Role="Tender" EntitySet="Tender" />
             <End Role="ContractCancelation" EntitySet="ContractCancelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_CustomerBusinessLine" Association="Self.FK_Customers_CustomerBusinessLine">
+            <End Role="CustomerBusinessLine" EntitySet="CustomerBusinessLine" />
+            <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Self.FK_FinancialYearDefination_Company">
             <End Role="Company" EntitySet="Company" />
@@ -772,6 +799,7 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BusinessUnits" EntityType="Model.BusinessUnit" />
           <EntitySet Name="Companies" EntityType="Model.Company" />
+          <EntitySet Name="ContractCancelations" EntityType="Model.ContractCancelation" />
           <EntitySet Name="Countries" EntityType="Model.Country" />
           <EntitySet Name="Currencies" EntityType="Model.Currency" />
           <EntitySet Name="Customers" EntityType="Model.Customer" />
@@ -806,6 +834,10 @@
           <AssociationSet Name="FK_VendorQuotation_Company" Association="Model.FK_VendorQuotation_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
           </AssociationSet>
           <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
             <End Role="Customer" EntitySet="Customers" />
@@ -851,10 +883,10 @@
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
           </AssociationSet>
-          <EntitySet Name="ContractCancelations" EntityType="Model.ContractCancelation" />
-          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
+          <EntitySet Name="CustomerBusinessLines" EntityType="Model.CustomerBusinessLine" />
+          <AssociationSet Name="FK_Customers_CustomerBusinessLine" Association="Model.FK_Customers_CustomerBusinessLine">
+            <End Role="CustomerBusinessLine" EntitySet="CustomerBusinessLines" />
+            <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           <EntitySet Name="Regions" EntityType="Model.Region" />
           <AssociationSet Name="FK_Region_Province" Association="Model.FK_Region_Province">
@@ -919,6 +951,17 @@
           <NavigationProperty Name="FinancialYearDefinations" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="Company" ToRole="FinancialYearDefination" />
           <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Company" FromRole="Company" ToRole="VendorQuotation" />
         </EntityType>
+        <EntityType Name="ContractCancelation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="CancelationBy" Type="Int32" Nullable="false" />
+          <Property Name="CancelationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reasion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_ContractCancelation_Tender" FromRole="ContractCancelation" ToRole="Tender" />
+        </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -950,7 +993,7 @@
           <Property Name="RegionId" Type="Int32" />
           <Property Name="ZoneId" Type="Int32" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="BusinessLine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerBusinessLineId" Type="Int32" />
           <Property Name="Discount" Type="Double" Nullable="false" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -978,6 +1021,7 @@
           <Property Name="StatusId" Type="Byte" />
           <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
+          <NavigationProperty Name="CustomerBusinessLine" Relationship="Model.FK_Customers_CustomerBusinessLine" FromRole="Customer" ToRole="CustomerBusinessLine" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -1104,11 +1148,11 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProceedStatus" Type="Byte" />
+          <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
           <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
           <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
           <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
-          <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -1340,6 +1384,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ContractCancelation_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.ContractCancelation" Role="ContractCancelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractCancelation">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tender_Customers">
           <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
@@ -1472,26 +1528,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ContractCancelation">
+        <EntityType Name="CustomerBusinessLine">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContractId" Type="Int32" Nullable="false" />
-          <Property Name="CancelationBy" Type="Int32" Nullable="false" />
-          <Property Name="CancelationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reasion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_ContractCancelation_Tender" FromRole="ContractCancelation" ToRole="Tender" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="StatusId" Type="Byte" />
+          <NavigationProperty Name="Customers" Relationship="Model.FK_Customers_CustomerBusinessLine" FromRole="CustomerBusinessLine" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_ContractCancelation_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.ContractCancelation" Role="ContractCancelation" Multiplicity="*" />
+        <Association Name="FK_Customers_CustomerBusinessLine">
+          <End Type="Model.CustomerBusinessLine" Role="CustomerBusinessLine" Multiplicity="0..1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tender">
+            <Principal Role="CustomerBusinessLine">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ContractCancelation">
-              <PropertyRef Name="ContractId" />
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerBusinessLineId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1616,6 +1672,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ContractCancelations">
+            <EntityTypeMapping TypeName="Model.ContractCancelation">
+              <MappingFragment StoreEntitySet="ContractCancelation">
+                <ScalarProperty Name="Reasion" ColumnName="Reasion" />
+                <ScalarProperty Name="CancelationDate" ColumnName="CancelationDate" />
+                <ScalarProperty Name="CancelationBy" ColumnName="CancelationBy" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="Model.Country">
               <MappingFragment StoreEntitySet="Country">
@@ -1668,7 +1735,7 @@
                 <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="BusinessLine" ColumnName="BusinessLine" />
+                <ScalarProperty Name="CustomerBusinessLineId" ColumnName="CustomerBusinessLineId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
@@ -1996,13 +2063,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContractCancelations">
-            <EntityTypeMapping TypeName="Model.ContractCancelation">
-              <MappingFragment StoreEntitySet="ContractCancelation">
-                <ScalarProperty Name="Reasion" ColumnName="Reasion" />
-                <ScalarProperty Name="CancelationDate" ColumnName="CancelationDate" />
-                <ScalarProperty Name="CancelationBy" ColumnName="CancelationBy" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+          <EntitySetMapping Name="CustomerBusinessLines">
+            <EntityTypeMapping TypeName="Model.CustomerBusinessLine">
+              <MappingFragment StoreEntitySet="CustomerBusinessLine">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
