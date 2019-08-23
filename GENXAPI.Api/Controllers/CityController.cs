@@ -21,7 +21,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _cityRepo.AllIncluding(e => e.Province).ToList();
+                var result = _cityRepo.AllIncluding(e => e.Province, e => e.Region).ToList();
                 return Ok(result);
             }
             catch (Exception)

@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="cd41223231d2462ca97b9d3febfcf19e" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="19.75" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="3" PointY="33.625" />
         <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="8.25" />
         <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="5.75" PointY="0.75" />
@@ -32,7 +31,6 @@
         <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="11.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="12.75" PointY="4.75" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
-        <AssociationConnector Association="Model.FK_City_Province" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Company" />
         <AssociationConnector Association="Model.FK_Tender_Customers" />
@@ -50,6 +48,9 @@
         <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
         <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="3" PointY="9.375" />
         <AssociationConnector Association="Model.FK_Region_Province" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="5.25" PointY="14.5" />
+        <AssociationConnector Association="Model.FK_City_Province" />
+        <AssociationConnector Association="Model.FK_City_Region" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
