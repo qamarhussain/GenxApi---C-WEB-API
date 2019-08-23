@@ -1,10 +1,7 @@
 ﻿
+using GENXAPI.Repisitory.Core;
 using GENXAPI.Repisitory.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GENXAPI.Repisitory.Persistance;
 
 namespace GENXAPI.Repisitory
 {
@@ -121,6 +118,19 @@ namespace GENXAPI.Repisitory
                     this._contractCancelation = new ContractCancelationRepository(db);
                 }
                 return this._contractCancelation;
+            }
+        }
+
+        private IRegionRepository _region;
+        public IRegionRepository Region
+        {
+            get
+            {
+                if (this._region == null)
+                {
+                    this._region = new RegionRepository(db);
+                }
+                return this._region;
             }
         }
 

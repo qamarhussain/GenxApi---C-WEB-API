@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GENXAPI.Repisitory.Core;
+using System;
 
 namespace GENXAPI.Repisitory
 {
@@ -12,13 +9,11 @@ namespace GENXAPI.Repisitory
         ITenderDetailRepository TenderDetails { get; }
         ITenderChildRepository TenderChilds { get; }
         ICustomerRepository Customers { get; }
-
+        IRegionRepository Region { get; }
         IVendorQuotationRepository VendorQuotation { get; }
         IVendorQuotationDetailRepository VendorQuotationDetail { get; }
         IVendorQuotationChildRepository VendorQuotationChild { get; }
         IContractCancelationRepository ContractCancelation { get; }
-
-
         int SaveChanges();
     }
 }
