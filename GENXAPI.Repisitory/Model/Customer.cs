@@ -26,7 +26,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<int> RegionId { get; set; }
         public Nullable<int> ZoneId { get; set; }
         public string Name { get; set; }
-        public string BusinessLine { get; set; }
+        public Nullable<int> CustomerBusinessLineId { get; set; }
         public double Discount { get; set; }
         public string Type { get; set; }
         public string ContactPerson { get; set; }
@@ -56,5 +56,6 @@ namespace GENXAPI.Repisitory.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tender> Tenders { get; set; }
+        public virtual CustomerBusinessLine CustomerBusinessLine { get; set; }
     }
 }

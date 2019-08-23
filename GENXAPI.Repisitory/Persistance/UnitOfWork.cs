@@ -124,6 +124,20 @@ namespace GENXAPI.Repisitory
             }
         }
 
+        private ICustomerBusinessLineRepository _customerBusinessLine;
+
+        public ICustomerBusinessLineRepository CustomerBusinessLine
+        {
+            get
+            {
+                if (this._customerBusinessLine == null)
+                {
+                    this._customerBusinessLine = new CustomerBusinessLineRepository(db);
+                }
+                return this._customerBusinessLine;
+            }
+        }
+
         public int SaveChanges()
         {
             return db.SaveChanges();
