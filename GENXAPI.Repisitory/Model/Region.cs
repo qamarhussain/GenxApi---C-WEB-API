@@ -14,6 +14,12 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Region
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Region()
+        {
+            this.Cities = new HashSet<City>();
+        }
+    
         public int RegionId { get; set; }
         public string Name { get; set; }
         public string Abbreviation { get; set; }
@@ -28,5 +34,7 @@ namespace GENXAPI.Repisitory.Model
     
         public virtual Company Company { get; set; }
         public virtual Province Province { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<City> Cities { get; set; }
     }
 }

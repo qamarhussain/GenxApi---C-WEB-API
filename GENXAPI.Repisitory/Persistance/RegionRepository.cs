@@ -1,11 +1,8 @@
 ﻿using GENXAPI.Repisitory.Core;
 using GENXAPI.Repisitory.Model;
-using System;
+using GENXAPI.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace GENXAPI.Repisitory.Persistance
 {
     public class RegionRepository: Repository<Region>, IRegionRepository
@@ -23,5 +20,17 @@ namespace GENXAPI.Repisitory.Persistance
         {
 
         }
+
+        public IList<DropdownListDto> GetKeyPairValue(int CompanyId, int BusinessUnitId)
+        {
+            var result = Find(m => m.StatusId == (byte)Status.Active && m.CompanyId == CompanyId && m.BusinessUnitId == BusinessUnitId).Select(r =>
+            new DropdownListDto
+            {
+                Value = r.RegionId.ToString(),
+                Text = r.Name
+            });
+            return result.ToList();
+        }
+
     }
 }

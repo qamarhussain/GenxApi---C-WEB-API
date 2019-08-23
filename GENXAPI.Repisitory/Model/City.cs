@@ -22,7 +22,9 @@ namespace GENXAPI.Repisitory.Model
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
+        public Nullable<int> RegionId { get; set; }
     
         public virtual Province Province { get; set; }
+        public virtual Region Region { get; set; }
     }
 }

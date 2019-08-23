@@ -35,7 +35,6 @@
         <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="11.75" PointY="3" />
         <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="12.75" PointY="7" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
-        <AssociationConnector Association="Model.FK_City_Province" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
         <AssociationConnector Association="Model.FK_Region_Company1" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Company" />

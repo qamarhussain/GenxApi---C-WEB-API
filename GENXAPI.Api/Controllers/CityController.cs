@@ -21,7 +21,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _cityRepo.AllIncluding(e => e.Province).ToList();
+                var result = _cityRepo.AllIncluding(e => e.Province, e => e.Region).ToList();
                 return Ok(result);
             }
             catch (Exception)
@@ -85,6 +85,7 @@ namespace GENXAPI.Api.Controllers
                 cityModel.LastModifiedDate = DateTime.Now;
                 cityModel.LastModifiedBy = cityModel.LastModifiedBy;
                 cityModel.ProvinceId = city.ProvinceId;
+                cityModel.RegionId = city.RegionId;
                 cityModel.Name = city.Name;
                 cityModel.StatusId = city.StatusId;
 
