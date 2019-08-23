@@ -58,6 +58,7 @@
     <Compile Include="Core\ICompanyRepository.cs" />
     <Compile Include="Core\IContractCancelationRepository.cs" />
     <Compile Include="Core\ICustomerBusinessLineRepository.cs" />
+    <Compile Include="Core\IRegionRepository.cs" />
     <Compile Include="Core\IVendorQuotationChildRepository.cs" />
     <Compile Include="Core\IVendorQuotationDetailRepository.cs" />
     <Compile Include="Core\IVendorQuotationRepository.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Persistance\CompanyRepository.cs" />
     <Compile Include="Persistance\ContractCancelationRepository.cs" />
     <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
+    <Compile Include="Persistance\RegionRepository.cs" />
     <Compile Include="Persistance\Repository.cs" />
     <Compile Include="Persistance\TenderChildRepository.cs" />
     <Compile Include="Persistance\TenderDetailRepository.cs" />

@@ -36,12 +36,10 @@
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
         <AssociationConnector Association="Model.FK_City_Province" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
-        <AssociationConnector Association="Model.FK_Region_Company1" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Company" />
         <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
         <AssociationConnector Association="Model.FK_Tender_Customers" />
         <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
-        <AssociationConnector Association="Model.FK_Region_Province" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" />
         <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
