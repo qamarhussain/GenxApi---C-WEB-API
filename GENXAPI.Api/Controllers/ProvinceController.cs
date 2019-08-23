@@ -21,7 +21,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _provinceRepo.GetAllActive();
+                var result = _provinceRepo.GetAll();
                 return Ok(result);
             }
             catch (Exception)

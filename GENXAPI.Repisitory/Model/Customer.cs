@@ -54,8 +54,8 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<byte> StatusId { get; set; }
         public string Abbreviation { get; set; }
     
+        public virtual CustomerBusinessLine CustomerBusinessLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tender> Tenders { get; set; }
-        public virtual CustomerBusinessLine CustomerBusinessLine { get; set; }
     }
 }

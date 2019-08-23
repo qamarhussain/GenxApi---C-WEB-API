@@ -91,7 +91,6 @@ namespace GENXAPI.Api.Controllers
                 vendorModel.ContactPerson = vendor.ContactPerson;
                 vendorModel.CopyStatus = vendor.CopyStatus;
                 vendorModel.Country = vendor.Country;
-                vendorModel.CurrencyId = vendor.CurrencyId;
                 vendorModel.Email = vendor.Email;
                 vendorModel.FaxNo = vendor.FaxNo;
                 vendorModel.LastModifiedBy = vendor.LastModifiedBy;

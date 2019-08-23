@@ -16,20 +16,20 @@ namespace GENXAPI.Api.Controllers
     {
         protected readonly FleetServiceRepo _fleetServiceRepo = new FleetServiceRepo();
         // GET: api/Customer
-        //[HttpGet]
-        //public IHttpActionResult GetAllFleetServices()
-        //{
-        //    try
-        //    {
-        //        var result = _fleetServiceRepo.AllIncluding(x => x.TenderChilds).ToList();
-        //        return Ok(result);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return InternalServerError();
-        //    }
+        [HttpGet]
+        public IHttpActionResult GetAllFleetServices()
+        {
+            try
+            {
+                var result = _fleetServiceRepo.AllIncluding(x => x.TenderChilds).ToList();
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
 
-        //}
+        }
 
         // GET: api/Customer/5
         [HttpGet]

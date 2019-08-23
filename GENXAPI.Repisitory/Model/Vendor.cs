@@ -34,7 +34,6 @@ namespace GENXAPI.Repisitory.Model
         public string AccountNo { get; set; }
         public string NTN { get; set; }
         public string STRN { get; set; }
-        public int CurrencyId { get; set; }
         public Nullable<int> NatureOfBusinessId { get; set; }
         public Nullable<int> TypeOfBusinessId { get; set; }
         public Nullable<int> YearEstablished { get; set; }

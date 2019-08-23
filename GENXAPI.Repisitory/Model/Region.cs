@@ -18,14 +18,15 @@ namespace GENXAPI.Repisitory.Model
         public string Name { get; set; }
         public string Abbreviation { get; set; }
         public int ProvinceId { get; set; }
+        public int CompanyId { get; set; }
         public int BusinessUnitId { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<byte> StatusId { get; set; }
-        public int CompanyId { get; set; }
     
+        public virtual Company Company { get; set; }
         public virtual Province Province { get; set; }
     }
 }

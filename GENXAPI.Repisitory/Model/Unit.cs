@@ -14,10 +14,10 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Unit
     {
+        public int Id { get; set; }
         public int CompanyId { get; set; }
         public Nullable<int> BusinessUnitId { get; set; }
         public string Title { get; set; }
-        public string UnitMeasure { get; set; }
         public string Abbreviation { get; set; }
         public string LastModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
