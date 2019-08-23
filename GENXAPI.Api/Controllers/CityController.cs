@@ -85,6 +85,7 @@ namespace GENXAPI.Api.Controllers
                 cityModel.LastModifiedDate = DateTime.Now;
                 cityModel.LastModifiedBy = cityModel.LastModifiedBy;
                 cityModel.ProvinceId = city.ProvinceId;
+                cityModel.RegionId = city.RegionId;
                 cityModel.Name = city.Name;
                 cityModel.StatusId = city.StatusId;
 
