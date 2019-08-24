@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BusinessUnits">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -27,9 +27,9 @@
         </EntityType>
         <EntityType Name="City">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="CityId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ProvinceId" Type="int" Nullable="false" />
           <Property Name="StatusId" Type="tinyint" />
@@ -130,7 +130,7 @@
           <Property Name="RegDate" Type="datetime" />
           <Property Name="Remarks" Type="varchar(max)" />
           <Property Name="Address" Type="varchar" MaxLength="255" />
-          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="CityId" Type="int" />
           <Property Name="State" Type="varchar" MaxLength="50" />
           <Property Name="Region" Type="varchar" MaxLength="50" />
           <Property Name="Country" Type="varchar" MaxLength="50" />
@@ -503,15 +503,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customers_CustomerBusinessLine">
-          <End Role="CustomerBusinessLine" Type="Self.CustomerBusinessLine" Multiplicity="0..1" />
+        <Association Name="FK_Customers_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CustomerBusinessLine">
-              <PropertyRef Name="Id" />
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="Customers">
-              <PropertyRef Name="CustomerBusinessLineId" />
+              <PropertyRef Name="CityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -741,8 +741,8 @@
             <End Role="Tender" EntitySet="Tender" />
             <End Role="ContractCancelation" EntitySet="ContractCancelation" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customers_CustomerBusinessLine" Association="Self.FK_Customers_CustomerBusinessLine">
-            <End Role="CustomerBusinessLine" EntitySet="CustomerBusinessLine" />
+          <AssociationSet Name="FK_Customers_City" Association="Self.FK_Customers_City">
+            <End Role="City" EntitySet="City" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Self.FK_FinancialYearDefination_Company">
@@ -806,8 +806,7 @@
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -831,22 +830,6 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StatusId" Type="Byte" />
           <NavigationProperty Name="Company" Relationship="Self.FK_BusinessUnits_Company" FromRole="BusinessUnits" ToRole="Company" />
-        </EntityType>
-        <EntityType Name="City">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RegionId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Province" Relationship="Self.FK_City_Province" FromRole="City" ToRole="Province" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_City_Region" FromRole="City" ToRole="Region" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -917,47 +900,6 @@
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="BusinessUnitId" Type="Int32" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_CustomerBusinessLine" FromRole="CustomerBusinessLine" ToRole="Customers" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
-          <Property Name="RegionId" Type="Int32" />
-          <Property Name="ZoneId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustomerBusinessLineId" Type="Int32" />
-          <Property Name="Discount" Type="Double" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RegDate" Type="DateTime" Precision="3" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreditLimit" Type="Double" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="Abbreviation" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="CustomerBusinessLine" Relationship="Self.FK_Customers_CustomerBusinessLine" FromRole="Customers" ToRole="CustomerBusinessLine" />
-          <NavigationProperty Name="Tenders" Relationship="Self.FK_Tender_Customers" FromRole="Customers" ToRole="Tender" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -1040,8 +982,8 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Province" FromRole="Province" ToRole="City" />
           <NavigationProperty Name="Regions" Relationship="Self.FK_Region_Province" FromRole="Province" ToRole="Region" />
+          <NavigationProperty Name="Cities" Relationship="Model.FK_City_Province" FromRole="Province" ToRole="City" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -1058,9 +1000,9 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Region" FromRole="Region" ToRole="City" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Region_Company1" FromRole="Region" ToRole="Company" />
           <NavigationProperty Name="Province" Relationship="Self.FK_Region_Province" FromRole="Region" ToRole="Province" />
+          <NavigationProperty Name="Cities" Relationship="Model.FK_City_Region" FromRole="Region" ToRole="City" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1104,10 +1046,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProceedStatus" Type="Byte" />
           <NavigationProperty Name="ContractCancelations" Relationship="Self.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Tender_Customers" FromRole="Tender" ToRole="Customers" />
           <NavigationProperty Name="TenderChilds" Relationship="Self.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
           <NavigationProperty Name="TenderDetails" Relationship="Self.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
           <NavigationProperty Name="VendorQuotations" Relationship="Self.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -1313,30 +1255,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_City_Province">
-          <End Role="Province" Type="Self.Province" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Province">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="ProvinceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_City_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FinancialYearDefination_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="FinancialYearDefination" Type="Self.FinancialYearDefination" Multiplicity="*" />
@@ -1382,30 +1300,6 @@
             </Principal>
             <Dependent Role="ContractCancelation">
               <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customers_CustomerBusinessLine">
-          <End Role="CustomerBusinessLine" Type="Self.CustomerBusinessLine" Multiplicity="0..1" />
-          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerBusinessLine">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customers">
-              <PropertyRef Name="CustomerBusinessLineId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tender_Customers">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Tender" Type="Self.Tender" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tender">
-              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1543,13 +1437,11 @@
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BusinessUnits" EntityType="Self.BusinessUnit" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="ContractCancelations" EntityType="Self.ContractCancelation" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Currencies" EntityType="Self.Currency" />
           <EntitySet Name="CustomerBusinessLines" EntityType="Self.CustomerBusinessLine" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="FinancialYearDefinations" EntityType="Self.FinancialYearDefination" />
           <EntitySet Name="FleetServices" EntityType="Self.FleetService" />
           <EntitySet Name="ModuleCategories" EntityType="Self.ModuleCategory" />
@@ -1575,14 +1467,6 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="BusinessUnits" EntitySet="BusinessUnits" />
           </AssociationSet>
-          <AssociationSet Name="FK_City_Province" Association="Self.FK_City_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_Region" Association="Self.FK_City_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
           <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Self.FK_FinancialYearDefination_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
@@ -1598,14 +1482,6 @@
           <AssociationSet Name="FK_ContractCancelation_Tender" Association="Self.FK_ContractCancelation_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="ContractCancelation" EntitySet="ContractCancelations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customers_CustomerBusinessLine" Association="Self.FK_Customers_CustomerBusinessLine">
-            <End Role="CustomerBusinessLine" EntitySet="CustomerBusinessLines" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tender_Customers" Association="Self.FK_Tender_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Tender" EntitySet="Tenders" />
           </AssociationSet>
           <AssociationSet Name="FK_TenderChild_FleetService" Association="Self.FK_TenderChild_FleetService">
             <End Role="FleetService" EntitySet="FleetServices" />
@@ -1651,7 +1527,130 @@
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
           </AssociationSet>
+          <EntitySet Name="Cities" EntityType="Model.City" />
+          <EntitySet Name="Customers" EntityType="Model.Customer" />
+          <AssociationSet Name="FK_City_Province" Association="Model.FK_City_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Region" Association="Model.FK_City_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_City" Association="Model.FK_Customers_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Tender" EntitySet="Tenders" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Province" Relationship="Model.FK_City_Province" FromRole="City" ToRole="Province" />
+          <NavigationProperty Name="Region" Relationship="Model.FK_City_Region" FromRole="City" ToRole="Region" />
+          <NavigationProperty Name="Customers" Relationship="Model.FK_Customers_City" FromRole="City" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="ZoneId" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerBusinessLineId" Type="Int32" />
+          <Property Name="Discount" Type="Double" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FaxNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreditLimit" Type="Double" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="Model.FK_Customers_City" FromRole="Customer" ToRole="City" />
+          <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
+        </EntityType>
+        <Association Name="FK_City_Province">
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Region">
+          <End Type="Model.Region" Role="Region" Multiplicity="1" />
+          <End Type="Model.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_City">
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tender_Customers">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tender">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1675,21 +1674,6 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="Model.City">
-              <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1760,45 +1744,6 @@
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="Model.Customer">
-              <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CustomerBusinessLineId" ColumnName="CustomerBusinessLineId" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
-                <ScalarProperty Name="NTN" ColumnName="NTN" />
-                <ScalarProperty Name="STRN" ColumnName="STRN" />
-                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
-                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
-                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2133,6 +2078,60 @@
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="Model.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Model.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="STRN" ColumnName="STRN" />
+                <ScalarProperty Name="NTN" ColumnName="NTN" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="CustomerBusinessLineId" ColumnName="CustomerBusinessLineId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

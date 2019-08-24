@@ -68,6 +68,19 @@ namespace GENXAPI.Repisitory
             }
         }
 
+
+        private ICityRepository _city;
+        public ICityRepository City
+        {
+            get
+            {
+                if (this._city == null)
+                {
+                    this._city = new CityRepository(db);
+                }
+                return this._city;
+            }
+        }
         private IVendorQuotationRepository _vendorQuotation;
 
         public IVendorQuotationRepository VendorQuotation

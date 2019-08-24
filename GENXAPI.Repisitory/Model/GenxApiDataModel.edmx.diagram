@@ -6,13 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="20317bdf70fd46f4b13e4fbc28ba9b3e" Name="Diagram1">
         <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="6" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CustomerBusinessLine" Width="1.5" PointX="1.5" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="1.5" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
@@ -35,14 +33,10 @@
         <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_City_Province" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_City_Region" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Region_Company1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Company" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_ContractCancelation_Tender" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Customers_CustomerBusinessLine" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Tender_Customers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_TenderChild_FleetService" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Region_Province" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" ManuallyRouted="false" />
@@ -54,6 +48,12 @@
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="8" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="14.75" />
+        <AssociationConnector Association="Model.FK_City_Province" />
+        <AssociationConnector Association="Model.FK_City_Region" />
+        <AssociationConnector Association="Model.FK_Customers_City" />
+        <AssociationConnector Association="Model.FK_Tender_Customers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

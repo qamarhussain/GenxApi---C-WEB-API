@@ -14,6 +14,11 @@ namespace GENXAPI.Api.Controllers
     [Authorize]
     public class CityController : ApiController
     {
+        IUnitOfWork _unitOfWork;
+        public CityController()
+        {
+            _unitOfWork = new UnitOfWork();
+        }
         protected readonly CityRepo _cityRepo = new CityRepo();
         // GET: api/Customer
         [HttpGet]
@@ -150,7 +155,7 @@ namespace GENXAPI.Api.Controllers
                 {
                     cities.Add(new CityViewModel
                     {
-                        Id=item.Id,
+                        Id=item.CityId,
                         Name=item.Name
                     });
                 }
@@ -163,6 +168,21 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+
+        [HttpGet]
+        public IHttpActionResult GetDropdownList()
+        {
+            try
+            {
+                var keyPairValues = _unitOfWork.City.GetKeyPairValue();
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
 
 
     }

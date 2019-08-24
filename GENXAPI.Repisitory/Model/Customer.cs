@@ -42,7 +42,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<System.DateTime> RegDate { get; set; }
         public string Remarks { get; set; }
         public string Address { get; set; }
-        public string City { get; set; }
+        public Nullable<int> CityId { get; set; }
         public string State { get; set; }
         public string Region { get; set; }
         public string Country { get; set; }
@@ -54,7 +54,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<byte> StatusId { get; set; }
         public string Abbreviation { get; set; }
     
-        public virtual CustomerBusinessLine CustomerBusinessLine { get; set; }
+        public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tender> Tenders { get; set; }
     }

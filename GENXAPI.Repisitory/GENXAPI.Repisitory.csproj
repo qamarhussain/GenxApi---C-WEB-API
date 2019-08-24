@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ICityRepository.cs" />
     <Compile Include="Core\ICompanyRepository.cs" />
     <Compile Include="Core\IContractCancelationRepository.cs" />
     <Compile Include="Core\ICustomerBusinessLineRepository.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Model\VendorsOrgType.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Persistance\CityRepository.cs" />
     <Compile Include="Persistance\CompanyRepository.cs" />
     <Compile Include="Persistance\ContractCancelationRepository.cs" />
     <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
