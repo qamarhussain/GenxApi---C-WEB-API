@@ -32,9 +32,9 @@ namespace GENXAPI.Repisitory.Model
         public string CreatedBy { get; set; }
         public Nullable<byte> StatusId { get; set; }
     
-        public virtual Company Company { get; set; }
-        public virtual Province Province { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<City> Cities { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual Province Province { get; set; }
     }
 }

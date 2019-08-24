@@ -26,6 +26,7 @@ namespace GENXAPI.Repisitory.Model
         }
     
         public virtual DbSet<BusinessUnit> BusinessUnits { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<ContractCancelation> ContractCancelations { get; set; }
         public virtual DbSet<Country> Countries { get; set; }

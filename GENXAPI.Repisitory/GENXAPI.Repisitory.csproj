@@ -71,38 +71,6 @@
     <Compile Include="Core\ITenderChildRepository.cs" />
     <Compile Include="Core\ITenderRepository.cs" />
     <Compile Include="Core\IVendorRepository.cs" />
-    <Compile Include="Model\ContractCancelation.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CustomerBusinessLine.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Region.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\VendorQuotation.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\VendorQuotationChild.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\VendorQuotationDetail.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Persistance\CompanyRepository.cs" />
-    <Compile Include="Persistance\ContractCancelationRepository.cs" />
-    <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
-    <Compile Include="Persistance\RegionRepository.cs" />
-    <Compile Include="Persistance\Repository.cs" />
-    <Compile Include="Persistance\TenderChildRepository.cs" />
-    <Compile Include="Persistance\TenderDetailRepository.cs" />
-    <Compile Include="Persistance\TenderRepository.cs" />
-    <Compile Include="Persistance\UnitOfWork.cs" />
-    <Compile Include="Persistance\VendorQuotationChildRepository.cs" />
-    <Compile Include="Persistance\VendorQuotationDetailRepository.cs" />
-    <Compile Include="Persistance\VendorQuotationRepository.cs" />
-    <Compile Include="Persistance\VendorRepository.cs" />
-    <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BusinessUnit.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -110,6 +78,9 @@
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Company.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ContractCancelation.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Country.cs">
@@ -121,7 +92,9 @@
     <Compile Include="Model\Customer.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DropdownListDto.cs" />
+    <Compile Include="Model\CustomerBusinessLine.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\FinancialYearDefination.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -155,6 +128,9 @@
     <Compile Include="Model\Province.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Region.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Role.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -182,12 +158,36 @@
     <Compile Include="Model\Vendor.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\VendorQuotation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VendorQuotationChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VendorQuotationDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\VendorsBusinessNature.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\VendorsOrgType.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Persistance\CompanyRepository.cs" />
+    <Compile Include="Persistance\ContractCancelationRepository.cs" />
+    <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
+    <Compile Include="Persistance\RegionRepository.cs" />
+    <Compile Include="Persistance\Repository.cs" />
+    <Compile Include="Persistance\TenderChildRepository.cs" />
+    <Compile Include="Persistance\TenderDetailRepository.cs" />
+    <Compile Include="Persistance\TenderRepository.cs" />
+    <Compile Include="Persistance\UnitOfWork.cs" />
+    <Compile Include="Persistance\VendorQuotationChildRepository.cs" />
+    <Compile Include="Persistance\VendorQuotationDetailRepository.cs" />
+    <Compile Include="Persistance\VendorQuotationRepository.cs" />
+    <Compile Include="Persistance\VendorRepository.cs" />
+    <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\DropdownListDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BusinessUnitRepo.cs" />
     <Compile Include="Repositories\CityRepo.cs" />
@@ -210,19 +210,20 @@
     <Compile Include="Utilities\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Model\GenxApiDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GenxApiDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Model\GenxApiDataModel.edmx.diagram">
       <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\GenxApiDataModel.Context.tt">
@@ -236,10 +237,6 @@
       <LastGenOutput>GenxApiDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
