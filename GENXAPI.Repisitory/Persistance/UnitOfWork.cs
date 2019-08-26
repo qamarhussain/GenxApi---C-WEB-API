@@ -1,4 +1,5 @@
 ﻿
+using System;
 using GENXAPI.Repisitory.Core;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Repisitory.Persistance;
@@ -158,6 +159,45 @@ namespace GENXAPI.Repisitory
                     this._region = new RegionRepository(db);
                 }
                 return this._region;
+            }
+        }
+
+        private IRegionalOfficeRepository _regionalOffice;
+        public IRegionalOfficeRepository RegionalOffice
+        {
+            get
+            {
+                if (this._regionalOffice == null)
+                {
+                    this._regionalOffice = new RegionalOfficeRepository(db);
+                }
+                return this._regionalOffice;
+            }
+        }
+
+        private IJobRepository _jobRepository;
+        public IJobRepository Job
+        {
+            get
+            {
+                if (this._jobRepository == null)
+                {
+                    this._jobRepository = new JobRepository(db);
+                }
+                return this._jobRepository;
+            }
+        }
+
+        private IJobChildRepository _jobChildRepository;
+        public IJobChildRepository JobChild
+        {
+            get
+            {
+                if (this._jobChildRepository == null)
+                {
+                    this._jobChildRepository = new JobChildRepository(db);
+                }
+                return this._jobChildRepository;
             }
         }
 

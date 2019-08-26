@@ -17,6 +17,10 @@ namespace GENXAPI.Repisitory
         ICustomerBusinessLineRepository CustomerBusinessLine { get; }
         ICityRepository City { get; }
 
+        IRegionalOfficeRepository RegionalOffice { get; }
+        IJobRepository Job { get; }
+        IJobChildRepository JobChild { get; }
+
 
         int SaveChanges();
     }

@@ -32,5 +32,16 @@ namespace GENXAPI.Repisitory
           });
             return result.ToList();
         }
+
+        public IList<DropdownListDto> GetContractKeyPairForJob(int CustomerId)
+        {
+            var result = Find(m => m.StatusId == (byte)Status.Active && m.CustomerId == CustomerId && m.ProceedStatus == (byte)TenderUtility.ContractApprovedState).Select(r =>
+        new DropdownListDto
+        {
+            Value = r.Id.ToString(),
+            Text = r.TenderNo
+        });
+            return result.ToList();
+        }
     }
 }

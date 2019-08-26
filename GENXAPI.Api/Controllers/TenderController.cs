@@ -21,11 +21,11 @@ namespace GENXAPI.Api.Controllers
         protected readonly TenderDetailRepo _tenderDetailRepo = new TenderDetailRepo();
         protected readonly TenderChildRepo _tenderChildRepo = new TenderChildRepo();
 
-        IUnitOfWork db;
+        IUnitOfWork _unitOfWork;
 
         public TenderController()
         {
-            db = new UnitOfWork();
+            _unitOfWork = new UnitOfWork();
         }
 
         // GET: api/Customer
@@ -34,7 +34,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).Where(o=>o.ProceedStatus == (byte)TenderUtility.TenderState).ToList();
+                var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).Where(o=>o.ProceedStatus == (byte)TenderUtility.TenderState).ToList();
                 return Ok(result);
 
             }
@@ -52,7 +52,7 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 //var tender = _tenderRepo.AllIncluding(z => z.Customer).Where(m => m.Id == id).FirstOrDefault();
-                var tender = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds.Select(q => q.FleetService)).Where(m => m.Id == id).FirstOrDefault();
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds.Select(q => q.FleetService)).Where(m => m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();
@@ -93,31 +93,6 @@ namespace GENXAPI.Api.Controllers
                     #region Tender Child.
                     
                     tenderViewModel.TenderChilds = tender.TenderChilds.ToList();
-                    //if(tenderViewModel.TenderChilds.Count() > 0)
-                    //{
-                    //    foreach(var item in tenderViewModel.TenderChilds)
-                    //    {
-                    //        if(item.FleetServiceId  != null){
-                    //            item.FleetService = _fleetServiceRepo.Get(Convert.ToInt32(item.FleetServiceId));
-                    //        }
-                    //    }
-                    //}
-                    //foreach (var items in tender.TenderChilds)
-                    //{
-                    //    TenderChildViewModel tenderChild = new TenderChildViewModel();
-                    //    tenderChild.Id = items.FleetServiceId;
-                    //    tenderChild.FleetServiceId = items.FleetServiceId;
-                    //    var fleetServiceObj = _fleetServiceRepo.Get(items.FleetServiceId);
-                    //    tenderChild.ServiceName = fleetServiceObj.ServiceName;
-                    //    tenderChild.ServiceType = fleetServiceObj.ServiceType;
-                    //    tenderChild.ItemCode = items.ItemCode;
-                    //    tenderChild.CustomerId = items.CustomerId;
-                    //    tenderChild.TenderId = items.TenderId;
-                    //    tenderChild.VehicleType = items.VehicleType;
-                    //    tenderChild.Amount = items.Amount;
-                    //    tenderChild.UnitOfMeasurement = items.UnitOfMeasurement;
-                    //    tenderViewModel.TenderChilds.Add(tenderChild);
-                    //}
 
                     #endregion
                     return Ok(tender);
@@ -137,7 +112,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var tender = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();
@@ -153,8 +128,8 @@ namespace GENXAPI.Api.Controllers
                 tender.CompanyId = updateViewModel.CompanyId;
                 tender.BusinessUnitId = updateViewModel.BusinessUnitId;
                 tender.TenderNo = updateViewModel.TenderNo;
-                db.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
-                db.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
+                _unitOfWork.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
+                _unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
                 #region Tender Detail.
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in updateViewModel.TenderDetails)
@@ -187,16 +162,8 @@ namespace GENXAPI.Api.Controllers
                     tenderChildList.Add(tenderChild);
                 }
                 tender.TenderChilds = tenderChildList;
-                //var detailToDelete = db.TenderDetails.Find(x => x.TenderId == id).ToList();
-                //foreach(var item in detailToDelete)
-                //{
-                //    item.Tender = null;
-                //    db.TenderDetails.Remove(item);
-                //}
-                //db.TenderChilds.RemoveRange(db.TenderChilds.Find(x => x.TenderId == id).ToList());
-                //db.TenderDetails.RemoveRange(db.TenderDetails.Find(x => x.TenderId == id).ToList());
-                db.Tenders.Update(tender);
-                db.SaveChanges();
+                _unitOfWork.Tenders.Update(tender);
+                _unitOfWork.SaveChanges();
                 return Ok(tender);
                 #endregion
             }
@@ -229,7 +196,7 @@ namespace GENXAPI.Api.Controllers
                 tender.BusinessUnitId = createViewModel.BusinessUnitId;
                 tender.TenderNo = createViewModel.TenderNo;
                 tender.ProceedStatus = (byte)TenderUtility.TenderState;
-                db.Tenders.Add(tender);
+                _unitOfWork.Tenders.Add(tender);
                 #region Tender Detail.
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in createViewModel.TenderDetails)
@@ -247,7 +214,7 @@ namespace GENXAPI.Api.Controllers
                     tenderDetail.ProvinceName = items.ProvinceName;
                     tenderDetailList.Add(tenderDetail);
                 }
-                db.TenderDetails.AddRange(tenderDetailList);
+                _unitOfWork.TenderDetails.AddRange(tenderDetailList);
                 #endregion
 
                 #region Tender Services.
@@ -261,10 +228,10 @@ namespace GENXAPI.Api.Controllers
                     tenderChild.TenderId = tender.Id;
                     tenderChildList.Add(tenderChild);
                 }
-                db.TenderChilds.AddRange(tenderChildList);
+                _unitOfWork.TenderChilds.AddRange(tenderChildList);
                 #endregion
 
-                db.SaveChanges();
+                _unitOfWork.SaveChanges();
                 return Ok();
             }
             catch(Exception ex)

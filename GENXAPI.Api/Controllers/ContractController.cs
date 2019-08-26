@@ -15,23 +15,23 @@ namespace GENXAPI.Api.Controllers
     public class ContractController : ApiController
     {
         protected readonly FleetServiceRepo _fleetServiceRepo = new FleetServiceRepo();
-        IUnitOfWork db;
+        IUnitOfWork _unitOfWork;
         public ContractController()
         {
-            db = new UnitOfWork();
+            _unitOfWork = new UnitOfWork();
         }
 
         public IHttpActionResult GetAllContracts()
         {
-            var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
             return Ok(result);
         }
 
         public IHttpActionResult CreateContract(ContractCreateViewModel model)
         {
-            var tender = db.Tenders.Get(model.TenderId);
+            var tender = _unitOfWork.Tenders.Get(model.TenderId);
             var serviceIds = model.contractServices.Select(x => x.Id).ToList();
-            var childList = db.TenderChilds.Find(o => serviceIds.Contains(o.Id)).ToList();
+            var childList = _unitOfWork.TenderChilds.Find(o => serviceIds.Contains(o.Id)).ToList();
 
             foreach(var item in childList)
             {
@@ -40,7 +40,7 @@ namespace GENXAPI.Api.Controllers
                 {
                     item.Amount = serviceItem.Amount;
                     item.ItemCode = serviceItem.ItemCode;
-                    db.TenderChilds.Update(item);
+                    _unitOfWork.TenderChilds.Update(item);
                 }
             }
             var vehiclesToAdd = new List<TenderChild>();
@@ -55,17 +55,17 @@ namespace GENXAPI.Api.Controllers
                     Amount=item.Amount,
                     TenderDetailId=item.DetailId
                 };
-                db.TenderChilds.Add(obj);
+                _unitOfWork.TenderChilds.Add(obj);
             }
             tender.ProceedStatus = (byte)TenderUtility.ContractState;
-            db.Tenders.Update(tender);
-            db.SaveChanges();
+            _unitOfWork.Tenders.Update(tender);
+            _unitOfWork.SaveChanges();
             return Ok();
         }
 
         public IHttpActionResult GetById(int id)
         {
-            var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s=>s.Vehicle)).Where(o => o.Id == id).FirstOrDefault();
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s=>s.Vehicle)).Where(o => o.Id == id).FirstOrDefault();
             if(result == null)
             {
                 return NotFound();
@@ -75,17 +75,17 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult UpdateContract(ContractCreateViewModel model)
         {
-            var tender = db.Tenders.AllIncluding(x=>x.TenderDetails, y=>y.TenderChilds).Where(r=>r.Id == model.TenderId).FirstOrDefault();
+            var tender = _unitOfWork.Tenders.AllIncluding(x=>x.TenderDetails, y=>y.TenderChilds).Where(r=>r.Id == model.TenderId).FirstOrDefault();
             if(tender == null)
             {
                 return NotFound();
             }
-            db.TenderChilds.RemoveRange(tender.TenderChilds.Where(x=>x.TenderDetailId != null).ToArray());
+            _unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.Where(x=>x.TenderDetailId != null).ToArray());
             var servicesToAdd = new List<TenderChild>();
             foreach(var item in tender.TenderChilds)
             {
                 item.Amount = model.contractServices.Where(x => x.Id == item.Id).First().Amount;
-                db.TenderChilds.Update(item);
+                _unitOfWork.TenderChilds.Update(item);
             }
             var vehiclesToAdd = new List<TenderChild>();
             foreach (var item in model.contractDetailVehicle)
@@ -99,10 +99,10 @@ namespace GENXAPI.Api.Controllers
                     Amount = item.Amount,
                     TenderDetailId = item.DetailId
                 };
-                db.TenderChilds.Add(obj);
+                _unitOfWork.TenderChilds.Add(obj);
             }
-            db.Tenders.Update(tender);
-            db.SaveChanges();
+            _unitOfWork.Tenders.Update(tender);
+            _unitOfWork.SaveChanges();
             return Ok();
         }
 
@@ -111,7 +111,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var keyPairValues = db.Tenders.GetContractKeyPair(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId), Convert.ToInt32(model.CustomerId));
+                var keyPairValues = _unitOfWork.Tenders.GetContractKeyPair(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId), Convert.ToInt32(model.CustomerId));
                 return Ok(keyPairValues);
             }
             catch (Exception ex)
@@ -125,12 +125,12 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var contract = db.Tenders.Get(model.Id);
+                var contract = _unitOfWork.Tenders.Get(model.Id);
                 contract.ProceedStatus = (byte)TenderUtility.ContractApprovedState;
                 contract.LastModifiedDate = DateTime.Now;
                 contract.LastModifiedBy = model.LastModifiedBy;
-                db.Tenders.Update(contract);
-                db.SaveChanges();
+                _unitOfWork.Tenders.Update(contract);
+                _unitOfWork.SaveChanges();
                 return Ok();
             }catch(Exception ex)
             {
@@ -144,13 +144,13 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 model.CancelationDate = DateTime.Now;
-                db.ContractCancelation.Add(model);
-                var contract = db.Tenders.Get(model.ContractId);
+                _unitOfWork.ContractCancelation.Add(model);
+                var contract = _unitOfWork.Tenders.Get(model.ContractId);
                 contract.ProceedStatus = (byte)TenderUtility.ContractCancelState;
                 contract.LastModifiedDate = DateTime.Now;
                 contract.LastModifiedBy = model.CancelationBy.ToString();
-                db.Tenders.Update(contract);
-                db.SaveChanges();
+                _unitOfWork.Tenders.Update(contract);
+                _unitOfWork.SaveChanges();
                 return Ok();
             }
             catch (Exception ex)

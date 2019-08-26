@@ -59,6 +59,9 @@
     <Compile Include="Core\ICompanyRepository.cs" />
     <Compile Include="Core\IContractCancelationRepository.cs" />
     <Compile Include="Core\ICustomerBusinessLineRepository.cs" />
+    <Compile Include="Core\IJobChildRepository.cs" />
+    <Compile Include="Core\IJobRepository.cs" />
+    <Compile Include="Core\IRegionalOfficeRepository.cs" />
     <Compile Include="Core\IRegionRepository.cs" />
     <Compile Include="Core\IVendorQuotationChildRepository.cs" />
     <Compile Include="Core\IVendorQuotationDetailRepository.cs" />
@@ -117,6 +120,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Job.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\JobChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Module.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -130,6 +139,9 @@
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Region.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RegionalOffice.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Role.cs">
@@ -178,6 +190,9 @@
     <Compile Include="Persistance\CompanyRepository.cs" />
     <Compile Include="Persistance\ContractCancelationRepository.cs" />
     <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
+    <Compile Include="Persistance\JobChildRepository.cs" />
+    <Compile Include="Persistance\JobRepository.cs" />
+    <Compile Include="Persistance\RegionalOfficeRepository.cs" />
     <Compile Include="Persistance\RegionRepository.cs" />
     <Compile Include="Persistance\Repository.cs" />
     <Compile Include="Persistance\TenderChildRepository.cs" />

@@ -12,29 +12,31 @@ namespace GENXAPI.Repisitory.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Region
+    public partial class RegionalOffice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Region()
+        public RegionalOffice()
         {
-            this.Cities = new HashSet<City>();
+            this.JobChilds = new HashSet<JobChild>();
         }
     
-        public int RegionId { get; set; }
-        public string Name { get; set; }
-        public string Abbreviation { get; set; }
-        public int ProvinceId { get; set; }
+        public int Id { get; set; }
         public int CompanyId { get; set; }
         public int BusinessUnitId { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string LastModifiedBy { get; set; }
+        public string OfficeName { get; set; }
+        public int CityId { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string ContactPerson { get; set; }
+        public string ContactPersonMobile { get; set; }
+        public byte StatusId { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
+        public Nullable<int> LastModifiedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
-        public Nullable<byte> StatusId { get; set; }
     
+        public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<City> Cities { get; set; }
-        public virtual Company Company { get; set; }
-        public virtual Province Province { get; set; }
+        public virtual ICollection<JobChild> JobChilds { get; set; }
     }
 }

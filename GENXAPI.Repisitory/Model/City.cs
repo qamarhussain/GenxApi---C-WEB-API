@@ -18,6 +18,7 @@ namespace GENXAPI.Repisitory.Model
         public City()
         {
             this.Customers = new HashSet<Customer>();
+            this.RegionalOffices = new HashSet<RegionalOffice>();
         }
     
         public int CityId { get; set; }
@@ -34,5 +35,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegionalOffice> RegionalOffices { get; set; }
     }
 }
