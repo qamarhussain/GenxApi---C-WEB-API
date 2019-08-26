@@ -25,7 +25,7 @@ namespace GENXAPI.Repisitory
                 result = Find(m => m.StatusId == (byte)Status.Active && m.ProvinceId == ProvinceId).Select(r =>
          new DropdownListDto
          {
-             Value = r.Id.ToString(),
+             Value = r.CityId.ToString(),
              Text = r.Name
          }).ToList();
             }
@@ -34,7 +34,7 @@ namespace GENXAPI.Repisitory
                 result = Find(m => m.StatusId == (byte)Status.Active).Select(r =>
          new DropdownListDto
          {
-             Value = r.Id.ToString(),
+             Value = r.CityId.ToString(),
              Text = r.Name,
              ParentReferenceId=r.ProvinceId.ToString()
          }).ToList();
@@ -45,7 +45,7 @@ namespace GENXAPI.Repisitory
 
         public IList<City> GetByIdCollection(List<int> ids)
         {
-            return GetAll().Where(x => ids.Contains(x.Id)).ToList();
+            return GetAll().Where(x => ids.Contains(x.CityId)).ToList();
         }
 
     }
