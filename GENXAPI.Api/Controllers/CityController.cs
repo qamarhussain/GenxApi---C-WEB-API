@@ -21,12 +21,12 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _cityRepo.AllIncluding(e => e.Province, e => e.Region).ToList();
+                var result = _cityRepo.AllIncluding(e => e.Province, a => a.Region).ToList();
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
 
         }
