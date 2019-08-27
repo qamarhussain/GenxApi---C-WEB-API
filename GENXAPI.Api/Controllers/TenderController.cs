@@ -70,6 +70,7 @@ namespace GENXAPI.Api.Controllers
                     tenderViewModel.StatusId = (byte)tender.StatusId;
                     tenderViewModel.TenderNo = tender.TenderNo;
                     tenderViewModel.ProvinceId = tender.TenderDetails.FirstOrDefault() == null ? 0 : tender.TenderDetails.First().ProvinceId;
+                    tenderViewModel.RegionId = tender.TenderDetails.FirstOrDefault() == null ? 0 : tender.TenderDetails.First().RegionId;
                     #region Tender details
                     //var tenderDetailList = db.TenderDetails.Find(x => x.TenderId == tender.Id).ToList();
                     //tenderViewModel.TenderDetails = tenderDetailList;
@@ -85,6 +86,8 @@ namespace GENXAPI.Api.Controllers
                         tenderDetail.DestinationFromName = items.DestinationFromName;
                         tenderDetail.ProvinceId = items.ProvinceId;
                         tenderDetail.ProvinceName = items.ProvinceName;
+                        tenderDetail.RegionId = items.RegionId;
+                        tenderDetail.RegionName = items.RegionName;
                         tenderDetail.ItemCode = items.ItemCode;
                         tenderViewModel.TenderDetails.Add(tenderDetail);
                     }
@@ -212,6 +215,8 @@ namespace GENXAPI.Api.Controllers
                     tenderDetail.ItemCode = items.ItemCode;
                     tenderDetail.ProvinceId = items.ProvinceId;
                     tenderDetail.ProvinceName = items.ProvinceName;
+                    tenderDetail.RegionId = items.RegionId;
+                    tenderDetail.RegionName = items.RegionName;
                     tenderDetailList.Add(tenderDetail);
                 }
                 _unitOfWork.TenderDetails.AddRange(tenderDetailList);

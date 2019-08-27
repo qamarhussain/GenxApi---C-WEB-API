@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="17.375" />
         <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="17.25" PointY="21.375" />
-        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="15" PointY="25.375" />
         <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="5.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="7.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="15" PointY="11.5" />
@@ -52,15 +51,16 @@
         <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
         <AssociationConnector Association="Model.FK_Region_Province" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" />
-        <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
-        <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
         <AssociationConnector Association="Model.FK_Job_Tender" />
+        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="15" PointY="6" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
+        <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

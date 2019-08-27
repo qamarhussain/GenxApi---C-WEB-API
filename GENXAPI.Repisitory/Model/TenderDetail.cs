@@ -30,6 +30,8 @@ namespace GENXAPI.Repisitory.Model
         public string ItemCode { get; set; }
         public int ProvinceId { get; set; }
         public string ProvinceName { get; set; }
+        public Nullable<int> RegionId { get; set; }
+        public string RegionName { get; set; }
     
         public virtual Tender Tender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

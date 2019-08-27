@@ -31,6 +31,7 @@ namespace GENXAPI.Api.Models
         public int BusinessUnitId { get; set; }
         public string TenderNo { get; set; }
         public int ProvinceId { get; set; }
+        public Nullable<int> RegionId { get; set; }
 
 
     }
