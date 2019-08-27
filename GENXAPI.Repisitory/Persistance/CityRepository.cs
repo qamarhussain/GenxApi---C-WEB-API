@@ -23,9 +23,9 @@ namespace GENXAPI.Repisitory.Persistance
 
         }
 
-        public IList<DropdownListDto> GetKeyPairValue()
+        public IList<DropdownListDto> GetKeyPairValue(int regionId)
         {
-            var result = Find(m => m.StatusId == (byte)Status.Active).Select(r =>
+            var result = Find(m => m.StatusId == (byte)Status.Active && m.RegionId == regionId ).Select(r =>
             new DropdownListDto
             {
                 Value = r.CityId.ToString(),

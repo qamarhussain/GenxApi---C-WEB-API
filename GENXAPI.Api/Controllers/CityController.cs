@@ -169,12 +169,12 @@ namespace GENXAPI.Api.Controllers
         }
 
 
-        [HttpGet]
-        public IHttpActionResult GetDropdownList()
+        [HttpPost]
+        public IHttpActionResult GetCitiesListByRegionId(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                var keyPairValues = _unitOfWork.City.GetKeyPairValue();
+                var keyPairValues = _unitOfWork.City.GetKeyPairValue(model.RegionId);
                 return Ok(keyPairValues);
             }
             catch (Exception ex)

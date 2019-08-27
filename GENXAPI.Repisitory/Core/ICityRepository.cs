@@ -4,6 +4,6 @@ namespace GENXAPI.Repisitory.Core
 {
     public interface ICityRepository: IRepository<City>
     {
-        IList<DropdownListDto> GetKeyPairValue();
+        IList<DropdownListDto> GetKeyPairValue(int regionId);
     }
 }
