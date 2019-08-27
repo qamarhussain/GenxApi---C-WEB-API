@@ -6,5 +6,6 @@ namespace GENXAPI.Repisitory
     public interface IRegionRepository: IRepository<Region>
     {
         IList<DropdownListDto> GetKeyPairValue(int CompanyId, int BusinessUnitId);
+        IList<DropdownListDto> GetKeyPairValue(int ProvinceId);
     }
 }
