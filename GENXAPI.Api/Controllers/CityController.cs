@@ -184,6 +184,21 @@ namespace GENXAPI.Api.Controllers
 
         }
 
+        [HttpGet]
+        public IHttpActionResult GetCitiesListForDropdown()
+        {
+            try
+            {
+                var keyPairValues = _unitOfWork.City.GetKeyPairValue();
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
 
     }
 }

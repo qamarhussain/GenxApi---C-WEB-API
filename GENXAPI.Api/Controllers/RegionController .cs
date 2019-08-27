@@ -125,6 +125,21 @@ namespace GENXAPI.Api.Controllers
 
         }
 
+        [HttpPost]
+        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var keyPairValues = _unitOfWork.Region.GetKeyPairValue(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
 
         [HttpPost]
         public IHttpActionResult GetRegionListByProviceId(CompanyBusinessUntiInfoViewModel model)
