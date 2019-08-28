@@ -109,7 +109,7 @@ namespace GENXAPI.Api.Controllers
         [HttpPut]
         public IHttpActionResult UpdateTender(int id, [FromBody]TenderCreateViewModel updateViewModel)
         {
-            TenderDetail tenderDetail = new TenderDetail();
+           
             try
             {
                 var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
@@ -134,8 +134,8 @@ namespace GENXAPI.Api.Controllers
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in updateViewModel.TenderDetails)
                 {
-                    
 
+                    TenderDetail tenderDetail = new TenderDetail();
                     tenderDetail.TenderId = tender.Id;
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
                     tenderDetail.DestinationFromId = items.DestinationFromId;
@@ -157,7 +157,7 @@ namespace GENXAPI.Api.Controllers
                     tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
-                    tenderChild.TenderDetailId = tenderDetail.Id;
+                    //tenderChild.TenderDetailId = tenderDetail.Id;
                     tenderChildList.Add(tenderChild);
                 }
                 tender.TenderChilds = tenderChildList;
@@ -179,7 +179,7 @@ namespace GENXAPI.Api.Controllers
         public IHttpActionResult TenderCreate([FromBody] TenderCreateViewModel createViewModel)
         {
             Tender tender = new Tender();
-            TenderDetail tenderDetail = new TenderDetail();
+   
             try
             {
                 tender.CustomerId = createViewModel.CustomerId;
@@ -201,7 +201,7 @@ namespace GENXAPI.Api.Controllers
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in createViewModel.TenderDetails)
                 {
-                    
+                    TenderDetail tenderDetail = new TenderDetail();
                     tenderDetail.TenderId = tender.Id;
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
                     tenderDetail.DestinationFromId = items.DestinationFromId;
@@ -223,7 +223,7 @@ namespace GENXAPI.Api.Controllers
                     tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
-                    tenderChild.TenderDetailId = tenderDetail.Id;
+                    //tenderChild.TenderDetailId = tenderDetail.Id;
                     tenderChildList.Add(tenderChild);
                 }
                 _unitOfWork.TenderChilds.AddRange(tenderChildList);
