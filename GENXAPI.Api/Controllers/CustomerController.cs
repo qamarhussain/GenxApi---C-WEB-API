@@ -103,6 +103,7 @@ namespace GENXAPI.Api.Controllers
                 customerModel.CustomerBusinessLineId = customer.CustomerBusinessLineId;
                 customerModel.BusinessUnitId = customer.BusinessUnitId;
                 customerModel.City = customer.City;
+                customerModel.CityId = customer.CityId;
                 customerModel.CNIC = customer.CNIC;
                 customerModel.CompanyId = customer.CompanyId;
                 customerModel.ContactPerson = customer.ContactPerson;
