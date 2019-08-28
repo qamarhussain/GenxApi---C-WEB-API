@@ -81,13 +81,9 @@ namespace GENXAPI.Api.Controllers
                         tenderDetail.TenderId = items.TenderId;
                         tenderDetail.CustomerId = items.CustomerId;
                         tenderDetail.DestinationToId = items.DestinationToId;
-                        tenderDetail.DestinationToName = items.DestinationToName;
                         tenderDetail.DestinationFromId = items.DestinationFromId;
-                        tenderDetail.DestinationFromName = items.DestinationFromName;
                         tenderDetail.ProvinceId = items.ProvinceId;
-                        tenderDetail.ProvinceName = items.ProvinceName;
                         tenderDetail.RegionId = items.RegionId;
-                        tenderDetail.RegionName = items.RegionName;
                         tenderDetail.ItemCode = items.ItemCode;
                         tenderViewModel.TenderDetails.Add(tenderDetail);
                     }
@@ -113,6 +109,7 @@ namespace GENXAPI.Api.Controllers
         [HttpPut]
         public IHttpActionResult UpdateTender(int id, [FromBody]TenderCreateViewModel updateViewModel)
         {
+            TenderDetail tenderDetail = new TenderDetail();
             try
             {
                 var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
@@ -137,17 +134,15 @@ namespace GENXAPI.Api.Controllers
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in updateViewModel.TenderDetails)
                 {
-                    TenderDetail tenderDetail = new TenderDetail();
+                    
 
                     tenderDetail.TenderId = tender.Id;
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
                     tenderDetail.DestinationFromId = items.DestinationFromId;
-                    tenderDetail.DestinationFromName = items.DestinationFromName;
                     tenderDetail.DestinationToId = items.DestinationToId;
-                    tenderDetail.DestinationToName = items.DestinationToName;
                     tenderDetail.ItemCode = items.ItemCode;
                     tenderDetail.ProvinceId = items.ProvinceId;
-                    tenderDetail.ProvinceName = items.ProvinceName;
+                    tenderDetail.RegionId = items.RegionId;
                     tenderDetailList.Add(tenderDetail);
                 }
                 tender.TenderDetails = tenderDetailList;
@@ -162,6 +157,7 @@ namespace GENXAPI.Api.Controllers
                     tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
+                    tenderChild.TenderDetailId = tenderDetail.Id;
                     tenderChildList.Add(tenderChild);
                 }
                 tender.TenderChilds = tenderChildList;
@@ -183,6 +179,7 @@ namespace GENXAPI.Api.Controllers
         public IHttpActionResult TenderCreate([FromBody] TenderCreateViewModel createViewModel)
         {
             Tender tender = new Tender();
+            TenderDetail tenderDetail = new TenderDetail();
             try
             {
                 tender.CustomerId = createViewModel.CustomerId;
@@ -204,19 +201,14 @@ namespace GENXAPI.Api.Controllers
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in createViewModel.TenderDetails)
                 {
-                    TenderDetail tenderDetail = new TenderDetail();
-
+                    
                     tenderDetail.TenderId = tender.Id;
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
                     tenderDetail.DestinationFromId = items.DestinationFromId;
-                    tenderDetail.DestinationFromName = items.DestinationFromName;
                     tenderDetail.DestinationToId = items.DestinationToId;
-                    tenderDetail.DestinationToName = items.DestinationToName;
                     tenderDetail.ItemCode = items.ItemCode;
                     tenderDetail.ProvinceId = items.ProvinceId;
-                    tenderDetail.ProvinceName = items.ProvinceName;
                     tenderDetail.RegionId = items.RegionId;
-                    tenderDetail.RegionName = items.RegionName;
                     tenderDetailList.Add(tenderDetail);
                 }
                 _unitOfWork.TenderDetails.AddRange(tenderDetailList);
@@ -231,6 +223,7 @@ namespace GENXAPI.Api.Controllers
                     tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
+                    tenderChild.TenderDetailId = tenderDetail.Id;
                     tenderChildList.Add(tenderChild);
                 }
                 _unitOfWork.TenderChilds.AddRange(tenderChildList);

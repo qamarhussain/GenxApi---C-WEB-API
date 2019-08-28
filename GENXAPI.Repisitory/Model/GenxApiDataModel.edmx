@@ -359,14 +359,10 @@
           <Property Name="TenderId" Type="int" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="DestinationToId" Type="int" />
-          <Property Name="DestinationToName" Type="varchar" MaxLength="50" />
           <Property Name="DestinationFromId" Type="int" />
-          <Property Name="DestinationFromName" Type="varchar" MaxLength="50" />
           <Property Name="ItemCode" Type="varchar" MaxLength="50" />
           <Property Name="ProvinceId" Type="int" Nullable="false" />
-          <Property Name="ProvinceName" Type="varchar" MaxLength="50" />
           <Property Name="RegionId" Type="int" />
-          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Units">
           <Key>
@@ -719,6 +715,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TenderDetail_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="DestinationToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_City1">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="DestinationFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TenderDetail_Tender">
           <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
           <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
@@ -904,6 +948,22 @@
             <End Role="Vehicles" EntitySet="Vehicles" />
             <End Role="TenderChild" EntitySet="TenderChild" />
           </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City" Association="Self.FK_TenderDetail_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="TenderDetail" EntitySet="TenderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City1" Association="Self.FK_TenderDetail_City1">
+            <End Role="City" EntitySet="City" />
+            <End Role="TenderDetail" EntitySet="TenderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Province" Association="Self.FK_TenderDetail_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="TenderDetail" EntitySet="TenderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Region" Association="Self.FK_TenderDetail_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="TenderDetail" EntitySet="TenderDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_TenderDetail_Tender" Association="Self.FK_TenderDetail_Tender">
             <End Role="Tender" EntitySet="Tender" />
             <End Role="TenderDetail" EntitySet="TenderDetail" />
@@ -1058,6 +1118,22 @@
             <End Role="Job" EntitySet="Jobs" />
           </AssociationSet>
           <EntitySet Name="TenderDetails" EntityType="Model.TenderDetail" />
+          <AssociationSet Name="FK_TenderDetail_City" Association="Model.FK_TenderDetail_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City1" Association="Model.FK_TenderDetail_City1">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Province" Association="Model.FK_TenderDetail_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Region" Association="Model.FK_TenderDetail_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="TenderDetail" EntitySet="TenderDetails" />
@@ -1105,6 +1181,8 @@
           <NavigationProperty Name="Region" Relationship="Model.FK_City_Region" FromRole="City" ToRole="Region" />
           <NavigationProperty Name="Customers" Relationship="Model.FK_Customers_City" FromRole="City" ToRole="Customer" />
           <NavigationProperty Name="RegionalOffices" Relationship="Model.FK_RegionalOffice_City" FromRole="City" ToRole="RegionalOffice" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_City" FromRole="City" ToRole="TenderDetail" />
+          <NavigationProperty Name="TenderDetails1" Relationship="Model.FK_TenderDetail_City1" FromRole="City" ToRole="TenderDetail" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -1342,6 +1420,7 @@
           <Property Name="StatusId" Type="Byte" />
           <NavigationProperty Name="Cities" Relationship="Model.FK_City_Province" FromRole="Province" ToRole="City" />
           <NavigationProperty Name="Regions" Relationship="Model.FK_Region_Province" FromRole="Province" ToRole="Region" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Province" FromRole="Province" ToRole="TenderDetail" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -1361,6 +1440,7 @@
           <NavigationProperty Name="Cities" Relationship="Model.FK_City_Region" FromRole="Region" ToRole="City" />
           <NavigationProperty Name="Company" Relationship="Model.FK_Region_Company1" FromRole="Region" ToRole="Company" />
           <NavigationProperty Name="Province" Relationship="Model.FK_Region_Province" FromRole="Region" ToRole="Province" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Region" FromRole="Region" ToRole="TenderDetail" />
         </EntityType>
         <EntityType Name="RegionalOffice">
           <Key>
@@ -1878,17 +1958,65 @@
           <Property Name="TenderId" Type="Int32" Nullable="false" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="DestinationToId" Type="Int32" />
-          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DestinationFromId" Type="Int32" />
-          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
-          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RegionId" Type="Int32" />
-          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="City" Relationship="Model.FK_TenderDetail_City" FromRole="TenderDetail" ToRole="City" />
+          <NavigationProperty Name="City1" Relationship="Model.FK_TenderDetail_City1" FromRole="TenderDetail" ToRole="City" />
+          <NavigationProperty Name="Province" Relationship="Model.FK_TenderDetail_Province" FromRole="TenderDetail" ToRole="Province" />
+          <NavigationProperty Name="Region" Relationship="Model.FK_TenderDetail_Region" FromRole="TenderDetail" ToRole="Region" />
           <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
         </EntityType>
+        <Association Name="FK_TenderDetail_City">
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="DestinationToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_City1">
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="DestinationFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Province">
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Region">
+          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TenderDetail_Tender">
           <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
           <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
@@ -2445,14 +2573,10 @@
           <EntitySetMapping Name="TenderDetails">
             <EntityTypeMapping TypeName="Model.TenderDetail">
               <MappingFragment StoreEntitySet="TenderDetail">
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
                 <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
                 <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
-                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
                 <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TenderId" ColumnName="TenderId" />
