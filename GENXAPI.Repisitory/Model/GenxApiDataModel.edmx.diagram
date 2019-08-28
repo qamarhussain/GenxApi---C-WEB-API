@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="16" />
         <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="13.625" />
         <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="15" PointY="21.625" />
-        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="10.5" PointY="4.75" />
         <EntityTypeShape EntityType="Model.JobChild" Width="1.5" PointX="12.75" PointY="11.625" />
         <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="2.75" PointY="4.75" />
@@ -48,7 +47,6 @@
         <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
         <AssociationConnector Association="Model.FK_Tender_Customers" />
         <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
-        <AssociationConnector Association="Model.FK_JobChild_Job" />
         <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
         <AssociationConnector Association="Model.FK_Region_Province" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" />
@@ -60,7 +58,13 @@
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="5.125" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City1" />
         <AssociationConnector Association="Model.FK_Job_Tender" />
+        <AssociationConnector Association="Model.FK_JobChild_Job" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Province" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Region" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

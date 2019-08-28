@@ -21,8 +21,8 @@ namespace GENXAPI.Utilities
         [Description("ContractCancelState")]
         ContractCancelState = 4,
         [Description("TenderRunningState")]
-        TenderRunningState = 5,
-        [Description("TenderCancelState")]
+        JobOrderState = 5,
+        [Description("JobOrderState")]
         TenderCancelState = 6,
         [Description("TenderCompleteState")]
         TenderCompleteState = 7,
