@@ -28,6 +28,9 @@ namespace GENXAPI.Repisitory.Model
         public string ItemCode { get; set; }
         public int ProvinceId { get; set; }
         public Nullable<int> RegionId { get; set; }
+        public string DestinationToName { get; set; }
+        public string DestinationFromName { get; set; }
+        public string ProvinceName { get; set; }
     
         public virtual City City { get; set; }
         public virtual City City1 { get; set; }

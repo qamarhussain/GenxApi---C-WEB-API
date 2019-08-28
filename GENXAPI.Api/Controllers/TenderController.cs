@@ -52,7 +52,7 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 //var tender = _tenderRepo.AllIncluding(z => z.Customer).Where(m => m.Id == id).FirstOrDefault();
-                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds.Select(q => q.FleetService)).Where(m => m.Id == id).FirstOrDefault();
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, i =>i.TenderDetails.Select(f => f.City),g => g.TenderDetails.Select(h => h.City1), z=>z.TenderChilds.Select(q => q.FleetService)).Where(m => m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();

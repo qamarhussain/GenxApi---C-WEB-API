@@ -40,6 +40,7 @@ namespace GENXAPI.Repisitory.Model
         public string CreatedBy { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> BusinessUnitId { get; set; }
+        public string JobNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobChild> JobChilds { get; set; }

@@ -175,6 +175,7 @@
             <PropertyRef Name="JobId" />
           </Key>
           <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobNo" Type="varchar" MaxLength="50" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="BusinessUnitId" Type="int" />
           <Property Name="TenderId" Type="int" Nullable="false" />
@@ -363,6 +364,9 @@
           <Property Name="ItemCode" Type="varchar" MaxLength="50" />
           <Property Name="ProvinceId" Type="int" Nullable="false" />
           <Property Name="RegionId" Type="int" />
+          <Property Name="DestinationToName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DestinationFromName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvinceName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Units">
           <Key>
@@ -723,7 +727,7 @@
               <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="TenderDetail">
-              <PropertyRef Name="DestinationToId" />
+              <PropertyRef Name="DestinationFromId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -735,7 +739,7 @@
               <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="TenderDetail">
-              <PropertyRef Name="DestinationFromId" />
+              <PropertyRef Name="DestinationToId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1183,7 +1187,7 @@
           <NavigationProperty Name="RegionalOffices" Relationship="Model.FK_RegionalOffice_City" FromRole="City" ToRole="RegionalOffice" />
           <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_City" FromRole="City" ToRole="TenderDetail" />
           <NavigationProperty Name="TenderDetails1" Relationship="Model.FK_TenderDetail_City1" FromRole="City" ToRole="TenderDetail" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -1350,6 +1354,7 @@
           <NavigationProperty Name="Tender" Relationship="Model.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="JobChild">
           <Key>
@@ -1962,6 +1967,9 @@
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <Property Name="RegionId" Type="Int32" />
+          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="City" Relationship="Model.FK_TenderDetail_City" FromRole="TenderDetail" ToRole="City" />
           <NavigationProperty Name="City1" Relationship="Model.FK_TenderDetail_City1" FromRole="TenderDetail" ToRole="City" />
           <NavigationProperty Name="Province" Relationship="Model.FK_TenderDetail_Province" FromRole="TenderDetail" ToRole="Province" />
@@ -1977,7 +1985,7 @@
               <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="TenderDetail">
-              <PropertyRef Name="DestinationToId" />
+              <PropertyRef Name="DestinationFromId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1989,7 +1997,7 @@
               <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="TenderDetail">
-              <PropertyRef Name="DestinationFromId" />
+              <PropertyRef Name="DestinationToId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2224,6 +2232,7 @@
           <EntitySetMapping Name="Jobs">
             <EntityTypeMapping TypeName="Model.Job">
               <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
                 <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -2573,6 +2582,9 @@
           <EntitySetMapping Name="TenderDetails">
             <EntityTypeMapping TypeName="Model.TenderDetail">
               <MappingFragment StoreEntitySet="TenderDetail">
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
+                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />

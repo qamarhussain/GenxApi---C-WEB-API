@@ -58,7 +58,7 @@
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
         <AssociationConnector Association="Model.FK_Job_Tender" />
-        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="18" PointY="8.625" />
+        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="18" PointY="8.375" />
         <AssociationConnector Association="Model.FK_TenderDetail_City" />
         <AssociationConnector Association="Model.FK_TenderDetail_City1" />
         <AssociationConnector Association="Model.FK_TenderDetail_Province" />
