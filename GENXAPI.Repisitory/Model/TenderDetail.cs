@@ -31,7 +31,7 @@ namespace GENXAPI.Repisitory.Model
         public string DestinationToName { get; set; }
         public string DestinationFromName { get; set; }
         public string ProvinceName { get; set; }
-        public Nullable<int> RegionId { get; set; }
+        //public Nullable<int> RegionId { get; set; }
     
         public virtual City City { get; set; }
         public virtual City City1 { get; set; }
@@ -40,9 +40,9 @@ namespace GENXAPI.Repisitory.Model
         public virtual Tender Tender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderChild> TenderChilds { get; set; }
-        public virtual City City { get; set; }
-        public virtual City City1 { get; set; }
-        public virtual Province Province { get; set; }
-        public virtual Region Region { get; set; }
+        //public virtual City City { get; set; }
+        //public virtual City City1 { get; set; }
+        //public virtual Province Province { get; set; }
+        //public virtual Region Region { get; set; }
     }
 }
