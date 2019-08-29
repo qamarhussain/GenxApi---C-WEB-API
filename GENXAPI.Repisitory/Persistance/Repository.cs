@@ -45,7 +45,7 @@ namespace GENXAPI.Repisitory
         {
             db.Set<TEntity>().Add(entity);
         }
-
+        
         public void AddRange(IEnumerable<TEntity> entities)
         {
             db.Set<TEntity>().AddRange(entities);

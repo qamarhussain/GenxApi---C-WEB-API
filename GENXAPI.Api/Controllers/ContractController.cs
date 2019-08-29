@@ -65,7 +65,7 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetById(int id)
         {
-            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s=>s.Vehicle)).Where(o => o.Id == id).FirstOrDefault();
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, a => a.TenderDetails.Select(b =>b.City), c =>c.TenderDetails.Select(d => d.City1), z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s=>s.Vehicle)).Where(o => o.Id == id).FirstOrDefault();
             if(result == null)
             {
                 return NotFound();
