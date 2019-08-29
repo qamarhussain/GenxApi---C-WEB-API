@@ -58,13 +58,14 @@
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
-        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="5.125" />
         <AssociationConnector Association="Model.FK_TenderDetail_City" />
         <AssociationConnector Association="Model.FK_TenderDetail_City1" />
-        <AssociationConnector Association="Model.FK_Job_Tender" />
-        <AssociationConnector Association="Model.FK_JobChild_Job" />
         <AssociationConnector Association="Model.FK_TenderDetail_Province" />
         <AssociationConnector Association="Model.FK_TenderDetail_Region" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="20" PointY="17" />
+        <AssociationConnector Association="Model.FK_Job_Customers" />
+        <AssociationConnector Association="Model.FK_Job_Tender" />
+        <AssociationConnector Association="Model.FK_JobChild_Job" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

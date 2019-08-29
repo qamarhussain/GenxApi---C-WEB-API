@@ -24,6 +24,7 @@ namespace GENXAPI.Repisitory.Model
         public string JobNo { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> BusinessUnitId { get; set; }
+        public Nullable<int> CustomerId { get; set; }
         public int TenderId { get; set; }
         public string TenderNo { get; set; }
         public byte JobStatus { get; set; }
@@ -42,6 +43,7 @@ namespace GENXAPI.Repisitory.Model
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
     
+        public virtual Customer Customer { get; set; }
         public virtual Tender Tender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobChild> JobChilds { get; set; }

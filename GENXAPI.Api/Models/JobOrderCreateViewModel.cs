@@ -9,6 +9,8 @@ namespace GENXAPI.Api.Models
     public class JobOrderCreateViewModel
     {
         public int JobId { get; set; }
+        public string JobNo { get; set; }
+        public Nullable<int> CustomerId { get; set; }
         public int TenderId { get; set; }
         public string TenderNo { get; set; }
         public byte JobStatus { get; set; }

@@ -61,6 +61,8 @@ namespace GENXAPI.Api.Controllers
                 var JobOrder = new Job();
                 JobOrder.CompanyId = model.CompanyId;
                 JobOrder.BusinessUnitId = model.BusinessUnitId;
+                JobOrder.CustomerId = model.CustomerId;
+                JobOrder.JobNo = model.JobNo;
                 JobOrder.PONo = model.PONo;
                 JobOrder.DeliveryAddress = model.DeliveryAddress;
                 JobOrder.DeliveryDate = model.DeliveryDate;
@@ -151,6 +153,19 @@ namespace GENXAPI.Api.Controllers
                 _unitOfWork.Job.Update(JobOrder);
                 _unitOfWork.SaveChanges();
                 return Ok(JobOrder);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult GetJobsCountByCustomerContract(JobOrderCreateViewModel model)
+        {
+            try
+            {
+                return Ok(_unitOfWork.Job.Find(x => x.CustomerId == model.CustomerId && x.TenderId == model.TenderId).Count());
             }
             catch(Exception ex)
             {
