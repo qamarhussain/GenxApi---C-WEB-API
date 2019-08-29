@@ -199,6 +199,7 @@ namespace GENXAPI.Api.Controllers
                 _unitOfWork.Tenders.Add(tender);
                 #region Tender Detail.
                 var tenderDetailList = new List<TenderDetail>();
+                
                 foreach (var items in createViewModel.TenderDetails)
                 {
                     TenderDetail tenderDetail = new TenderDetail();
