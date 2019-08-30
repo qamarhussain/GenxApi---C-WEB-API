@@ -22,7 +22,19 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetAllVendorQuotation()
         {
-            return Ok(_unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor, z => z.VendorQuotationChilds).ToList());
+            try
+            {
+                //return Ok(_unitOfWork.VendorQuotation.AllIncluding(a=>a.Tender, b=>b.Tender.TenderChilds, c => c.Tender.TenderChilds.Select(d=>d.FleetService),
+                //e => e.Tender.TenderChilds.Select(f => f.Vehicle), i => i.Tender.TenderDetails.Select(j => j.City), l => l.Tender.TenderDetails.Select(m => m.City1),
+                //x => x.Tender.Customer, y => y.Vendor, z => z.VendorQuotationChilds).ToList());
+                var data = _unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor).ToList();
+                return Ok(data);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+     
         }
 
         [HttpGet]
@@ -44,6 +56,8 @@ namespace GENXAPI.Api.Controllers
             vendorQuotation.BusinessUnitId = model.BusinessUnitId;
             vendorQuotation.CreatedBy = model.CreatedBy;
             vendorQuotation.StatusId = (byte)Status.Active;
+            vendorQuotation.JobId = (model.JobId == null || model.JobId == 0)? null : model.JobId;
+            vendorQuotation.JobNo = (model.JobId == null || model.JobId == 0) ? null : model.JobNo;
             vendorQuotation.TenderId = model.TenderId;
             vendorQuotation.VendorId = model.VendorId;
             vendorQuotation.VendorQuotationChilds = model.vendorQuotationChild;

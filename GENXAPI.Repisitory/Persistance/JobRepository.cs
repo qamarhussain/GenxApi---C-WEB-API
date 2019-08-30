@@ -22,5 +22,17 @@ namespace GENXAPI.Repisitory
         {
 
         }
+
+        public IList<DropdownListDto> GetJobsKeyPairByContract(int contractId)
+        {
+            var result = Find(m => m.TenderId == contractId).Select(r =>
+           new DropdownListDto
+           {
+               Value = r.JobId.ToString(),
+               Text = r.JobNo
+           });
+            return result.ToList();
+        }
+
     }
 }

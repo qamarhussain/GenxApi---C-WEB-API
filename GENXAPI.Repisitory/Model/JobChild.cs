@@ -24,7 +24,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<decimal> UnitCost { get; set; }
         public Nullable<int> OfficeId { get; set; }
     
-        public virtual Job Job { get; set; }
         public virtual RegionalOffice RegionalOffice { get; set; }
+        public virtual Job Job { get; set; }
     }
 }

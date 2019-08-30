@@ -26,13 +26,14 @@ namespace GENXAPI.Repisitory.Model
         public int CompanyId { get; set; }
         public int VendorId { get; set; }
         public int TenderId { get; set; }
+        public Nullable<int> JobId { get; set; }
+        public string JobNo { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual Tender Tender { get; set; }
         public virtual Vendor Vendor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

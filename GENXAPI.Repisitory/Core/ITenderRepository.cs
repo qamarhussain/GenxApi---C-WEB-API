@@ -8,5 +8,7 @@ namespace GENXAPI.Repisitory
          IList<DropdownListDto> GetContractKeyPair(int CompanyId, int BusinessUnitId, int CustomerId);
 
         IList<DropdownListDto> GetContractKeyPairForJob(int CustomerId);
+
+        
     }
 }

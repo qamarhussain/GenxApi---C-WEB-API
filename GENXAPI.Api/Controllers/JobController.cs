@@ -174,5 +174,80 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult GetJobIdsByContract(int id)
+        {
+            try
+            {
+                return Ok(_unitOfWork.Job.GetJobsKeyPairByContract(id));
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult GetContractsByCustomerForJobQuotation(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var keyPairValues = _unitOfWork.Tenders.GetContractKeyPairForJob(model.CustomerId);
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult GetJobForQuotation(JobOrderCreateViewModel model)
+        {
+            try
+            {
+                var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, a => a.TenderDetails.Select(b => b.City), c => c.TenderDetails.Select(d => d.City1), z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s => s.Vehicle)).Where(o => o.Id == model.TenderId).FirstOrDefault();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                var jobDetails = _unitOfWork.JobChild.Find(x => x.JobId == model.JobId).ToList();
+                if (jobDetails == null)
+                {
+                    return NotFound();
+                }
+                var childTemList = result.TenderChilds;
+                foreach (var item in result.TenderChilds.ToList())
+                {
+                    var itemCodeInJob = jobDetails.Where(x => x.ItemCode == item.ItemCode).FirstOrDefault();
+                    if (itemCodeInJob == null)
+                    {
+                        result.TenderChilds.Remove(item);
+                    }
+                }
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+       
+        }
+
+        public IHttpActionResult GetAllJobQuotation()
+        {
+            try
+            {
+                var data = _unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor).Where(d=>d.JobId != null).ToList();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
+
     }
 }

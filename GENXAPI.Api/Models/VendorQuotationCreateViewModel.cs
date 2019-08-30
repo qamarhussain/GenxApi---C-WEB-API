@@ -16,6 +16,8 @@ namespace GENXAPI.Api.Models
         public int BusinessUnitId { get; set; }
         public int CompanyId { get; set; }
         public int VendorId { get; set; }
+        public Nullable<int> JobId { get; set; }
+        public string JobNo { get; set; }
         public int TenderId { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public string LastModifiedBy { get; set; }

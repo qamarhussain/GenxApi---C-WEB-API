@@ -18,9 +18,9 @@ namespace GENXAPI.Repisitory.Model
         public Tender()
         {
             this.ContractCancelations = new HashSet<ContractCancelation>();
-            this.Jobs = new HashSet<Job>();
             this.TenderChilds = new HashSet<TenderChild>();
             this.TenderDetails = new HashSet<TenderDetail>();
+            this.Jobs = new HashSet<Job>();
             this.VendorQuotations = new HashSet<VendorQuotation>();
         }
     
@@ -44,11 +44,11 @@ namespace GENXAPI.Repisitory.Model
         public virtual ICollection<ContractCancelation> ContractCancelations { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Job> Jobs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderChild> TenderChilds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderDetail> TenderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Job> Jobs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotation> VendorQuotations { get; set; }
     }
