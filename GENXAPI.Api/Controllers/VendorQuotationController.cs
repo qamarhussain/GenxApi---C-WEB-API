@@ -22,7 +22,15 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetAllVendorQuotation()
         {
-            return Ok(_unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor, z => z.VendorQuotationChilds).ToList());
+            try
+            {
+                return Ok(_unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor, z => z.VendorQuotationChilds).ToList());
+
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [HttpGet]

@@ -21,6 +21,7 @@ namespace GENXAPI.Repisitory.Model
             this.RegionalOffices = new HashSet<RegionalOffice>();
             this.TenderDetails = new HashSet<TenderDetail>();
             this.TenderDetails1 = new HashSet<TenderDetail>();
+            this.Vendors = new HashSet<Vendor>();
         }
     
         public int CityId { get; set; }
@@ -43,5 +44,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual ICollection<TenderDetail> TenderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderDetail> TenderDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vendor> Vendors { get; set; }
     }
 }

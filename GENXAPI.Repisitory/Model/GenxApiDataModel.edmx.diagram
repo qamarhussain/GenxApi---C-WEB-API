@@ -31,11 +31,10 @@
         <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="12.75" PointY="29.875" />
-        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="15.75" PointY="11.25" />
         <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="18" PointY="21.625" />
         <EntityTypeShape EntityType="Model.VendorQuotationChild" Width="1.5" PointX="20.25" PointY="22.5" />
         <EntityTypeShape EntityType="Model.VendorQuotationDetail" Width="1.5" PointX="23.25" PointY="22" />
-        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="9.25" PointY="0.75" />
         <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="0.75" PointY="8.75" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
         <AssociationConnector Association="Model.FK_City_Province" />
@@ -62,10 +61,13 @@
         <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
         <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
-        <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
+        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="17.5" PointY="13.125" />
+        <AssociationConnector Association="Model.FK_Vendor_City" />
+        <AssociationConnector Association="Model.FK_Vendor_Region" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
+        <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
