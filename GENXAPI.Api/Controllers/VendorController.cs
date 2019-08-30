@@ -86,6 +86,9 @@ namespace GENXAPI.Api.Controllers
                 vendorModel.AccountNo = vendor.AccountNo;
                 vendorModel.Address = vendor.Address;
                 vendorModel.City = vendor.City;
+                vendorModel.CityId = vendor.CityId;
+                vendorModel.Region = vendor.Region;
+                vendorModel.RegionId = vendor.RegionId;
                 vendorModel.CNIC = vendor.CNIC;
                 vendorModel.CompanyId = vendor.CompanyId;
                 vendorModel.ContactPerson = vendor.ContactPerson;

@@ -24,7 +24,7 @@ namespace GENXAPI.Repisitory.Model
         public string DestinationFromName { get; set; }
         public Nullable<decimal> Amount { get; set; }
     
-        public virtual Vendor Vendor { get; set; }
         public virtual VendorQuotation VendorQuotation { get; set; }
+        public virtual Vendor Vendor { get; set; }
     }
 }
