@@ -20,7 +20,7 @@ namespace GENXAPI.Repisitory
         public IList<DropdownListDto> GetKeyPairValue(int? ProvinceId)
         {
             var result = new List<DropdownListDto>();
-            if (ProvinceId != null)
+            if (ProvinceId != 0 && ProvinceId != null)
             {
                 result = Find(m => m.StatusId == (byte)Status.Active && m.ProvinceId == ProvinceId).Select(r =>
          new DropdownListDto

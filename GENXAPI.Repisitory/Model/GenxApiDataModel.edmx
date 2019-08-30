@@ -1029,6 +1029,7 @@
           <EntitySet Name="Customers" EntityType="Model.Customer" />
           <EntitySet Name="FinancialYearDefinations" EntityType="Model.FinancialYearDefination" />
           <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
+          <EntitySet Name="Jobs" EntityType="Model.Job" />
           <EntitySet Name="JobChilds" EntityType="Model.JobChild" />
           <EntitySet Name="ModuleCategories" EntityType="Model.ModuleCategory" />
           <EntitySet Name="ModuleForms" EntityType="Model.ModuleForm" />
@@ -1070,6 +1071,14 @@
             <End Role="City" EntitySet="Cities" />
             <End Role="RegionalOffice" EntitySet="RegionalOffices" />
           </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City" Association="Model.FK_TenderDetail_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City1" Association="Model.FK_TenderDetail_City1">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Model.FK_FinancialYearDefination_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
@@ -1086,6 +1095,10 @@
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="ContractCancelation" EntitySet="ContractCancelations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Job_Customers" Association="Model.FK_Job_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Tender" EntitySet="Tenders" />
@@ -1094,6 +1107,14 @@
             <End Role="FleetService" EntitySet="FleetServices" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
+          <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobChild_Job" Association="Model.FK_JobChild_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="JobChild" EntitySet="JobChilds" />
+          </AssociationSet>
           <AssociationSet Name="FK_JobChild_RegionalOffice" Association="Model.FK_JobChild_RegionalOffice">
             <End Role="RegionalOffice" EntitySet="RegionalOffices" />
             <End Role="JobChild" EntitySet="JobChilds" />
@@ -1101,6 +1122,14 @@
           <AssociationSet Name="FK_Region_Province" Association="Model.FK_Region_Province">
             <End Role="Province" EntitySet="Provinces" />
             <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Province" Association="Model.FK_TenderDetail_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Region" Association="Model.FK_TenderDetail_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
             <End Role="Tender" EntitySet="Tenders" />
@@ -1137,35 +1166,6 @@
           <AssociationSet Name="FK_VendorQuotationDetail_VendorQuotation" Association="Model.FK_VendorQuotationDetail_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_City" Association="Model.FK_TenderDetail_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_City1" Association="Model.FK_TenderDetail_City1">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Province" Association="Model.FK_TenderDetail_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Region" Association="Model.FK_TenderDetail_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <EntitySet Name="Jobs" EntityType="Model.Job" />
-          <AssociationSet Name="FK_Job_Customers" Association="Model.FK_Job_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Job" EntitySet="Jobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="Job" EntitySet="Jobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobChild_Job" Association="Model.FK_JobChild_Job">
-            <End Role="Job" EntitySet="Jobs" />
-            <End Role="JobChild" EntitySet="JobChilds" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BusinessUnit">
@@ -1317,8 +1317,8 @@
           <Property Name="StatusId" Type="Byte" />
           <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="Model.FK_Customers_City" FromRole="Customer" ToRole="City" />
-          <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
           <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Customers" FromRole="Customer" ToRole="Job" />
+          <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -1350,6 +1350,36 @@
           <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
         </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TenderId" Type="Int32" Nullable="false" />
+          <Property Name="TenderNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobStatus" Type="Byte" Nullable="false" />
+          <Property Name="PONo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PODate" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="PRNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProposalRef" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OtherTermsConditions" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="InvoiceAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Job_Customers" FromRole="Job" ToRole="Customer" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
+          <NavigationProperty Name="JobChilds" Relationship="Model.FK_JobChild_Job" FromRole="Job" ToRole="JobChild" />
+        </EntityType>
         <EntityType Name="JobChild">
           <Key>
             <PropertyRef Name="Id" />
@@ -1363,8 +1393,8 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OfficeId" Type="Int32" />
-          <NavigationProperty Name="RegionalOffice" Relationship="Model.FK_JobChild_RegionalOffice" FromRole="JobChild" ToRole="RegionalOffice" />
           <NavigationProperty Name="Job" Relationship="Model.FK_JobChild_Job" FromRole="JobChild" ToRole="Job" />
+          <NavigationProperty Name="RegionalOffice" Relationship="Model.FK_JobChild_RegionalOffice" FromRole="JobChild" ToRole="RegionalOffice" />
         </EntityType>
         <EntityType Name="ModuleCategory">
           <Key>
@@ -1505,10 +1535,10 @@
           <Property Name="ProceedStatus" Type="Byte" />
           <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
           <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
+          <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Tender" FromRole="Tender" ToRole="Job" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
           <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
           <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
-          <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Tender" FromRole="Tender" ToRole="Job" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -1535,19 +1565,19 @@
           <Property Name="TenderId" Type="Int32" Nullable="false" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="DestinationToId" Type="Int32" />
-          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DestinationFromId" Type="Int32" />
-          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
-          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
           <Property Name="RegionId" Type="Int32" />
+          <Property Name="DestinationToName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="City" Relationship="Model.FK_TenderDetail_City" FromRole="TenderDetail" ToRole="City" />
           <NavigationProperty Name="City1" Relationship="Model.FK_TenderDetail_City1" FromRole="TenderDetail" ToRole="City" />
           <NavigationProperty Name="Province" Relationship="Model.FK_TenderDetail_Province" FromRole="TenderDetail" ToRole="Province" />
           <NavigationProperty Name="Region" Relationship="Model.FK_TenderDetail_Region" FromRole="TenderDetail" ToRole="Region" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -1767,6 +1797,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TenderDetail_City">
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="DestinationFromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_City1">
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="DestinationToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinancialYearDefination_Company">
           <End Type="Model.Company" Role="Company" Multiplicity="1" />
           <End Type="Model.FinancialYearDefination" Role="FinancialYearDefination" Multiplicity="*" />
@@ -1815,6 +1869,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Job_Customers">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tender_Customers">
           <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
@@ -1839,6 +1905,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Job_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="TenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobChild_Job">
+          <End Type="Model.Job" Role="Job" Multiplicity="0..1" />
+          <End Type="Model.JobChild" Role="JobChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="JobId" />
+            </Principal>
+            <Dependent Role="JobChild">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JobChild_RegionalOffice">
           <End Type="Model.RegionalOffice" Role="RegionalOffice" Multiplicity="0..1" />
           <End Type="Model.JobChild" Role="JobChild" Multiplicity="*" />
@@ -1860,6 +1950,30 @@
             </Principal>
             <Dependent Role="Region">
               <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Province">
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Region">
+          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="RegionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1968,120 +2082,6 @@
             </Principal>
             <Dependent Role="VendorQuotationDetail">
               <PropertyRef Name="VendorQuotationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderDetail_City">
-          <End Type="Model.City" Role="City" Multiplicity="0..1" />
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityId" />
-            </Principal>
-            <Dependent Role="TenderDetail">
-              <PropertyRef Name="DestinationToId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderDetail_City1">
-          <End Type="Model.City" Role="City" Multiplicity="0..1" />
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityId" />
-            </Principal>
-            <Dependent Role="TenderDetail">
-              <PropertyRef Name="DestinationFromId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderDetail_Province">
-          <End Type="Model.Province" Role="Province" Multiplicity="1" />
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Province">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderDetail">
-              <PropertyRef Name="ProvinceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderDetail_Region">
-          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="TenderDetail">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Job">
-          <Key>
-            <PropertyRef Name="JobId" />
-          </Key>
-          <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="BusinessUnitId" Type="Int32" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="TenderId" Type="Int32" Nullable="false" />
-          <Property Name="TenderNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="JobStatus" Type="Byte" Nullable="false" />
-          <Property Name="PONo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PODate" Type="DateTime" Precision="3" />
-          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
-          <Property Name="PRNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProposalRef" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OtherTermsConditions" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="InvoiceAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DeliveryAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="StatusId" Type="Byte" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Customer" Relationship="Model.FK_Job_Customers" FromRole="Job" ToRole="Customer" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
-          <NavigationProperty Name="JobChilds" Relationship="Model.FK_JobChild_Job" FromRole="Job" ToRole="JobChild" />
-        </EntityType>
-        <Association Name="FK_Job_Customers">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="Model.Job" Role="Job" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Job">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Job_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.Job" Role="Job" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Job">
-              <PropertyRef Name="TenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobChild_Job">
-          <End Type="Model.Job" Role="Job" Multiplicity="0..1" />
-          <End Type="Model.JobChild" Role="JobChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Job">
-              <PropertyRef Name="JobId" />
-            </Principal>
-            <Dependent Role="JobChild">
-              <PropertyRef Name="JobId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2265,6 +2265,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="Model.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="InvoiceAddress" ColumnName="InvoiceAddress" />
+                <ScalarProperty Name="OtherTermsConditions" ColumnName="OtherTermsConditions" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ProposalRef" ColumnName="ProposalRef" />
+                <ScalarProperty Name="PRNo" ColumnName="PRNo" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="PODate" ColumnName="PODate" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="JobChilds">
             <EntityTypeMapping TypeName="Model.JobChild">
               <MappingFragment StoreEntitySet="JobChild">
@@ -2435,13 +2463,13 @@
           <EntitySetMapping Name="TenderDetails">
             <EntityTypeMapping TypeName="Model.TenderDetail">
               <MappingFragment StoreEntitySet="TenderDetail">
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
+                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
                 <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
-                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
                 <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TenderId" ColumnName="TenderId" />
@@ -2602,34 +2630,6 @@
                 <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Jobs">
-            <EntityTypeMapping TypeName="Model.Job">
-              <MappingFragment StoreEntitySet="Job">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
-                <ScalarProperty Name="InvoiceAddress" ColumnName="InvoiceAddress" />
-                <ScalarProperty Name="OtherTermsConditions" ColumnName="OtherTermsConditions" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="ProposalRef" ColumnName="ProposalRef" />
-                <ScalarProperty Name="PRNo" ColumnName="PRNo" />
-                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-                <ScalarProperty Name="PODate" ColumnName="PODate" />
-                <ScalarProperty Name="PONo" ColumnName="PONo" />
-                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
-                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
