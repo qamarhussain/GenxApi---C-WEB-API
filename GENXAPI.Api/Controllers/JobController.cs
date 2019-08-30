@@ -29,7 +29,8 @@ namespace GENXAPI.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {
-            var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds, d => d.JobChilds.Select(e=>e.RegionalOffice), f => f.Tender.TenderChilds.Select(g=>g.FleetService), h => h.Tender.TenderDetails).Where(x => x.JobId == id).FirstOrDefault();
+            var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds, d => d.JobChilds.Select(e=>e.RegionalOffice), f => f.Tender.TenderChilds.Select(g=>g.FleetService), h => h.Tender.TenderDetails, i => i.Tender.TenderDetails.Select(j=>j.City), 
+                l => l.Tender.TenderDetails.Select(m => m.City1), n => n.Tender.TenderChilds.Select(o => o.Vehicle)).Where(x => x.JobId == id).FirstOrDefault();
             if(data == null)
             {
                 return NotFound();
