@@ -216,7 +216,6 @@ namespace GENXAPI.Api.Controllers
                 {
                     return NotFound();
                 }
-                var childTemList = result.TenderChilds;
                 foreach (var item in result.TenderChilds.ToList())
                 {
                     var itemCodeInJob = jobDetails.Where(x => x.ItemCode == item.ItemCode).FirstOrDefault();
@@ -246,6 +245,26 @@ namespace GENXAPI.Api.Controllers
                 return InternalServerError(ex);
             }
 
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetJobQuotationByJobId(int id)
+        {
+            var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, a => a.Tender.TenderDetails.Select(b => b.City), c => c.Tender.TenderDetails.Select(d => d.City1), z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
+            if (data == null)
+            {
+                return NotFound();
+            }
+            var jomDetails = data.VendorQuotationChilds.ToList();
+            foreach (var item in data.Tender.TenderChilds.ToList())
+            {
+                var itemCodeInJob = jomDetails.Where(x => x.ItemCode == item.ItemCode).FirstOrDefault();
+                if (itemCodeInJob == null)
+                {
+                    data.Tender.TenderChilds.Remove(item);
+                }
+            }
+            return Ok(data);
         }
 
 

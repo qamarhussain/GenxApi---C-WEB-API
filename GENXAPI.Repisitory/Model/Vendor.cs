@@ -17,8 +17,8 @@ namespace GENXAPI.Repisitory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vendor()
         {
-            this.VendorQuotationDetails = new HashSet<VendorQuotationDetail>();
             this.VendorQuotations = new HashSet<VendorQuotation>();
+            this.VendorQuotationDetails = new HashSet<VendorQuotationDetail>();
         }
     
         public int CompanyId { get; set; }
@@ -53,8 +53,8 @@ namespace GENXAPI.Repisitory.Model
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VendorQuotationDetail> VendorQuotationDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotation> VendorQuotations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VendorQuotationDetail> VendorQuotationDetails { get; set; }
     }
 }

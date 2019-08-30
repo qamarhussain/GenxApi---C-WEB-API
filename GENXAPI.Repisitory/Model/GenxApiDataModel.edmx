@@ -462,6 +462,8 @@
           <Property Name="CompanyId" Type="int" Nullable="false" />
           <Property Name="VendorId" Type="int" Nullable="false" />
           <Property Name="TenderId" Type="int" Nullable="false" />
+          <Property Name="JobId" Type="int" />
+          <Property Name="JobNo" Type="varchar" MaxLength="25" />
           <Property Name="StatusId" Type="tinyint" />
           <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="LastModifiedDate" Type="datetime" />
@@ -817,18 +819,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VendorQuotation_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="VendorQuotation" Type="Self.VendorQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="VendorQuotation">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VendorQuotation_Tender">
           <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
           <End Role="VendorQuotation" Type="Self.VendorQuotation" Multiplicity="*" />
@@ -1022,10 +1012,6 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Vendor" EntitySet="Vendor" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotation_Company" Association="Self.FK_VendorQuotation_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotation" />
-          </AssociationSet>
           <AssociationSet Name="FK_VendorQuotation_Tender" Association="Self.FK_VendorQuotation_Tender">
             <End Role="Tender" EntitySet="Tender" />
             <End Role="VendorQuotation" EntitySet="VendorQuotation" />
@@ -1078,6 +1064,7 @@
           <EntitySet Name="Units" EntityType="Model.Unit" />
           <EntitySet Name="Users" EntityType="Model.User" />
           <EntitySet Name="Vehicles" EntityType="Model.Vehicle" />
+          <EntitySet Name="Vendors" EntityType="Model.Vendor" />
           <EntitySet Name="VendorQuotations" EntityType="Model.VendorQuotation" />
           <EntitySet Name="VendorQuotationChilds" EntityType="Model.VendorQuotationChild" />
           <EntitySet Name="VendorQuotationDetails" EntityType="Model.VendorQuotationDetail" />
@@ -1111,6 +1098,10 @@
             <End Role="City" EntitySet="Cities" />
             <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_Vendor_City" Association="Model.FK_Vendor_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Vendor" EntitySet="Vendors" />
+          </AssociationSet>
           <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Model.FK_FinancialYearDefination_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
@@ -1118,10 +1109,6 @@
           <AssociationSet Name="FK_Region_Company1" Association="Model.FK_Region_Company1">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Region" EntitySet="Regions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotation_Company" Association="Model.FK_VendorQuotation_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
           </AssociationSet>
           <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
             <End Role="Tender" EntitySet="Tenders" />
@@ -1163,6 +1150,10 @@
             <End Role="Region" EntitySet="Regions" />
             <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_Vendor_Region" Association="Model.FK_Vendor_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Vendor" EntitySet="Vendors" />
+          </AssociationSet>
           <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
@@ -1183,29 +1174,20 @@
             <End Role="Vehicle" EntitySet="Vehicles" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Model.FK_VendorQuotationChild_VendorQuotation">
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationDetail_VendorQuotation" Association="Model.FK_VendorQuotationDetail_VendorQuotation">
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-            <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
-          </AssociationSet>
-          <EntitySet Name="Vendors" EntityType="Model.Vendor" />
-          <AssociationSet Name="FK_Vendor_City" Association="Model.FK_Vendor_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Vendor" EntitySet="Vendors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vendor_Region" Association="Model.FK_Vendor_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="Vendor" EntitySet="Vendors" />
-          </AssociationSet>
           <AssociationSet Name="FK_VendorQuotation_Vendor" Association="Model.FK_VendorQuotation_Vendor">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
           </AssociationSet>
           <AssociationSet Name="FK_VendorQuotationDetail_Vendor" Association="Model.FK_VendorQuotationDetail_Vendor">
             <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Model.FK_VendorQuotationChild_VendorQuotation">
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationDetail_VendorQuotation" Association="Model.FK_VendorQuotationDetail_VendorQuotation">
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
           </AssociationSet>
         </EntityContainer>
@@ -1277,7 +1259,6 @@
           <NavigationProperty Name="BusinessUnits" Relationship="Model.FK_BusinessUnits_Company" FromRole="Company" ToRole="BusinessUnit" />
           <NavigationProperty Name="FinancialYearDefinations" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="Company" ToRole="FinancialYearDefination" />
           <NavigationProperty Name="Regions" Relationship="Model.FK_Region_Company1" FromRole="Company" ToRole="Region" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Company" FromRole="Company" ToRole="VendorQuotation" />
         </EntityType>
         <EntityType Name="ContractCancelation">
           <Key>
@@ -1674,6 +1655,43 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Vehicles" FromRole="Vehicle" ToRole="TenderChild" />
         </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="VendorId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NatureOfBusinessId" Type="Int32" />
+          <Property Name="TypeOfBusinessId" Type="Int32" />
+          <Property Name="YearEstablished" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CopyStatus" Type="Boolean" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="RegionId" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="Model.FK_Vendor_City" FromRole="Vendor" ToRole="City" />
+          <NavigationProperty Name="Region" Relationship="Model.FK_Vendor_Region" FromRole="Vendor" ToRole="Region" />
+          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
+          <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="Vendor" ToRole="VendorQuotationDetail" />
+        </EntityType>
         <EntityType Name="VendorQuotation">
           <Key>
             <PropertyRef Name="VendorQuotationId" />
@@ -1683,16 +1701,17 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="VendorId" Type="Int32" Nullable="false" />
           <Property Name="TenderId" Type="Int32" Nullable="false" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="JobNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Company" Relationship="Model.FK_VendorQuotation_Company" FromRole="VendorQuotation" ToRole="Company" />
           <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
+          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
           <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationChild" />
           <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationDetail" />
-          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="VendorQuotationChild">
           <Key>
@@ -1717,8 +1736,8 @@
           <Property Name="DestinationFromId" Type="Int32" />
           <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotationDetail" ToRole="VendorQuotation" />
           <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="VendorQuotationDetail" ToRole="Vendor" />
+          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationDetail_VendorQuotation" FromRole="VendorQuotationDetail" ToRole="VendorQuotation" />
         </EntityType>
         <EntityType Name="VendorsBusinessNature">
           <Key>
@@ -1830,6 +1849,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vendor_City">
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Vendor">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinancialYearDefination_Company">
           <End Type="Model.Company" Role="Company" Multiplicity="1" />
           <End Type="Model.FinancialYearDefination" Role="FinancialYearDefination" Multiplicity="*" />
@@ -1850,18 +1881,6 @@
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="Region">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotation_Company">
-          <End Type="Model.Company" Role="Company" Multiplicity="1" />
-          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="VendorQuotation">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1986,6 +2005,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vendor_Region">
+          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Vendor">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TenderChild_Tender">
           <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
           <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
@@ -2046,91 +2077,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VendorQuotationChild_VendorQuotation">
-          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="1" />
-          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VendorQuotation">
-              <PropertyRef Name="VendorQuotationId" />
-            </Principal>
-            <Dependent Role="VendorQuotationChild">
-              <PropertyRef Name="VendorQuotationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotationDetail_VendorQuotation">
-          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="1" />
-          <End Type="Model.VendorQuotationDetail" Role="VendorQuotationDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VendorQuotation">
-              <PropertyRef Name="VendorQuotationId" />
-            </Principal>
-            <Dependent Role="VendorQuotationDetail">
-              <PropertyRef Name="VendorQuotationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Vendor">
-          <Key>
-            <PropertyRef Name="VendorId" />
-          </Key>
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VendorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NatureOfBusinessId" Type="Int32" />
-          <Property Name="TypeOfBusinessId" Type="Int32" />
-          <Property Name="YearEstablished" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CityId" Type="Int32" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CopyStatus" Type="Boolean" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="RegionId" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Model.FK_Vendor_City" FromRole="Vendor" ToRole="City" />
-          <NavigationProperty Name="Region" Relationship="Model.FK_Vendor_Region" FromRole="Vendor" ToRole="Region" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
-          <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="Vendor" ToRole="VendorQuotationDetail" />
-        </EntityType>
-        <Association Name="FK_Vendor_City">
-          <End Type="Model.City" Role="City" Multiplicity="0..1" />
-          <End Type="Model.Vendor" Role="Vendor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityId" />
-            </Principal>
-            <Dependent Role="Vendor">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Vendor_Region">
-          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
-          <End Type="Model.Vendor" Role="Vendor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="Vendor">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VendorQuotation_Vendor">
           <End Type="Model.Vendor" Role="Vendor" Multiplicity="1" />
           <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
@@ -2152,6 +2098,30 @@
             </Principal>
             <Dependent Role="VendorQuotationDetail">
               <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotationChild_VendorQuotation">
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="1" />
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorQuotation">
+              <PropertyRef Name="VendorQuotationId" />
+            </Principal>
+            <Dependent Role="VendorQuotationChild">
+              <PropertyRef Name="VendorQuotationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotationDetail_VendorQuotation">
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="1" />
+          <End Type="Model.VendorQuotationDetail" Role="VendorQuotationDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorQuotation">
+              <PropertyRef Name="VendorQuotationId" />
+            </Principal>
+            <Dependent Role="VendorQuotationDetail">
+              <PropertyRef Name="VendorQuotationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2601,6 +2571,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="Model.Vendor">
+              <MappingFragment StoreEntitySet="Vendor">
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CopyStatus" ColumnName="CopyStatus" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="YearEstablished" ColumnName="YearEstablished" />
+                <ScalarProperty Name="TypeOfBusinessId" ColumnName="TypeOfBusinessId" />
+                <ScalarProperty Name="NatureOfBusinessId" ColumnName="NatureOfBusinessId" />
+                <ScalarProperty Name="STRN" ColumnName="STRN" />
+                <ScalarProperty Name="NTN" ColumnName="NTN" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VendorQuotations">
             <EntityTypeMapping TypeName="Model.VendorQuotation">
               <MappingFragment StoreEntitySet="VendorQuotation">
@@ -2609,6 +2613,8 @@
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
                 <ScalarProperty Name="TenderId" ColumnName="TenderId" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -2667,40 +2673,6 @@
                 <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vendors">
-            <EntityTypeMapping TypeName="Model.Vendor">
-              <MappingFragment StoreEntitySet="Vendor">
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="CopyStatus" ColumnName="CopyStatus" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="YearEstablished" ColumnName="YearEstablished" />
-                <ScalarProperty Name="TypeOfBusinessId" ColumnName="TypeOfBusinessId" />
-                <ScalarProperty Name="NatureOfBusinessId" ColumnName="NatureOfBusinessId" />
-                <ScalarProperty Name="STRN" ColumnName="STRN" />
-                <ScalarProperty Name="NTN" ColumnName="NTN" />
-                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
-                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
-                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
-                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

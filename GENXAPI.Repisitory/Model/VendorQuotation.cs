@@ -35,10 +35,10 @@ namespace GENXAPI.Repisitory.Model
         public string CreatedBy { get; set; }
     
         public virtual Tender Tender { get; set; }
+        public virtual Vendor Vendor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotationChild> VendorQuotationChilds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotationDetail> VendorQuotationDetails { get; set; }
-        public virtual Vendor Vendor { get; set; }
     }
 }

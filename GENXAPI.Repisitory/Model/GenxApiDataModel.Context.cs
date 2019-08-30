@@ -35,6 +35,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<FinancialYearDefination> FinancialYearDefinations { get; set; }
         public virtual DbSet<FleetService> FleetServices { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<JobChild> JobChilds { get; set; }
         public virtual DbSet<ModuleCategory> ModuleCategories { get; set; }
         public virtual DbSet<ModuleForm> ModuleForms { get; set; }
@@ -51,11 +52,10 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
         public virtual DbSet<VendorQuotationChild> VendorQuotationChilds { get; set; }
         public virtual DbSet<VendorQuotationDetail> VendorQuotationDetails { get; set; }
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
-        public virtual DbSet<Job> Jobs { get; set; }
-        public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
     }
 }
