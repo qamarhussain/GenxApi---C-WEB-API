@@ -18,6 +18,7 @@ namespace GENXAPI.Api.Controllers
         public CityController()
         {
             _unitOfWork = new UnitOfWork();
+            
         }
         protected readonly CityRepo _cityRepo = new CityRepo();
         // GET: api/Customer
@@ -26,7 +27,8 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _cityRepo.AllIncluding(e => e.Province, a => a.Region).ToList();
+                //var result = _cityRepo.AllIncluding(e => e.Province, a => a.Region).ToList();
+               var result = _unitOfWork.City.AllIncluding(y => y.Province, a => a.Region).ToList(); 
                 return Ok(result);
             }
             catch (Exception ex)

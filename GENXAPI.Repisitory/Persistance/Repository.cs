@@ -36,7 +36,7 @@ namespace GENXAPI.Repisitory
             IQueryable<TEntity> query = db.Set<TEntity>();
             foreach (var includeProperty in includeProperties)
             {
-                query = query.Include(includeProperty);
+                query = query.Include(includeProperty).AsNoTracking();
             }
             return query;
         }

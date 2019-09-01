@@ -23,7 +23,8 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetAllContracts()
         {
-            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
+            //var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
             return Ok(result);
         }
 
@@ -65,45 +66,60 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetById(int id)
         {
-            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, a => a.TenderDetails.Select(b =>b.City), c =>c.TenderDetails.Select(d => d.City1), z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s=>s.Vehicle)).Where(o => o.Id == id).FirstOrDefault();
-            if(result == null)
+            var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == id).FirstOrDefault();
+
+            if (tender == null)
             {
                 return NotFound();
             }
-            return Ok(result);
+            var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
+            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v=>v.Vehicle, z=>z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
+            tender.TenderDetails = tenderDetails;
+            tender.TenderChilds = tenderChilds;
+            return Ok(tender);
         }
 
         public IHttpActionResult UpdateContract(ContractCreateViewModel model)
         {
-            var tender = _unitOfWork.Tenders.AllIncluding(x=>x.TenderDetails, y=>y.TenderChilds).Where(r=>r.Id == model.TenderId).FirstOrDefault();
-            if(tender == null)
+            try
             {
-                return NotFound();
-            }
-            _unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.Where(x=>x.TenderDetailId != null).ToArray());
-            var servicesToAdd = new List<TenderChild>();
-            foreach(var item in tender.TenderChilds)
-            {
-                item.Amount = model.contractServices.Where(x => x.Id == item.Id).First().Amount;
-                _unitOfWork.TenderChilds.Update(item);
-            }
-            var vehiclesToAdd = new List<TenderChild>();
-            foreach (var item in model.contractDetailVehicle)
-            {
-                var obj = new TenderChild
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.TenderDetails, y => y.TenderChilds).Where(r => r.Id == model.TenderId).FirstOrDefault();
+                if (tender == null)
                 {
-                    CustomerId = tender.CustomerId,
-                    ItemCode = item.ItemCode,
-                    TenderId = model.TenderId,
-                    VehicleId = item.VehicleId,
-                    Amount = item.Amount,
-                    TenderDetailId = item.DetailId
-                };
-                _unitOfWork.TenderChilds.Add(obj);
+                    return NotFound();
+                }
+                //_unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.Where(x => x.TenderDetailId != null).ToArray());
+                foreach (var child in tender.TenderChilds.Where(x => x.TenderDetailId != null).ToList())
+                    _unitOfWork.TenderChilds.Remove(child);
+                var servicesToAdd = new List<TenderChild>();
+                foreach (var item in tender.TenderChilds)
+                {
+                    item.Amount = model.contractServices.Where(x => x.Id == item.Id).First().Amount;
+                    _unitOfWork.TenderChilds.Update(item);
+                }
+                var vehiclesToAdd = new List<TenderChild>();
+                foreach (var item in model.contractDetailVehicle)
+                {
+                    var obj = new TenderChild
+                    {
+                        CustomerId = tender.CustomerId,
+                        ItemCode = item.ItemCode,
+                        TenderId = model.TenderId,
+                        VehicleId = item.VehicleId,
+                        Amount = item.Amount,
+                        TenderDetailId = item.DetailId
+                    };
+                    _unitOfWork.TenderChilds.Add(obj);
+                }
+                _unitOfWork.Tenders.Update(tender);
+                _unitOfWork.SaveChanges();
+                return Ok();
             }
-            _unitOfWork.Tenders.Update(tender);
-            _unitOfWork.SaveChanges();
-            return Ok();
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+       
         }
 
         [HttpPost]

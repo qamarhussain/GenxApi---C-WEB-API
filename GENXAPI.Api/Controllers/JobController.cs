@@ -22,20 +22,35 @@ namespace GENXAPI.Api.Controllers
         [HttpPost]
         public IHttpActionResult GetAllJobOrders(CompanyBusinessUntiInfoViewModel model)
         {
-            var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds).Where(x => x.CompanyId == model.CompanyId && x.BusinessUnitId == model.BusinessUnitId).ToList();
+            //var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds).Where(x => x.CompanyId == model.CompanyId && x.BusinessUnitId == model.BusinessUnitId).ToList();
+            var data = _unitOfWork.Job.AllIncluding(b => b.Tender.Customer).Where(x => x.CompanyId == model.CompanyId && x.BusinessUnitId == model.BusinessUnitId).ToList();
             return Ok(data);
         }
 
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {
-            var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds, d => d.JobChilds.Select(e=>e.RegionalOffice), f => f.Tender.TenderChilds.Select(g=>g.FleetService), h => h.Tender.TenderDetails, i => i.Tender.TenderDetails.Select(j=>j.City), 
-                l => l.Tender.TenderDetails.Select(m => m.City1), n => n.Tender.TenderChilds.Select(o => o.Vehicle)).Where(x => x.JobId == id).FirstOrDefault();
-            if(data == null)
+            try
             {
-                return NotFound();
+                //var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds, d => d.JobChilds.Select(e=>e.RegionalOffice), f => f.Tender.TenderChilds.Select(g=>g.FleetService), h => h.Tender.TenderDetails, i => i.Tender.TenderDetails.Select(j=>j.City), 
+                //    l => l.Tender.TenderDetails.Select(m => m.City1), n => n.Tender.TenderChilds.Select(o => o.Vehicle)).Where(x => x.JobId == id).FirstOrDefault();
+                var data = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.JobChilds.Select(c => c.RegionalOffice)).Where(x => x.JobId == id).FirstOrDefault();
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == data.TenderId).FirstOrDefault();
+                if (tender == null)
+                {
+                    return NotFound();
+                }
+                var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
+                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
+                tender.TenderDetails = tenderDetails;
+                tender.TenderChilds = tenderChilds;
+                data.Tender = tender;
+                return Ok(data);
             }
-            return Ok(data);
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // Used to get contract to make a job.
@@ -115,12 +130,14 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var JobOrder = _unitOfWork.Job.AllIncluding(a => a.JobChilds, b => b.Tender.Customer, c => c.Tender.TenderChilds, d => d.JobChilds.Select(e => e.RegionalOffice)).Where(x => x.JobId == model.JobId).FirstOrDefault();
+                var JobOrder = _unitOfWork.Job.AllIncluding(a => a.JobChilds).Where(x => x.JobId == model.JobId).FirstOrDefault();
                 if (JobOrder == null)
                 {
                     return NotFound();
                 }
-                _unitOfWork.JobChild.RemoveRange(JobOrder.JobChilds.ToArray());
+                //_unitOfWork.JobChild.RemoveRange(JobOrder.JobChilds.ToArray());
+                foreach (var child in JobOrder.JobChilds.ToList())
+                    _unitOfWork.JobChild.Remove(child);
 
                 JobOrder.PONo = model.PONo;
                 JobOrder.DeliveryAddress = model.DeliveryAddress;
@@ -233,6 +250,7 @@ namespace GENXAPI.Api.Controllers
        
         }
 
+        [HttpGet]
         public IHttpActionResult GetAllJobQuotation()
         {
             try

@@ -34,7 +34,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).Where(o=>o.ProceedStatus == (byte)TenderUtility.TenderState).ToList();
+                var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).ToList();
                 return Ok(result);
 
             }
@@ -52,50 +52,17 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 //var tender = _tenderRepo.AllIncluding(z => z.Customer).Where(m => m.Id == id).FirstOrDefault();
-                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, i =>i.TenderDetails.Select(f => f.City),g => g.TenderDetails.Select(h => h.City1), z=>z.TenderChilds.Select(q => q.FleetService)).Where(m => m.Id == id).FirstOrDefault();
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == id).FirstOrDefault();
+              
                 if (tender == null)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    TenderCreateViewModel tenderViewModel = new TenderCreateViewModel();
-                    tenderViewModel.Id = tender.Id;
-                    tenderViewModel.CustomerId = tender.CustomerId;
-                    tenderViewModel.CustomerName = tender.Customer.Name;
-                    tenderViewModel.IssuanceDate = tender.IssuanceDate;
-                    tenderViewModel.TenderReference = tender.TenderReference;
-                    tenderViewModel.TenderSource = tender.TenderSource;
-                    tenderViewModel.TenderTerm = tender.TenderTerm;
-                    tenderViewModel.StatusId = (byte)tender.StatusId;
-                    tenderViewModel.TenderNo = tender.TenderNo;
-                    tenderViewModel.ProvinceId = tender.TenderDetails.FirstOrDefault() == null ? 0 : tender.TenderDetails.First().ProvinceId;
-                    tenderViewModel.RegionId = tender.TenderDetails.FirstOrDefault() == null ? 0 : tender.TenderDetails.First().RegionId;
-                    #region Tender details
-                    //var tenderDetailList = db.TenderDetails.Find(x => x.TenderId == tender.Id).ToList();
-                    //tenderViewModel.TenderDetails = tenderDetailList;
-                    foreach (var items in tender.TenderDetails)
-                    {
-                        TenderDetail tenderDetail = new TenderDetail();
-                        tenderDetail.Id = items.Id;
-                        tenderDetail.TenderId = items.TenderId;
-                        tenderDetail.CustomerId = items.CustomerId;
-                        tenderDetail.DestinationToId = items.DestinationToId;
-                        tenderDetail.DestinationFromId = items.DestinationFromId;
-                        tenderDetail.ProvinceId = items.ProvinceId;
-                        tenderDetail.RegionId = items.RegionId;
-                        tenderDetail.ItemCode = items.ItemCode;
-                        tenderViewModel.TenderDetails.Add(tenderDetail);
-                    }
-                    #endregion End Tender details
-
-                    #region Tender Child.
-                    
-                    tenderViewModel.TenderChilds = tender.TenderChilds.ToList();
-
-                    #endregion
-                    return Ok(tender);
-                }
+                var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
+                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, y => y.Vehicle).Where(a => a.TenderId == tender.Id).ToList();
+                tender.TenderDetails = tenderDetails;
+                tender.TenderChilds = tenderChilds;
+                return Ok(tender);
             }
             catch (Exception ex)
             {
@@ -128,8 +95,12 @@ namespace GENXAPI.Api.Controllers
                 tender.CompanyId = updateViewModel.CompanyId;
                 tender.BusinessUnitId = updateViewModel.BusinessUnitId;
                 tender.TenderNo = updateViewModel.TenderNo;
-                _unitOfWork.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
-                _unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
+                //_unitOfWork.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
+                //_unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
+                foreach (var child in tender.TenderDetails.ToList())
+                    _unitOfWork.TenderDetails.Remove(child);
+                foreach (var child in tender.TenderChilds.ToList())
+                    _unitOfWork.TenderChilds.Remove(child);
                 #region Tender Detail.
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in updateViewModel.TenderDetails)
