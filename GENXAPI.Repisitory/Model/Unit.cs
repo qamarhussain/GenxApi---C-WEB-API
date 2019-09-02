@@ -14,6 +14,12 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Unit
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Unit()
+        {
+            this.FleetServices = new HashSet<FleetService>();
+        }
+    
         public int Id { get; set; }
         public int CompanyId { get; set; }
         public Nullable<int> BusinessUnitId { get; set; }
@@ -24,5 +30,8 @@ namespace GENXAPI.Repisitory.Model
         public string CreatedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
         public Nullable<byte> StatusId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FleetService> FleetServices { get; set; }
     }
 }

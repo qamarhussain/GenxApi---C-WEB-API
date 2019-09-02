@@ -168,7 +168,7 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" />
           <Property Name="StatusId" Type="tinyint" />
-          <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="50" />
+          <Property Name="UnitOfMeasurement" Type="int" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -591,6 +591,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FleetService_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="FleetService" Type="Self.FleetService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FleetService">
+              <PropertyRef Name="UnitOfMeasurement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Job_Customers">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Job" Type="Self.Job" Multiplicity="*" />
@@ -936,6 +948,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="FinancialYearDefination" EntitySet="FinancialYearDefination" />
           </AssociationSet>
+          <AssociationSet Name="FK_FleetService_Units" Association="Self.FK_FleetService_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="FleetService" EntitySet="FleetService" />
+          </AssociationSet>
           <AssociationSet Name="FK_Job_Customers" Association="Self.FK_Job_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Job" EntitySet="Job" />
@@ -1047,7 +1063,6 @@
           <EntitySet Name="CustomerBusinessLines" EntityType="Model.CustomerBusinessLine" />
           <EntitySet Name="Customers" EntityType="Model.Customer" />
           <EntitySet Name="FinancialYearDefinations" EntityType="Model.FinancialYearDefination" />
-          <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
           <EntitySet Name="Jobs" EntityType="Model.Job" />
           <EntitySet Name="JobChilds" EntityType="Model.JobChild" />
           <EntitySet Name="ModuleCategories" EntityType="Model.ModuleCategory" />
@@ -1122,10 +1137,6 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Tender" EntitySet="Tenders" />
           </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
-            <End Role="FleetService" EntitySet="FleetServices" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
           <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="Job" EntitySet="Jobs" />
@@ -1189,6 +1200,15 @@
           <AssociationSet Name="FK_VendorQuotationDetail_VendorQuotation" Association="Model.FK_VendorQuotationDetail_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
+          </AssociationSet>
+          <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
+          <AssociationSet Name="FK_FleetService_Units" Association="Model.FK_FleetService_Units">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="FleetService" EntitySet="FleetServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
+            <End Role="FleetService" EntitySet="FleetServices" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BusinessUnit">
@@ -1357,21 +1377,6 @@
           <Property Name="FYearLocked" Type="Boolean" />
           <Property Name="StatusId" Type="Byte" />
           <NavigationProperty Name="Company" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="FinancialYearDefination" ToRole="Company" />
-        </EntityType>
-        <EntityType Name="FleetService">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="UnitOfMeasurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -1576,10 +1581,10 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FleetServiceId" Type="Int32" />
           <Property Name="TenderDetailId" Type="Int32" />
-          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
           <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
           <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
           <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
+          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
         </EntityType>
         <EntityType Name="TenderDetail">
           <Key>
@@ -1617,6 +1622,7 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StatusId" Type="Byte" />
+          <NavigationProperty Name="FleetServices" Relationship="Model.FK_FleetService_Units" FromRole="Unit" ToRole="FleetService" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1921,18 +1927,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TenderChild_FleetService">
-          <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FleetService">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="FleetServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Job_Tender">
           <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
           <End Type="Model.Job" Role="Job" Multiplicity="*" />
@@ -2125,6 +2119,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FleetService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="UnitOfMeasurement" Type="Int32" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK_FleetService_Units" FromRole="FleetService" ToRole="Unit" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
+        </EntityType>
+        <Association Name="FK_FleetService_Units">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FleetService">
+              <PropertyRef Name="UnitOfMeasurement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderChild_FleetService">
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FleetService">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderChild">
+              <PropertyRef Name="FleetServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2286,21 +2320,6 @@
                 <ScalarProperty Name="FYearTitle" ColumnName="FYearTitle" />
                 <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FleetServices">
-            <EntityTypeMapping TypeName="Model.FleetService">
-              <MappingFragment StoreEntitySet="FleetService">
-                <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
-                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2672,6 +2691,21 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FleetServices">
+            <EntityTypeMapping TypeName="Model.FleetService">
+              <MappingFragment StoreEntitySet="FleetService">
+                <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
