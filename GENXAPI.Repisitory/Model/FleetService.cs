@@ -28,8 +28,9 @@ namespace GENXAPI.Repisitory.Model
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<byte> StatusId { get; set; }
-        public string UnitOfMeasurement { get; set; }
+        public Nullable<int> UnitOfMeasurement { get; set; }
     
+        public virtual Unit Unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderChild> TenderChilds { get; set; }
     }

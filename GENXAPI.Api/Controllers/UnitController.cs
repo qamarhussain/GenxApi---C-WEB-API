@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Models;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System;
@@ -117,12 +118,12 @@ namespace GENXAPI.Api.Controllers
 
         }
 
-        [HttpGet]
-        public IHttpActionResult GetKeyPair()
+        [HttpPost]
+        public IHttpActionResult GetKeyPair(CompanyBusinessUntiInfoViewModel model)
         {
             try
             {
-                var keyPairValues = _unitRepo.GetKeyPairValue();
+                var keyPairValues = _unitRepo.GetKeyPairValue(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId));
                 return Ok(keyPairValues);
             }
             catch (Exception ex)
