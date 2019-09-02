@@ -23,9 +23,9 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<int> FleetServiceId { get; set; }
         public Nullable<int> TenderDetailId { get; set; }
     
+        public virtual FleetService FleetService { get; set; }
         public virtual Tender Tender { get; set; }
         public virtual TenderDetail TenderDetail { get; set; }
         public virtual Vehicle Vehicle { get; set; }
-        public virtual FleetService FleetService { get; set; }
     }
 }
