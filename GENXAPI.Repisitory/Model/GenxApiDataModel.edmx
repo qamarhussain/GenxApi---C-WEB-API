@@ -211,6 +211,19 @@
           <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfficeId" Type="int" />
         </EntityType>
+        <EntityType Name="JobQuotationApproval">
+          <Key>
+            <PropertyRef Name="JobQuotationApprovalId" />
+          </Key>
+          <Property Name="JobQuotationApprovalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ContractId" Type="int" />
+          <Property Name="JobId" Type="int" />
+          <Property Name="JobNo" Type="varchar" MaxLength="50" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="VendorId" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="ModuleCategory">
           <Key>
             <PropertyRef Name="id" />
@@ -904,6 +917,7 @@
           <EntitySet Name="FleetService" EntityType="Self.FleetService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobChild" EntityType="Self.JobChild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobQuotationApproval" EntityType="Self.JobQuotationApproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleCategory" EntityType="Self.ModuleCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleForms" EntityType="Self.ModuleForms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
@@ -1210,6 +1224,7 @@
             <End Role="FleetService" EntitySet="FleetServices" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
           </AssociationSet>
+          <EntitySet Name="JobQuotationApprovals" EntityType="Model.JobQuotationApproval" />
         </EntityContainer>
         <EntityType Name="BusinessUnit">
           <Key>
@@ -2159,6 +2174,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="JobQuotationApproval">
+          <Key>
+            <PropertyRef Name="JobQuotationApprovalId" />
+          </Key>
+          <Property Name="JobQuotationApprovalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ContractId" Type="Int32" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2707,6 +2735,20 @@
                 <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobQuotationApprovals">
+            <EntityTypeMapping TypeName="Model.JobQuotationApproval">
+              <MappingFragment StoreEntitySet="JobQuotationApproval">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="JobQuotationApprovalId" ColumnName="JobQuotationApprovalId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

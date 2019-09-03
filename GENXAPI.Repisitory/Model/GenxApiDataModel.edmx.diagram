@@ -68,6 +68,7 @@
         <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="7" PointY="11.75" />
         <AssociationConnector Association="Model.FK_FleetService_Units" />
         <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
+        <EntityTypeShape EntityType="Model.JobQuotationApproval" Width="1.5" PointX="9.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

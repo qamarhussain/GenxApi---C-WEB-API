@@ -1,5 +1,4 @@
-﻿using GENXAPI.Repisitory.Core;
-using System;
+﻿using System;
 
 namespace GENXAPI.Repisitory
 {
@@ -20,6 +19,7 @@ namespace GENXAPI.Repisitory
         IRegionalOfficeRepository RegionalOffice { get; }
         IJobRepository Job { get; }
         IJobChildRepository JobChild { get; }
+        IJobQuotationApprovalRepository JobQuotationApproval { get; }
 
 
         int SaveChanges();

@@ -18,8 +18,6 @@ namespace GENXAPI.Repisitory.Model
         public Entities()
             : base("name=Entities")
         {
-            //this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -59,5 +57,6 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
         public virtual DbSet<FleetService> FleetServices { get; set; }
+        public virtual DbSet<JobQuotationApproval> JobQuotationApprovals { get; set; }
     }
 }

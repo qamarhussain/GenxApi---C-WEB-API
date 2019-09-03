@@ -314,6 +314,8 @@ namespace GENXAPI.Api.Controllers
                     {
                         obj.JobId = item.vendorInfo.First().VendorQuotation.JobId;
                         obj.JobNo = item.vendorInfo.First().VendorQuotation.JobNo;
+                        obj.VendorQuotationId = item.vendorInfo.First().VendorQuotationId;
+                        obj.VendorQUotationChildId = item.vendorInfo.First().VendorQuotationChildId;
                         obj.ItemCode = item.ItemCode;
                         if (itemCodeDetail.FleetServiceId != null)
                             obj.Particulars = itemCodeDetail.FleetService.ServiceName;
@@ -339,6 +341,28 @@ namespace GENXAPI.Api.Controllers
 
 
                 return Ok(viewModelList);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult AddJobQuotationApproval(JobQuotationApprovalCreateViewModel model)
+        {
+            try
+            {
+                foreach(var item in model.listItemCodes)
+                {
+                    item.CustomerId = model.CustomerId;
+                    item.JobId = model.JobId;
+                    item.JobNo = model.JobNo;
+                    item.ContractId = model.ContractId;
+                }
+                _unitOfWork.JobQuotationApproval.AddRange(model.listItemCodes);
+                _unitOfWork.SaveChanges();
+                return Ok(model);
             }
             catch (Exception ex)
             {
