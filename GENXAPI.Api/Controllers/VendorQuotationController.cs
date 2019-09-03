@@ -1,4 +1,5 @@
 ﻿using GENXAPI.Api.Models;
+using GENXAPI.Api.Utilities;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
@@ -30,18 +31,18 @@ namespace GENXAPI.Api.Controllers
                 var data = _unitOfWork.VendorQuotation.AllIncluding(x => x.Tender.Customer, y => y.Vendor).ToList();
                 return Ok(data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
-     
+
         }
 
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {
             //var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, a => a.Tender.TenderDetails.Select(b => b.City), c =>c.Tender.TenderDetails.Select(d => d.City1), z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
-            var data = _unitOfWork.VendorQuotation.AllIncluding(x=>x.Vendor, y=>y.VendorQuotationChilds).Where(z=>z.VendorQuotationId == id).FirstOrDefault();
+            var data = _unitOfWork.VendorQuotation.AllIncluding(x => x.Vendor, y => y.VendorQuotationChilds).Where(z => z.VendorQuotationId == id).FirstOrDefault();
             if (data == null)
             {
                 return NotFound();
@@ -67,7 +68,7 @@ namespace GENXAPI.Api.Controllers
             vendorQuotation.BusinessUnitId = model.BusinessUnitId;
             vendorQuotation.CreatedBy = model.CreatedBy;
             vendorQuotation.StatusId = (byte)Status.Active;
-            vendorQuotation.JobId = (model.JobId == null || model.JobId == 0)? null : model.JobId;
+            vendorQuotation.JobId = (model.JobId == null || model.JobId == 0) ? null : model.JobId;
             vendorQuotation.JobNo = (model.JobId == null || model.JobId == 0) ? null : model.JobNo;
             vendorQuotation.TenderId = model.TenderId;
             vendorQuotation.VendorId = model.VendorId;
@@ -100,22 +101,27 @@ namespace GENXAPI.Api.Controllers
                 _unitOfWork.SaveChanges();
                 return Ok(quotationModal);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
-          
+
         }
 
         [HttpGet]
         public IHttpActionResult GetQoutationByContractId(int Id)
         {
-            var data = _unitOfWork.VendorQuotation.AllIncluding(a=>a.Vendor, b=>b.Tender.Customer, y => y.Tender.TenderDetails, z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.TenderId == Id).FirstOrDefault();
-            if(data == null)
+            var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.TenderId == Id).FirstOrDefault();
+            if (data == null)
             {
                 return NotFound();
             }
             return Ok(data);
         }
+
+       
+
+    
+
     }
 }

@@ -39,7 +39,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var companyKairPair = _companyRepo.GetKeyPairValue().ToList(); ;
+                var companyKairPair = _companyRepo.GetKeyPairValue().ToList();
                 var businessUnitKeyPair = _businessUnitKeyPair.GetKeyPairValue().ToList();
                 var financialYearKeyPair = _financialYearRepo.GetKeyPairValue().ToList();
                 var startupKeyPairModel = new StartupKeyPairViewModel()
