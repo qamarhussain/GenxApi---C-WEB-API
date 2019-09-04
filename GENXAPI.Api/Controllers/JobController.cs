@@ -278,11 +278,23 @@ namespace GENXAPI.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetJobQuotationByJobId(int id)
         {
-            var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, a => a.Tender.TenderDetails.Select(b => b.City), c => c.Tender.TenderDetails.Select(d => d.City1), z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
-            if (data == null)
+            //var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, a => a.Tender.TenderDetails.Select(b => b.City), c => c.Tender.TenderDetails.Select(d => d.City1), z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
+            var data = _unitOfWork.VendorQuotation.AllIncluding(a=>a.Vendor, b=>b.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
+            if(data == null)
             {
                 return NotFound();
             }
+            var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == data.TenderId).FirstOrDefault();
+            if (tender == null)
+            {
+                return NotFound();
+            }
+            var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
+            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
+            tender.TenderDetails = tenderDetails;
+            tender.TenderChilds = tenderChilds;
+            data.Tender = tender;
+
             var jomDetails = data.VendorQuotationChilds.ToList();
             foreach (var item in data.Tender.TenderChilds.ToList())
             {
