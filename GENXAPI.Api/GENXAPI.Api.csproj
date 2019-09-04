@@ -217,6 +217,8 @@
     <Compile Include="Models\ContractCreateViewModel.cs" />
     <Compile Include="Models\FleetServiceViewModel.cs" />
     <Compile Include="Models\JobOrderCreateViewModel.cs" />
+    <Compile Include="Models\JobQuotationApprovalCreateViewModel.cs" />
+    <Compile Include="Models\JobQuotationApprovalViewModel.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\StartupKeyPairViewModel.cs" />
     <Compile Include="Models\TenderCreateViewModel.cs" />

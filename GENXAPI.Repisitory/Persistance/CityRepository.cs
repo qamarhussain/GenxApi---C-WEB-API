@@ -1,11 +1,10 @@
-﻿using GENXAPI.Repisitory.Core;
-using GENXAPI.Repisitory.Model;
+﻿using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace GENXAPI.Repisitory.Persistance
+namespace GENXAPI.Repisitory
 {
     public class CityRepository: Repository<City>, ICityRepository
     {

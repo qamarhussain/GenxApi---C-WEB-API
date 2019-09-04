@@ -1,8 +1,6 @@
 ﻿
 using System;
-using GENXAPI.Repisitory.Core;
 using GENXAPI.Repisitory.Model;
-using GENXAPI.Repisitory.Persistance;
 
 namespace GENXAPI.Repisitory
 {
@@ -198,6 +196,19 @@ namespace GENXAPI.Repisitory
                     this._jobChildRepository = new JobChildRepository(db);
                 }
                 return this._jobChildRepository;
+            }
+        }
+
+        private IJobQuotationApprovalRepository _jobQuotationApprovalRepository;
+        public IJobQuotationApprovalRepository JobQuotationApproval
+        {
+            get
+            {
+                if (this._jobQuotationApprovalRepository == null)
+                {
+                    this._jobQuotationApprovalRepository = new JobQuotationApprovalRepository(db);
+                }
+                return this._jobQuotationApprovalRepository;
             }
         }
 

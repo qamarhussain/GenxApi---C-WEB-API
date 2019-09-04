@@ -1,5 +1,4 @@
-﻿using GENXAPI.Repisitory.Core;
-using GENXAPI.Repisitory.Model;
+﻿using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
 using System.Collections.Generic;
 using System.Linq;

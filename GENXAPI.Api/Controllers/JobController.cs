@@ -223,11 +223,21 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, a => a.TenderDetails.Select(b => b.City), c => c.TenderDetails.Select(d => d.City1), z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s => s.Vehicle)).Where(o => o.Id == model.TenderId).FirstOrDefault();
+                //var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, a => a.TenderDetails.Select(b => b.City), c => c.TenderDetails.Select(d => d.City1), z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s => s.Vehicle)).Where(o => o.Id == model.TenderId).FirstOrDefault();
+                //if (result == null)
+                //{
+                //    return NotFound();
+                //}
+                var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == model.TenderId).FirstOrDefault();
+
                 if (result == null)
                 {
                     return NotFound();
                 }
+                var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == result.Id).ToList();
+                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == result.Id).ToList();
+                result.TenderDetails = tenderDetails;
+                result.TenderChilds = tenderChilds;
                 var jobDetails = _unitOfWork.JobChild.Find(x => x.JobId == model.JobId).ToList();
                 if (jobDetails == null)
                 {
@@ -285,6 +295,80 @@ namespace GENXAPI.Api.Controllers
             return Ok(data);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetJobForApproval(int id)
+        {
+            try
+            {
+                var data = _unitOfWork.VendorQuotationChild.AllIncluding(x => x.VendorQuotation, y => y.VendorQuotation.Vendor).Where(e => e.VendorQuotation.JobId == id).ToList();
+                var results = (from ssi in data
+                                   // here I choose each field I want to group by
+                               group ssi by new { ssi.ItemCode } into g
+                               select new { ItemCode = g.Key.ItemCode, vendorInfo = g.ToList() }).ToList();
+                var viewModelList = new List<JobQuotationApprovalViewModel>();
+                foreach (var item in results)
+                {
+                    var obj = new JobQuotationApprovalViewModel();
+                    var itemCodeDetail = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.ItemCode == item.ItemCode).FirstOrDefault();
+                    if (itemCodeDetail != null)
+                    {
+                        obj.JobId = item.vendorInfo.First().VendorQuotation.JobId;
+                        obj.JobNo = item.vendorInfo.First().VendorQuotation.JobNo;
+                        obj.VendorQuotationId = item.vendorInfo.First().VendorQuotationId;
+                        obj.VendorQUotationChildId = item.vendorInfo.First().VendorQuotationChildId;
+                        obj.ItemCode = item.ItemCode;
+                        if (itemCodeDetail.FleetServiceId != null)
+                            obj.Particulars = itemCodeDetail.FleetService.ServiceName;
+                        else
+                            obj.Particulars = itemCodeDetail.TenderDetail.City.Name + " To " + itemCodeDetail.TenderDetail.City1.Name;
+
+                        foreach (var p in item.vendorInfo)
+                        {
+                            obj.vendorInfo.Add(new JobQuotationApprovalViewModelVendors()
+                            {
+                                VendorId = p.VendorQuotation.VendorId,
+                                VendorName = p.VendorQuotation.Vendor.VendorName,
+                                Amount = p.Amount
+                            });
+                        }
+
+                    }
+                    viewModelList.Add(obj);
+                }
+
+                //var result = GetGroupedJobQuotations(viewModelList);
+
+
+
+                return Ok(viewModelList);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult AddJobQuotationApproval(JobQuotationApprovalCreateViewModel model)
+        {
+            try
+            {
+                foreach(var item in model.listItemCodes)
+                {
+                    item.CustomerId = model.CustomerId;
+                    item.JobId = model.JobId;
+                    item.JobNo = model.JobNo;
+                    item.ContractId = model.ContractId;
+                }
+                _unitOfWork.JobQuotationApproval.AddRange(model.listItemCodes);
+                _unitOfWork.SaveChanges();
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
 
     }
 }
