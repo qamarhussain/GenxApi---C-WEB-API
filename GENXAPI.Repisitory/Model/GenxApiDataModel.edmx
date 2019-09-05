@@ -191,6 +191,7 @@
           <Property Name="OtherTermsConditions" Type="varchar" MaxLength="200" />
           <Property Name="InvoiceAddress" Type="varchar" MaxLength="200" />
           <Property Name="DeliveryAddress" Type="varchar" MaxLength="200" />
+          <Property Name="ExecutionStatus" Type="tinyint" />
           <Property Name="StatusId" Type="tinyint" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" />
           <Property Name="LastModifiedBy" Type="int" />
@@ -664,6 +665,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobQuotationApproval_Vendor">
+          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+          <End Role="JobQuotationApproval" Type="Self.JobQuotationApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="VendorId" />
+            </Principal>
+            <Dependent Role="JobQuotationApproval">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Region_Company1">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Region" Type="Self.Region" Multiplicity="*" />
@@ -982,6 +995,10 @@
             <End Role="RegionalOffice" EntitySet="RegionalOffice" />
             <End Role="JobChild" EntitySet="JobChild" />
           </AssociationSet>
+          <AssociationSet Name="FK_JobQuotationApproval_Vendor" Association="Self.FK_JobQuotationApproval_Vendor">
+            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="JobQuotationApproval" EntitySet="JobQuotationApproval" />
+          </AssociationSet>
           <AssociationSet Name="FK_Region_Company1" Association="Self.FK_Region_Company1">
             <End Role="Company" EntitySet="Company" />
             <End Role="Region" EntitySet="Region" />
@@ -1077,8 +1094,10 @@
           <EntitySet Name="CustomerBusinessLines" EntityType="Model.CustomerBusinessLine" />
           <EntitySet Name="Customers" EntityType="Model.Customer" />
           <EntitySet Name="FinancialYearDefinations" EntityType="Model.FinancialYearDefination" />
+          <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
           <EntitySet Name="Jobs" EntityType="Model.Job" />
           <EntitySet Name="JobChilds" EntityType="Model.JobChild" />
+          <EntitySet Name="JobQuotationApprovals" EntityType="Model.JobQuotationApproval" />
           <EntitySet Name="ModuleCategories" EntityType="Model.ModuleCategory" />
           <EntitySet Name="ModuleForms" EntityType="Model.ModuleForm" />
           <EntitySet Name="Modules" EntityType="Model.Module" />
@@ -1151,6 +1170,14 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Tender" EntitySet="Tenders" />
           </AssociationSet>
+          <AssociationSet Name="FK_FleetService_Units" Association="Model.FK_FleetService_Units">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="FleetService" EntitySet="FleetServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
+            <End Role="FleetService" EntitySet="FleetServices" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
           <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="Job" EntitySet="Jobs" />
@@ -1162,6 +1189,10 @@
           <AssociationSet Name="FK_JobChild_RegionalOffice" Association="Model.FK_JobChild_RegionalOffice">
             <End Role="RegionalOffice" EntitySet="RegionalOffices" />
             <End Role="JobChild" EntitySet="JobChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQuotationApproval_Vendor" Association="Model.FK_JobQuotationApproval_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="JobQuotationApproval" EntitySet="JobQuotationApprovals" />
           </AssociationSet>
           <AssociationSet Name="FK_Region_Province" Association="Model.FK_Region_Province">
             <End Role="Province" EntitySet="Provinces" />
@@ -1215,16 +1246,6 @@
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationDetail" EntitySet="VendorQuotationDetails" />
           </AssociationSet>
-          <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
-          <AssociationSet Name="FK_FleetService_Units" Association="Model.FK_FleetService_Units">
-            <End Role="Unit" EntitySet="Units" />
-            <End Role="FleetService" EntitySet="FleetServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
-            <End Role="FleetService" EntitySet="FleetServices" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <EntitySet Name="JobQuotationApprovals" EntityType="Model.JobQuotationApproval" />
         </EntityContainer>
         <EntityType Name="BusinessUnit">
           <Key>
@@ -1393,6 +1414,22 @@
           <Property Name="StatusId" Type="Byte" />
           <NavigationProperty Name="Company" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="FinancialYearDefination" ToRole="Company" />
         </EntityType>
+        <EntityType Name="FleetService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="UnitOfMeasurement" Type="Int32" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK_FleetService_Units" FromRole="FleetService" ToRole="Unit" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
+        </EntityType>
         <EntityType Name="Job">
           <Key>
             <PropertyRef Name="JobId" />
@@ -1414,6 +1451,7 @@
           <Property Name="OtherTermsConditions" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="InvoiceAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DeliveryAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ExecutionStatus" Type="Byte" />
           <Property Name="StatusId" Type="Byte" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
@@ -1438,6 +1476,20 @@
           <Property Name="OfficeId" Type="Int32" />
           <NavigationProperty Name="Job" Relationship="Model.FK_JobChild_Job" FromRole="JobChild" ToRole="Job" />
           <NavigationProperty Name="RegionalOffice" Relationship="Model.FK_JobChild_RegionalOffice" FromRole="JobChild" ToRole="RegionalOffice" />
+        </EntityType>
+        <EntityType Name="JobQuotationApproval">
+          <Key>
+            <PropertyRef Name="JobQuotationApprovalId" />
+          </Key>
+          <Property Name="JobQuotationApprovalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ContractId" Type="Int32" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Vendor" Relationship="Model.FK_JobQuotationApproval_Vendor" FromRole="JobQuotationApproval" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="ModuleCategory">
           <Key>
@@ -1596,10 +1648,10 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FleetServiceId" Type="Int32" />
           <Property Name="TenderDetailId" Type="Int32" />
+          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
           <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
           <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
           <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
-          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
         </EntityType>
         <EntityType Name="TenderDetail">
           <Key>
@@ -1709,6 +1761,7 @@
           <Property Name="StatusId" Type="Byte" />
           <Property Name="RegionId" Type="Int32" />
           <NavigationProperty Name="City" Relationship="Model.FK_Vendor_City" FromRole="Vendor" ToRole="City" />
+          <NavigationProperty Name="JobQuotationApprovals" Relationship="Model.FK_JobQuotationApproval_Vendor" FromRole="Vendor" ToRole="JobQuotationApproval" />
           <NavigationProperty Name="Region" Relationship="Model.FK_Vendor_Region" FromRole="Vendor" ToRole="Region" />
           <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
           <NavigationProperty Name="VendorQuotationDetails" Relationship="Model.FK_VendorQuotationDetail_Vendor" FromRole="Vendor" ToRole="VendorQuotationDetail" />
@@ -1942,6 +1995,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FleetService_Units">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FleetService">
+              <PropertyRef Name="UnitOfMeasurement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderChild_FleetService">
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FleetService">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderChild">
+              <PropertyRef Name="FleetServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Job_Tender">
           <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
           <End Type="Model.Job" Role="Job" Multiplicity="*" />
@@ -1975,6 +2052,18 @@
             </Principal>
             <Dependent Role="JobChild">
               <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobQuotationApproval_Vendor">
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="0..1" />
+          <End Type="Model.JobQuotationApproval" Role="JobQuotationApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="VendorId" />
+            </Principal>
+            <Dependent Role="JobQuotationApproval">
+              <PropertyRef Name="VendorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2134,59 +2223,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="FleetService">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="UnitOfMeasurement" Type="Int32" />
-          <NavigationProperty Name="Unit" Relationship="Model.FK_FleetService_Units" FromRole="FleetService" ToRole="Unit" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
-        </EntityType>
-        <Association Name="FK_FleetService_Units">
-          <End Type="Model.Unit" Role="Unit" Multiplicity="0..1" />
-          <End Type="Model.FleetService" Role="FleetService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FleetService">
-              <PropertyRef Name="UnitOfMeasurement" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderChild_FleetService">
-          <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FleetService">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="FleetServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="JobQuotationApproval">
-          <Key>
-            <PropertyRef Name="JobQuotationApprovalId" />
-          </Key>
-          <Property Name="JobQuotationApprovalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="ContractId" Type="Int32" />
-          <Property Name="JobId" Type="Int32" />
-          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VendorId" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2352,6 +2388,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FleetServices">
+            <EntityTypeMapping TypeName="Model.FleetService">
+              <MappingFragment StoreEntitySet="FleetService">
+                <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Jobs">
             <EntityTypeMapping TypeName="Model.Job">
               <MappingFragment StoreEntitySet="Job">
@@ -2360,6 +2411,7 @@
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ExecutionStatus" ColumnName="ExecutionStatus" />
                 <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
                 <ScalarProperty Name="InvoiceAddress" ColumnName="InvoiceAddress" />
                 <ScalarProperty Name="OtherTermsConditions" ColumnName="OtherTermsConditions" />
@@ -2392,6 +2444,20 @@
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobQuotationApprovals">
+            <EntityTypeMapping TypeName="Model.JobQuotationApproval">
+              <MappingFragment StoreEntitySet="JobQuotationApproval">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="JobQuotationApprovalId" ColumnName="JobQuotationApprovalId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2720,35 +2786,6 @@
                 <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FleetServices">
-            <EntityTypeMapping TypeName="Model.FleetService">
-              <MappingFragment StoreEntitySet="FleetService">
-                <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
-                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobQuotationApprovals">
-            <EntityTypeMapping TypeName="Model.JobQuotationApproval">
-              <MappingFragment StoreEntitySet="JobQuotationApproval">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="JobQuotationApprovalId" ColumnName="JobQuotationApprovalId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

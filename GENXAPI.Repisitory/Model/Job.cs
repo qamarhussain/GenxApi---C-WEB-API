@@ -37,6 +37,7 @@ namespace GENXAPI.Repisitory.Model
         public string OtherTermsConditions { get; set; }
         public string InvoiceAddress { get; set; }
         public string DeliveryAddress { get; set; }
+        public Nullable<byte> ExecutionStatus { get; set; }
         public byte StatusId { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<int> LastModifiedBy { get; set; }

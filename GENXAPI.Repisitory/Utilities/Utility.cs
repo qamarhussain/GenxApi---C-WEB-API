@@ -10,6 +10,15 @@ using System.Drawing;
 
 namespace GENXAPI.Utilities
 {
+    public enum JobExecutionStatus
+    {
+        [Description("Running")]
+        Running = 1,
+        [Description("Executed")]
+        Executed = 2,
+     
+    }
+
     public enum TenderUtility
     {
         [Description("TenderState")]

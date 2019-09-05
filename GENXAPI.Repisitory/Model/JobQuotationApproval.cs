@@ -22,5 +22,7 @@ namespace GENXAPI.Repisitory.Model
         public string ItemCode { get; set; }
         public Nullable<int> VendorId { get; set; }
         public Nullable<decimal> Amount { get; set; }
+    
+        public virtual Vendor Vendor { get; set; }
     }
 }

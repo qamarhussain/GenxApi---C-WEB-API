@@ -223,11 +223,6 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                //var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, a => a.TenderDetails.Select(b => b.City), c => c.TenderDetails.Select(d => d.City1), z => z.TenderChilds.Select(q => q.FleetService), z => z.TenderChilds.Select(s => s.Vehicle)).Where(o => o.Id == model.TenderId).FirstOrDefault();
-                //if (result == null)
-                //{
-                //    return NotFound();
-                //}
                 var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == model.TenderId).FirstOrDefault();
 
                 if (result == null)
@@ -377,6 +372,69 @@ namespace GENXAPI.Api.Controllers
                 return Ok(model);
             }
             catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetJobsByContractForExecution(int id)
+        {
+            try
+            {
+                var data = _unitOfWork.JobQuotationApproval.GetJobsKeyPairByContract(id);
+                if (data == null)
+                {
+                    return NotFound();
+                }
+                return Ok(data);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult GetExecutedJobs(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var data = _unitOfWork.Job.AllIncluding(e=>e.Customer).Where(x => x.ExecutionStatus == (byte)JobExecutionStatus.Executed).ToList();
+                return Ok(data);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetJobDataToExecute(int id)
+        {
+            try
+            {
+                var data = new JobDataViewModel();
+                data.jobQuotations = _unitOfWork.JobQuotationApproval.AllIncluding(e=>e.Vendor).Where(x => x.JobId == id).ToList();
+                var job = _unitOfWork.Job.AllIncluding(x=>x.JobChilds).Where(e=>e.JobId == id).FirstOrDefault();
+                if(job == null)
+                {
+                    return NotFound();
+                }
+                data.job = job;
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == job.TenderId).FirstOrDefault();
+                if (tender == null)
+                {
+                    return NotFound();
+                }
+                var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
+                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
+                tender.TenderDetails = tenderDetails;
+                tender.TenderChilds = tenderChilds;
+                data.tender = tender;
+                return Ok(data);
+            }
+            catch(Exception ex)
             {
                 return InternalServerError(ex);
             }
