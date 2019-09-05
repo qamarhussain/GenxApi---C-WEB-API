@@ -11,7 +11,7 @@ namespace GENXAPI.Repisitory
         public UnitOfWork()
         {
             db = new Entities();
-            //db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.LazyLoadingEnabled = false;
         }
 
         private ITenderRepository _Tenders;
