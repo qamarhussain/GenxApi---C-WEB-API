@@ -9,6 +9,6 @@ namespace GENXAPI.Repisitory
 {
     public interface IJobQuotationApprovalRepository : IRepository<JobQuotationApproval>
     {
-
+        IList<DropdownListDto> GetJobsKeyPairByContract(int contractId);
     }
 }
