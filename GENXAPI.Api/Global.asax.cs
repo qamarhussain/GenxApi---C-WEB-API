@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GENXAPI.Api.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace GENXAPI.Api
     {
         protected void Application_Start()
         {
+            //GlobalConfiguration.Configuration.Filters.Add(new CustomExceptionFilter());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

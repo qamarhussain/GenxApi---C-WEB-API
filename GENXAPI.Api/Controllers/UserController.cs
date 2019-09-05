@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Attributes;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Web.Http;
 
 namespace GENXAPI.Api.Controllers
 {
-
+    [Authorize]
+    [CustomExceptionFilter]
     public class UserController : ApiController
     {
         protected readonly UserRepo _userRepo = new UserRepo();

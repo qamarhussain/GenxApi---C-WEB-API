@@ -1,4 +1,5 @@
-﻿using GENXAPI.Api.Models;
+﻿using GENXAPI.Api.Attributes;
+using GENXAPI.Api.Models;
 using GENXAPI.Api.Utilities;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
@@ -12,6 +13,7 @@ using System.Web.Http;
 
 namespace GENXAPI.Api.Controllers
 {
+    [CustomExceptionFilter]
     public class ContractController : ApiController
     {
         protected readonly FleetServiceRepo _fleetServiceRepo = new FleetServiceRepo();
@@ -23,7 +25,8 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetAllContracts()
         {
-            //var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
+            ContractCreateViewModel md = null;
+            md.TenderId = 11;
             var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
             return Ok(result);
         }

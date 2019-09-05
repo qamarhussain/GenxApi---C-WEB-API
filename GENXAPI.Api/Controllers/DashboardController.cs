@@ -1,4 +1,5 @@
-﻿using GENXAPI.Repisitory;
+﻿using GENXAPI.Api.Attributes;
+using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Http;
 namespace GENXAPI.Api.Controllers
 {
     [Authorize]
+    [CustomExceptionFilter]
     public class DashboardController : ApiController
     {
         #region Private variables.

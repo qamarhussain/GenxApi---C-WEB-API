@@ -19,6 +19,7 @@ namespace GENXAPI.Repisitory.Model
         {
             this.Jobs = new HashSet<Job>();
             this.Tenders = new HashSet<Tender>();
+            this.ExecutedJobs = new HashSet<ExecutedJob>();
         }
     
         public int Id { get; set; }
@@ -60,5 +61,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual ICollection<Job> Jobs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tender> Tenders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExecutedJob> ExecutedJobs { get; set; }
     }
 }

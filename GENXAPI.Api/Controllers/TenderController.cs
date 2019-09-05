@@ -1,4 +1,5 @@
-﻿using GENXAPI.Api.Models;
+﻿using GENXAPI.Api.Attributes;
+using GENXAPI.Api.Models;
 using GENXAPI.Api.Utilities;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
@@ -13,6 +14,7 @@ using System.Web.Http;
 namespace GENXAPI.Api.Controllers
 {
     [Authorize]
+    [CustomExceptionFilter]
     public class TenderController : ApiController
     {
         protected readonly TenderRepo _tenderRepo = new TenderRepo();

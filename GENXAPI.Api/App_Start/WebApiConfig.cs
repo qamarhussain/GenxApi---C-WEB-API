@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GENXAPI.Api.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -17,7 +18,7 @@ namespace GENXAPI.Api
             config.MapHttpAttributeRoutes();
 
             config.MessageHandlers.Add(new TokenValidationHandler());
-
+            config.Filters.Add(new CustomExceptionFilter());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

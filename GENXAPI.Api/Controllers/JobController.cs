@@ -1,4 +1,5 @@
-﻿using GENXAPI.Api.Models;
+﻿using GENXAPI.Api.Attributes;
+using GENXAPI.Api.Models;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
@@ -11,6 +12,8 @@ using System.Web.Http;
 
 namespace GENXAPI.Api.Controllers
 {
+    [Authorize]
+    [CustomExceptionFilter]
     public class JobController : ApiController
     {
         IUnitOfWork _unitOfWork;

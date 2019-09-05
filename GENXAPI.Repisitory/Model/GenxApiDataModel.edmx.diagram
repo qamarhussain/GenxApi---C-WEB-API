@@ -70,6 +70,8 @@
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <AssociationConnector Association="Model.FK_VendorQuotationDetail_VendorQuotation" />
+        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="28.25" />
+        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

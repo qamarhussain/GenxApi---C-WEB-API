@@ -59,6 +59,7 @@
     <Compile Include="Core\ICompanyRepository.cs" />
     <Compile Include="Core\IContractCancelationRepository.cs" />
     <Compile Include="Core\ICustomerBusinessLineRepository.cs" />
+    <Compile Include="Core\IExecutedJobRepository.cs" />
     <Compile Include="Core\IJobChildRepository.cs" />
     <Compile Include="Core\IJobQuotationApprovalRepository.cs" />
     <Compile Include="Core\IJobRepository.cs" />
@@ -98,6 +99,9 @@
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CustomerBusinessLine.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ExecutedJob.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FinancialYearDefination.cs">
@@ -194,6 +198,7 @@
     <Compile Include="Persistance\CompanyRepository.cs" />
     <Compile Include="Persistance\ContractCancelationRepository.cs" />
     <Compile Include="Persistance\CustomerBusinessLineRepository.cs" />
+    <Compile Include="Persistance\ExecutedJobRepository.cs" />
     <Compile Include="Persistance\JobChildRepository.cs" />
     <Compile Include="Persistance\JobQuotationApprovalRepository.cs" />
     <Compile Include="Persistance\JobRepository.cs" />

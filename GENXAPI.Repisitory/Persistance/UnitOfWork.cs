@@ -212,6 +212,19 @@ namespace GENXAPI.Repisitory
             }
         }
 
+        private IExecutedJobRepository _executedJobRepository;
+        public IExecutedJobRepository ExecutedJob
+        {
+            get
+            {
+                if (this._executedJobRepository == null)
+                {
+                    this._executedJobRepository = new ExecutedJobRepository(db);
+                }
+                return this._executedJobRepository;
+            }
+        }
+
         public int SaveChanges()
         {
             return db.SaveChanges();

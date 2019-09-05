@@ -8,9 +8,12 @@ using System.Web.Http;
 using GENXAPI.Repisitory.Repositories;
 using GENXAPI.Utilities;
 using GENXAPI.Api.Models;
+using GENXAPI.Api.Attributes;
 
 namespace GENXAPI.Api.Controllers
 {
+    [Authorize]
+    [CustomExceptionFilter]
     public class VendorController : ApiController
     {
         protected readonly VendorRepo _vendorRepo = new VendorRepo();

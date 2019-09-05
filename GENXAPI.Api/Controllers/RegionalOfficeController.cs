@@ -6,10 +6,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using GENXAPI.Api.Models;
+using GENXAPI.Api.Attributes;
 
 namespace GENXAPI.Api.Controllers
 {
     [Authorize]
+    [CustomExceptionFilter]
+
     public class RegionalOfficeController : ApiController
     {
         IUnitOfWork _unitOfWork;
