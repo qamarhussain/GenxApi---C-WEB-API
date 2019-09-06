@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace GENXAPI.Api.Controllers
 {
+    [Authorize]
     [CustomExceptionFilter]
     public class ContractController : ApiController
     {

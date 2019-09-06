@@ -306,7 +306,8 @@ namespace GENXAPI.Api.Controllers
             tender.TenderChilds = tenderChilds;
             data.Tender = tender;
 
-            var jomDetails = data.VendorQuotationChilds.ToList();
+            //var jomDetails = data.VendorQuotationChilds.ToList();
+            var jomDetails = _unitOfWork.JobChild.Find(x => x.JobId == data.JobId).ToList();
             foreach (var item in data.Tender.TenderChilds.ToList())
             {
                 var itemCodeInJob = jomDetails.Where(x => x.ItemCode == item.ItemCode).FirstOrDefault();
