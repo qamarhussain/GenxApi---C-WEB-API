@@ -25,8 +25,6 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetAllContracts()
         {
-            ContractCreateViewModel md = null;
-            md.TenderId = 11;
             var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
             return Ok(result);
         }
