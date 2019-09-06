@@ -11,7 +11,8 @@ namespace GENXAPI.Repisitory.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class JobQuotationApproval
     {
         public int JobQuotationApprovalId { get; set; }
@@ -24,5 +25,8 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<decimal> Amount { get; set; }
     
         public virtual Vendor Vendor { get; set; }
+
+        [NotMapped]
+        public bool IsJobExecuted { get; set; }
     }
 }

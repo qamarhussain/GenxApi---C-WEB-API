@@ -1,6 +1,7 @@
 ﻿using GENXAPI.Api.Attributes;
 using GENXAPI.Api.Models;
 using GENXAPI.Repisitory;
+using GENXAPI.Repisitory.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +29,11 @@ namespace GENXAPI.Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CreateJobExecution(ExecutedJobCreateViewModel model)
+        public IHttpActionResult CreateJobExecution(ExecutedJob model)
         {
-            model.itemCodeList.ForEach(x => x.CreatedOn = DateTime.Now);
-            model.itemCodeList.ForEach(x => x.LastModifiedDate = DateTime.Now);
-            _unitOfWork.ExecutedJob.AddRange(model.itemCodeList);
+            model.CreatedOn = DateTime.Now;
+            model.LastModifiedDate = DateTime.Now;
+            _unitOfWork.ExecutedJob.Add(model);
             _unitOfWork.SaveChanges();
             return Ok(model);
         }

@@ -419,6 +419,22 @@ namespace GENXAPI.Api.Controllers
             {
                 var data = new JobDataViewModel();
                 data.jobQuotations = _unitOfWork.JobQuotationApproval.AllIncluding(e=>e.Vendor).Where(x => x.JobId == id).ToList();
+                #region identifying executed jobs.
+                var executedJobs = _unitOfWork.ExecutedJob.Find(x => x.JobId == id).ToList();
+                foreach(var item in data.jobQuotations)
+                {
+                    var getIfExecuted = executedJobs.Where(x => x.ItemCode == item.ItemCode).FirstOrDefault();
+                    if (getIfExecuted != null)
+                    {
+                        item.IsJobExecuted = true;
+                    }
+                    else
+                    {
+                        item.IsJobExecuted = false;
+                    }
+                }
+                #endregion
+
                 var job = _unitOfWork.Job.AllIncluding(x=>x.JobChilds).Where(e=>e.JobId == id).FirstOrDefault();
                 if(job == null)
                 {
