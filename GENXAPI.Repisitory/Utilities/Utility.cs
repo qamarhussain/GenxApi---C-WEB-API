@@ -30,11 +30,13 @@ namespace GENXAPI.Utilities
         [Description("ContractCancelState")]
         ContractCancelState = 4,
         [Description("TenderRunningState")]
-        JobOrderState = 5,
-        [Description("JobOrderState")]
         TenderCancelState = 6,
+        [Description("JobOrderState")]
+        JobOrderState = 5,
+        [Description("JobApprovalState")]
+        JobApprovalState = 7,
         [Description("TenderCompleteState")]
-        TenderCompleteState = 7,
+        TenderCompleteState = 8,
     }
     public enum Status
     {

@@ -207,6 +207,19 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult GetJobIdsByContractWithoutStatus(int id)
+        {
+            try
+            {
+                return Ok(_unitOfWork.Job.GetJobsKeyPairByContractIdWithoutStatus(id));
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpPost]
         public IHttpActionResult GetContractsByCustomerForJobQuotation(CompanyBusinessUntiInfoViewModel model)
         {
@@ -371,6 +384,10 @@ namespace GENXAPI.Api.Controllers
                     item.ContractId = model.ContractId;
                 }
                 _unitOfWork.JobQuotationApproval.AddRange(model.listItemCodes);
+
+                var jobOrderToUpdateStatus = _unitOfWork.Job.Get(model.JobId);
+                jobOrderToUpdateStatus.JobStatus = (byte)TenderUtility.JobApprovalState;
+                _unitOfWork.Job.Update(jobOrderToUpdateStatus);
                 _unitOfWork.SaveChanges();
                 return Ok(model);
             }

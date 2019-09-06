@@ -1,4 +1,5 @@
 ﻿using GENXAPI.Repisitory.Model;
+using GENXAPI.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,22 @@ namespace GENXAPI.Repisitory
 
         public IList<DropdownListDto> GetJobsKeyPairByContract(int contractId)
         {
-            var result = Find(m => m.TenderId == contractId).Select(r =>
+            var result = Find(m => m.TenderId == contractId && m.JobStatus == (byte)Status.Active).Select(r =>
            new DropdownListDto
            {
                Value = r.JobId.ToString(),
                Text = r.JobNo
            });
+            return result.ToList();
+        }
+        public IList<DropdownListDto> GetJobsKeyPairByContractIdWithoutStatus(int contractId)
+        {
+            var result = Find(m => m.TenderId == contractId).Select(r =>
+          new DropdownListDto
+          {
+              Value = r.JobId.ToString(),
+              Text = r.JobNo
+          });
             return result.ToList();
         }
 

@@ -10,5 +10,6 @@ namespace GENXAPI.Repisitory
     public interface IJobRepository : IRepository<Job>
     {
         IList<DropdownListDto> GetJobsKeyPairByContract(int contractId);
+        IList<DropdownListDto> GetJobsKeyPairByContractIdWithoutStatus(int contractId);
     }
 }
