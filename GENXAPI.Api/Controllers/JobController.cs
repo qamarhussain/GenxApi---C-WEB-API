@@ -246,7 +246,7 @@ namespace GENXAPI.Api.Controllers
                     return NotFound();
                 }
                 var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == result.Id).ToList();
-                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == result.Id).ToList();
+                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == result.Id).ToList();
                 result.TenderDetails = tenderDetails;
                 result.TenderChilds = tenderChilds;
                 var jobDetails = _unitOfWork.JobChild.Find(x => x.JobId == model.JobId).ToList();
@@ -301,7 +301,7 @@ namespace GENXAPI.Api.Controllers
                 return NotFound();
             }
             var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
-            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
+            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a =>a.FleetService.Unit,  v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
             tender.TenderDetails = tenderDetails;
             tender.TenderChilds = tenderChilds;
             data.Tender = tender;
