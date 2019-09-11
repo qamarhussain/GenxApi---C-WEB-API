@@ -27,6 +27,7 @@ namespace GENXAPI.Api.Models
 
     public class ContractDetailVehicle
     {
+        public int Id { get; set; }
         public int DetailId { get; set; }
         public int VehicleId { get; set; }
         public string ItemCode { get; set; }

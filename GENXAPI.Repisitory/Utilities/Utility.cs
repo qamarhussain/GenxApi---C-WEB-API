@@ -10,6 +10,15 @@ using System.Drawing;
 
 namespace GENXAPI.Utilities
 {
+    public enum TenderChildStatus
+    {
+        [Description("Active")]
+        Active = 1,
+        [Description("Deleted")]
+        Deleted = 2,
+
+    }
+
     public enum JobExecutionStatus
     {
         [Description("Running")]

@@ -104,19 +104,32 @@ namespace GENXAPI.Api.Controllers
                     var obj = updateViewModel.TenderDetails.Where(x => x.DestinationFromId == child.DestinationFromId && x.DestinationToId == child.DestinationToId).FirstOrDefault();
                     if (obj == null)
                     {
-                        foreach (var item in tender.TenderChilds.Where(x => x.TenderDetailId == child.Id).ToList())
+                        foreach (var item in tender.TenderChilds.Where(x => x.TenderDetailId == child.Id && x.IsDeleted != (byte)TenderChildStatus.Deleted).ToList())
                         {
-                            _unitOfWork.TenderChilds.Remove(item);
+                            item.IsDeleted = (byte)TenderChildStatus.Deleted;
+                            _unitOfWork.TenderChilds.Update(item);
                         }
-                        _unitOfWork.TenderDetails.Remove(child);
+                        child.IsDeleted = (byte)TenderChildStatus.Deleted;
+                        _unitOfWork.TenderDetails.Update(child);
                     }else
                     {
                         updateViewModel.TenderDetails.Remove(obj);
                     }   
                 }
                     
-                foreach (var child in tender.TenderChilds.Where(x=>x.FleetServiceId != null).ToList())
-                    _unitOfWork.TenderChilds.Remove(child);
+                foreach (var child in tender.TenderChilds.Where(x=>x.FleetServiceId != null && x.IsDeleted != (byte)TenderChildStatus.Deleted).ToList())
+                {
+                    var modelService = updateViewModel.TenderChilds.Where(x => x.FleetServiceId == child.FleetServiceId).FirstOrDefault();
+                    if (modelService == null)
+                    {
+                        child.IsDeleted = (byte)TenderChildStatus.Deleted;
+                        _unitOfWork.TenderChilds.Update(child);
+                    }else
+                    {
+                        updateViewModel.TenderChilds.Remove(modelService);
+                    }
+                }
+                    
                 //if(tender.TenderChilds.Count > 0)
                 //{
                 //    foreach (var items in tender.TenderChilds)
@@ -142,10 +155,12 @@ namespace GENXAPI.Api.Controllers
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
                     tenderDetail.DestinationFromId = items.DestinationFromId;
                     tenderDetail.DestinationToId = items.DestinationToId;
-                    tenderDetail.ItemCode = items.ItemCode;
+                    //tenderDetail.ItemCode = items.ItemCode;
                     tenderDetail.ProvinceId = items.ProvinceId;
                     tenderDetail.RegionId = items.RegionId;
-                    tender.TenderDetails.Add(tenderDetail);
+                    tenderDetail.IsDeleted = (byte)TenderChildStatus.Active;
+                    //tender.TenderDetails.Add(tenderDetail);
+                    _unitOfWork.TenderDetails.Add(tenderDetail);
                     //tenderDetailList.Add(tenderDetail);
                 }
                 //tender.TenderDetails = tenderDetailList;
@@ -155,13 +170,23 @@ namespace GENXAPI.Api.Controllers
                 var tenderChildList = new List<TenderChild>();
                 foreach (var items in updateViewModel.TenderChilds)
                 {
+                    var deletedService = tender.TenderChilds.Where(x => x.FleetServiceId == items.FleetServiceId).FirstOrDefault();
                     TenderChild tenderChild = new TenderChild();
                     tenderChild.FleetServiceId = items.FleetServiceId;
-                    tenderChild.ItemCode = items.ItemCode;
+                    if(tender.ProceedStatus >= (byte)TenderUtility.ContractState)
+                    {
+                        tenderChild.ItemCode = tender.TenderNo + "-" + (tender.TenderChilds.Count + 1);
+                    }else
+                    {
+                        tenderChild.ItemCode = null;
+                    }
+                    
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
                     //tenderChild.TenderDetailId = tenderDetail.Id;
-                    tender.TenderChilds.Add(tenderChild);
+                    tenderChild.Amount = (deletedService != null && deletedService.Amount != 0) ? deletedService.Amount : 0;
+                    tenderChild.IsDeleted = (byte)TenderChildStatus.Active;
+                    _unitOfWork.TenderChilds.Add(tenderChild);
                     //tenderChildList.Add(tenderChild);
                 }
                 //tender.TenderChilds = tenderChildList;
@@ -211,9 +236,10 @@ namespace GENXAPI.Api.Controllers
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
                     tenderDetail.DestinationFromId = items.DestinationFromId;
                     tenderDetail.DestinationToId = items.DestinationToId;
-                    tenderDetail.ItemCode = items.ItemCode;
+                    //tenderDetail.ItemCode = items.ItemCode;
                     tenderDetail.ProvinceId = items.ProvinceId;
                     tenderDetail.RegionId = items.RegionId;
+                    tenderDetail.IsDeleted = (byte)TenderChildStatus.Active;
                     tenderDetailList.Add(tenderDetail);
                 }
                 _unitOfWork.TenderDetails.AddRange(tenderDetailList);
@@ -225,10 +251,11 @@ namespace GENXAPI.Api.Controllers
                 {
                     TenderChild tenderChild = new TenderChild();
                     tenderChild.FleetServiceId = items.Id;
-                    tenderChild.ItemCode = items.ItemCode;
+                    //tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
                     //tenderChild.TenderDetailId = tenderDetail.Id;
+                    tenderChild.IsDeleted = (byte)TenderChildStatus.Active;
                     tenderChildList.Add(tenderChild);
                 }
                 _unitOfWork.TenderChilds.AddRange(tenderChildList);

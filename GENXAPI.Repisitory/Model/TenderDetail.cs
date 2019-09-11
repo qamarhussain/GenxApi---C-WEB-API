@@ -31,6 +31,7 @@ namespace GENXAPI.Repisitory.Model
         public string DestinationToName { get; set; }
         public string DestinationFromName { get; set; }
         public string ProvinceName { get; set; }
+        public Nullable<byte> IsDeleted { get; set; }
     
         public virtual City City { get; set; }
         public virtual City City1 { get; set; }

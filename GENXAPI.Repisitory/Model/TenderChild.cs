@@ -22,6 +22,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<decimal> Amount { get; set; }
         public Nullable<int> FleetServiceId { get; set; }
         public Nullable<int> TenderDetailId { get; set; }
+        public Nullable<byte> IsDeleted { get; set; }
     
         public virtual FleetService FleetService { get; set; }
         public virtual Tender Tender { get; set; }

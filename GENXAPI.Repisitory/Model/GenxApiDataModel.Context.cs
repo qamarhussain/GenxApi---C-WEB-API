@@ -18,7 +18,6 @@ namespace GENXAPI.Repisitory.Model
         public Entities()
             : base("name=Entities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -48,8 +47,6 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RolesToUser> RolesToUsers { get; set; }
         public virtual DbSet<Tender> Tenders { get; set; }
-        public virtual DbSet<TenderChild> TenderChilds { get; set; }
-        public virtual DbSet<TenderDetail> TenderDetails { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
@@ -60,5 +57,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
         public virtual DbSet<ExecutedJob> ExecutedJobs { get; set; }
+        public virtual DbSet<TenderChild> TenderChilds { get; set; }
+        public virtual DbSet<TenderDetail> TenderDetails { get; set; }
     }
 }

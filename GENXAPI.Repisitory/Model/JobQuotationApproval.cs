@@ -25,7 +25,6 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<decimal> Amount { get; set; }
     
         public virtual Vendor Vendor { get; set; }
-
         [NotMapped]
         public bool IsJobExecuted { get; set; }
     }

@@ -56,7 +56,8 @@ namespace GENXAPI.Api.Controllers
                     TenderId=model.TenderId,
                     VehicleId=item.VehicleId,
                     Amount=item.Amount,
-                    TenderDetailId=item.DetailId
+                    TenderDetailId=item.DetailId,
+                    IsDeleted=(byte)TenderChildStatus.Active
                 };
                 _unitOfWork.TenderChilds.Add(obj);
             }
@@ -91,27 +92,53 @@ namespace GENXAPI.Api.Controllers
                     return NotFound();
                 }
                 //_unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.Where(x => x.TenderDetailId != null).ToArray());
-                foreach (var child in tender.TenderChilds.Where(x => x.TenderDetailId != null).ToList())
-                    _unitOfWork.TenderChilds.Remove(child);
+                //foreach (var child in tender.TenderChilds.Where(x => x.TenderDetailId != null).ToList())
+                //{
+                //    child.IsDeleted = (byte)TenderChildStatus.Deleted;
+                //    _unitOfWork.TenderChilds.Update(child);
+                //}
+                    
                 var servicesToAdd = new List<TenderChild>();
-                foreach (var item in tender.TenderChilds)
+                foreach (var item in tender.TenderChilds.Where(x=>x.TenderDetailId == null).ToList())
                 {
-                    item.Amount = model.contractServices.Where(x => x.Id == item.Id).First().Amount;
-                    _unitOfWork.TenderChilds.Update(item);
+                    var modelService = model.contractServices.Where(x => x.Id == item.Id).FirstOrDefault();
+                    if(modelService != null)
+                    {
+                        item.ItemCode = modelService.ItemCode;
+                        item.Amount = modelService.Amount;
+                        _unitOfWork.TenderChilds.Update(item);
+                    }
+                    else
+                    {
+                        item.Amount = 0;
+                        _unitOfWork.TenderChilds.Update(item);
+                    }
+             
                 }
                 var vehiclesToAdd = new List<TenderChild>();
                 foreach (var item in model.contractDetailVehicle)
                 {
-                    var obj = new TenderChild
+                    var childVehicleModel = tender.TenderChilds.Where(x => x.Id == item.Id).FirstOrDefault();
+                    if(childVehicleModel == null)
                     {
-                        CustomerId = tender.CustomerId,
-                        ItemCode = item.ItemCode,
-                        TenderId = model.TenderId,
-                        VehicleId = item.VehicleId,
-                        Amount = item.Amount,
-                        TenderDetailId = item.DetailId
-                    };
-                    _unitOfWork.TenderChilds.Add(obj);
+                        var obj = new TenderChild
+                        {
+                            CustomerId = tender.CustomerId,
+                            ItemCode = item.ItemCode,
+                            TenderId = model.TenderId,
+                            VehicleId = item.VehicleId,
+                            Amount = item.Amount,
+                            TenderDetailId = item.DetailId,
+                            IsDeleted = (byte)TenderChildStatus.Active
+                        };
+                        _unitOfWork.TenderChilds.Add(obj);
+                    }else
+                    {
+                        childVehicleModel.ItemCode = item.ItemCode;
+                        childVehicleModel.Amount = item.Amount;
+                        _unitOfWork.TenderChilds.Update(childVehicleModel);
+                    }
+                 
                 }
                 _unitOfWork.Tenders.Update(tender);
                 _unitOfWork.SaveChanges();
@@ -122,6 +149,57 @@ namespace GENXAPI.Api.Controllers
                 return InternalServerError(ex);
             }
        
+        }
+
+        public IHttpActionResult UpdateTenderVehicle(ContractCreateViewModel model)
+        {
+            try
+            {
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.TenderDetails, y => y.TenderChilds).Where(r => r.Id == model.TenderId).FirstOrDefault();
+                if (tender == null)
+                {
+                    return NotFound();
+                }
+                foreach (var item in model.contractDetailVehicle)
+                {
+                    var childVehicleModel = tender.TenderChilds.Where(x => x.TenderDetailId == item.DetailId && x.VehicleId == item.VehicleId).FirstOrDefault();
+                    if (childVehicleModel == null)
+                    {
+                        string itemcode = null;
+                        if (tender.ProceedStatus >= (byte)TenderUtility.ContractState)
+                        {
+                            itemcode = tender.TenderNo + "-" + (tender.TenderChilds.Count + 1);
+                        }
+                        var obj = new TenderChild
+                        {
+                            CustomerId = tender.CustomerId,
+                            ItemCode = itemcode,
+                            TenderId = model.TenderId,
+                            VehicleId = item.VehicleId,
+                            Amount = item.Amount,
+                            TenderDetailId = item.DetailId,
+                            IsDeleted = (byte)TenderChildStatus.Active
+                        };
+                        _unitOfWork.TenderChilds.Add(obj);
+                    }
+                }
+                foreach(var item in tender.TenderChilds.Where(x=>x.IsDeleted != (byte)TenderChildStatus.Deleted && x.VehicleId!=null && x.TenderDetailId != null).ToList())
+                {
+                    var childVehicleModel = model.contractDetailVehicle.Where(x => x.DetailId == item.TenderDetailId && x.VehicleId == item.VehicleId).FirstOrDefault();
+                    if (childVehicleModel == null)
+                    {
+                        item.IsDeleted = (byte)TenderChildStatus.Deleted;
+                        _unitOfWork.TenderChilds.Update(item);
+                    }
+                }
+
+                _unitOfWork.SaveChanges();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [HttpPost]
