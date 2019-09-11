@@ -100,9 +100,38 @@ namespace GENXAPI.Api.Controllers
                 //_unitOfWork.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
                 //_unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
                 foreach (var child in tender.TenderDetails.ToList())
-                    _unitOfWork.TenderDetails.Remove(child);
-                foreach (var child in tender.TenderChilds.ToList())
+                {
+                    var obj = updateViewModel.TenderDetails.Where(x => x.DestinationFromId == child.DestinationFromId && x.DestinationToId == child.DestinationToId).FirstOrDefault();
+                    if (obj == null)
+                    {
+                        foreach (var item in tender.TenderChilds.Where(x => x.TenderDetailId == child.Id).ToList())
+                        {
+                            _unitOfWork.TenderChilds.Remove(item);
+                        }
+                        _unitOfWork.TenderDetails.Remove(child);
+                    }else
+                    {
+                        updateViewModel.TenderDetails.Remove(obj);
+                    }   
+                }
+                    
+                foreach (var child in tender.TenderChilds.Where(x=>x.FleetServiceId != null).ToList())
                     _unitOfWork.TenderChilds.Remove(child);
+                //if(tender.TenderChilds.Count > 0)
+                //{
+                //    foreach (var items in tender.TenderChilds)
+                //    {
+                //        TenderChild tenderChild = new TenderChild();
+                //        tenderChild.FleetServiceId = items.FleetServiceId;
+                //        tenderChild.ItemCode = items.ItemCode;
+                //        tenderChild.CustomerId = tender.CustomerId;
+                //        tenderChild.TenderId = tender.Id;
+                //        //tenderChild.TenderDetailId = tenderDetail.Id;
+                //        updateViewModel.TenderChilds.Add(tenderChild);
+                //    }
+                //}
+                //foreach (var child in tender.TenderChilds.ToList())
+                //    _unitOfWork.TenderChilds.Remove(child);
                 #region Tender Detail.
                 var tenderDetailList = new List<TenderDetail>();
                 foreach (var items in updateViewModel.TenderDetails)
@@ -116,9 +145,10 @@ namespace GENXAPI.Api.Controllers
                     tenderDetail.ItemCode = items.ItemCode;
                     tenderDetail.ProvinceId = items.ProvinceId;
                     tenderDetail.RegionId = items.RegionId;
-                    tenderDetailList.Add(tenderDetail);
+                    tender.TenderDetails.Add(tenderDetail);
+                    //tenderDetailList.Add(tenderDetail);
                 }
-                tender.TenderDetails = tenderDetailList;
+                //tender.TenderDetails = tenderDetailList;
                 #endregion
 
                 #region Tender Services.
@@ -131,9 +161,10 @@ namespace GENXAPI.Api.Controllers
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
                     //tenderChild.TenderDetailId = tenderDetail.Id;
-                    tenderChildList.Add(tenderChild);
+                    tender.TenderChilds.Add(tenderChild);
+                    //tenderChildList.Add(tenderChild);
                 }
-                tender.TenderChilds = tenderChildList;
+                //tender.TenderChilds = tenderChildList;
                 _unitOfWork.Tenders.Update(tender);
                 _unitOfWork.SaveChanges();
                 return Ok(tender);
