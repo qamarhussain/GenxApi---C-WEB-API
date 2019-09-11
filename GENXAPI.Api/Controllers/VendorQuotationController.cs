@@ -122,7 +122,21 @@ namespace GENXAPI.Api.Controllers
         }
 
        
-
+        [HttpPost]
+        public IHttpActionResult CheckVendorExistOnJobId(CompanyBusinessUntiInfoViewModel model)
+        {
+            var isExist = _unitOfWork.VendorQuotation.Find(a => a.JobId == model.JobId && a.VendorId == model.VendorId).FirstOrDefault();
+           
+            if (isExist == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(isExist);
+            }
+           
+        }
     
 
     }
