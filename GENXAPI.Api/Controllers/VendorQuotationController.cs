@@ -129,11 +129,11 @@ namespace GENXAPI.Api.Controllers
            
             if (isExist == null)
             {
-                return NotFound();
+                return Ok(new { Status = false });
             }
             else
             {
-                return Ok(isExist);
+                return Ok(new { Status = true });
             }
            
         }

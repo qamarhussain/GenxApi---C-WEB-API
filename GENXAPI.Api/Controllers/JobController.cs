@@ -477,5 +477,29 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult GetApprovedJobQuotations()
+        {
+            try
+            {
+                var model = new List<JobApprovalListViewModel>();
+
+                var data = _unitOfWork.JobQuotationApproval.AllIncluding(x=>x.Vendor).ToList();
+                foreach(var item in data)
+                {
+                    JobApprovalListViewModel obj = new JobApprovalListViewModel();
+                    obj.jobQuotationApproval = item;
+                    obj.tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(e => e.Id == item.ContractId).FirstOrDefault();
+                    model.Add(obj);
+                }
+
+                return Ok(model);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }
