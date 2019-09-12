@@ -65,22 +65,30 @@ namespace GENXAPI.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateVendorQuotation(VendorQuotationCreateViewModel model)
         {
-            var vendorQuotation = new VendorQuotation();
-            vendorQuotation.CompanyId = model.CompanyId;
-            vendorQuotation.BusinessUnitId = model.BusinessUnitId;
-            vendorQuotation.CreatedBy = model.CreatedBy;
-            vendorQuotation.StatusId = (byte)Status.Active;
-            vendorQuotation.JobId = (model.JobId == null || model.JobId == 0) ? null : model.JobId;
-            vendorQuotation.JobNo = (model.JobId == null || model.JobId == 0) ? null : model.JobNo;
-            vendorQuotation.TenderId = model.TenderId;
-            vendorQuotation.VendorId = model.VendorId;
-            vendorQuotation.VendorQuotationChilds = model.vendorQuotationChild;
-            vendorQuotation.CreatedOn = DateTime.Now;
-            vendorQuotation.LastModifiedBy = model.LastModifiedBy;
-            vendorQuotation.LastModifiedDate = DateTime.Now;
-            _unitOfWork.VendorQuotation.Add(vendorQuotation);
-            _unitOfWork.SaveChanges();
-            return Ok();
+            try
+            {
+                var vendorQuotation = new VendorQuotation();
+                vendorQuotation.CompanyId = model.CompanyId;
+                vendorQuotation.BusinessUnitId = model.BusinessUnitId;
+                vendorQuotation.CreatedBy = model.CreatedBy;
+                vendorQuotation.StatusId = (byte)Status.Active;
+                vendorQuotation.JobId = (model.JobId == null || model.JobId == 0) ? null : model.JobId;
+                vendorQuotation.JobNo = (model.JobId == null || model.JobId == 0) ? null : model.JobNo;
+                vendorQuotation.TenderId = model.TenderId;
+                vendorQuotation.VendorId = model.VendorId;
+                vendorQuotation.VendorQuotationChilds = model.vendorQuotationChild;
+                vendorQuotation.CreatedOn = DateTime.Now;
+                vendorQuotation.LastModifiedBy = model.LastModifiedBy;
+                vendorQuotation.LastModifiedDate = DateTime.Now;
+                _unitOfWork.VendorQuotation.Add(vendorQuotation);
+                _unitOfWork.SaveChanges();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+          
         }
 
         [HttpPost]

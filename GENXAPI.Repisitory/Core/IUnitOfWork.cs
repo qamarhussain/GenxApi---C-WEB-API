@@ -10,7 +10,6 @@ namespace GENXAPI.Repisitory
         ICustomerRepository Customers { get; }
         IRegionRepository Region { get; }
         IVendorQuotationRepository VendorQuotation { get; }
-        IVendorQuotationDetailRepository VendorQuotationDetail { get; }
         IVendorQuotationChildRepository VendorQuotationChild { get; }
         IContractCancelationRepository ContractCancelation { get; }
         ICustomerBusinessLineRepository CustomerBusinessLine { get; }

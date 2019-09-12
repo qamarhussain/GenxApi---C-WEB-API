@@ -19,7 +19,6 @@ namespace GENXAPI.Repisitory.Model
         {
             this.JobQuotationApprovals = new HashSet<JobQuotationApproval>();
             this.VendorQuotations = new HashSet<VendorQuotation>();
-            this.VendorQuotationDetails = new HashSet<VendorQuotationDetail>();
         }
     
         public int CompanyId { get; set; }
@@ -57,7 +56,5 @@ namespace GENXAPI.Repisitory.Model
         public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotation> VendorQuotations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VendorQuotationDetail> VendorQuotationDetails { get; set; }
     }
 }

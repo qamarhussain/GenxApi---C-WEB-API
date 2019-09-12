@@ -94,18 +94,6 @@ namespace GENXAPI.Repisitory
             }
         }
 
-        private IVendorQuotationDetailRepository _vendorQuotationDetail;
-        public IVendorQuotationDetailRepository VendorQuotationDetail
-        {
-            get
-            {
-                if (this._vendorQuotationDetail == null)
-                {
-                    this._vendorQuotationDetail = new VendorQuotationDetailRepository(db);
-                }
-                return this._vendorQuotationDetail;
-            }
-        }
 
         private IVendorQuotationChildRepository _vendorQuotationChild;
         public IVendorQuotationChildRepository VendorQuotationChild

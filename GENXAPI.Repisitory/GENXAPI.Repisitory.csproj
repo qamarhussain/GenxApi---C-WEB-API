@@ -66,7 +66,6 @@
     <Compile Include="Core\IRegionalOfficeRepository.cs" />
     <Compile Include="Core\IRegionRepository.cs" />
     <Compile Include="Core\IVendorQuotationChildRepository.cs" />
-    <Compile Include="Core\IVendorQuotationDetailRepository.cs" />
     <Compile Include="Core\IVendorQuotationRepository.cs" />
     <Compile Include="Infrastructure\CustomerRepository.cs" />
     <Compile Include="Infrastructure\GenericCRUD.cs" />
@@ -185,9 +184,6 @@
     <Compile Include="Model\VendorQuotationChild.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\VendorQuotationDetail.cs">
-      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\VendorsBusinessNature.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -210,7 +206,6 @@
     <Compile Include="Persistance\TenderRepository.cs" />
     <Compile Include="Persistance\UnitOfWork.cs" />
     <Compile Include="Persistance\VendorQuotationChildRepository.cs" />
-    <Compile Include="Persistance\VendorQuotationDetailRepository.cs" />
     <Compile Include="Persistance\VendorQuotationRepository.cs" />
     <Compile Include="Persistance\VendorRepository.cs" />
     <Compile Include="Model\BaseModel.cs" />

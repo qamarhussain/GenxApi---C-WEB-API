@@ -18,7 +18,13 @@ namespace GENXAPI.Repisitory.Model
         public int VendorQuotationId { get; set; }
         public string ItemCode { get; set; }
         public decimal Amount { get; set; }
+        public Nullable<int> DestinationFromId { get; set; }
+        public Nullable<int> DestinationToId { get; set; }
+        public Nullable<int> ServiceId { get; set; }
     
+        public virtual City City { get; set; }
+        public virtual City City1 { get; set; }
+        public virtual FleetService FleetService { get; set; }
         public virtual VendorQuotation VendorQuotation { get; set; }
     }
 }

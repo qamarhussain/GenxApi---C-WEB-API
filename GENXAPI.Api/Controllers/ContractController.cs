@@ -221,11 +221,37 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var contract = _unitOfWork.Tenders.Get(model.Id);
-                contract.ProceedStatus = (byte)TenderUtility.ContractApprovedState;
-                contract.LastModifiedDate = DateTime.Now;
-                contract.LastModifiedBy = model.LastModifiedBy;
-                _unitOfWork.Tenders.Update(contract);
+                //var contract = _unitOfWork.Tenders.Get(model.Id);
+                //contract.ProceedStatus = (byte)TenderUtility.ContractApprovedState;
+                //contract.LastModifiedDate = DateTime.Now;
+                //contract.LastModifiedBy = model.LastModifiedBy;
+                //_unitOfWork.Tenders.Update(contract);
+                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == model.Id).FirstOrDefault();
+
+                if (tender == null)
+                {
+                    return NotFound();
+                }
+                tender.ProceedStatus = (byte)TenderUtility.ContractApprovedState;
+                tender.LastModifiedDate = DateTime.Now;
+                tender.LastModifiedBy = model.LastModifiedBy;
+                var tenderChilds = _unitOfWork.TenderChilds.Find(a => a.TenderId == tender.Id && a.IsDeleted == (byte)TenderChildStatus.Active).ToList();
+                // Update services and assigning item code to each.
+                int countItemCode = 1;
+                foreach (var item in tenderChilds.Where(x=>x.FleetServiceId != null && x.TenderDetailId == null).ToList())
+                {
+                    item.ItemCode = tender.TenderNo + "-" + countItemCode;
+                    _unitOfWork.TenderChilds.Update(item);
+                    countItemCode++;
+                }
+                // Updating vehicle and assigning item code to each.
+                foreach (var item in tenderChilds.Where(x => x.TenderDetailId != null && x.FleetServiceId == null).ToList())
+                {
+                    item.ItemCode = tender.TenderNo + "-" + countItemCode;
+                    _unitOfWork.TenderChilds.Update(item);
+                    countItemCode++;
+                }
+                _unitOfWork.Tenders.Update(tender);
                 _unitOfWork.SaveChanges();
                 return Ok();
             }catch(Exception ex)
