@@ -378,6 +378,11 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ProceedStatus" Type="tinyint" />
+          <Property Name="TenderExpiryDate" Type="datetime" />
+          <Property Name="Gst" Type="nvarchar" MaxLength="50" />
+          <Property Name="FurthurTax" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdditionalTax" Type="nvarchar" MaxLength="50" />
+          <Property Name="WithHoldingTax" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -521,6 +526,7 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DestinationFromId" Type="int" />
           <Property Name="DestinationToId" Type="int" />
+          <Property Name="VehicleId" Type="int" />
           <Property Name="ServiceId" Type="int" />
         </EntityType>
         <EntityType Name="VendorsBusinessNature">
@@ -957,6 +963,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VendorQuotationChild_VendorQuotationChild">
+          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="1" />
+          <End Role="VendorQuotationChild1" Type="Self.VendorQuotationChild" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="VendorQuotationChild">
+              <PropertyRef Name="VendorQuotationChildId" />
+            </Principal>
+            <Dependent Role="VendorQuotationChild1">
+              <PropertyRef Name="VendorQuotationChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="BusinessUnits" EntityType="Self.BusinessUnits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -1127,6 +1145,10 @@
             <End Role="VendorQuotation" EntitySet="VendorQuotation" />
             <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
           </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotationChild" Association="Self.FK_VendorQuotationChild_VendorQuotationChild">
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
+            <End Role="VendorQuotationChild1" EntitySet="VendorQuotationChild" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1154,7 +1176,6 @@
           <EntitySet Name="RegionalOffices" EntityType="Model.RegionalOffice" />
           <EntitySet Name="Roles" EntityType="Model.Role" />
           <EntitySet Name="RolesToUsers" EntityType="Model.RolesToUser" />
-          <EntitySet Name="Tenders" EntityType="Model.Tender" />
           <EntitySet Name="Units" EntityType="Model.Unit" />
           <EntitySet Name="Users" EntityType="Model.User" />
           <EntitySet Name="Vehicles" EntityType="Model.Vehicle" />
@@ -1194,25 +1215,13 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="Region" EntitySet="Regions" />
           </AssociationSet>
-          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
-          </AssociationSet>
           <AssociationSet Name="FK_Job_Customers" Association="Model.FK_Job_Customers">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Job" EntitySet="Jobs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Tender" EntitySet="Tenders" />
-          </AssociationSet>
           <AssociationSet Name="FK_FleetService_Units" Association="Model.FK_FleetService_Units">
             <End Role="Unit" EntitySet="Units" />
             <End Role="FleetService" EntitySet="FleetServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="Job" EntitySet="Jobs" />
           </AssociationSet>
           <AssociationSet Name="FK_JobChild_Job" Association="Model.FK_JobChild_Job">
             <End Role="Job" EntitySet="Jobs" />
@@ -1233,10 +1242,6 @@
           <AssociationSet Name="FK_Vendor_Region" Association="Model.FK_Vendor_Region">
             <End Role="Region" EntitySet="Regions" />
             <End Role="Vendor" EntitySet="Vendors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotation_Tender" Association="Model.FK_VendorQuotation_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
           </AssociationSet>
           <AssociationSet Name="FK_VendorQuotation_Vendor" Association="Model.FK_VendorQuotation_Vendor">
             <End Role="Vendor" EntitySet="Vendors" />
@@ -1269,14 +1274,6 @@
             <End Role="Region" EntitySet="Regions" />
             <End Role="TenderDetail" EntitySet="TenderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_TenderChild_TenderDetail" Association="Model.FK_TenderChild_TenderDetail">
             <End Role="TenderDetail" EntitySet="TenderDetails" />
             <End Role="TenderChild" EntitySet="TenderChilds" />
@@ -1301,6 +1298,35 @@
           <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Model.FK_VendorQuotationChild_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+          <EntitySet Name="Tenders" EntityType="Model.Tender" />
+          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Tender" EntitySet="Tenders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotation_Tender" Association="Model.FK_VendorQuotation_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotationChild" Association="Model.FK_VendorQuotationChild_VendorQuotationChild">
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+            <End Role="VendorQuotationChild1" EntitySet="VendorQuotationChilds" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BusinessUnit">
@@ -1455,8 +1481,8 @@
           <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="Model.FK_Customers_City" FromRole="Customer" ToRole="City" />
           <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Customers" FromRole="Customer" ToRole="Job" />
-          <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
           <NavigationProperty Name="ExecutedJobs" Relationship="Model.FK_ExecutedJob_Customers" FromRole="Customer" ToRole="ExecutedJob" />
+          <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -1518,8 +1544,8 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customer" Relationship="Model.FK_Job_Customers" FromRole="Job" ToRole="Customer" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
           <NavigationProperty Name="JobChilds" Relationship="Model.FK_JobChild_Job" FromRole="Job" ToRole="JobChild" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
         </EntityType>
         <EntityType Name="JobChild">
           <Key>
@@ -1670,32 +1696,6 @@
           <Property Name="modifiedBy" Type="Guid" />
           <Property Name="modifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Tender">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BusinessUnitId" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TenderNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StatusId" Type="Byte" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProceedStatus" Type="Byte" />
-          <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
-          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
-          <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Tender" FromRole="Tender" ToRole="Job" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
-          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
-          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
-        </EntityType>
         <EntityType Name="Unit">
           <Key>
             <PropertyRef Name="Id" />
@@ -1802,9 +1802,9 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
           <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
           <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationChild" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
         </EntityType>
         <EntityType Name="VendorsBusinessNature">
           <Key>
@@ -1928,18 +1928,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ContractCancelation_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.ContractCancelation" Role="ContractCancelation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ContractCancelation">
-              <PropertyRef Name="ContractId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Job_Customers">
           <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="Model.Job" Role="Job" Multiplicity="*" />
@@ -1948,18 +1936,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Job">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tender_Customers">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tender">
               <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1973,18 +1949,6 @@
             </Principal>
             <Dependent Role="FleetService">
               <PropertyRef Name="UnitOfMeasurement" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Job_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.Job" Role="Job" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Job">
-              <PropertyRef Name="TenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2045,18 +2009,6 @@
             </Principal>
             <Dependent Role="Vendor">
               <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VendorQuotation_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="VendorQuotation">
-              <PropertyRef Name="TenderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2124,9 +2076,9 @@
           <Property Name="TenderDetailId" Type="Int32" />
           <Property Name="IsDeleted" Type="Byte" />
           <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
           <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
           <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
         </EntityType>
         <EntityType Name="TenderDetail">
           <Key>
@@ -2148,8 +2100,8 @@
           <NavigationProperty Name="City1" Relationship="Model.FK_TenderDetail_City1" FromRole="TenderDetail" ToRole="City" />
           <NavigationProperty Name="Province" Relationship="Model.FK_TenderDetail_Province" FromRole="TenderDetail" ToRole="Province" />
           <NavigationProperty Name="Region" Relationship="Model.FK_TenderDetail_Region" FromRole="TenderDetail" ToRole="Region" />
-          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
           <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
         </EntityType>
         <Association Name="FK_TenderDetail_City">
           <End Type="Model.City" Role="City" Multiplicity="0..1" />
@@ -2211,30 +2163,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TenderChild_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderChild">
-              <PropertyRef Name="TenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TenderDetail_Tender">
-          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
-          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tender">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TenderDetail">
-              <PropertyRef Name="TenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TenderChild_TenderDetail">
           <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="0..1" />
           <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
@@ -2274,6 +2202,9 @@
           <NavigationProperty Name="City1" Relationship="Model.FK_VendorQuotationChild_City1" FromRole="VendorQuotationChild" ToRole="City" />
           <NavigationProperty Name="FleetService" Relationship="Model.FK_VendorQuotationChild_FleetService" FromRole="VendorQuotationChild" ToRole="FleetService" />
           <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotationChild" ToRole="VendorQuotation" />
+          <Property Name="VehicleId" Type="Int32" />
+          <NavigationProperty Name="VendorQuotationChild1" Relationship="Model.FK_VendorQuotationChild_VendorQuotationChild" FromRole="VendorQuotationChild" ToRole="VendorQuotationChild1" />
+          <NavigationProperty Name="VendorQuotationChild2" Relationship="Model.FK_VendorQuotationChild_VendorQuotationChild" FromRole="VendorQuotationChild1" ToRole="VendorQuotationChild" />
         </EntityType>
         <Association Name="FK_VendorQuotationChild_City">
           <End Type="Model.City" Role="City" Multiplicity="0..1" />
@@ -2320,6 +2251,121 @@
             </Principal>
             <Dependent Role="VendorQuotationChild">
               <PropertyRef Name="VendorQuotationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="TenderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TenderSource" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenderTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenderNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProceedStatus" Type="Byte" />
+          <Property Name="TenderExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Gst" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FurthurTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WithHoldingTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
+          <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Tender" FromRole="Tender" ToRole="Job" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
+          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
+        </EntityType>
+        <Association Name="FK_ContractCancelation_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.ContractCancelation" Role="ContractCancelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractCancelation">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tender_Customers">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tender">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="TenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderChild_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderChild">
+              <PropertyRef Name="TenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenderDetail_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TenderDetail">
+              <PropertyRef Name="TenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotation_Tender">
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorQuotation">
+              <PropertyRef Name="TenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorQuotationChild_VendorQuotationChild">
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="1" />
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="VendorQuotationChild">
+              <PropertyRef Name="VendorQuotationChildId" />
+            </Principal>
+            <Dependent Role="VendorQuotationChild1">
+              <PropertyRef Name="VendorQuotationChildId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2678,27 +2724,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tenders">
-            <EntityTypeMapping TypeName="Model.Tender">
-              <MappingFragment StoreEntitySet="Tender">
-                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
-                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
-                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
-                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="Model.Unit">
               <MappingFragment StoreEntitySet="Units">
@@ -2895,6 +2920,7 @@
           <EntitySetMapping Name="VendorQuotationChilds">
             <EntityTypeMapping TypeName="Model.VendorQuotationChild">
               <MappingFragment StoreEntitySet="VendorQuotationChild">
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
                 <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
                 <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
@@ -2902,6 +2928,32 @@
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
                 <ScalarProperty Name="VendorQuotationChildId" ColumnName="VendorQuotationChildId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tenders">
+            <EntityTypeMapping TypeName="Model.Tender">
+              <MappingFragment StoreEntitySet="Tender">
+                <ScalarProperty Name="WithHoldingTax" ColumnName="WithHoldingTax" />
+                <ScalarProperty Name="AdditionalTax" ColumnName="AdditionalTax" />
+                <ScalarProperty Name="FurthurTax" ColumnName="FurthurTax" />
+                <ScalarProperty Name="Gst" ColumnName="Gst" />
+                <ScalarProperty Name="TenderExpiryDate" ColumnName="TenderExpiryDate" />
+                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
+                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
+                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

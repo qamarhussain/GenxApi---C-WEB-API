@@ -23,6 +23,11 @@ namespace GENXAPI.Api.Models
         public DateTime IssuanceDate { get; set; }
         public string TenderSource { get; set; }
         public string TenderTerm { get; set; }
+        public DateTime TenderExpiryDate { get; set; }
+        public string Gst { get; set; }
+        public string FurthurTax { get; set; }
+        public string AdditionalTax { get; set; }
+        public string WithHoldingTax { get; set; }
         public int StatusId { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
