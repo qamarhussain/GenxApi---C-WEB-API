@@ -91,6 +91,11 @@ namespace GENXAPI.Api.Controllers
                 tender.TenderReference = updateViewModel.TenderReference;
                 tender.TenderSource = updateViewModel.TenderSource;
                 tender.TenderTerm = updateViewModel.TenderTerm;
+                tender.TenderExpiryDate = updateViewModel.TenderExpiryDate;
+                tender.Gst = updateViewModel.Gst;
+                tender.FurthurTax = updateViewModel.FurthurTax;
+                tender.AdditionalTax = updateViewModel.AdditionalTax;
+                tender.WithHoldingTax = updateViewModel.WithHoldingTax;
                 tender.StatusId = (byte)updateViewModel.StatusId;
                 tender.LastModifiedDate = DateTime.Now;
                 tender.LastModifiedBy = updateViewModel.LastModifiedBy;
@@ -216,6 +221,11 @@ namespace GENXAPI.Api.Controllers
                 tender.TenderReference = createViewModel.TenderReference;
                 tender.TenderSource = createViewModel.TenderSource;
                 tender.TenderTerm = createViewModel.TenderTerm;
+                tender.TenderExpiryDate = createViewModel.TenderExpiryDate;
+                tender.Gst = createViewModel.Gst;
+                tender.FurthurTax = createViewModel.FurthurTax;
+                tender.AdditionalTax = createViewModel.AdditionalTax;
+                tender.WithHoldingTax = createViewModel.WithHoldingTax;
                 tender.StatusId = (byte)Status.Active;
                 tender.CreatedOn = DateTime.Now;
                 tender.LastModifiedDate = DateTime.Now;

@@ -22,10 +22,13 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<int> DestinationToId { get; set; }
         public Nullable<int> VehicleId { get; set; }
         public Nullable<int> ServiceId { get; set; }
+        public Nullable<int> VehicleId { get; set; }
     
         public virtual City City { get; set; }
         public virtual City City1 { get; set; }
         public virtual FleetService FleetService { get; set; }
         public virtual VendorQuotation VendorQuotation { get; set; }
+        public virtual VendorQuotationChild VendorQuotationChild1 { get; set; }
+        public virtual VendorQuotationChild VendorQuotationChild2 { get; set; }
     }
 }
