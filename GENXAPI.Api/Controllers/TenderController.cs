@@ -61,7 +61,7 @@ namespace GENXAPI.Api.Controllers
                     return NotFound();
                 }
                 var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
-                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, y => y.Vehicle).Where(a => a.TenderId == tender.Id).ToList();
+                var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, z =>z.FleetService.Unit, y => y.Vehicle).Where(a => a.TenderId == tender.Id).ToList();
                 tender.TenderDetails = tenderDetails;
                 tender.TenderChilds = tenderChilds;
                 return Ok(tender);

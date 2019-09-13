@@ -17,6 +17,7 @@ namespace GENXAPI.Api.Controllers
     public class FleetServiceController : ApiController
     {
         protected readonly FleetServiceRepo _fleetServiceRepo = new FleetServiceRepo();
+        protected readonly UnitRepo _unitRepo = new UnitRepo();
         // GET: api/Customer
         [HttpGet]
         public IHttpActionResult GetAllFleetServices()
@@ -129,7 +130,7 @@ namespace GENXAPI.Api.Controllers
                         Id=item.Id,
                         ServiceName=item.ServiceName,
                         ServiceType=item.ServiceType,
-                        UnitOfMeasurement=item.UnitOfMeasurement
+                        unit = _unitRepo.Get(item.Id)
                     });
                 }
                 return Ok(fleetServices);
