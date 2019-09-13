@@ -20,6 +20,7 @@ namespace GENXAPI.Repisitory.Model
         public decimal Amount { get; set; }
         public Nullable<int> DestinationFromId { get; set; }
         public Nullable<int> DestinationToId { get; set; }
+        public Nullable<int> VehicleId { get; set; }
         public Nullable<int> ServiceId { get; set; }
     
         public virtual City City { get; set; }

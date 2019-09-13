@@ -226,8 +226,7 @@ namespace GENXAPI.Api.Controllers
                 //contract.LastModifiedDate = DateTime.Now;
                 //contract.LastModifiedBy = model.LastModifiedBy;
                 //_unitOfWork.Tenders.Update(contract);
-                var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == model.Id).FirstOrDefault();
-
+                var tender = _unitOfWork.Tenders.Get(model.Id);
                 if (tender == null)
                 {
                     return NotFound();

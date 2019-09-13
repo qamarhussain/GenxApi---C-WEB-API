@@ -5,33 +5,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="20317bdf70fd46f4b13e4fbc28ba9b3e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="22.375" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="24.125" />
-        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="23.5" />
-        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="15" PointY="49.5" />
+        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="33.125" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="26.125" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="25.75" />
+        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="15" PointY="56.625" />
         <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.CustomerBusinessLine" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="32.625" />
-        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="31.875" />
-        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="15" PointY="41.75" />
-        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="34.625" />
-        <EntityTypeShape EntityType="Model.JobChild" Width="1.5" PointX="20.25" PointY="32.625" />
-        <EntityTypeShape EntityType="Model.JobQuotationApproval" Width="1.5" PointX="12.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="29.75" />
+        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="27.875" />
+        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="15" PointY="19.375" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="35.125" />
+        <EntityTypeShape EntityType="Model.JobChild" Width="1.5" PointX="17.25" PointY="38.25" />
+        <EntityTypeShape EntityType="Model.JobQuotationApproval" Width="1.5" PointX="12.75" PointY="24" />
         <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="3.75" PointY="27.25" />
-        <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="6" PointY="24.125" />
-        <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="27.875" />
+        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="3.75" PointY="28.5" />
+        <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="6" PointY="26.25" />
+        <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="40.5" />
         <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="34.125" />
-        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="12.75" PointY="41.75" />
+        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="40.5" />
+        <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="20.25" PointY="37.5" />
+        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="18" PointY="32.125" />
+        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="12.75" PointY="19.5" />
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="15" PointY="19.75" />
-        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="10.5" PointY="19.375" />
-        <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="15" PointY="24.25" />
+        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="18" PointY="42.625" />
+        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="10.5" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="15" PointY="30.125" />
+        <EntityTypeShape EntityType="Model.VendorQuotationChild" Width="1.5" PointX="17.25" PointY="27.375" />
         <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="8.75" PointY="0.75" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
@@ -39,38 +43,34 @@
         <AssociationConnector Association="Model.FK_City_Region" />
         <AssociationConnector Association="Model.FK_Customers_City" />
         <AssociationConnector Association="Model.FK_RegionalOffice_City" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City1" />
         <AssociationConnector Association="Model.FK_Vendor_City" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_City" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_City1" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
         <AssociationConnector Association="Model.FK_Region_Company1" />
         <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
+        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
         <AssociationConnector Association="Model.FK_Job_Customers" />
         <AssociationConnector Association="Model.FK_Tender_Customers" />
         <AssociationConnector Association="Model.FK_FleetService_Units" />
+        <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_FleetService" />
         <AssociationConnector Association="Model.FK_Job_Tender" />
         <AssociationConnector Association="Model.FK_JobChild_Job" />
         <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
         <AssociationConnector Association="Model.FK_JobQuotationApproval_Vendor" />
         <AssociationConnector Association="Model.FK_Region_Province" />
-        <AssociationConnector Association="Model.FK_Vendor_Region" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
-        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="28.25" />
-        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
-        <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="17.25" PointY="32.5" />
-        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="15" PointY="29.375" />
-        <AssociationConnector Association="Model.FK_TenderDetail_City" />
-        <AssociationConnector Association="Model.FK_TenderDetail_City1" />
-        <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
         <AssociationConnector Association="Model.FK_TenderDetail_Province" />
         <AssociationConnector Association="Model.FK_TenderDetail_Region" />
+        <AssociationConnector Association="Model.FK_Vendor_Region" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" />
         <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
         <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
-        <EntityTypeShape EntityType="Model.VendorQuotationChild" Width="1.5" PointX="17.25" PointY="37" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_City" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_City1" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_FleetService" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
       </Diagram>
     </edmx:Diagrams>

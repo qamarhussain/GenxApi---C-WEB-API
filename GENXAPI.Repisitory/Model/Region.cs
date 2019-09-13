@@ -18,8 +18,8 @@ namespace GENXAPI.Repisitory.Model
         public Region()
         {
             this.Cities = new HashSet<City>();
-            this.Vendors = new HashSet<Vendor>();
             this.TenderDetails = new HashSet<TenderDetail>();
+            this.Vendors = new HashSet<Vendor>();
         }
     
         public int RegionId { get; set; }
@@ -39,8 +39,8 @@ namespace GENXAPI.Repisitory.Model
         public virtual Company Company { get; set; }
         public virtual Province Province { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vendor> Vendors { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TenderDetail> TenderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vendor> Vendors { get; set; }
     }
 }

@@ -28,12 +28,12 @@ namespace GENXAPI.Repisitory.Model
         public string EmployeeName { get; set; }
         public string CEOName { get; set; }
         public string Remarks { get; set; }
+        public Nullable<System.DateTime> ExecutionDate { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<int> LastModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public byte StatusId { get; set; }
-        public Nullable<System.DateTime> ExecutionDate { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

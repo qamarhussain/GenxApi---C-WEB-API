@@ -33,6 +33,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<CustomerBusinessLine> CustomerBusinessLines { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<ExecutedJob> ExecutedJobs { get; set; }
         public virtual DbSet<FinancialYearDefination> FinancialYearDefinations { get; set; }
         public virtual DbSet<FleetService> FleetServices { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
@@ -47,16 +48,15 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RolesToUser> RolesToUsers { get; set; }
         public virtual DbSet<Tender> Tenders { get; set; }
+        public virtual DbSet<TenderChild> TenderChilds { get; set; }
+        public virtual DbSet<TenderDetail> TenderDetails { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
+        public virtual DbSet<VendorQuotationChild> VendorQuotationChilds { get; set; }
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
-        public virtual DbSet<ExecutedJob> ExecutedJobs { get; set; }
-        public virtual DbSet<TenderChild> TenderChilds { get; set; }
-        public virtual DbSet<TenderDetail> TenderDetails { get; set; }
-        public virtual DbSet<VendorQuotationChild> VendorQuotationChilds { get; set; }
     }
 }
