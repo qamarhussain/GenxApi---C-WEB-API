@@ -16,6 +16,8 @@ namespace GENXAPI.Utilities
         Active = 1,
         [Description("Deleted")]
         Deleted = 2,
+        [Description("JobExecuted")]
+        JobExecuted = 3,
 
     }
 

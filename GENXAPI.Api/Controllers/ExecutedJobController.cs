@@ -2,6 +2,7 @@
 using GENXAPI.Api.Models;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
+using GENXAPI.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,31 @@ namespace GENXAPI.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateJobExecution(ExecutedJob model)
         {
-            model.CreatedOn = DateTime.Now;
-            model.LastModifiedDate = DateTime.Now;
-            _unitOfWork.ExecutedJob.Add(model);
-            _unitOfWork.SaveChanges();
-            return Ok(model);
+            try
+            {
+                model.CreatedOn = DateTime.Now;
+                model.LastModifiedDate = DateTime.Now;
+                _unitOfWork.ExecutedJob.Add(model);
+                var jobChild = _unitOfWork.JobChild.Find(x => x.ItemCode == model.ItemCode).FirstOrDefault();
+                if (jobChild != null)
+                {
+                    jobChild.IsExecuted = (byte)TenderChildStatus.JobExecuted;
+                    _unitOfWork.JobChild.Update(jobChild);
+                }
+                var tenderChild = _unitOfWork.TenderChilds.Find(x => x.ItemCode == model.ItemCode).FirstOrDefault();
+                if (tenderChild != null)
+                {
+                    tenderChild.IsJobExecuted = (byte)TenderChildStatus.JobExecuted;
+                    _unitOfWork.TenderChilds.Update(tenderChild);
+                }
+                _unitOfWork.SaveChanges();
+                return Ok(model);
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+          
         }
 
 

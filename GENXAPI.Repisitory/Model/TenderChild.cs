@@ -23,6 +23,7 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<int> FleetServiceId { get; set; }
         public Nullable<int> TenderDetailId { get; set; }
         public Nullable<byte> IsDeleted { get; set; }
+        public Nullable<byte> IsJobExecuted { get; set; }
     
         public virtual FleetService FleetService { get; set; }
         public virtual Tender Tender { get; set; }

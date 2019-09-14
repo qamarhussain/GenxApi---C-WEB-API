@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BusinessUnits">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -72,6 +72,8 @@
           <Property Name="CancelationBy" Type="int" Nullable="false" />
           <Property Name="CancelationDate" Type="datetime" Nullable="false" />
           <Property Name="Reasion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -236,6 +238,7 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfficeId" Type="int" />
+          <Property Name="IsExecuted" Type="tinyint" />
         </EntityType>
         <EntityType Name="JobQuotationApproval">
           <Key>
@@ -397,6 +400,7 @@
           <Property Name="FleetServiceId" Type="int" />
           <Property Name="TenderDetailId" Type="int" />
           <Property Name="IsDeleted" Type="tinyint" />
+          <Property Name="IsJobExecuted" Type="tinyint" />
         </EntityType>
         <EntityType Name="TenderDetail">
           <Key>
@@ -1134,11 +1138,181 @@
             <End Role="VendorQuotationChild" EntitySet="VendorQuotationChild" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BusinessUnits" EntityType="Model.BusinessUnit" />
+          <EntitySet Name="Cities" EntityType="Model.City" />
+          <EntitySet Name="Companies" EntityType="Model.Company" />
+          <EntitySet Name="ContractCancelations" EntityType="Model.ContractCancelation" />
+          <EntitySet Name="Countries" EntityType="Model.Country" />
+          <EntitySet Name="Currencies" EntityType="Model.Currency" />
+          <EntitySet Name="CustomerBusinessLines" EntityType="Model.CustomerBusinessLine" />
+          <EntitySet Name="Customers" EntityType="Model.Customer" />
+          <EntitySet Name="ExecutedJobs" EntityType="Model.ExecutedJob" />
+          <EntitySet Name="FinancialYearDefinations" EntityType="Model.FinancialYearDefination" />
+          <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
+          <EntitySet Name="Jobs" EntityType="Model.Job" />
+          <EntitySet Name="JobChilds" EntityType="Model.JobChild" />
+          <EntitySet Name="JobQuotationApprovals" EntityType="Model.JobQuotationApproval" />
+          <EntitySet Name="ModuleCategories" EntityType="Model.ModuleCategory" />
+          <EntitySet Name="ModuleForms" EntityType="Model.ModuleForm" />
+          <EntitySet Name="Modules" EntityType="Model.Module" />
+          <EntitySet Name="Provinces" EntityType="Model.Province" />
+          <EntitySet Name="Regions" EntityType="Model.Region" />
+          <EntitySet Name="RegionalOffices" EntityType="Model.RegionalOffice" />
+          <EntitySet Name="Roles" EntityType="Model.Role" />
+          <EntitySet Name="RolesToUsers" EntityType="Model.RolesToUser" />
+          <EntitySet Name="Tenders" EntityType="Model.Tender" />
+          <EntitySet Name="TenderChilds" EntityType="Model.TenderChild" />
+          <EntitySet Name="TenderDetails" EntityType="Model.TenderDetail" />
+          <EntitySet Name="Units" EntityType="Model.Unit" />
+          <EntitySet Name="Users" EntityType="Model.User" />
+          <EntitySet Name="Vehicles" EntityType="Model.Vehicle" />
+          <EntitySet Name="Vendors" EntityType="Model.Vendor" />
+          <EntitySet Name="VendorQuotations" EntityType="Model.VendorQuotation" />
+          <EntitySet Name="VendorQuotationChilds" EntityType="Model.VendorQuotationChild" />
+          <EntitySet Name="VendorsBusinessNatures" EntityType="Model.VendorsBusinessNature" />
+          <EntitySet Name="VendorsOrgTypes" EntityType="Model.VendorsOrgType" />
+          <AssociationSet Name="FK_BusinessUnits_Company" Association="Model.FK_BusinessUnits_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="BusinessUnit" EntitySet="BusinessUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Province" Association="Model.FK_City_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Region" Association="Model.FK_City_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_City" Association="Model.FK_Customers_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegionalOffice_City" Association="Model.FK_RegionalOffice_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="RegionalOffice" EntitySet="RegionalOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City" Association="Model.FK_TenderDetail_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_City1" Association="Model.FK_TenderDetail_City1">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendor_City" Association="Model.FK_Vendor_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Vendor" EntitySet="Vendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_City" Association="Model.FK_VendorQuotationChild_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_City1" Association="Model.FK_VendorQuotationChild_City1">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Model.FK_FinancialYearDefination_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_Company1" Association="Model.FK_Region_Company1">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExecutedJob_Customers" Association="Model.FK_ExecutedJob_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ExecutedJob" EntitySet="ExecutedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Customers" Association="Model.FK_Job_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tender_Customers" Association="Model.FK_Tender_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Tender" EntitySet="Tenders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FleetService_Units" Association="Model.FK_FleetService_Units">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="FleetService" EntitySet="FleetServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_FleetService" Association="Model.FK_TenderChild_FleetService">
+            <End Role="FleetService" EntitySet="FleetServices" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_FleetService" Association="Model.FK_VendorQuotationChild_FleetService">
+            <End Role="FleetService" EntitySet="FleetServices" />
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Tender" Association="Model.FK_Job_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobChild_Job" Association="Model.FK_JobChild_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="JobChild" EntitySet="JobChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobChild_RegionalOffice" Association="Model.FK_JobChild_RegionalOffice">
+            <End Role="RegionalOffice" EntitySet="RegionalOffices" />
+            <End Role="JobChild" EntitySet="JobChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobQuotationApproval_Vendor" Association="Model.FK_JobQuotationApproval_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="JobQuotationApproval" EntitySet="JobQuotationApprovals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_Province" Association="Model.FK_Region_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Province" Association="Model.FK_TenderDetail_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Region" Association="Model.FK_TenderDetail_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendor_Region" Association="Model.FK_Vendor_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Vendor" EntitySet="Vendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_Tender" Association="Model.FK_TenderChild_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderDetail_Tender" Association="Model.FK_TenderDetail_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotation_Tender" Association="Model.FK_VendorQuotation_Tender">
+            <End Role="Tender" EntitySet="Tenders" />
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_TenderDetail" Association="Model.FK_TenderChild_TenderDetail">
+            <End Role="TenderDetail" EntitySet="TenderDetails" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenderChild_Vehicles" Association="Model.FK_TenderChild_Vehicles">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="TenderChild" EntitySet="TenderChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotation_Vendor" Association="Model.FK_VendorQuotation_Vendor">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Model.FK_VendorQuotationChild_VendorQuotation">
+            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
+            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BusinessUnit">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -1146,69 +1320,69 @@
           </Key>
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_BusinessUnits_Company" FromRole="BusinessUnits" ToRole="Company" />
+          <NavigationProperty Name="Company" Relationship="Model.FK_BusinessUnits_Company" FromRole="BusinessUnit" ToRole="Company" />
         </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityId" />
           </Key>
           <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RegionId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Province" Relationship="Self.FK_City_Province" FromRole="City" ToRole="Province" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_City_Region" FromRole="City" ToRole="Region" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_City" FromRole="City" ToRole="Customers" />
-          <NavigationProperty Name="RegionalOffices" Relationship="Self.FK_RegionalOffice_City" FromRole="City" ToRole="RegionalOffice" />
-          <NavigationProperty Name="TenderDetails" Relationship="Self.FK_TenderDetail_City" FromRole="City" ToRole="TenderDetail" />
-          <NavigationProperty Name="TenderDetails1" Relationship="Self.FK_TenderDetail_City1" FromRole="City" ToRole="TenderDetail" />
-          <NavigationProperty Name="Vendors" Relationship="Self.FK_Vendor_City" FromRole="City" ToRole="Vendor" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Self.FK_VendorQuotationChild_City" FromRole="City" ToRole="VendorQuotationChild" />
-          <NavigationProperty Name="VendorQuotationChilds1" Relationship="Self.FK_VendorQuotationChild_City1" FromRole="City" ToRole="VendorQuotationChild" />
+          <NavigationProperty Name="Province" Relationship="Model.FK_City_Province" FromRole="City" ToRole="Province" />
+          <NavigationProperty Name="Region" Relationship="Model.FK_City_Region" FromRole="City" ToRole="Region" />
+          <NavigationProperty Name="Customers" Relationship="Model.FK_Customers_City" FromRole="City" ToRole="Customer" />
+          <NavigationProperty Name="RegionalOffices" Relationship="Model.FK_RegionalOffice_City" FromRole="City" ToRole="RegionalOffice" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_City" FromRole="City" ToRole="TenderDetail" />
+          <NavigationProperty Name="TenderDetails1" Relationship="Model.FK_TenderDetail_City1" FromRole="City" ToRole="TenderDetail" />
+          <NavigationProperty Name="Vendors" Relationship="Model.FK_Vendor_City" FromRole="City" ToRole="Vendor" />
+          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_City" FromRole="City" ToRole="VendorQuotationChild" />
+          <NavigationProperty Name="VendorQuotationChilds1" Relationship="Model.FK_VendorQuotationChild_City1" FromRole="City" ToRole="VendorQuotationChild" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyId" />
           </Key>
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NTN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STRN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GST" Type="Double" Nullable="false" />
           <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ShowName" Type="Boolean" Nullable="false" />
           <Property Name="ShowLogo" Type="Boolean" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="BusinessUnits" Relationship="Self.FK_BusinessUnits_Company" FromRole="Company" ToRole="BusinessUnits" />
-          <NavigationProperty Name="FinancialYearDefinations" Relationship="Self.FK_FinancialYearDefination_Company" FromRole="Company" ToRole="FinancialYearDefination" />
-          <NavigationProperty Name="Regions" Relationship="Self.FK_Region_Company1" FromRole="Company" ToRole="Region" />
+          <NavigationProperty Name="BusinessUnits" Relationship="Model.FK_BusinessUnits_Company" FromRole="Company" ToRole="BusinessUnit" />
+          <NavigationProperty Name="FinancialYearDefinations" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="Company" ToRole="FinancialYearDefination" />
+          <NavigationProperty Name="Regions" Relationship="Model.FK_Region_Company1" FromRole="Company" ToRole="Region" />
         </EntityType>
         <EntityType Name="ContractCancelation">
           <Key>
@@ -1218,15 +1392,17 @@
           <Property Name="ContractId" Type="Int32" Nullable="false" />
           <Property Name="CancelationBy" Type="Int32" Nullable="false" />
           <Property Name="CancelationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reasion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Tender" Relationship="Self.FK_ContractCancelation_Tender" FromRole="ContractCancelation" ToRole="Tender" />
+          <Property Name="Reasion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_ContractCancelation_Tender" FromRole="ContractCancelation" ToRole="Tender" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -1234,12 +1410,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CurrencyRate" Type="Double" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerBusinessLine">
@@ -1261,15 +1437,15 @@
           <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
           <Property Name="RegionId" Type="Int32" />
           <Property Name="ZoneId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CustomerBusinessLineId" Type="Int32" />
           <Property Name="Discount" Type="Double" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FaxNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NTN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="STRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1284,15 +1460,15 @@
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreditLimit" Type="Double" />
           <Property Name="StatusId" Type="Byte" />
-          <Property Name="Abbreviation" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Customers_City" FromRole="Customers" ToRole="City" />
-          <NavigationProperty Name="ExecutedJobs" Relationship="Self.FK_ExecutedJob_Customers" FromRole="Customers" ToRole="ExecutedJob" />
-          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Customers" FromRole="Customers" ToRole="Job" />
-          <NavigationProperty Name="Tenders" Relationship="Self.FK_Tender_Customers" FromRole="Customers" ToRole="Tender" />
+          <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="Model.FK_Customers_City" FromRole="Customer" ToRole="City" />
+          <NavigationProperty Name="ExecutedJobs" Relationship="Model.FK_ExecutedJob_Customers" FromRole="Customer" ToRole="ExecutedJob" />
+          <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Customers" FromRole="Customer" ToRole="Job" />
+          <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
         </EntityType>
         <EntityType Name="ExecutedJob">
           <Key>
@@ -1316,9 +1492,9 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_ExecutedJob_Customers" FromRole="ExecutedJob" ToRole="Customers" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_ExecutedJob_Customers" FromRole="ExecutedJob" ToRole="Customer" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -1327,30 +1503,30 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
-          <Property Name="FYearTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FYearTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FYearStartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FYearEndDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FYearActive" Type="Boolean" />
           <Property Name="FYearLocked" Type="Boolean" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_FinancialYearDefination_Company" FromRole="FinancialYearDefination" ToRole="Company" />
+          <NavigationProperty Name="Company" Relationship="Model.FK_FinancialYearDefination_Company" FromRole="FinancialYearDefination" ToRole="Company" />
         </EntityType>
         <EntityType Name="FleetService">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ServiceName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ServiceType" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="UnitOfMeasurement" Type="Int32" />
-          <NavigationProperty Name="Unit" Relationship="Self.FK_FleetService_Units" FromRole="FleetService" ToRole="Units" />
-          <NavigationProperty Name="TenderChilds" Relationship="Self.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Self.FK_VendorQuotationChild_FleetService" FromRole="FleetService" ToRole="VendorQuotationChild" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK_FleetService_Units" FromRole="FleetService" ToRole="Unit" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_FleetService" FromRole="FleetService" ToRole="TenderChild" />
+          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_FleetService" FromRole="FleetService" ToRole="VendorQuotationChild" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -1362,7 +1538,7 @@
           <Property Name="BusinessUnitId" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="TenderId" Type="Int32" Nullable="false" />
-          <Property Name="TenderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenderNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="JobStatus" Type="Byte" Nullable="false" />
           <Property Name="PONo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PODate" Type="DateTime" Precision="3" />
@@ -1378,10 +1554,10 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Job_Customers" FromRole="Job" ToRole="Customers" />
-          <NavigationProperty Name="Tender" Relationship="Self.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
-          <NavigationProperty Name="JobChilds" Relationship="Self.FK_JobChild_Job" FromRole="Job" ToRole="JobChild" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Job_Customers" FromRole="Job" ToRole="Customer" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_Job_Tender" FromRole="Job" ToRole="Tender" />
+          <NavigationProperty Name="JobChilds" Relationship="Model.FK_JobChild_Job" FromRole="Job" ToRole="JobChild" />
         </EntityType>
         <EntityType Name="JobChild">
           <Key>
@@ -1396,8 +1572,9 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OfficeId" Type="Int32" />
-          <NavigationProperty Name="Job" Relationship="Self.FK_JobChild_Job" FromRole="JobChild" ToRole="Job" />
-          <NavigationProperty Name="RegionalOffice" Relationship="Self.FK_JobChild_RegionalOffice" FromRole="JobChild" ToRole="RegionalOffice" />
+          <Property Name="IsExecuted" Type="Byte" />
+          <NavigationProperty Name="Job" Relationship="Model.FK_JobChild_Job" FromRole="JobChild" ToRole="Job" />
+          <NavigationProperty Name="RegionalOffice" Relationship="Model.FK_JobChild_RegionalOffice" FromRole="JobChild" ToRole="RegionalOffice" />
         </EntityType>
         <EntityType Name="JobQuotationApproval">
           <Key>
@@ -1411,7 +1588,7 @@
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VendorId" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Vendor" Relationship="Self.FK_JobQuotationApproval_Vendor" FromRole="JobQuotationApproval" ToRole="Vendor" />
+          <NavigationProperty Name="Vendor" Relationship="Model.FK_JobQuotationApproval_Vendor" FromRole="JobQuotationApproval" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="ModuleCategory">
           <Key>
@@ -1443,7 +1620,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OrderBy" Type="Double" />
           <Property Name="Project" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1454,7 +1631,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="BusinessUnitId" Type="Int32" />
@@ -1462,18 +1639,18 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Province" FromRole="Province" ToRole="City" />
-          <NavigationProperty Name="Regions" Relationship="Self.FK_Region_Province" FromRole="Province" ToRole="Region" />
-          <NavigationProperty Name="TenderDetails" Relationship="Self.FK_TenderDetail_Province" FromRole="Province" ToRole="TenderDetail" />
+          <NavigationProperty Name="Cities" Relationship="Model.FK_City_Province" FromRole="Province" ToRole="City" />
+          <NavigationProperty Name="Regions" Relationship="Model.FK_Region_Province" FromRole="Province" ToRole="Region" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Province" FromRole="Province" ToRole="TenderDetail" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="RegionId" />
           </Key>
           <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
@@ -1481,13 +1658,13 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Region" FromRole="Region" ToRole="City" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Region_Company1" FromRole="Region" ToRole="Company" />
-          <NavigationProperty Name="Province" Relationship="Self.FK_Region_Province" FromRole="Region" ToRole="Province" />
-          <NavigationProperty Name="TenderDetails" Relationship="Self.FK_TenderDetail_Region" FromRole="Region" ToRole="TenderDetail" />
-          <NavigationProperty Name="Vendors" Relationship="Self.FK_Vendor_Region" FromRole="Region" ToRole="Vendor" />
+          <NavigationProperty Name="Cities" Relationship="Model.FK_City_Region" FromRole="Region" ToRole="City" />
+          <NavigationProperty Name="Company" Relationship="Model.FK_Region_Company1" FromRole="Region" ToRole="Company" />
+          <NavigationProperty Name="Province" Relationship="Model.FK_Region_Province" FromRole="Region" ToRole="Province" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Region" FromRole="Region" ToRole="TenderDetail" />
+          <NavigationProperty Name="Vendors" Relationship="Model.FK_Vendor_Region" FromRole="Region" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="RegionalOffice">
           <Key>
@@ -1498,17 +1675,17 @@
           <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
           <Property Name="OfficeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CityId" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ContactPersonMobile" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPersonMobile" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="City" Relationship="Self.FK_RegionalOffice_City" FromRole="RegionalOffice" ToRole="City" />
-          <NavigationProperty Name="JobChilds" Relationship="Self.FK_JobChild_RegionalOffice" FromRole="RegionalOffice" ToRole="JobChild" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="Model.FK_RegionalOffice_City" FromRole="RegionalOffice" ToRole="City" />
+          <NavigationProperty Name="JobChilds" Relationship="Model.FK_JobChild_RegionalOffice" FromRole="RegionalOffice" ToRole="JobChild" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1549,19 +1726,19 @@
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProceedStatus" Type="Byte" />
           <Property Name="TenderExpiryDate" Type="DateTime" Precision="3" />
           <Property Name="Gst" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FurthurTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WithHoldingTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ContractCancelations" Relationship="Self.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Tender_Customers" FromRole="Tender" ToRole="Customers" />
-          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Tender" FromRole="Tender" ToRole="Job" />
-          <NavigationProperty Name="TenderChilds" Relationship="Self.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
-          <NavigationProperty Name="TenderDetails" Relationship="Self.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Self.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
+          <NavigationProperty Name="ContractCancelations" Relationship="Model.FK_ContractCancelation_Tender" FromRole="Tender" ToRole="ContractCancelation" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Tender_Customers" FromRole="Tender" ToRole="Customer" />
+          <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Tender" FromRole="Tender" ToRole="Job" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Tender" FromRole="Tender" ToRole="TenderChild" />
+          <NavigationProperty Name="TenderDetails" Relationship="Model.FK_TenderDetail_Tender" FromRole="Tender" ToRole="TenderDetail" />
+          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Tender" FromRole="Tender" ToRole="VendorQuotation" />
         </EntityType>
         <EntityType Name="TenderChild">
           <Key>
@@ -1576,10 +1753,11 @@
           <Property Name="FleetServiceId" Type="Int32" />
           <Property Name="TenderDetailId" Type="Int32" />
           <Property Name="IsDeleted" Type="Byte" />
-          <NavigationProperty Name="FleetService" Relationship="Self.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
-          <NavigationProperty Name="Tender" Relationship="Self.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
-          <NavigationProperty Name="TenderDetail" Relationship="Self.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
-          <NavigationProperty Name="Vehicle" Relationship="Self.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicles" />
+          <Property Name="IsJobExecuted" Type="Byte" />
+          <NavigationProperty Name="FleetService" Relationship="Model.FK_TenderChild_FleetService" FromRole="TenderChild" ToRole="FleetService" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderChild_Tender" FromRole="TenderChild" ToRole="Tender" />
+          <NavigationProperty Name="TenderDetail" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderChild" ToRole="TenderDetail" />
+          <NavigationProperty Name="Vehicle" Relationship="Model.FK_TenderChild_Vehicles" FromRole="TenderChild" ToRole="Vehicle" />
         </EntityType>
         <EntityType Name="TenderDetail">
           <Key>
@@ -1597,12 +1775,12 @@
           <Property Name="DestinationFromName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Byte" />
-          <NavigationProperty Name="City" Relationship="Self.FK_TenderDetail_City" FromRole="TenderDetail" ToRole="City" />
-          <NavigationProperty Name="City1" Relationship="Self.FK_TenderDetail_City1" FromRole="TenderDetail" ToRole="City" />
-          <NavigationProperty Name="Province" Relationship="Self.FK_TenderDetail_Province" FromRole="TenderDetail" ToRole="Province" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_TenderDetail_Region" FromRole="TenderDetail" ToRole="Region" />
-          <NavigationProperty Name="Tender" Relationship="Self.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
-          <NavigationProperty Name="TenderChilds" Relationship="Self.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
+          <NavigationProperty Name="City" Relationship="Model.FK_TenderDetail_City" FromRole="TenderDetail" ToRole="City" />
+          <NavigationProperty Name="City1" Relationship="Model.FK_TenderDetail_City1" FromRole="TenderDetail" ToRole="City" />
+          <NavigationProperty Name="Province" Relationship="Model.FK_TenderDetail_Province" FromRole="TenderDetail" ToRole="Province" />
+          <NavigationProperty Name="Region" Relationship="Model.FK_TenderDetail_Region" FromRole="TenderDetail" ToRole="Region" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_TenderDetail_Tender" FromRole="TenderDetail" ToRole="Tender" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_TenderDetail" FromRole="TenderDetail" ToRole="TenderChild" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -1612,28 +1790,28 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="BusinessUnitId" Type="Int32" />
           <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StatusId" Type="Byte" />
-          <NavigationProperty Name="FleetServices" Relationship="Self.FK_FleetService_Units" FromRole="Units" ToRole="FleetService" />
+          <NavigationProperty Name="FleetServices" Relationship="Model.FK_FleetService_Units" FromRole="Unit" ToRole="FleetService" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OldPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NewPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OldPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfirmPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
@@ -1651,11 +1829,11 @@
           <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TenderChilds" Relationship="Self.FK_TenderChild_Vehicles" FromRole="Vehicles" ToRole="TenderChild" />
+          <NavigationProperty Name="TenderChilds" Relationship="Model.FK_TenderChild_Vehicles" FromRole="Vehicle" ToRole="TenderChild" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -1663,7 +1841,7 @@
           </Key>
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VendorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1682,17 +1860,17 @@
           <Property Name="CityId" Type="Int32" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CopyStatus" Type="Boolean" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="RegionId" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Vendor_City" FromRole="Vendor" ToRole="City" />
-          <NavigationProperty Name="JobQuotationApprovals" Relationship="Self.FK_JobQuotationApproval_Vendor" FromRole="Vendor" ToRole="JobQuotationApproval" />
-          <NavigationProperty Name="Region" Relationship="Self.FK_Vendor_Region" FromRole="Vendor" ToRole="Region" />
-          <NavigationProperty Name="VendorQuotations" Relationship="Self.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
+          <NavigationProperty Name="City" Relationship="Model.FK_Vendor_City" FromRole="Vendor" ToRole="City" />
+          <NavigationProperty Name="JobQuotationApprovals" Relationship="Model.FK_JobQuotationApproval_Vendor" FromRole="Vendor" ToRole="JobQuotationApproval" />
+          <NavigationProperty Name="Region" Relationship="Model.FK_Vendor_Region" FromRole="Vendor" ToRole="Region" />
+          <NavigationProperty Name="VendorQuotations" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="Vendor" ToRole="VendorQuotation" />
         </EntityType>
         <EntityType Name="VendorQuotation">
           <Key>
@@ -1709,10 +1887,10 @@
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Tender" Relationship="Self.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
-          <NavigationProperty Name="Vendor" Relationship="Self.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
-          <NavigationProperty Name="VendorQuotationChilds" Relationship="Self.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationChild" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tender" Relationship="Model.FK_VendorQuotation_Tender" FromRole="VendorQuotation" ToRole="Tender" />
+          <NavigationProperty Name="Vendor" Relationship="Model.FK_VendorQuotation_Vendor" FromRole="VendorQuotation" ToRole="Vendor" />
+          <NavigationProperty Name="VendorQuotationChilds" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotation" ToRole="VendorQuotationChild" />
         </EntityType>
         <EntityType Name="VendorQuotationChild">
           <Key>
@@ -1721,15 +1899,15 @@
           <Property Name="VendorQuotationChildId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendorQuotationId" Type="Int32" Nullable="false" />
           <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DestinationFromId" Type="Int32" />
           <Property Name="DestinationToId" Type="Int32" />
           <Property Name="VehicleId" Type="Int32" />
           <Property Name="ServiceId" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Self.FK_VendorQuotationChild_City" FromRole="VendorQuotationChild" ToRole="City" />
-          <NavigationProperty Name="City1" Relationship="Self.FK_VendorQuotationChild_City1" FromRole="VendorQuotationChild" ToRole="City" />
-          <NavigationProperty Name="FleetService" Relationship="Self.FK_VendorQuotationChild_FleetService" FromRole="VendorQuotationChild" ToRole="FleetService" />
-          <NavigationProperty Name="VendorQuotation" Relationship="Self.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotationChild" ToRole="VendorQuotation" />
+          <NavigationProperty Name="City" Relationship="Model.FK_VendorQuotationChild_City" FromRole="VendorQuotationChild" ToRole="City" />
+          <NavigationProperty Name="City1" Relationship="Model.FK_VendorQuotationChild_City1" FromRole="VendorQuotationChild" ToRole="City" />
+          <NavigationProperty Name="FleetService" Relationship="Model.FK_VendorQuotationChild_FleetService" FromRole="VendorQuotationChild" ToRole="FleetService" />
+          <NavigationProperty Name="VendorQuotation" Relationship="Model.FK_VendorQuotationChild_VendorQuotation" FromRole="VendorQuotationChild" ToRole="VendorQuotation" />
         </EntityType>
         <EntityType Name="VendorsBusinessNature">
           <Key>
@@ -1737,8 +1915,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="BNatureName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BNatureName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
@@ -1750,28 +1928,28 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="OrgTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrgTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="StatusId" Type="Byte" />
         </EntityType>
         <Association Name="FK_BusinessUnits_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="BusinessUnits" Type="Self.BusinessUnit" Multiplicity="*" />
+          <End Type="Model.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model.BusinessUnit" Role="BusinessUnit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="CompanyId" />
             </Principal>
-            <Dependent Role="BusinessUnits">
+            <Dependent Role="BusinessUnit">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_City_Province">
-          <End Role="Province" Type="Self.Province" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.City" Role="City" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Province">
               <PropertyRef Name="Id" />
@@ -1782,8 +1960,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_City_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <End Type="Model.Region" Role="Region" Multiplicity="1" />
+          <End Type="Model.City" Role="City" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="RegionId" />
@@ -1794,20 +1972,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customers_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
             </Principal>
-            <Dependent Role="Customers">
+            <Dependent Role="Customer">
               <PropertyRef Name="CityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RegionalOffice_City">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="RegionalOffice" Type="Self.RegionalOffice" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="1" />
+          <End Type="Model.RegionalOffice" Role="RegionalOffice" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
@@ -1818,8 +1996,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderDetail_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
@@ -1830,8 +2008,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderDetail_City1">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
@@ -1842,8 +2020,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Vendor_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
@@ -1854,8 +2032,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorQuotationChild_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
@@ -1866,8 +2044,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorQuotationChild_City1">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
+          <End Type="Model.City" Role="City" Multiplicity="0..1" />
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
@@ -1878,8 +2056,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FinancialYearDefination_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="FinancialYearDefination" Type="Self.FinancialYearDefination" Multiplicity="*" />
+          <End Type="Model.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model.FinancialYearDefination" Role="FinancialYearDefination" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="CompanyId" />
@@ -1890,8 +2068,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Region_Company1">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="Region" Type="Self.Region" Multiplicity="*" />
+          <End Type="Model.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model.Region" Role="Region" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="CompanyId" />
@@ -1902,8 +2080,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ContractCancelation_Tender">
-          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
-          <End Role="ContractCancelation" Type="Self.ContractCancelation" Multiplicity="*" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.ContractCancelation" Role="ContractCancelation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tender">
               <PropertyRef Name="Id" />
@@ -1914,10 +2092,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExecutedJob_Customers">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="ExecutedJob" Type="Self.ExecutedJob" Multiplicity="*" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.ExecutedJob" Role="ExecutedJob" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customers">
+            <Principal Role="Customer">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ExecutedJob">
@@ -1926,10 +2104,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Job_Customers">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Job" Role="Job" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customers">
+            <Principal Role="Customer">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Job">
@@ -1938,10 +2116,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tender_Customers">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Tender" Type="Self.Tender" Multiplicity="*" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customers">
+            <Principal Role="Customer">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Tender">
@@ -1950,10 +2128,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FleetService_Units">
-          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
-          <End Role="FleetService" Type="Self.FleetService" Multiplicity="*" />
+          <End Type="Model.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Units">
+            <Principal Role="Unit">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="FleetService">
@@ -1962,8 +2140,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderChild_FleetService">
-          <End Role="FleetService" Type="Self.FleetService" Multiplicity="0..1" />
-          <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FleetService">
               <PropertyRef Name="Id" />
@@ -1974,8 +2152,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorQuotationChild_FleetService">
-          <End Role="FleetService" Type="Self.FleetService" Multiplicity="0..1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
+          <End Type="Model.FleetService" Role="FleetService" Multiplicity="0..1" />
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FleetService">
               <PropertyRef Name="Id" />
@@ -1986,8 +2164,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Job_Tender">
-          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
-          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.Job" Role="Job" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tender">
               <PropertyRef Name="Id" />
@@ -1998,8 +2176,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobChild_Job">
-          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
-          <End Role="JobChild" Type="Self.JobChild" Multiplicity="*" />
+          <End Type="Model.Job" Role="Job" Multiplicity="0..1" />
+          <End Type="Model.JobChild" Role="JobChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Job">
               <PropertyRef Name="JobId" />
@@ -2010,8 +2188,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobChild_RegionalOffice">
-          <End Role="RegionalOffice" Type="Self.RegionalOffice" Multiplicity="0..1" />
-          <End Role="JobChild" Type="Self.JobChild" Multiplicity="*" />
+          <End Type="Model.RegionalOffice" Role="RegionalOffice" Multiplicity="0..1" />
+          <End Type="Model.JobChild" Role="JobChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RegionalOffice">
               <PropertyRef Name="Id" />
@@ -2022,8 +2200,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobQuotationApproval_Vendor">
-          <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
-          <End Role="JobQuotationApproval" Type="Self.JobQuotationApproval" Multiplicity="*" />
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="0..1" />
+          <End Type="Model.JobQuotationApproval" Role="JobQuotationApproval" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendor">
               <PropertyRef Name="VendorId" />
@@ -2034,8 +2212,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Region_Province">
-          <End Role="Province" Type="Self.Province" Multiplicity="1" />
-          <End Role="Region" Type="Self.Region" Multiplicity="*" />
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.Region" Role="Region" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Province">
               <PropertyRef Name="Id" />
@@ -2046,8 +2224,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderDetail_Province">
-          <End Role="Province" Type="Self.Province" Multiplicity="1" />
-          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <End Type="Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Province">
               <PropertyRef Name="Id" />
@@ -2058,8 +2236,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderDetail_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="RegionId" />
@@ -2070,8 +2248,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Vendor_Region">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+          <End Type="Model.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="RegionId" />
@@ -2082,8 +2260,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderChild_Tender">
-          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
-          <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tender">
               <PropertyRef Name="Id" />
@@ -2094,8 +2272,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderDetail_Tender">
-          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
-          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="*" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tender">
               <PropertyRef Name="Id" />
@@ -2106,8 +2284,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorQuotation_Tender">
-          <End Role="Tender" Type="Self.Tender" Multiplicity="1" />
-          <End Role="VendorQuotation" Type="Self.VendorQuotation" Multiplicity="*" />
+          <End Type="Model.Tender" Role="Tender" Multiplicity="1" />
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tender">
               <PropertyRef Name="Id" />
@@ -2118,8 +2296,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderChild_TenderDetail">
-          <End Role="TenderDetail" Type="Self.TenderDetail" Multiplicity="0..1" />
-          <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
+          <End Type="Model.TenderDetail" Role="TenderDetail" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TenderDetail">
               <PropertyRef Name="Id" />
@@ -2130,10 +2308,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TenderChild_Vehicles">
-          <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="0..1" />
-          <End Role="TenderChild" Type="Self.TenderChild" Multiplicity="*" />
+          <End Type="Model.Vehicle" Role="Vehicle" Multiplicity="0..1" />
+          <End Type="Model.TenderChild" Role="TenderChild" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Vehicles">
+            <Principal Role="Vehicle">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TenderChild">
@@ -2142,8 +2320,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorQuotation_Vendor">
-          <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
-          <End Role="VendorQuotation" Type="Self.VendorQuotation" Multiplicity="*" />
+          <End Type="Model.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendor">
               <PropertyRef Name="VendorId" />
@@ -2154,8 +2332,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_VendorQuotationChild_VendorQuotation">
-          <End Role="VendorQuotation" Type="Self.VendorQuotation" Multiplicity="1" />
-          <End Role="VendorQuotationChild" Type="Self.VendorQuotationChild" Multiplicity="*" />
+          <End Type="Model.VendorQuotation" Role="VendorQuotation" Multiplicity="1" />
+          <End Type="Model.VendorQuotationChild" Role="VendorQuotationChild" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="VendorQuotation">
               <PropertyRef Name="VendorQuotationId" />
@@ -2165,177 +2343,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BusinessUnits" EntityType="Self.BusinessUnit" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Companies" EntityType="Self.Company" />
-          <EntitySet Name="ContractCancelations" EntityType="Self.ContractCancelation" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="Currencies" EntityType="Self.Currency" />
-          <EntitySet Name="CustomerBusinessLines" EntityType="Self.CustomerBusinessLine" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="ExecutedJobs" EntityType="Self.ExecutedJob" />
-          <EntitySet Name="FinancialYearDefinations" EntityType="Self.FinancialYearDefination" />
-          <EntitySet Name="FleetServices" EntityType="Self.FleetService" />
-          <EntitySet Name="Jobs" EntityType="Self.Job" />
-          <EntitySet Name="JobChilds" EntityType="Self.JobChild" />
-          <EntitySet Name="JobQuotationApprovals" EntityType="Self.JobQuotationApproval" />
-          <EntitySet Name="ModuleCategories" EntityType="Self.ModuleCategory" />
-          <EntitySet Name="ModuleForms" EntityType="Self.ModuleForm" />
-          <EntitySet Name="Modules" EntityType="Self.Module" />
-          <EntitySet Name="Provinces" EntityType="Self.Province" />
-          <EntitySet Name="Regions" EntityType="Self.Region" />
-          <EntitySet Name="RegionalOffices" EntityType="Self.RegionalOffice" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="RolesToUsers" EntityType="Self.RolesToUser" />
-          <EntitySet Name="Tenders" EntityType="Self.Tender" />
-          <EntitySet Name="TenderChilds" EntityType="Self.TenderChild" />
-          <EntitySet Name="TenderDetails" EntityType="Self.TenderDetail" />
-          <EntitySet Name="Units" EntityType="Self.Unit" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
-          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
-          <EntitySet Name="VendorQuotations" EntityType="Self.VendorQuotation" />
-          <EntitySet Name="VendorQuotationChilds" EntityType="Self.VendorQuotationChild" />
-          <EntitySet Name="VendorsBusinessNatures" EntityType="Self.VendorsBusinessNature" />
-          <EntitySet Name="VendorsOrgTypes" EntityType="Self.VendorsOrgType" />
-          <AssociationSet Name="FK_BusinessUnits_Company" Association="Self.FK_BusinessUnits_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="BusinessUnits" EntitySet="BusinessUnits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_Province" Association="Self.FK_City_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_Region" Association="Self.FK_City_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customers_City" Association="Self.FK_Customers_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegionalOffice_City" Association="Self.FK_RegionalOffice_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="RegionalOffice" EntitySet="RegionalOffices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_City" Association="Self.FK_TenderDetail_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_City1" Association="Self.FK_TenderDetail_City1">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vendor_City" Association="Self.FK_Vendor_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Vendor" EntitySet="Vendors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_City" Association="Self.FK_VendorQuotationChild_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_City1" Association="Self.FK_VendorQuotationChild_City1">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FinancialYearDefination_Company" Association="Self.FK_FinancialYearDefination_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="FinancialYearDefination" EntitySet="FinancialYearDefinations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region_Company1" Association="Self.FK_Region_Company1">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Region" EntitySet="Regions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContractCancelation_Tender" Association="Self.FK_ContractCancelation_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="ContractCancelation" EntitySet="ContractCancelations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExecutedJob_Customers" Association="Self.FK_ExecutedJob_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="ExecutedJob" EntitySet="ExecutedJobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Job_Customers" Association="Self.FK_Job_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Job" EntitySet="Jobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tender_Customers" Association="Self.FK_Tender_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Tender" EntitySet="Tenders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FleetService_Units" Association="Self.FK_FleetService_Units">
-            <End Role="Units" EntitySet="Units" />
-            <End Role="FleetService" EntitySet="FleetServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_FleetService" Association="Self.FK_TenderChild_FleetService">
-            <End Role="FleetService" EntitySet="FleetServices" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_FleetService" Association="Self.FK_VendorQuotationChild_FleetService">
-            <End Role="FleetService" EntitySet="FleetServices" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Job_Tender" Association="Self.FK_Job_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="Job" EntitySet="Jobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobChild_Job" Association="Self.FK_JobChild_Job">
-            <End Role="Job" EntitySet="Jobs" />
-            <End Role="JobChild" EntitySet="JobChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobChild_RegionalOffice" Association="Self.FK_JobChild_RegionalOffice">
-            <End Role="RegionalOffice" EntitySet="RegionalOffices" />
-            <End Role="JobChild" EntitySet="JobChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobQuotationApproval_Vendor" Association="Self.FK_JobQuotationApproval_Vendor">
-            <End Role="Vendor" EntitySet="Vendors" />
-            <End Role="JobQuotationApproval" EntitySet="JobQuotationApprovals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region_Province" Association="Self.FK_Region_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="Region" EntitySet="Regions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Province" Association="Self.FK_TenderDetail_Province">
-            <End Role="Province" EntitySet="Provinces" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Region" Association="Self.FK_TenderDetail_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vendor_Region" Association="Self.FK_Vendor_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="Vendor" EntitySet="Vendors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Tender" Association="Self.FK_TenderChild_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderDetail_Tender" Association="Self.FK_TenderDetail_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotation_Tender" Association="Self.FK_VendorQuotation_Tender">
-            <End Role="Tender" EntitySet="Tenders" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_TenderDetail" Association="Self.FK_TenderChild_TenderDetail">
-            <End Role="TenderDetail" EntitySet="TenderDetails" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TenderChild_Vehicles" Association="Self.FK_TenderChild_Vehicles">
-            <End Role="Vehicles" EntitySet="Vehicles" />
-            <End Role="TenderChild" EntitySet="TenderChilds" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotation_Vendor" Association="Self.FK_VendorQuotation_Vendor">
-            <End Role="Vendor" EntitySet="Vendors" />
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Self.FK_VendorQuotationChild_VendorQuotation">
-            <End Role="VendorQuotation" EntitySet="VendorQuotations" />
-            <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2345,582 +2352,586 @@
           <EntitySetMapping Name="BusinessUnits">
             <EntityTypeMapping TypeName="Model.BusinessUnit">
               <MappingFragment StoreEntitySet="BusinessUnits">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="Model.City">
               <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="Model.Company">
               <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="NTN" ColumnName="NTN" />
-                <ScalarProperty Name="STRN" ColumnName="STRN" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="GST" ColumnName="GST" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="ShowName" ColumnName="ShowName" />
-                <ScalarProperty Name="ShowLogo" ColumnName="ShowLogo" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="ShowLogo" ColumnName="ShowLogo" />
+                <ScalarProperty Name="ShowName" ColumnName="ShowName" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="STRN" ColumnName="STRN" />
+                <ScalarProperty Name="NTN" ColumnName="NTN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ContractCancelations">
             <EntityTypeMapping TypeName="Model.ContractCancelation">
               <MappingFragment StoreEntitySet="ContractCancelation">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="CancelationBy" ColumnName="CancelationBy" />
-                <ScalarProperty Name="CancelationDate" ColumnName="CancelationDate" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Reasion" ColumnName="Reasion" />
+                <ScalarProperty Name="CancelationDate" ColumnName="CancelationDate" />
+                <ScalarProperty Name="CancelationBy" ColumnName="CancelationBy" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="Model.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Currencies">
             <EntityTypeMapping TypeName="Model.Currency">
               <MappingFragment StoreEntitySet="Currency">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CurrencyRate" ColumnName="CurrencyRate" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CurrencyRate" ColumnName="CurrencyRate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CustomerBusinessLines">
             <EntityTypeMapping TypeName="Model.CustomerBusinessLine">
               <MappingFragment StoreEntitySet="CustomerBusinessLine">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="Model.Customer">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CustomerBusinessLineId" ColumnName="CustomerBusinessLineId" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
-                <ScalarProperty Name="NTN" ColumnName="NTN" />
-                <ScalarProperty Name="STRN" ColumnName="STRN" />
-                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
-                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
-                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="STRN" ColumnName="STRN" />
+                <ScalarProperty Name="NTN" ColumnName="NTN" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="CustomerBusinessLineId" ColumnName="CustomerBusinessLineId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExecutedJobs">
             <EntityTypeMapping TypeName="Model.ExecutedJob">
               <MappingFragment StoreEntitySet="ExecutedJob">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="Transporter" ColumnName="Transporter" />
-                <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
-                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
-                <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
-                <ScalarProperty Name="SupportingRefNo" ColumnName="SupportingRefNo" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="CEOName" ColumnName="CEOName" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="ExecutionDate" ColumnName="ExecutionDate" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ExecutionDate" ColumnName="ExecutionDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CEOName" ColumnName="CEOName" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="SupportingRefNo" ColumnName="SupportingRefNo" />
+                <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
+                <ScalarProperty Name="Transporter" ColumnName="Transporter" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FinancialYearDefinations">
             <EntityTypeMapping TypeName="Model.FinancialYearDefination">
               <MappingFragment StoreEntitySet="FinancialYearDefination">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="FYearTitle" ColumnName="FYearTitle" />
-                <ScalarProperty Name="FYearStartDate" ColumnName="FYearStartDate" />
-                <ScalarProperty Name="FYearEndDate" ColumnName="FYearEndDate" />
-                <ScalarProperty Name="FYearActive" ColumnName="FYearActive" />
-                <ScalarProperty Name="FYearLocked" ColumnName="FYearLocked" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="FYearLocked" ColumnName="FYearLocked" />
+                <ScalarProperty Name="FYearActive" ColumnName="FYearActive" />
+                <ScalarProperty Name="FYearEndDate" ColumnName="FYearEndDate" />
+                <ScalarProperty Name="FYearStartDate" ColumnName="FYearStartDate" />
+                <ScalarProperty Name="FYearTitle" ColumnName="FYearTitle" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FleetServices">
             <EntityTypeMapping TypeName="Model.FleetService">
               <MappingFragment StoreEntitySet="FleetService">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
-                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Jobs">
             <EntityTypeMapping TypeName="Model.Job">
               <MappingFragment StoreEntitySet="Job">
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
-                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
-                <ScalarProperty Name="PONo" ColumnName="PONo" />
-                <ScalarProperty Name="PODate" ColumnName="PODate" />
-                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-                <ScalarProperty Name="PRNo" ColumnName="PRNo" />
-                <ScalarProperty Name="ProposalRef" ColumnName="ProposalRef" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="OtherTermsConditions" ColumnName="OtherTermsConditions" />
-                <ScalarProperty Name="InvoiceAddress" ColumnName="InvoiceAddress" />
-                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
-                <ScalarProperty Name="ExecutionStatus" ColumnName="ExecutionStatus" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ExecutionStatus" ColumnName="ExecutionStatus" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="InvoiceAddress" ColumnName="InvoiceAddress" />
+                <ScalarProperty Name="OtherTermsConditions" ColumnName="OtherTermsConditions" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ProposalRef" ColumnName="ProposalRef" />
+                <ScalarProperty Name="PRNo" ColumnName="PRNo" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="PODate" ColumnName="PODate" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JobChilds">
             <EntityTypeMapping TypeName="Model.JobChild">
               <MappingFragment StoreEntitySet="JobChild">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="DetailedDescription" ColumnName="DetailedDescription" />
-                <ScalarProperty Name="UnitOfMesure" ColumnName="UnitOfMesure" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="IsExecuted" ColumnName="IsExecuted" />
                 <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitOfMesure" ColumnName="UnitOfMesure" />
+                <ScalarProperty Name="DetailedDescription" ColumnName="DetailedDescription" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JobQuotationApprovals">
             <EntityTypeMapping TypeName="Model.JobQuotationApproval">
               <MappingFragment StoreEntitySet="JobQuotationApproval">
-                <ScalarProperty Name="JobQuotationApprovalId" ColumnName="JobQuotationApprovalId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="JobQuotationApprovalId" ColumnName="JobQuotationApprovalId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ModuleCategories">
             <EntityTypeMapping TypeName="Model.ModuleCategory">
               <MappingFragment StoreEntitySet="ModuleCategory">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="moduleId" ColumnName="moduleId" />
-                <ScalarProperty Name="CssClass" ColumnName="CssClass" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
                 <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CssClass" ColumnName="CssClass" />
+                <ScalarProperty Name="moduleId" ColumnName="moduleId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ModuleForms">
             <EntityTypeMapping TypeName="Model.ModuleForm">
               <MappingFragment StoreEntitySet="ModuleForms">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="formName" ColumnName="formName" />
-                <ScalarProperty Name="formAlias" ColumnName="formAlias" />
-                <ScalarProperty Name="moduleId" ColumnName="moduleId" />
-                <ScalarProperty Name="moduleCategoryId" ColumnName="moduleCategoryId" />
-                <ScalarProperty Name="Navigation" ColumnName="Navigation" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="Project" ColumnName="Project" />
                 <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="Navigation" ColumnName="Navigation" />
+                <ScalarProperty Name="moduleCategoryId" ColumnName="moduleCategoryId" />
+                <ScalarProperty Name="moduleId" ColumnName="moduleId" />
+                <ScalarProperty Name="formAlias" ColumnName="formAlias" />
+                <ScalarProperty Name="formName" ColumnName="formName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Modules">
             <EntityTypeMapping TypeName="Model.Module">
               <MappingFragment StoreEntitySet="Modules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="Project" ColumnName="Project" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provinces">
             <EntityTypeMapping TypeName="Model.Province">
               <MappingFragment StoreEntitySet="Province">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Regions">
             <EntityTypeMapping TypeName="Model.Region">
               <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RegionalOffices">
             <EntityTypeMapping TypeName="Model.RegionalOffice">
               <MappingFragment StoreEntitySet="RegionalOffice">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="ContactPersonMobile" ColumnName="ContactPersonMobile" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ContactPersonMobile" ColumnName="ContactPersonMobile" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="Model.Role">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
-                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
                 <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RolesToUsers">
             <EntityTypeMapping TypeName="Model.RolesToUser">
               <MappingFragment StoreEntitySet="RolesToUser">
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
-                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
                 <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tenders">
             <EntityTypeMapping TypeName="Model.Tender">
               <MappingFragment StoreEntitySet="Tender">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
-                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
-                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
-                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
-                <ScalarProperty Name="TenderExpiryDate" ColumnName="TenderExpiryDate" />
-                <ScalarProperty Name="Gst" ColumnName="Gst" />
-                <ScalarProperty Name="FurthurTax" ColumnName="FurthurTax" />
-                <ScalarProperty Name="AdditionalTax" ColumnName="AdditionalTax" />
                 <ScalarProperty Name="WithHoldingTax" ColumnName="WithHoldingTax" />
+                <ScalarProperty Name="AdditionalTax" ColumnName="AdditionalTax" />
+                <ScalarProperty Name="FurthurTax" ColumnName="FurthurTax" />
+                <ScalarProperty Name="Gst" ColumnName="Gst" />
+                <ScalarProperty Name="TenderExpiryDate" ColumnName="TenderExpiryDate" />
+                <ScalarProperty Name="ProceedStatus" ColumnName="ProceedStatus" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TenderNo" ColumnName="TenderNo" />
+                <ScalarProperty Name="TenderTerm" ColumnName="TenderTerm" />
+                <ScalarProperty Name="TenderSource" ColumnName="TenderSource" />
+                <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TenderReference" ColumnName="TenderReference" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TenderChilds">
             <EntityTypeMapping TypeName="Model.TenderChild">
               <MappingFragment StoreEntitySet="TenderChild">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="FleetServiceId" ColumnName="FleetServiceId" />
-                <ScalarProperty Name="TenderDetailId" ColumnName="TenderDetailId" />
+                <ScalarProperty Name="IsJobExecuted" ColumnName="IsJobExecuted" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="TenderDetailId" ColumnName="TenderDetailId" />
+                <ScalarProperty Name="FleetServiceId" ColumnName="FleetServiceId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TenderDetails">
             <EntityTypeMapping TypeName="Model.TenderDetail">
               <MappingFragment StoreEntitySet="TenderDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
-                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
-                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
-                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="DestinationFromName" ColumnName="DestinationFromName" />
+                <ScalarProperty Name="DestinationToName" ColumnName="DestinationToName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
+                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="Model.Unit">
               <MappingFragment StoreEntitySet="Units">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="OldPassword" ColumnName="OldPassword" />
-                <ScalarProperty Name="NewPassword" ColumnName="NewPassword" />
-                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="NewPassword" ColumnName="NewPassword" />
+                <ScalarProperty Name="OldPassword" ColumnName="OldPassword" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="Model.Vehicle">
               <MappingFragment StoreEntitySet="Vehicles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="Model.Vendor">
               <MappingFragment StoreEntitySet="Vendor">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
-                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
-                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
-                <ScalarProperty Name="NTN" ColumnName="NTN" />
-                <ScalarProperty Name="STRN" ColumnName="STRN" />
-                <ScalarProperty Name="NatureOfBusinessId" ColumnName="NatureOfBusinessId" />
-                <ScalarProperty Name="TypeOfBusinessId" ColumnName="TypeOfBusinessId" />
-                <ScalarProperty Name="YearEstablished" ColumnName="YearEstablished" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CopyStatus" ColumnName="CopyStatus" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CopyStatus" ColumnName="CopyStatus" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="YearEstablished" ColumnName="YearEstablished" />
+                <ScalarProperty Name="TypeOfBusinessId" ColumnName="TypeOfBusinessId" />
+                <ScalarProperty Name="NatureOfBusinessId" ColumnName="NatureOfBusinessId" />
+                <ScalarProperty Name="STRN" ColumnName="STRN" />
+                <ScalarProperty Name="NTN" ColumnName="NTN" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="VendorType" ColumnName="VendorType" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorQuotations">
             <EntityTypeMapping TypeName="Model.VendorQuotation">
               <MappingFragment StoreEntitySet="VendorQuotation">
-                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
-                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorQuotationChilds">
             <EntityTypeMapping TypeName="Model.VendorQuotationChild">
               <MappingFragment StoreEntitySet="VendorQuotationChild">
-                <ScalarProperty Name="VendorQuotationChildId" ColumnName="VendorQuotationChildId" />
-                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
-                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="DestinationToId" ColumnName="DestinationToId" />
+                <ScalarProperty Name="DestinationFromId" ColumnName="DestinationFromId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
+                <ScalarProperty Name="VendorQuotationChildId" ColumnName="VendorQuotationChildId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorsBusinessNatures">
             <EntityTypeMapping TypeName="Model.VendorsBusinessNature">
               <MappingFragment StoreEntitySet="VendorsBusinessNature">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="BNatureName" ColumnName="BNatureName" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BNatureName" ColumnName="BNatureName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorsOrgTypes">
             <EntityTypeMapping TypeName="Model.VendorsOrgType">
               <MappingFragment StoreEntitySet="VendorsOrgType">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
