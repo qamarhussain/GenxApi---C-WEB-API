@@ -501,5 +501,29 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult GetExecutedJobs()
+        {
+            try
+            {
+                var model = new List<JobExecutedViewListModel>();
+
+                var data = _unitOfWork.ExecutedJob.AllIncluding(x => x.Customer).ToList();
+                foreach (var item in data)
+                {
+                    JobExecutedViewListModel obj = new JobExecutedViewListModel();
+                    obj.executedJob = item;
+                    obj.tender = _unitOfWork.Tenders.Get(item.ContractId);
+                    model.Add(obj);
+                }
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }

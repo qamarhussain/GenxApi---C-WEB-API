@@ -222,6 +222,7 @@
     <Compile Include="Models\FleetServiceViewModel.cs" />
     <Compile Include="Models\JobApprovalListViewModel.cs" />
     <Compile Include="Models\JobDataViewModel.cs" />
+    <Compile Include="Models\JobExecutedViewListModel.cs" />
     <Compile Include="Models\JobOrderCreateViewModel.cs" />
     <Compile Include="Models\JobQuotationApprovalCreateViewModel.cs" />
     <Compile Include="Models\JobQuotationApprovalViewModel.cs" />
