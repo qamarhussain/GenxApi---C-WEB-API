@@ -145,7 +145,23 @@ namespace GENXAPI.Api.Controllers
             }
            
         }
-    
+
+        [HttpPost]
+        public IHttpActionResult CheckVendorExistOnTenderId(CompanyBusinessUntiInfoViewModel model)
+        {
+            var isExist = _unitOfWork.VendorQuotation.Find(a => a.TenderId == model.TendorId && a.VendorId == model.VendorId).FirstOrDefault();
+
+            if (isExist == null)
+            {
+                return Ok(new { Status = false });
+            }
+            else
+            {
+                return Ok(new { Status = true });
+            }
+
+        }
+
 
     }
 }

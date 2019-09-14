@@ -19,6 +19,8 @@ namespace GENXAPI.Repisitory.Model
         public int CancelationBy { get; set; }
         public System.DateTime CancelationDate { get; set; }
         public string Reasion { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
     
         public virtual Tender Tender { get; set; }
     }

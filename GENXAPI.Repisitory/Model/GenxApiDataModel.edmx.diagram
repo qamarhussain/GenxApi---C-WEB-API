@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="26.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="15" PointY="34.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CustomerBusinessLine" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -50,7 +49,6 @@
         <AssociationConnector Association="Model.FK_VendorQuotationChild_City1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Region_Company1" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_ExecutedJob_Customers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Job_Customers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Tender_Customers" ManuallyRouted="false" />
@@ -72,6 +70,8 @@
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="15" PointY="51.375" />
+        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

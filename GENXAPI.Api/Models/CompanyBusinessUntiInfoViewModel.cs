@@ -14,5 +14,6 @@ namespace GENXAPI.Api.Models
         public int RegionId { get; set; }
         public int JobId { get; set; }
         public int VendorId { get; set; }
+        public int TendorId { get; set; }
     }
 }
