@@ -17,6 +17,6 @@ namespace GENXAPI.Api.Models
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public Nullable<int> UnitOfMeasurement { get; set; }
-        public Unit unit { get; set; }
+        public Unit Unit { get; set; }
     }
 }

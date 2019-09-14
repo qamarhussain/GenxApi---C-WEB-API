@@ -121,6 +121,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
+                
                 var keyPairValues = _fleetServiceRepo.GetByIdCollection(model);
                 var fleetServices = new List<FleetServiceViewModel>();
                 foreach(var item in keyPairValues)
@@ -130,7 +131,7 @@ namespace GENXAPI.Api.Controllers
                         Id=item.Id,
                         ServiceName=item.ServiceName,
                         ServiceType=item.ServiceType,
-                        unit = _unitRepo.Get(item.Id)
+                        Unit = _unitRepo.Get(item.UnitOfMeasurement.Value)
                     });
                 }
                 return Ok(fleetServices);
