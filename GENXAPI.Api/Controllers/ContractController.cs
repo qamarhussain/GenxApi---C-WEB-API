@@ -264,7 +264,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                model.CancelationDate = DateTime.Now;
+                model.CreatedOn = DateTime.Now;
                 _unitOfWork.ContractCancelation.Add(model);
                 var contract = _unitOfWork.Tenders.Get(model.ContractId);
                 contract.ProceedStatus = (byte)TenderUtility.ContractCancelState;
