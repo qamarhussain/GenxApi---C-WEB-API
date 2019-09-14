@@ -25,8 +25,8 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<byte> IsDeleted { get; set; }
     
         public virtual FleetService FleetService { get; set; }
+        public virtual Tender Tender { get; set; }
         public virtual TenderDetail TenderDetail { get; set; }
         public virtual Vehicle Vehicle { get; set; }
-        public virtual Tender Tender { get; set; }
     }
 }

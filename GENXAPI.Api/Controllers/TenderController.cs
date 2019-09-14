@@ -104,7 +104,7 @@ namespace GENXAPI.Api.Controllers
                 tender.TenderNo = updateViewModel.TenderNo;
                 //_unitOfWork.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
                 //_unitOfWork.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
-                foreach (var child in tender.TenderDetails.ToList())
+                foreach (var child in tender.TenderDetails.Where(x=>x.IsDeleted == (byte)TenderChildStatus.Active).ToList())
                 {
                     var obj = updateViewModel.TenderDetails.Where(x => x.DestinationFromId == child.DestinationFromId && x.DestinationToId == child.DestinationToId).FirstOrDefault();
                     if (obj == null)

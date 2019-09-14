@@ -45,8 +45,8 @@ namespace GENXAPI.Repisitory.Model
         public string CreatedBy { get; set; }
     
         public virtual Customer Customer { get; set; }
+        public virtual Tender Tender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobChild> JobChilds { get; set; }
-        public virtual Tender Tender { get; set; }
     }
 }

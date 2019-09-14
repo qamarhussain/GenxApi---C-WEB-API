@@ -4,84 +4,74 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20317bdf70fd46f4b13e4fbc28ba9b3e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="33.125" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="26.125" />
-        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="25.75" />
-        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="15" PointY="56.625" />
-        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.CustomerBusinessLine" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="29.75" />
-        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="27.875" />
-        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="24.5" />
-        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="15" PointY="19.375" />
-        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="35.125" />
-        <EntityTypeShape EntityType="Model.JobChild" Width="1.5" PointX="17.25" PointY="38.25" />
-        <EntityTypeShape EntityType="Model.JobQuotationApproval" Width="1.5" PointX="12.75" PointY="24" />
-        <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="3.75" PointY="28.5" />
-        <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="6" PointY="26.25" />
-        <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="40.5" />
-        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="34.125" />
-        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="12.75" PointY="41.75" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="18" PointY="42.625" />
-        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="10.5" PointY="21.75" />
-        <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="15" PointY="30.125" />
-        <EntityTypeShape EntityType="Model.VendorQuotationChild" Width="1.5" PointX="17.25" PointY="27.375" />
-        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="8.75" PointY="0.75" />
-        <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
-        <AssociationConnector Association="Model.FK_City_Province" />
-        <AssociationConnector Association="Model.FK_City_Region" />
-        <AssociationConnector Association="Model.FK_Customers_City" />
-        <AssociationConnector Association="Model.FK_RegionalOffice_City" />
-        <AssociationConnector Association="Model.FK_TenderDetail_City" />
-        <AssociationConnector Association="Model.FK_TenderDetail_City1" />
-        <AssociationConnector Association="Model.FK_Vendor_City" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_City" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_City1" />
-        <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
-        <AssociationConnector Association="Model.FK_Region_Company1" />
-        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
-        <AssociationConnector Association="Model.FK_Job_Customers" />
-        <AssociationConnector Association="Model.FK_FleetService_Units" />
-        <AssociationConnector Association="Model.FK_Job_Tender" />
-        <AssociationConnector Association="Model.FK_JobChild_Job" />
-        <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
-        <AssociationConnector Association="Model.FK_JobQuotationApproval_Vendor" />
-        <AssociationConnector Association="Model.FK_Region_Province" />
-        <AssociationConnector Association="Model.FK_Vendor_Region" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
-        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="28.25" />
-        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
-        <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="17.25" PointY="32.5" />
-        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="15" PointY="29.375" />
-        <AssociationConnector Association="Model.FK_TenderDetail_City" />
-        <AssociationConnector Association="Model.FK_TenderDetail_City1" />
-        <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
-        <AssociationConnector Association="Model.FK_TenderDetail_Province" />
-        <AssociationConnector Association="Model.FK_TenderDetail_Region" />
-        <AssociationConnector Association="Model.FK_TenderChild_Tender" />
-        <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
-        <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
-        <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
-        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="34.625" />
-        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
-        <AssociationConnector Association="Model.FK_Tender_Customers" />
-        <AssociationConnector Association="Model.FK_Job_Tender" />
-        <AssociationConnector Association="Model.FK_TenderChild_Tender" />
-        <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotationChild" />
+      <Diagram DiagramId="6ac98afddb364c5ca2b9976ef256c778" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="8.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ContractCancelation" Width="1.5" PointX="15" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CustomerBusinessLine" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="15.75" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobChild" Width="1.5" PointX="20.25" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JobQuotationApproval" Width="1.5" PointX="17.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="3.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="18" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="18" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="13.5" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="15.75" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="15.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="15" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VendorQuotationChild" Width="1.5" PointX="20.25" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_BusinessUnits_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_City_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_City_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Customers_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_RegionalOffice_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Vendor_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_City" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_City1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Region_Company1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Job_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Tender_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_FleetService_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderChild_FleetService" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_FleetService" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Job_Tender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_JobChild_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_JobQuotationApproval_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Region_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Vendor_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderChild_Tender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Tender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TenderChild_Vehicles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
