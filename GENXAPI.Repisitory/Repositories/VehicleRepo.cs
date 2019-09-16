@@ -23,7 +23,7 @@ namespace GENXAPI.Repisitory
             new DropdownListDto
             {
                 Value = r.Id.ToString(),
-                Text = r.Title + "-"+ r.Weight
+                Text = r.Title + " " + "-"+ " " + r.Weight
             });
             return result.ToList();
         }
