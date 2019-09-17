@@ -348,7 +348,7 @@ namespace GENXAPI.Api.Controllers
                 foreach (var item in results)
                 {
                     var obj = new JobQuotationApprovalViewModel();
-                    var itemCodeDetail = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.ItemCode == item.ItemCode && a.IsDeleted == (byte)TenderChildStatus.Active).FirstOrDefault();
+                    var itemCodeDetail = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a =>a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.ItemCode == item.ItemCode && a.IsDeleted == (byte)TenderChildStatus.Active).FirstOrDefault();
                     if (itemCodeDetail != null)
                     {
                         obj.JobId = item.vendorInfo.First().VendorQuotation.JobId;
@@ -357,9 +357,9 @@ namespace GENXAPI.Api.Controllers
                         obj.VendorQUotationChildId = item.vendorInfo.First().VendorQuotationChildId;
                         obj.ItemCode = item.ItemCode;
                         if (itemCodeDetail.FleetServiceId != null)
-                            obj.Particulars = itemCodeDetail.FleetService.ServiceName;
+                            obj.Particulars = itemCodeDetail.FleetService.ServiceName + " " + "-" + " "+ itemCodeDetail.FleetService.Unit.Title;
                         else
-                            obj.Particulars = itemCodeDetail.TenderDetail.City.Name + " To " + itemCodeDetail.TenderDetail.City1.Name;
+                            obj.Particulars = itemCodeDetail.TenderDetail.City.Name + " To " + itemCodeDetail.TenderDetail.City1.Name + " " + "-" + " " + itemCodeDetail.Vehicle.Title + " " + "-" + " " + itemCodeDetail.Vehicle.Weight;
 
                         foreach (var p in item.vendorInfo)
                         {

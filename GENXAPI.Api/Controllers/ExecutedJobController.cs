@@ -37,18 +37,39 @@ namespace GENXAPI.Api.Controllers
                 model.CreatedOn = DateTime.Now;
                 model.LastModifiedDate = DateTime.Now;
                 _unitOfWork.ExecutedJob.Add(model);
-                var jobChild = _unitOfWork.JobChild.Find(x => x.ItemCode == model.ItemCode).FirstOrDefault();
+                var jobChild = _unitOfWork.JobChild.Find(x => x.ItemCode == model.ItemCode && x.JobId == model.JobId).FirstOrDefault();
                 if (jobChild != null)
                 {
-                    jobChild.IsExecuted = (byte)TenderChildStatus.JobExecuted;
-                    _unitOfWork.JobChild.Update(jobChild);
+                    //if(jobChild.IsExecuted == 3)
+                    //{
+                    //    jobChild.IsExecuted = 3;
+                    //    _unitOfWork.JobChild.Update(jobChild);
+
+                    //}
+                 
+                        jobChild.IsExecuted = (byte)TenderChildStatus.JobExecuted;
+                        _unitOfWork.JobChild.Update(jobChild);
+                    
+                
                 }
                 var tenderChild = _unitOfWork.TenderChilds.Find(x => x.ItemCode == model.ItemCode).FirstOrDefault();
                 if (tenderChild != null)
                 {
-                    tenderChild.IsJobExecuted = (byte)TenderChildStatus.JobExecuted;
-                    _unitOfWork.TenderChilds.Update(tenderChild);
+                    //if(tenderChild.IsJobExecuted == 3)
+                    //{
+                    //    tenderChild.IsJobExecuted = 3;
+                    //    _unitOfWork.TenderChilds.Update(tenderChild);
+
+                    //}
+                   
+                        tenderChild.IsJobExecuted = (byte)TenderChildStatus.JobExecuted;
+                        _unitOfWork.TenderChilds.Update(tenderChild);
+                    
+              
                 }
+   
+                
+              
                 _unitOfWork.SaveChanges();
                 return Ok(model);
             }
