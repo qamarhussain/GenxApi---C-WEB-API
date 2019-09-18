@@ -40,36 +40,15 @@ namespace GENXAPI.Api.Controllers
                 var jobChild = _unitOfWork.JobChild.Find(x => x.ItemCode == model.ItemCode && x.JobId == model.JobId).FirstOrDefault();
                 if (jobChild != null)
                 {
-                    //if(jobChild.IsExecuted == 3)
-                    //{
-                    //    jobChild.IsExecuted = 3;
-                    //    _unitOfWork.JobChild.Update(jobChild);
-
-                    //}
-                 
                         jobChild.IsExecuted = (byte)TenderChildStatus.JobExecuted;
                         _unitOfWork.JobChild.Update(jobChild);
-                    
-                
                 }
-                var tenderChild = _unitOfWork.TenderChilds.Find(x => x.ItemCode == model.ItemCode).FirstOrDefault();
+                var tenderChild = _unitOfWork.TenderChilds.Find(x => x.ItemCode == model.ItemCode && x.CustomerId == model.CustomerId && x.TenderId == model.ContractId).FirstOrDefault();
                 if (tenderChild != null)
                 {
-                    //if(tenderChild.IsJobExecuted == 3)
-                    //{
-                    //    tenderChild.IsJobExecuted = 3;
-                    //    _unitOfWork.TenderChilds.Update(tenderChild);
-
-                    //}
-                   
                         tenderChild.IsJobExecuted = (byte)TenderChildStatus.JobExecuted;
                         _unitOfWork.TenderChilds.Update(tenderChild);
-                    
-              
                 }
-   
-                
-              
                 _unitOfWork.SaveChanges();
                 return Ok(model);
             }
