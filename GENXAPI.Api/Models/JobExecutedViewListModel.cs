@@ -6,5 +6,6 @@ namespace GENXAPI.Api.Models
     {
         public ExecutedJob executedJob { get; set; }
         public Tender tender { get; set; }
+        public JobQuotationApproval jobQuotationApproval { get; set; }
     }
 }
