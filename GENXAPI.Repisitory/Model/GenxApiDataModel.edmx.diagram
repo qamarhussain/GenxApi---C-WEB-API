@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.CustomerBusinessLine" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="10.5" PointY="22.125" />
-        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="12.75" PointY="20.375" />
         <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="3" PointY="24.875" />
         <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="18" PointY="22.5" />
         <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="15" PointY="27.5" />
@@ -51,7 +50,6 @@
         <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
         <AssociationConnector Association="Model.FK_Region_Company1" />
         <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
-        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
         <AssociationConnector Association="Model.FK_Job_Customers" />
         <AssociationConnector Association="Model.FK_Tender_Customers" />
         <AssociationConnector Association="Model.FK_FleetService_Units" />
@@ -72,6 +70,9 @@
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
         <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
+        <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="13.125" PointY="22.625" />
+        <EntityTypeShape EntityType="Model.Warehouse" Width="1.5" PointX="0.75" PointY="8.75" />
+        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

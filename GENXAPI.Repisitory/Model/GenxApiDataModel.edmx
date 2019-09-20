@@ -168,6 +168,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StatusId" Type="tinyint" Nullable="false" />
+          <Property Name="WayBillNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -558,6 +559,24 @@
           <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="LastModifiedDate" Type="datetime" />
           <Property Name="StatusId" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseId" />
+          </Key>
+          <Property Name="WarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="BusinessUnitId" Type="int" />
+          <Property Name="Abbrivation" Type="varchar" MaxLength="10" />
+          <Property Name="Longitude" Type="varchar" MaxLength="25" />
+          <Property Name="Latitude" Type="varchar" MaxLength="25" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="StatusId" Type="tinyint" Nullable="false" />
         </EntityType>
         <Association Name="FK_BusinessUnits_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
@@ -1001,6 +1020,7 @@
           <EntitySet Name="VendorQuotationChild" EntityType="Self.VendorQuotationChild" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VendorsBusinessNature" EntityType="Self.VendorsBusinessNature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VendorsOrgType" EntityType="Self.VendorsOrgType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BusinessUnits_Company" Association="Self.FK_BusinessUnits_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="BusinessUnits" EntitySet="BusinessUnits" />
@@ -1151,7 +1171,6 @@
           <EntitySet Name="Currencies" EntityType="Model.Currency" />
           <EntitySet Name="CustomerBusinessLines" EntityType="Model.CustomerBusinessLine" />
           <EntitySet Name="Customers" EntityType="Model.Customer" />
-          <EntitySet Name="ExecutedJobs" EntityType="Model.ExecutedJob" />
           <EntitySet Name="FinancialYearDefinations" EntityType="Model.FinancialYearDefination" />
           <EntitySet Name="FleetServices" EntityType="Model.FleetService" />
           <EntitySet Name="Jobs" EntityType="Model.Job" />
@@ -1227,10 +1246,6 @@
           <AssociationSet Name="FK_ContractCancelation_Tender" Association="Model.FK_ContractCancelation_Tender">
             <End Role="Tender" EntitySet="Tenders" />
             <End Role="ContractCancelation" EntitySet="ContractCancelations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExecutedJob_Customers" Association="Model.FK_ExecutedJob_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="ExecutedJob" EntitySet="ExecutedJobs" />
           </AssociationSet>
           <AssociationSet Name="FK_Job_Customers" Association="Model.FK_Job_Customers">
             <End Role="Customer" EntitySet="Customers" />
@@ -1311,6 +1326,12 @@
           <AssociationSet Name="FK_VendorQuotationChild_VendorQuotation" Association="Model.FK_VendorQuotationChild_VendorQuotation">
             <End Role="VendorQuotation" EntitySet="VendorQuotations" />
             <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
+          </AssociationSet>
+          <EntitySet Name="ExecutedJobs" EntityType="Model.ExecutedJob" />
+          <EntitySet Name="Warehouses" EntityType="Model.Warehouse" />
+          <AssociationSet Name="FK_ExecutedJob_Customers" Association="Model.FK_ExecutedJob_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ExecutedJob" EntitySet="ExecutedJobs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BusinessUnit">
@@ -1466,35 +1487,9 @@
           <Property Name="StatusId" Type="Byte" />
           <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="City" Relationship="Model.FK_Customers_City" FromRole="Customer" ToRole="City" />
-          <NavigationProperty Name="ExecutedJobs" Relationship="Model.FK_ExecutedJob_Customers" FromRole="Customer" ToRole="ExecutedJob" />
           <NavigationProperty Name="Jobs" Relationship="Model.FK_Job_Customers" FromRole="Customer" ToRole="Job" />
           <NavigationProperty Name="Tenders" Relationship="Model.FK_Tender_Customers" FromRole="Customer" ToRole="Tender" />
-        </EntityType>
-        <EntityType Name="ExecutedJob">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerId" Type="Int32" />
-          <Property Name="ContractId" Type="Int32" />
-          <Property Name="JobId" Type="Int32" />
-          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Transporter" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="VehicleNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DriverName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DriverPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="SupportingRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CEOName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ExecutionDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StatusId" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Model.FK_ExecutedJob_Customers" FromRole="ExecutedJob" ToRole="Customer" />
+          <NavigationProperty Name="ExecutedJobs" Relationship="Model.FK_ExecutedJob_Customers" FromRole="Customer" ToRole="ExecutedJob" />
         </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
@@ -2091,18 +2086,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ExecutedJob_Customers">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="Model.ExecutedJob" Role="ExecutedJob" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExecutedJob">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Job_Customers">
           <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="Model.Job" Role="Job" Multiplicity="*" />
@@ -2343,6 +2326,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ExecutedJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ContractId" Type="Int32" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="JobNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Transporter" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DriverPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SupportingRefNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEOName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExecutionDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" Nullable="false" />
+          <Property Name="WayBillNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_ExecutedJob_Customers" FromRole="ExecutedJob" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseId" />
+          </Key>
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="BusinessUnitId" Type="Int32" />
+          <Property Name="Abbrivation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ExecutedJob_Customers">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Model.ExecutedJob" Role="ExecutedJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExecutedJob">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2491,32 +2531,6 @@
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ExecutedJobs">
-            <EntityTypeMapping TypeName="Model.ExecutedJob">
-              <MappingFragment StoreEntitySet="ExecutedJob">
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="ExecutionDate" ColumnName="ExecutionDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="CEOName" ColumnName="CEOName" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="SupportingRefNo" ColumnName="SupportingRefNo" />
-                <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
-                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
-                <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
-                <ScalarProperty Name="Transporter" ColumnName="Transporter" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2932,6 +2946,52 @@
                 <ScalarProperty Name="OrgTypeName" ColumnName="OrgTypeName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExecutedJobs">
+            <EntityTypeMapping TypeName="Model.ExecutedJob">
+              <MappingFragment StoreEntitySet="ExecutedJob">
+                <ScalarProperty Name="WayBillNumber" ColumnName="WayBillNumber" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ExecutionDate" ColumnName="ExecutionDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CEOName" ColumnName="CEOName" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="SupportingRefNo" ColumnName="SupportingRefNo" />
+                <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
+                <ScalarProperty Name="Transporter" ColumnName="Transporter" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="Model.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Abbrivation" ColumnName="Abbrivation" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

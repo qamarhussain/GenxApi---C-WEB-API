@@ -17,11 +17,11 @@ namespace GENXAPI.Repisitory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tender()
         {
+            this.ContractCancelations = new HashSet<ContractCancelation>();
             this.Jobs = new HashSet<Job>();
             this.TenderChilds = new HashSet<TenderChild>();
             this.TenderDetails = new HashSet<TenderDetail>();
             this.VendorQuotations = new HashSet<VendorQuotation>();
-            this.ContractCancelations = new HashSet<ContractCancelation>();
         }
     
         public int Id { get; set; }
@@ -45,6 +45,8 @@ namespace GENXAPI.Repisitory.Model
         public string AdditionalTax { get; set; }
         public string WithHoldingTax { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContractCancelation> ContractCancelations { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Job> Jobs { get; set; }
@@ -54,7 +56,5 @@ namespace GENXAPI.Repisitory.Model
         public virtual ICollection<TenderDetail> TenderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VendorQuotation> VendorQuotations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContractCancelation> ContractCancelations { get; set; }
     }
 }

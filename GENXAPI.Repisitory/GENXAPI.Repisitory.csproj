@@ -190,6 +190,9 @@
     <Compile Include="Model\VendorsOrgType.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Warehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Persistance\CityRepository.cs" />
     <Compile Include="Persistance\CompanyRepository.cs" />
     <Compile Include="Persistance\ContractCancelationRepository.cs" />
