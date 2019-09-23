@@ -3,6 +3,7 @@ using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -26,7 +27,8 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _moduleFormRepo.GetAll().OrderBy(x=>x.OrderBy).ToList();
+                int moduleId = Convert.ToInt32(ConfigurationManager.AppSettings["ModuleId"]);
+                var result = _moduleFormRepo.Find(x => x.moduleId == moduleId).OrderBy(x => x.OrderBy).ToList();
                 return Ok(result);
             }
             catch (Exception ex)
