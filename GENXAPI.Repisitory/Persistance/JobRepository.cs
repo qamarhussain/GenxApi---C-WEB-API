@@ -34,6 +34,18 @@ namespace GENXAPI.Repisitory
            });
             return result.ToList();
         }
+
+        public IList<DropdownListDto> GetExecutedJobsKeyPairByContractId(int contractId)
+        {
+            var result = Find(m => m.StatusId == (byte)Status.Active && m.TenderId == contractId && (m.JobStatus >= (byte)TenderUtility.JobApprovalState && m.JobStatus != (byte)TenderUtility.ContractCancelState)).Select(r =>
+            //var result = Find(m => m.TenderId == contractId && m.JobStatus == (byte)Status.Active).Select(r =>
+           new DropdownListDto
+           {
+               Value = r.JobId.ToString(),
+               Text = r.JobNo
+           });
+            return result.ToList();
+        }
         public IList<DropdownListDto> GetJobsKeyPairByContractIdWithoutStatus(int contractId)
         {
             var result = Find(m => m.TenderId == contractId).Select(r =>

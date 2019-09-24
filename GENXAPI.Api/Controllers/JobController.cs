@@ -87,6 +87,20 @@ namespace GENXAPI.Api.Controllers
         }
 
         [HttpPost]
+        public IHttpActionResult GetJobOnContractId(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var keyPairValues = _unitOfWork.Job.GetExecutedJobsKeyPairByContractId(model.TendorId);
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
         public IHttpActionResult CreateJobOrder(JobOrderCreateViewModel model)
         {
             try

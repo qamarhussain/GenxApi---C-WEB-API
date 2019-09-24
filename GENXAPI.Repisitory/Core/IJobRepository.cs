@@ -11,5 +11,6 @@ namespace GENXAPI.Repisitory
     {
         IList<DropdownListDto> GetJobsKeyPairByContract(int contractId);
         IList<DropdownListDto> GetJobsKeyPairByContractIdWithoutStatus(int contractId);
+        IList<DropdownListDto> GetExecutedJobsKeyPairByContractId(int contractId);
     }
 }
