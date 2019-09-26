@@ -170,6 +170,19 @@
           <Property Name="StatusId" Type="tinyint" Nullable="false" />
           <Property Name="WayBillNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileGuId" Type="uniqueidentifier" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="220" />
+          <Property Name="FileUploadedName" Type="nvarchar" MaxLength="300" />
+          <Property Name="FileJobId" Type="int" />
+          <Property Name="FileCustomerId" Type="int" />
+          <Property Name="FileContractId" Type="int" />
+          <Property Name="FileCreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="FinancialYearDefination">
           <Key>
             <PropertyRef Name="Id" />
@@ -566,6 +579,8 @@
           </Key>
           <Property Name="WarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+          <Property Name="ContactPersonPhone" Type="varchar" MaxLength="25" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="BusinessUnitId" Type="int" />
           <Property Name="Abbrivation" Type="varchar" MaxLength="10" />
@@ -996,6 +1011,7 @@
           <EntitySet Name="CustomerBusinessLine" EntityType="Self.CustomerBusinessLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExecutedJob" EntityType="Self.ExecutedJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinancialYearDefination" EntityType="Self.FinancialYearDefination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FleetService" EntityType="Self.FleetService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
@@ -1333,6 +1349,7 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="ExecutedJob" EntitySet="ExecutedJobs" />
           </AssociationSet>
+          <EntitySet Name="Files" EntityType="Model.File" />
         </EntityContainer>
         <EntityType Name="BusinessUnit">
           <Key>
@@ -2370,6 +2387,8 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StatusId" Type="Byte" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPersonPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_ExecutedJob_Customers">
           <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
@@ -2383,6 +2402,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileGuId" Type="Guid" />
+          <Property Name="FileName" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="FileUploadedName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FileJobId" Type="Int32" />
+          <Property Name="FileCustomerId" Type="Int32" />
+          <Property Name="FileContractId" Type="Int32" />
+          <Property Name="FileCreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2979,6 +3011,8 @@
           <EntitySetMapping Name="Warehouses">
             <EntityTypeMapping TypeName="Model.Warehouse">
               <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="ContactPersonPhone" ColumnName="ContactPersonPhone" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -2992,6 +3026,20 @@
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="Model.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="FileCreateDate" ColumnName="FileCreateDate" />
+                <ScalarProperty Name="FileContractId" ColumnName="FileContractId" />
+                <ScalarProperty Name="FileCustomerId" ColumnName="FileCustomerId" />
+                <ScalarProperty Name="FileJobId" ColumnName="FileJobId" />
+                <ScalarProperty Name="FileUploadedName" ColumnName="FileUploadedName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileGuId" ColumnName="FileGuId" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

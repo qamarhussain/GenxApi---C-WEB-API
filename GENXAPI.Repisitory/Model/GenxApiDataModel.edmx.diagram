@@ -73,6 +73,7 @@
         <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="13.125" PointY="22.625" />
         <EntityTypeShape EntityType="Model.Warehouse" Width="1.5" PointX="0.75" PointY="8.75" />
         <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
+        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="9.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

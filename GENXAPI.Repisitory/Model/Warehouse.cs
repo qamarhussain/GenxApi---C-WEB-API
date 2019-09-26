@@ -27,5 +27,7 @@ namespace GENXAPI.Repisitory.Model
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public byte StatusId { get; set; }
+        public string ContactPerson { get; set; }
+        public string ContactPersonPhone { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace GENXAPI.Repisitory
         IJobQuotationApprovalRepository JobQuotationApproval { get; }
 
         IExecutedJobRepository ExecutedJob { get; }
-
+        IFileRepository File { get;}
 
         int SaveChanges();
     }

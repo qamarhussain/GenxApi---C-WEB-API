@@ -158,6 +158,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Error\" />
+    <Folder Include="media\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Attributes\CustomExceptionFilter.cs" />
     <Compile Include="Controllers\ExecutedJobController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\RegionalOfficeController.cs" />
     <Compile Include="Controllers\RegionController .cs" />
@@ -215,10 +217,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\CompanyBusinessUntiInfoViewModel.cs" />
     <Compile Include="Models\ContractCreateViewModel.cs" />
     <Compile Include="Models\ExecutedJobCreateViewModel.cs" />
+    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\FleetServiceViewModel.cs" />
     <Compile Include="Models\JobApprovalListViewModel.cs" />
     <Compile Include="Models\JobDataViewModel.cs" />

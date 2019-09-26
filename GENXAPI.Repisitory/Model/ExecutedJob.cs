@@ -11,8 +11,7 @@ namespace GENXAPI.Repisitory.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class ExecutedJob
     {
         public int Id { get; set; }
@@ -38,6 +37,5 @@ namespace GENXAPI.Repisitory.Model
         public string WayBillNumber { get; set; }
     
         public virtual Customer Customer { get; set; }
-
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using System;
-using GENXAPI.Repisitory.Model;
+﻿using GENXAPI.Repisitory.Model;
 
 namespace GENXAPI.Repisitory
 {
@@ -210,6 +208,19 @@ namespace GENXAPI.Repisitory
                     this._executedJobRepository = new ExecutedJobRepository(db);
                 }
                 return this._executedJobRepository;
+            }
+        }
+
+        private IFileRepository _fileRepository;
+        public IFileRepository File
+        {
+            get
+            {
+                if (this._fileRepository == null)
+                {
+                    this._fileRepository = new FileRepository(db);
+                }
+                return this._fileRepository;
             }
         }
 
