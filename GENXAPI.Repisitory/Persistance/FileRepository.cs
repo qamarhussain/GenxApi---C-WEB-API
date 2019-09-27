@@ -67,7 +67,7 @@ namespace GENXAPI.Repisitory
 
         public FileModel UploadJobFile(HttpFileCollection httpFiles)
         {
-            var mediaFolder = @"~/media";
+           var mediaFolder = @"~/media";
             FileModel fm = new FileModel();
             try
             {
