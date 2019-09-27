@@ -2,6 +2,7 @@
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
@@ -47,6 +48,30 @@ namespace GENXAPI.Api.Controllers
             return WebHelper.SendResponse("");
             
 
+        }
+
+        [HttpGet]
+       // [Route("GetById/{fileJobId}")]
+        public IHttpActionResult GetById(int id)
+        {
+            try
+            {
+                var file = _unitOfWork.File.Find(a =>a.FileJobId == id).ToList();
+                //var file = _unitOfWork.File.Get(fileJobId);
+
+                if (file == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(file);
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }
