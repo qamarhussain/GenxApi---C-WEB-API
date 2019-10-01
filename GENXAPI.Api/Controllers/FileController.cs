@@ -57,6 +57,12 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 var file = _unitOfWork.File.Find(a =>a.FileJobId == id).ToList();
+                foreach (var item in file)
+                {
+                    string path = "D:\\GenxApp Project\\GenxApi\\GENXAPI.Api\\media\\" + item.FileUploadedName;
+                    item.FileUploadedName = path; 
+
+                }
                 //var file = _unitOfWork.File.Get(fileJobId);
 
                 if (file == null)
