@@ -281,5 +281,60 @@ namespace GENXAPI.Api.Controllers
 
         }
 
+
+
+        [HttpGet]
+        public IHttpActionResult GetVendorForContractId(int id)
+        {
+            try
+            {
+                var data = _unitOfWork.VendorQuotationChild.AllIncluding(x => x.VendorQuotation, y => y.VendorQuotation.Vendor).Where(e => e.VendorQuotation.TenderId == id).ToList();
+                var results = (from ssi in data
+                                   // here I choose each field I want to group by
+                               group ssi by new { ssi.ItemCode } into g
+                               select new { ItemCode = g.Key.ItemCode, vendorInfo = g.ToList() }).ToList();
+                var viewModelList = new List<VendorQuotationsViewModel>();
+                foreach (var item in results)
+                {
+                    var obj = new VendorQuotationsViewModel();
+                    var itemCodeDetail = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.ItemCode == item.ItemCode && a.IsDeleted == (byte)TenderChildStatus.Active).FirstOrDefault();
+                    if (itemCodeDetail != null)
+                    {
+                        obj.TenderId = item.vendorInfo.First().VendorQuotation.TenderId;
+                        //obj.TendorNo = item.vendorInfo.First().VendorQuotation.;
+                        obj.VendorQuotationId = item.vendorInfo.First().VendorQuotationId;
+                        obj.VendorQUotationChildId = item.vendorInfo.First().VendorQuotationChildId;
+                        obj.ItemCode = item.ItemCode;
+                        if (itemCodeDetail.FleetServiceId != null)
+                            obj.Particulars = itemCodeDetail.FleetService.ServiceName + " " + "-" + " " + itemCodeDetail.FleetService.Unit.Title;
+                        else
+                            obj.Particulars = itemCodeDetail.TenderDetail.City.Name + " To " + itemCodeDetail.TenderDetail.City1.Name + " " + "-" + " " + itemCodeDetail.Vehicle.Title + " " + "-" + " " + itemCodeDetail.Vehicle.Weight;
+
+                        foreach (var p in item.vendorInfo)
+                        {
+                            obj.vendorInfo.Add(new VendorQuotationApprovalViewModelVendors()
+                            {
+                                VendorId = p.VendorQuotation.VendorId,
+                                VendorName = p.VendorQuotation.Vendor.VendorName,
+                                Amount = p.Amount
+                            });
+                        }
+
+                    }
+                    viewModelList.Add(obj);
+                }
+
+                //var result = GetGroupedJobQuotations(viewModelList);
+
+
+
+                return Ok(viewModelList);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }
