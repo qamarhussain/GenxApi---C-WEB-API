@@ -288,27 +288,32 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var data = _unitOfWork.VendorQuotationChild.AllIncluding(x => x.VendorQuotation, y => y.VendorQuotation.Vendor).Where(e => e.VendorQuotation.TenderId == id).ToList();
+                var data = _unitOfWork.VendorQuotationChild.AllIncluding(x => x.VendorQuotation, y => y.VendorQuotation.Vendor, z => z.FleetService, u =>u.FleetService.Unit).Where(e => e.VendorQuotation.TenderId == id).ToList();
                 var results = (from ssi in data
                                    // here I choose each field I want to group by
-                               group ssi by new { ssi.ItemCode } into g
-                               select new { ItemCode = g.Key.ItemCode, vendorInfo = g.ToList() }).ToList();
+                               group ssi by new { ssi.DestinationFromId, ssi.DestinationToId, ssi.VehicleId, ssi.ServiceId } into g
+                               select new { DestinationFrom = g.Key.DestinationFromId, DestinationTo = g.Key.DestinationToId, VehicleId = g.Key.VehicleId, FleetServiceId = g.Key.ServiceId, vendorInfo = g.ToList() }).ToList();
                 var viewModelList = new List<VendorQuotationsViewModel>();
                 foreach (var item in results)
                 {
                     var obj = new VendorQuotationsViewModel();
-                    var itemCodeDetail = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.ItemCode == item.ItemCode && a.IsDeleted == (byte)TenderChildStatus.Active).FirstOrDefault();
+                    var itemCodeDetail = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.VehicleId == item.VehicleId && a.TenderDetail.DestinationFromId == item.DestinationFrom && a.TenderDetail.DestinationToId == item.DestinationTo && a.FleetServiceId == item.FleetServiceId && a.IsDeleted == (byte)TenderChildStatus.Active).FirstOrDefault();
                     if (itemCodeDetail != null)
                     {
                         obj.TenderId = item.vendorInfo.First().VendorQuotation.TenderId;
-                        //obj.TendorNo = item.vendorInfo.First().VendorQuotation.;
+                        //obj.TendorNo = item.vendorInfo.First().VendorQuotation.Tender.TenderNo;
                         obj.VendorQuotationId = item.vendorInfo.First().VendorQuotationId;
                         obj.VendorQUotationChildId = item.vendorInfo.First().VendorQuotationChildId;
-                        obj.ItemCode = item.ItemCode;
+
                         if (itemCodeDetail.FleetServiceId != null)
+                        {
                             obj.Particulars = itemCodeDetail.FleetService.ServiceName + " " + "-" + " " + itemCodeDetail.FleetService.Unit.Title;
+
+                        }
+
+                        //    obj.Particulars = itemCodeDetail.FleetService.ServiceName + " " + "-" + " " + itemCodeDetail.FleetService.Unit.Title;
                         else
-                            obj.Particulars = itemCodeDetail.TenderDetail.City.Name + " To " + itemCodeDetail.TenderDetail.City1.Name + " " + "-" + " " + itemCodeDetail.Vehicle.Title + " " + "-" + " " + itemCodeDetail.Vehicle.Weight;
+                        obj.Particulars = itemCodeDetail.TenderDetail.City.Name + " To " + itemCodeDetail.TenderDetail.City1.Name + " " + "-" + " " + itemCodeDetail.Vehicle.Title + " " + "-" + " " + itemCodeDetail.Vehicle.Weight;
 
                         foreach (var p in item.vendorInfo)
                         {
