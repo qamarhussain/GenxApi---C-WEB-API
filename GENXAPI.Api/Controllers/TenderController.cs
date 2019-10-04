@@ -47,6 +47,22 @@ namespace GENXAPI.Api.Controllers
 
         }
 
+        [HttpGet]
+        public IHttpActionResult GetTotalNoOfTenders()
+        {
+            try
+            {
+                var result = _unitOfWork.Tenders.GetTotalNoOfTender();
+                return Ok(result);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
         // GET: api/Customer/5
         [HttpGet]
         public IHttpActionResult GetById(int id)
