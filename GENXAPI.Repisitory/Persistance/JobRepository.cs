@@ -26,7 +26,7 @@ namespace GENXAPI.Repisitory
 
         public IList<DropdownListDto> GetJobsKeyPairByContract(int contractId)
         {
-            var result = Find(m => m.TenderId == contractId && m.JobStatus == (byte)Status.Active).Select(r =>
+            var result = Find(m => m.TenderId == contractId && m.JobStatus == (byte)TenderUtility.JobOrderState).Select(r =>
            new DropdownListDto
            {
                Value = r.JobId.ToString(),

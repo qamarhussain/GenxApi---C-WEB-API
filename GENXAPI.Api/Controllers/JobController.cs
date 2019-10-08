@@ -30,6 +30,35 @@ namespace GENXAPI.Api.Controllers
             return Ok(data);
         }
 
+        public IHttpActionResult GetPendingJob()
+        {
+            var result = _unitOfWork.Job.AllIncluding(x => x.Customer, y =>y.Tender).Where(o => o.JobStatus == (byte)TenderUtility.JobOrderState).ToList().Count();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetApprovedJob()
+        {
+            try
+            {
+                var model = new List<JobApprovalListViewModel>();
+
+                var data = _unitOfWork.JobQuotationApproval.AllIncluding(x => x.Vendor).ToList();
+                foreach (var item in data)
+                {
+                    JobApprovalListViewModel obj = new JobApprovalListViewModel();
+                    obj.jobQuotationApproval = item;
+                    obj.tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(e => e.Id == item.ContractId).FirstOrDefault();
+                    model.Add(obj);
+                }
+
+                return Ok(model.Count());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
         // Used to get only approved jobs.
         [HttpGet]
         public IHttpActionResult GetAllJobsByContractid(int id)
@@ -115,7 +144,7 @@ namespace GENXAPI.Api.Controllers
                 JobOrder.DeliveryAddress = model.DeliveryAddress;
                 JobOrder.DeliveryDate = model.DeliveryDate;
                 JobOrder.InvoiceAddress = model.InvoiceAddress;
-                JobOrder.JobStatus = (byte)Status.Active;
+                JobOrder.JobStatus = (byte)TenderUtility.JobOrderState;
                 JobOrder.OtherTermsConditions = model.OtherTermsConditions;
                 JobOrder.PODate = model.PODate;
                 JobOrder.PRNo = model.PRNo;
@@ -175,7 +204,7 @@ namespace GENXAPI.Api.Controllers
                 JobOrder.DeliveryAddress = model.DeliveryAddress;
                 JobOrder.DeliveryDate = model.DeliveryDate;
                 JobOrder.InvoiceAddress = model.InvoiceAddress;
-                JobOrder.JobStatus = (byte)Status.Active;
+                JobOrder.JobStatus = (byte)TenderUtility.JobOrderState;
                 JobOrder.OtherTermsConditions = model.OtherTermsConditions;
                 JobOrder.PODate = model.PODate;
                 JobOrder.PRNo = model.PRNo;
@@ -530,6 +559,8 @@ namespace GENXAPI.Api.Controllers
                 return InternalServerError(ex);
             }
         }
+
+
 
         [HttpGet]
         public IHttpActionResult GetExecutedJobs()

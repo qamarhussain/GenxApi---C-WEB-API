@@ -10,7 +10,6 @@ namespace GENXAPI.Repisitory
     public interface IRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
-        int GetTotalNoOfTender();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         TEntity Get(object Id);
         IQueryable<TEntity> AllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);

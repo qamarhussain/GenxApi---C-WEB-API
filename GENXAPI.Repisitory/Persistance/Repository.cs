@@ -22,13 +22,6 @@ namespace GENXAPI.Repisitory
             return db.Set<TEntity>().AsNoTracking().ToList();
         }
 
-        public int GetTotalNoOfTender()
-        {
-            var query = db.Database.SqlQuery<TEntity>("SELECT * FROM Tender INNER JOIN TenderChild ON Tender.Id = TenderId WHERE TenderChild.VehicleId IS NULL").ToList();
-            var count = query.Count();
-            return count;
-        }
-
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return db.Set<TEntity>().AsNoTracking().Where(predicate);

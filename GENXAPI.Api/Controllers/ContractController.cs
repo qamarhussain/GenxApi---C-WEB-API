@@ -29,6 +29,30 @@ namespace GENXAPI.Api.Controllers
             var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus != (byte)TenderUtility.TenderState).ToList();
             return Ok(result);
         }
+        public IHttpActionResult GetTenderWithoutCustomerQuotation()
+        {
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus == (byte)TenderUtility.TenderState).ToList().Count();
+            return Ok(result);
+        }
+
+
+        public IHttpActionResult GetPendingTender()
+        {
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus == (byte)TenderUtility.ContractState).ToList().Count();
+            return Ok(result);
+        }
+
+        public IHttpActionResult GetApprovedTender()
+        {
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus == (byte)TenderUtility.ContractApprovedState).ToList().Count();
+            return Ok(result);
+        }
+
+        public IHttpActionResult GetCancelTender()
+        {
+            var result = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(o => o.ProceedStatus == (byte)TenderUtility.ContractCancelState).ToList().Count();
+            return Ok(result);
+        }
 
         public IHttpActionResult CreateContract(ContractCreateViewModel model)
         {

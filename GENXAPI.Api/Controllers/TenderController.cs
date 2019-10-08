@@ -52,7 +52,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _unitOfWork.Tenders.GetTotalNoOfTender();
+                var result = _unitOfWork.TenderChilds.AllIncluding(a =>a.Tender).Where(a =>a.VehicleId == null).Count();
                 return Ok(result);
 
             }
@@ -62,6 +62,23 @@ namespace GENXAPI.Api.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IHttpActionResult GetTotalTenderVehicleWithOutVendor()
+        {
+            try
+            {
+                var result = _unitOfWork.Tenders.AllIncluding(a => a.VendorQuotations, b =>b.TenderChilds).Where(a => a.VendorQuotations.Count == 0).Count();
+                return Ok(result);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
 
         // GET: api/Customer/5
         [HttpGet]
