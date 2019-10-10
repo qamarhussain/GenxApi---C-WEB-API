@@ -75,6 +75,20 @@ namespace GENXAPI.Api.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult GetAllPendingJobs()
+        {
+            try
+            {
+                var data = _unitOfWork.JobChild.AllIncluding(b => b.Job.Tender.Customer, c => c.Job).Where(x => x.IsExecuted == null).ToList();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         public IHttpActionResult GetById(int id)
         {
             try
