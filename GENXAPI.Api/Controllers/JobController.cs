@@ -32,8 +32,8 @@ namespace GENXAPI.Api.Controllers
 
         public IHttpActionResult GetPendingJob()
         {
-            var result = _unitOfWork.Job.AllIncluding(x => x.Customer, y =>y.Tender).Where(o => o.JobStatus == (byte)TenderUtility.JobOrderState).ToList().Count();
-            return Ok(result);
+            var data = _unitOfWork.JobChild.AllIncluding(b => b.Job.Tender.Customer, c => c.Job).Where(x => x.IsExecuted == null).ToList();
+            return Ok(data.Count());
         }
 
         [HttpGet]
