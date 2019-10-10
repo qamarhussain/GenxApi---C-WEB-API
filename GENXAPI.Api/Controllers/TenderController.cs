@@ -52,8 +52,12 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _unitOfWork.Tenders.AllIncluding(a =>a.TenderChilds).Where(a =>a.TenderChilds.Count == 0).Count();
-                return Ok(result);
+                var data = _unitOfWork.TenderChilds.AllIncluding(a => a.Tender).Where(x => x.VehicleId == null).ToList();
+                var results = (from ssi in data
+                                   // here I choose each field I want to group by
+                               group ssi by new { ssi.TenderId, ssi.VehicleId } into g
+                               select new { TenderId = g.Key.TenderId, VehicleId = g.Key.VehicleId, TotalTender = g.ToList().Count() }).ToList();
+                return Ok(results.Count());
 
             }
             catch (Exception ex)
