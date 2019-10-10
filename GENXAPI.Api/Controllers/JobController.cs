@@ -586,5 +586,29 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult TotalExecutedJobs()
+        {
+            try
+            {
+                var model = new List<JobExecutedViewListModel>();
+                var data = _unitOfWork.ExecutedJob.AllIncluding(x => x.Customer).ToList();
+                foreach (var item in data)
+                {
+                    JobExecutedViewListModel obj = new JobExecutedViewListModel();
+                    obj.executedJob = item;
+                    obj.tender = _unitOfWork.Tenders.Get(item.ContractId);
+                    obj.jobQuotationApproval = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == item.JobId).FirstOrDefault();
+                    model.Add(obj);
+                }
+
+                return Ok(model.Count());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }

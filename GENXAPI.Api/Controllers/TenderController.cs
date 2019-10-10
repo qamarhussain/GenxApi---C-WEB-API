@@ -52,7 +52,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _unitOfWork.TenderChilds.AllIncluding(a =>a.Tender).Where(a =>a.VehicleId == null).Count();
+                var result = _unitOfWork.Tenders.AllIncluding(a =>a.TenderChilds).Where(a =>a.TenderChilds.Count == 0).Count();
                 return Ok(result);
 
             }
