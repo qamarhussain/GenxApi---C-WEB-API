@@ -23,7 +23,6 @@
         <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="3.75" PointY="28.75" />
         <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="6" PointY="26.625" />
-        <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="40.75" />
         <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="12.75" PointY="32.875" />
@@ -41,7 +40,6 @@
         <AssociationConnector Association="Model.FK_City_Province" />
         <AssociationConnector Association="Model.FK_City_Region" />
         <AssociationConnector Association="Model.FK_Customers_City" />
-        <AssociationConnector Association="Model.FK_RegionalOffice_City" />
         <AssociationConnector Association="Model.FK_TenderDetail_City" />
         <AssociationConnector Association="Model.FK_TenderDetail_City1" />
         <AssociationConnector Association="Model.FK_Vendor_City" />
@@ -57,7 +55,6 @@
         <AssociationConnector Association="Model.FK_VendorQuotationChild_FleetService" />
         <AssociationConnector Association="Model.FK_Job_Tender" />
         <AssociationConnector Association="Model.FK_JobChild_Job" />
-        <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
         <AssociationConnector Association="Model.FK_JobQuotationApproval_Vendor" />
         <AssociationConnector Association="Model.FK_Region_Province" />
         <AssociationConnector Association="Model.FK_TenderDetail_Province" />
@@ -74,6 +71,9 @@
         <EntityTypeShape EntityType="Model.Warehouse" Width="1.5" PointX="0.75" PointY="8.75" />
         <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
         <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="16.5" />
+        <AssociationConnector Association="Model.FK_RegionalOffice_City" />
+        <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

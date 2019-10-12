@@ -43,7 +43,6 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
-        public virtual DbSet<RegionalOffice> RegionalOffices { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RolesToUser> RolesToUsers { get; set; }
         public virtual DbSet<Tender> Tenders { get; set; }
@@ -60,5 +59,6 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<ExecutedJob> ExecutedJobs { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<RegionalOffice> RegionalOffices { get; set; }
     }
 }
