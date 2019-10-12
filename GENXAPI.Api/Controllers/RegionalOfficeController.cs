@@ -90,6 +90,7 @@ namespace GENXAPI.Api.Controllers
                 regionalModel.LastModifiedBy = regionalModel.LastModifiedBy;
                 regionalModel.CityId = regionalOffice.CityId;
                 regionalModel.OfficeName = regionalOffice.OfficeName;
+                regionalModel.Abbreviation = regionalOffice.Abbreviation;
                 regionalModel.StatusId = regionalOffice.StatusId;
 
                 _unitOfWork.RegionalOffice.Update(regionalModel);
