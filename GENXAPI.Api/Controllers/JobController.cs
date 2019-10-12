@@ -574,7 +574,36 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult GetJobDataForDashboard(int id)
+        {
+            try
+            {
+                var model = new List<DashboardDataViewModel>();
 
+                var data = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == id).ToList();
+                foreach (var item in data)
+                {
+                    DashboardDataViewModel obj = new DashboardDataViewModel();
+                    obj.jobQuotationApproval = item;
+
+                    obj.tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == item.ContractId).FirstOrDefault();
+                    if (obj.tender == null)
+                    {
+                        return NotFound();
+                    }
+                    obj.tenderDetail = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == item.ContractId).FirstOrDefault();
+                    obj.tenderChild = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == item.ContractId).FirstOrDefault();
+                    model.Add(obj);
+                }
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
 
         [HttpGet]
         public IHttpActionResult GetExecutedJobs()

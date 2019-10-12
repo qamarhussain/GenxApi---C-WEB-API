@@ -220,6 +220,7 @@
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\CompanyBusinessUntiInfoViewModel.cs" />
     <Compile Include="Models\ContractCreateViewModel.cs" />
+    <Compile Include="Models\DashboardDataViewModel.cs" />
     <Compile Include="Models\ExecutedJobCreateViewModel.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\FleetServiceViewModel.cs" />
