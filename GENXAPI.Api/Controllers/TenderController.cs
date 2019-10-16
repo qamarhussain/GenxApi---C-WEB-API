@@ -4,6 +4,7 @@ using GENXAPI.Api.Utilities;
 using GENXAPI.Repisitory;
 using GENXAPI.Repisitory.Model;
 using GENXAPI.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -323,7 +324,29 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                return Ok(_tenderRepo.GetKeyPairValue(model.CustomerId,(int)TenderUtility.TenderState));
+                //var isExist = _unitOfWork.Customers.Find(x => x.Id == model.CustomerId && x.Type == "0").FirstOrDefault();
+                //if (isExist != null)
+                //{
+                //    var result = _tenderRepo.GetKeyPairValue(model.CustomerId, (int)TenderUtility.TenderState);
+                //    return Ok(new {
+                //        Status = result
+                //    });
+
+                //}
+                    //if (isExist.Type == "0" && isExist.Id == model.CustomerId)
+                    //{
+                    //  var result = _tenderRepo.GetKeyPairValue(model.CustomerId, (int)TenderUtility.TenderState);
+                    //   return Ok(new { Status = true });
+
+
+                    //}
+
+                    return Ok(_tenderRepo.GetKeyPairValue(model.CustomerId, (int)TenderUtility.TenderState));
+
+                
+                
+                
+                
             }
             catch(Exception ex)
             {

@@ -232,7 +232,15 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 var keyPairValues = _unitOfWork.Tenders.GetContractKeyPair(Convert.ToInt32(model.CompanyId), Convert.ToInt32(model.BusinessUnitId), Convert.ToInt32(model.CustomerId));
-                return Ok(keyPairValues);
+                if(keyPairValues.Count == 0)
+                {
+                    return Ok(new { Status = true });
+                }
+                else
+                {
+                    return Ok(keyPairValues);
+                }
+                
             }
             catch (Exception ex)
             {

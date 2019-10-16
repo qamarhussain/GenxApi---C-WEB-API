@@ -24,7 +24,7 @@ namespace GENXAPI.Repisitory
 
         public IList<DropdownListDto> GetContractKeyPair(int CompanyId, int BusinessUnitId, int CustomerId)
         {
-            var result = Find(m => m.ProceedStatus != (byte)TenderUtility.ContractCancelState && m.CustomerId == CustomerId && m.CompanyId == CompanyId && m.BusinessUnitId == BusinessUnitId).Select(r =>
+            var result = Find(m => m.ProceedStatus != (byte)TenderUtility.ContractCancelState && m.CustomerId == CustomerId && m.CompanyId == CompanyId && m.BusinessUnitId == BusinessUnitId && m.Customer.Type == "1").Select(r =>
           new DropdownListDto
           {
               Value = r.Id.ToString(),
