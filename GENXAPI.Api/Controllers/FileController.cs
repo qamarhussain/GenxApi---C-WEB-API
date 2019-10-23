@@ -270,6 +270,13 @@ namespace GENXAPI.Api.Controllers
         public double CustomerId { get; set; }
         public double Amount{ get; set; }
         public double FleetServiceId { get; set; }
+        public string DestinationFrom { get; set; }
+        public string DestinationTo { get; set; }
+        public string VehicleName { get; set; }
+        public double DestinationToId { get; set; }
+        public double DestinationFromId { get; set; }
+        public double VehicleId { get; set; }
+        public double DetailId { get; set; }
     }
 
    
