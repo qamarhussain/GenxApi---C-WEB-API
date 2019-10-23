@@ -90,87 +90,17 @@ namespace GENXAPI.Api.Controllers
         }
 
 
-        //[HttpPost]
-        //[Route("uploadData")]
-        //public IHttpActionResult UploadVendor(HttpPostedFileBase file)
-        //{
-        //    string filename = Guid.NewGuid() + Path.GetExtension(file.FileName);
-
-        //    string filepath = "/excelfolder/" + filename;
-
-        //    file.SaveAs(Path.Combine(HttpContext.Current.Server.MapPath("/excelfolder"), filename));
-
-        //    InsertExceldata(filepath, filename);
-
-
-        //    return null;
-        //}
-
-        //private void ExcelConn(string filePath)
-        //{
-        //    string constr = string.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0 Xml;HDR=YES;""", filePath);
-
-        //    Econ = new OleDbConnection(constr);
-        //}
-
-
-        //private void InsertExceldata(string fileepath, string filename)
-
-        //{
-
-        //    string fullpath = HttpContext.Current.Server.MapPath("/excelfolder/") + filename;
-
-        //    ExcelConn(fullpath);
-
-        //    string query = string.Format("Select * from [{0}]", "Sheet1$");
-
-        //    OleDbCommand Ecom = new OleDbCommand(query, Econ);
-
-        //    Econ.Open();
-
-        //    DataSet ds = new DataSet();
-
-        //    OleDbDataAdapter oda = new OleDbDataAdapter(query, Econ);
-
-        //    Econ.Close();
-
-        //    oda.Fill(ds);
-
-        //    DataTable dt = ds.Tables[0];
-
-        //    SqlBulkCopy objbulk = new SqlBulkCopy(con);
-
-        //    objbulk.DestinationTableName = "TenderChild";
-
-        //    objbulk.ColumnMappings.Add("CustomerId", "CustomerId");
-
-        //    objbulk.ColumnMappings.Add("FleetServiceId", "FleetServiceId");
-
-        //    objbulk.ColumnMappings.Add("TenderId", "TenderId");
-
-        //    objbulk.ColumnMappings.Add("ItemCode", "ItemCode");
-
-        //    con.Open();
-
-        //    objbulk.WriteToServer(dt);
-
-        //    con.Close();
-
-        //}
-
+        [HttpPost]
         public IHttpActionResult UploadVendor()
         {
             var httpRequest = HttpContext.Current.Request;
-
+            var contractId = httpRequest.Form["ContractId"];
+            var customerId = httpRequest.Form["CustomerId"];
             if (httpRequest.ContentLength > 0)
             {
                 string extension = System.IO.Path.GetExtension(httpRequest.Files["file"].FileName).ToLower();
                 string query = null;
                 string connString = "";
-
-
-
-
                 string[] validFileTypes = { ".xls", ".xlsx", ".csv" };
 
                 string path1 = string.Format("{0}/{1}", HttpContext.Current.Server.MapPath("~/ExcelFolder/Uploads"), HttpContext.Current.Request.Files["file"].FileName);
@@ -201,7 +131,31 @@ namespace GENXAPI.Api.Controllers
                         DataTable dt = ConvertXSLXtoDataTable(path1, connString);
                        // List<temp> obj = new List<temp>();
                         var list = ConvertDataTable<temp>(dt);
-                        return Ok(list);
+                        if(list != null)
+                        {
+                            try
+                            {
+                                foreach (var item in list)
+                                {
+                                    if (contractId == item.TenderId.ToString() && customerId == item.CustomerId.ToString())
+                                    {
+                                        return Ok(list);
+                                    }
+                                    else
+                                    {
+                                        return Ok("File does not match witht this detail");
+                                    }
+                                   
+                                }
+                            }
+                            catch (Exception)
+                            {
+
+                                throw;
+                            }
+                         
+                        }
+                        //return Ok(list);
                     }
 
                 }
@@ -309,8 +263,13 @@ namespace GENXAPI.Api.Controllers
     public class temp
     {
         public double SrNo { get; set; }
+        public string ServiceName { get; set; }
+        public string  ServiceType { get; set; }
+        public string Unit { get; set; }
+        public double TenderId { get; set; }
         public double CustomerId { get; set; }
-       // public string ItemCode{ get; set; }
+        public double Amount{ get; set; }
+        public double FleetServiceId { get; set; }
     }
 
    
