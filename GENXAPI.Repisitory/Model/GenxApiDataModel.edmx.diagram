@@ -32,8 +32,7 @@
         <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="18" PointY="40.5" />
         <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="10.5" PointY="31.125" />
-        <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="15" PointY="35" />
-        <EntityTypeShape EntityType="Model.VendorQuotationChild" Width="1.5" PointX="20.25" PointY="28" />
+        <EntityTypeShape EntityType="Model.VendorQuotationChild" PointX="19.875" PointY="27.125" Width="2.5" />
         <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="8.75" PointY="0.75" />
         <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
@@ -62,11 +61,8 @@
         <AssociationConnector Association="Model.FK_Vendor_Region" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" />
         <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
         <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
-        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
-        <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <EntityTypeShape EntityType="Model.ExecutedJob" Width="1.5" PointX="13.125" PointY="22.625" />
         <EntityTypeShape EntityType="Model.Warehouse" Width="1.5" PointX="0.75" PointY="8.75" />
         <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
@@ -74,6 +70,11 @@
         <EntityTypeShape EntityType="Model.RegionalOffice" Width="1.5" PointX="10.5" PointY="16.5" />
         <AssociationConnector Association="Model.FK_RegionalOffice_City" />
         <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
+        <EntityTypeShape EntityType="Model.VendorQuotation" Width="1.5" PointX="15" PointY="35" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
+        <EntityTypeShape EntityType="Model.ViewTenderWiseVendor" Width="1.5" PointX="9.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

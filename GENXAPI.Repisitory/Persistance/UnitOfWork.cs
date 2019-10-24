@@ -1,4 +1,6 @@
-﻿using GENXAPI.Repisitory.Model;
+﻿using GENXAPI.Repisitory.Core;
+using GENXAPI.Repisitory.Model;
+using GENXAPI.Repisitory.Persistance;
 
 namespace GENXAPI.Repisitory
 {
@@ -221,6 +223,19 @@ namespace GENXAPI.Repisitory
                     this._fileRepository = new FileRepository(db);
                 }
                 return this._fileRepository;
+            }
+        }
+
+        private ITenderWiseVendorRepository _tenderWiseVendorRepository;
+        public ITenderWiseVendorRepository TenderWiseVendor
+        {
+            get
+            {
+                if (this._tenderWiseVendorRepository == null)
+                {
+                    this._tenderWiseVendorRepository = new TenderWiseVendorRepository(db);
+                }
+                return this._tenderWiseVendorRepository;
             }
         }
 

@@ -27,6 +27,5 @@ namespace GENXAPI.Repisitory.Model
         public virtual Vendor Vendor { get; set; }
         [NotMapped]
         public bool IsJobExecuted { get; set; }
-
     }
 }

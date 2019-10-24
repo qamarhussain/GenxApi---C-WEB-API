@@ -162,6 +162,21 @@ namespace GENXAPI.Api.Controllers
 
         }
 
+        [HttpPost]
+        public IHttpActionResult GetVendorsListByTenderId(CompanyBusinessUntiInfoViewModel model)
+        {
+            try
+            {
+                var keyPairValues = _unitOfWork.TenderWiseVendor.AllIncluding().Where(a => a.TenderId == model.TendorId && a.BusinessUnitId == model.BusinessUnitId && a.CompanyId == model.CompanyId);
+                return Ok(keyPairValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+        }
+
 
     }
 }

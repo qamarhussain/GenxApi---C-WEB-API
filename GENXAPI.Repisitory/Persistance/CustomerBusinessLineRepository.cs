@@ -32,6 +32,7 @@ namespace GENXAPI.Repisitory
               Value = r.Id.ToString(),
               Text = r.Title
           });
+            
             return result.ToList();
         }
 

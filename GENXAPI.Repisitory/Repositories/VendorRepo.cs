@@ -25,7 +25,7 @@ namespace GENXAPI.Repisitory.Repositories
          });
             return result.ToList();
         }
-        
+
     }
    
 }

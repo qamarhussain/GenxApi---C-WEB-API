@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GENXAPI.Repisitory.Core;
+using System;
 
 namespace GENXAPI.Repisitory
 {
@@ -22,7 +23,7 @@ namespace GENXAPI.Repisitory
 
         IExecutedJobRepository ExecutedJob { get; }
         IFileRepository File { get;}
-
+        ITenderWiseVendorRepository TenderWiseVendor { get; }
         int SaveChanges();
     }
 }

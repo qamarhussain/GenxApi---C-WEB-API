@@ -52,7 +52,6 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
         public virtual DbSet<VendorQuotationChild> VendorQuotationChilds { get; set; }
         public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
         public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
@@ -60,5 +59,7 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<RegionalOffice> RegionalOffices { get; set; }
+        public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
+        public virtual DbSet<ViewTenderWiseVendor> ViewTenderWiseVendors { get; set; }
     }
 }

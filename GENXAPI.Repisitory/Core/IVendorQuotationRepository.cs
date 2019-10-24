@@ -9,6 +9,6 @@ namespace GENXAPI.Repisitory
 {
     public interface IVendorQuotationRepository : IRepository<VendorQuotation>
     {
-
+        IList<DropdownListDto> GetKeyPairValue(int TenderId);
     }
 }
