@@ -23,5 +23,19 @@ namespace GENXAPI.Repisitory.Persistance
         {
 
         }
+
+        public IList<DropdownListDto> GetKeyPairValue(int TenderId, int CompanyId, int BusinessUnitId)
+        {
+
+            var result = Find(m => m.TenderId == TenderId && m.CompanyId == CompanyId && m.BusinessUnitId == BusinessUnitId).Select(r =>
+           new DropdownListDto
+           {
+               VendorId = r.VendorId.ToString(),
+               Text = r.VendorName,
+               Value = r.VendorQuotationId.ToString()
+              
+           });
+            return result.ToList();
+        }
     }
 }

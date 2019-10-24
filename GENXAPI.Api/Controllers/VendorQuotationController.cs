@@ -43,7 +43,6 @@ namespace GENXAPI.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {
-            //var data = _unitOfWork.VendorQuotation.AllIncluding(a => a.Vendor, b => b.Tender.Customer, y => y.Tender.TenderDetails, a => a.Tender.TenderDetails.Select(b => b.City), c =>c.Tender.TenderDetails.Select(d => d.City1), z => z.Tender.TenderChilds.Select(q => q.FleetService), z => z.Tender.TenderChilds.Select(s => s.Vehicle), p => p.VendorQuotationChilds).Where(e => e.VendorQuotationId == id).FirstOrDefault();
             var data = _unitOfWork.VendorQuotation.AllIncluding(x => x.Vendor, y => y.VendorQuotationChilds).Where(z => z.VendorQuotationId == id).FirstOrDefault();
             if (data == null)
             {
@@ -55,12 +54,13 @@ namespace GENXAPI.Api.Controllers
                 return NotFound();
             }
             var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == tender.Id).ToList();
-            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a =>a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
+            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == tender.Id).ToList();
             tender.TenderDetails = tenderDetails;
             tender.TenderChilds = tenderChilds;
             data.Tender = tender;
             return Ok(data);
         }
+
 
         [HttpPost]
         public IHttpActionResult CreateVendorQuotation(VendorQuotationCreateViewModel model)
@@ -167,7 +167,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var keyPairValues = _unitOfWork.TenderWiseVendor.AllIncluding().Where(a => a.TenderId == model.TendorId && a.BusinessUnitId == model.BusinessUnitId && a.CompanyId == model.CompanyId);
+                var keyPairValues = _unitOfWork.TenderWiseVendor.GetKeyPairValue(model.TendorId, model.CompanyId, model.BusinessUnitId);
                 return Ok(keyPairValues);
             }
             catch (Exception ex)

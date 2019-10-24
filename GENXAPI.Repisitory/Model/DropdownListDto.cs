@@ -11,5 +11,6 @@ namespace GENXAPI.Repisitory.Model
         public string Value { get; set; }
         public string Text { get; set; }
         public string ParentReferenceId { get; set; }
+        public string VendorId { get; set; }
     }
 }
