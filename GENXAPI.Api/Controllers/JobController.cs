@@ -657,18 +657,29 @@ namespace GENXAPI.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetSelectedExecutedJobById(int id)
         {
-            var model = new JobExecutedViewListModel();
+            var model = new JobExecutedTrackingViewModel();
             model.executedJob = _unitOfWork.ExecutedJob.AllIncluding(x => x.Customer).Where(a => a.Id == id).FirstOrDefault();
 
             if (model.executedJob == null)
             {
                 return NotFound();
             }
-            model.jobQuotationApproval = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == model.executedJob.JobId).FirstOrDefault();
-            model.tender = _unitOfWork.Tenders.Get(model.executedJob.ContractId);
-            //model.TenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == model.executedJob.ContractId).ToList();
-            //model.TenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == model.executedJob.ContractId).ToList();
+            model.jobQuotationApproval = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == model.executedJob.JobId).ToList();
 
+            var job = _unitOfWork.Job.AllIncluding(x => x.JobChilds).Where(e => e.JobId == model.executedJob.JobId).FirstOrDefault();
+            if (job == null)
+            {
+                return NotFound();
+            }
+            model.job = job;
+            var tender = _unitOfWork.Tenders.AllIncluding(x => x.Customer).Where(m => m.Id == model.executedJob.ContractId).FirstOrDefault();
+
+
+            var tenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == model.executedJob.ContractId).ToList();
+            var tenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == model.executedJob.ContractId).ToList();
+            tender.TenderDetails = tenderDetails;
+            tender.TenderChilds = tenderChilds;
+            model.tender = tender;
             return Ok(model);
         }
 
