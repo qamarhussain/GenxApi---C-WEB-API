@@ -666,6 +666,9 @@ namespace GENXAPI.Api.Controllers
             }
             model.jobQuotationApproval = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == model.executedJob.JobId).FirstOrDefault();
             model.tender = _unitOfWork.Tenders.Get(model.executedJob.ContractId);
+            //model.TenderDetails = _unitOfWork.TenderDetails.AllIncluding(x => x.City, y => y.City1).Where(a => a.TenderId == model.executedJob.ContractId).ToList();
+            //model.TenderChilds = _unitOfWork.TenderChilds.AllIncluding(x => x.FleetService, a => a.FleetService.Unit, v => v.Vehicle, z => z.TenderDetail.City, a => a.TenderDetail.City1).Where(a => a.TenderId == model.executedJob.ContractId).ToList();
+
             return Ok(model);
         }
 
