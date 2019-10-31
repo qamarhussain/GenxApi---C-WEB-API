@@ -239,6 +239,18 @@ namespace GENXAPI.Repisitory
             }
         }
 
+        private IJobExecutedTrackingRepository _jobExecutedTrackingRepository;
+        public IJobExecutedTrackingRepository JobExecutedTracking
+        {
+            get
+            {
+                if (this._jobExecutedTrackingRepository == null)
+                {
+                    this._jobExecutedTrackingRepository = new JobExecutedTrackingRepository(db);
+                }
+                return this._jobExecutedTrackingRepository;
+            }
+        }
         public int SaveChanges()
         {
             return db.SaveChanges();

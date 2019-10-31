@@ -61,5 +61,6 @@ namespace GENXAPI.Repisitory.Model
         public virtual DbSet<RegionalOffice> RegionalOffices { get; set; }
         public virtual DbSet<VendorQuotation> VendorQuotations { get; set; }
         public virtual DbSet<ViewTenderWiseVendor> ViewTenderWiseVendors { get; set; }
+        public virtual DbSet<JobExecutedTracking> JobExecutedTrackings { get; set; }
     }
 }

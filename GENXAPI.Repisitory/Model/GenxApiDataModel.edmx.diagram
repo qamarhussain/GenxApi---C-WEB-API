@@ -75,6 +75,7 @@
         <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
         <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
         <EntityTypeShape EntityType="Model.ViewTenderWiseVendor" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.JobExecutedTracking" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

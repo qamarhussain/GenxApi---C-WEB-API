@@ -15,7 +15,7 @@ namespace GENXAPI.Repisitory
         IContractCancelationRepository ContractCancelation { get; }
         ICustomerBusinessLineRepository CustomerBusinessLine { get; }
         ICityRepository City { get; }
-
+        IJobExecutedTrackingRepository JobExecutedTracking { get; }
         IRegionalOfficeRepository RegionalOffice { get; }
         IJobRepository Job { get; }
         IJobChildRepository JobChild { get; }

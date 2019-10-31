@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ExecutedJobController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\JobExecutedTrackingController.cs" />
     <Compile Include="Controllers\RegionalOfficeController.cs" />
     <Compile Include="Controllers\RegionController .cs" />
     <Compile Include="Controllers\CityController.cs" />

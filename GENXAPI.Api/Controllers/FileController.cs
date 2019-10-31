@@ -96,78 +96,90 @@ namespace GENXAPI.Api.Controllers
             var httpRequest = HttpContext.Current.Request;
             var contractId = httpRequest.Form["ContractId"];
             var customerId = httpRequest.Form["CustomerId"];
-            if (httpRequest.ContentLength > 0)
+            BasicResponse br = new BasicResponse();
+            try
             {
-                string extension = System.IO.Path.GetExtension(httpRequest.Files["file"].FileName).ToLower();
-                string query = null;
-                string connString = "";
-                string[] validFileTypes = { ".xls", ".xlsx", ".csv" };
+                if (httpRequest.ContentLength > 0)
+                {
+                    string extension = System.IO.Path.GetExtension(httpRequest.Files["file"].FileName).ToLower();
+                    string query = null;
+                    string connString = "";
+                    string[] validFileTypes = { ".xls", ".xlsx", ".csv" };
+                    var excelFolder = @"~/ExcelFolder/Uploads";
+                    string path1 = string.Format("{0}/{1}", HttpContext.Current.Server.MapPath(excelFolder), HttpContext.Current.Request.Files["file"].FileName);
+                    if (!Directory.Exists(path1))
+                    {
+                        Directory.CreateDirectory(HttpContext.Current.Server.MapPath(excelFolder));
+                    }
+                    if (validFileTypes.Contains(extension))
+                    {
 
-                string path1 = string.Format("{0}/{1}", HttpContext.Current.Server.MapPath("~/ExcelFolder/Uploads"), HttpContext.Current.Request.Files["file"].FileName);
-                if (!Directory.Exists(path1))
-                {
-                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/ExcelFolder/Uploads"));
-                }
-                if (validFileTypes.Contains(extension))
-                {
-                    if (System.IO.File.Exists(path1))
-                    { System.IO.File.Delete(path1); }
-                    HttpContext.Current.Request.Files["file"].SaveAs(path1);
-                    if (extension == ".csv")
-                    {
-                        DataTable dt = ConvertCSVtoDataTable(path1);
-                        return Ok(dt);
-                    }
-                    //Connection String to Excel Workbook  
-                    else if (extension.Trim() == ".xls")
-                    {
-                        connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path1 + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
-                        DataTable dt = ConvertXSLXtoDataTable(path1, connString);
-                        return Ok(dt);
-                    }
-                    else if (extension.Trim() == ".xlsx")
-                    {
-                        connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path1 + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                        DataTable dt = ConvertXSLXtoDataTable(path1, connString);
-                       // List<temp> obj = new List<temp>();
-                        var list = ConvertDataTable<temp>(dt);
-                        if(list != null)
+                        if (System.IO.File.Exists(path1))
+                        { System.IO.File.Delete(path1); }
+                        HttpContext.Current.Request.Files["file"].SaveAs(path1);
+                        if (extension == ".csv")
                         {
-                            try
-                            {
-                                foreach (var item in list)
-                                {
-                                    if (contractId == item.TenderId.ToString() && customerId == item.CustomerId.ToString())
-                                    {
-                                        return Ok(list);
-                                    }
-                                    else
-                                    {
-                                        return Ok("File does not match witht this detail");
-                                    }
-                                   
-                                }
-                            }
-                            catch (Exception)
-                            {
-
-                                throw;
-                            }
-                         
+                            DataTable dt = ConvertCSVtoDataTable(path1);
+                            return Ok(dt);
                         }
-                        //return Ok(list);
+                        //Connection String to Excel Workbook  
+                        else if (extension.Trim() == ".xls")
+                        {
+                            connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path1 + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                            DataTable dt = ConvertXSLXtoDataTable(path1, connString);
+                            return Ok(dt);
+                        }
+                        else if (extension.Trim() == ".xlsx")
+                        {
+                            connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path1 + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                            DataTable dt = ConvertXSLXtoDataTable(path1, connString);
+                            // List<temp> obj = new List<temp>();
+                            var list = ConvertDataTable<temp>(dt);
+                            if (list != null)
+                            {
+                                try
+                                {
+                                    foreach (var item in list)
+                                    {
+                                        if (contractId == item.TenderId.ToString() && customerId == item.CustomerId.ToString())
+                                        {
+                                            return Ok(list);
+                                        }
+                                        else
+                                        {
+                                            return Ok("File does not match witht this detail");
+                                        }
+
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    
+                                }
+
+                            }
+                            //return Ok(list);
+                        }
+
+                    }
+                    else
+                    {
+                        return Ok("Please Upload Files in .xls, .xlsx or .csv format");
+
                     }
 
                 }
-                else
-                {
-                    return Ok("Please Upload Files in .xls, .xlsx or .csv format");
+            }
+            catch (Exception ex)
+            {
 
-                }
-
+               
+                br.error = ex.Message;
+                return Ok(br);
             }
 
-            return null;
+            return Ok(br);
+            // return null;
         }
 
         public static DataTable ConvertCSVtoDataTable(string strFilePath)
@@ -279,5 +291,9 @@ namespace GENXAPI.Api.Controllers
         public double DetailId { get; set; }
     }
 
+    public class BasicResponse
+    {
+        public string error { get; set; }
+    }
    
 }

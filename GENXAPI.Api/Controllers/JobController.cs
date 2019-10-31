@@ -629,6 +629,46 @@ namespace GENXAPI.Api.Controllers
             }
         }
 
+
+        [HttpGet]
+        public IHttpActionResult GetExecutedJobsOnJobId(int id)
+        {
+            try
+            {
+                var model = new List<JobExecutedViewListModel>();
+                var data = _unitOfWork.ExecutedJob.AllIncluding(x => x.Customer).Where(a => a.JobId == id).ToList();
+                foreach (var item in data)
+                {
+                    JobExecutedViewListModel obj = new JobExecutedViewListModel();
+                    obj.executedJob = item;
+                    obj.tender = _unitOfWork.Tenders.Get(item.ContractId);
+                    obj.jobQuotationApproval = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == item.JobId).FirstOrDefault();
+                    model.Add(obj);
+                }
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetSelectedExecutedJobById(int id)
+        {
+            var model = new JobExecutedViewListModel();
+            model.executedJob = _unitOfWork.ExecutedJob.AllIncluding(x => x.Customer).Where(a => a.Id == id).FirstOrDefault();
+
+            if (model.executedJob == null)
+            {
+                return NotFound();
+            }
+            model.jobQuotationApproval = _unitOfWork.JobQuotationApproval.AllIncluding(e => e.Vendor).Where(x => x.JobId == model.executedJob.JobId).FirstOrDefault();
+            model.tender = _unitOfWork.Tenders.Get(model.executedJob.ContractId);
+            return Ok(model);
+        }
+
         [HttpGet]
         public IHttpActionResult TotalExecutedJobs()
         {

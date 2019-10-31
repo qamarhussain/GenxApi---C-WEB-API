@@ -63,6 +63,7 @@
     <Compile Include="Core\IExecutedJobRepository.cs" />
     <Compile Include="Core\IFileRepository.cs" />
     <Compile Include="Core\IJobChildRepository.cs" />
+    <Compile Include="Core\IJobExecutedTrackingRepository.cs" />
     <Compile Include="Core\IJobQuotationApprovalRepository.cs" />
     <Compile Include="Core\IJobRepository.cs" />
     <Compile Include="Core\IRegionalOfficeRepository.cs" />
@@ -135,6 +136,9 @@
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\JobChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\JobExecutedTracking.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\JobQuotationApproval.cs">
@@ -210,6 +214,7 @@
     <Compile Include="Persistance\ExecutedJobRepository.cs" />
     <Compile Include="Persistance\FileRepository.cs" />
     <Compile Include="Persistance\JobChildRepository.cs" />
+    <Compile Include="Persistance\JobExecutedTrackingRepository.cs" />
     <Compile Include="Persistance\JobQuotationApprovalRepository.cs" />
     <Compile Include="Persistance\JobRepository.cs" />
     <Compile Include="Persistance\RegionalOfficeRepository.cs" />

@@ -254,6 +254,21 @@
           <Property Name="OfficeId" Type="int" />
           <Property Name="IsExecuted" Type="tinyint" />
         </EntityType>
+        <EntityType Name="JobExecutedTracking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ContractId" Type="int" />
+          <Property Name="JobId" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="JobExecutedId" Type="int" />
+        </EntityType>
         <EntityType Name="JobQuotationApproval">
           <Key>
             <PropertyRef Name="JobQuotationApprovalId" />
@@ -1036,6 +1051,7 @@ warning 6002: The table/view 'GenxApp-Refactor-back.dbo.ViewTenderWiseVendor' do
           <EntitySet Name="FleetService" EntityType="Self.FleetService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobChild" EntityType="Self.JobChild" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobExecutedTracking" EntityType="Self.JobExecutedTracking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobQuotationApproval" EntityType="Self.JobQuotationApproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleCategory" EntityType="Self.ModuleCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleForms" EntityType="Self.ModuleForms" Schema="dbo" store:Type="Tables" />
@@ -1382,6 +1398,7 @@ warning 6002: The table/view 'GenxApp-Refactor-back.dbo.ViewTenderWiseVendor' do
             <End Role="VendorQuotationChild" EntitySet="VendorQuotationChilds" />
           </AssociationSet>
           <EntitySet Name="ViewTenderWiseVendors" EntityType="Model.ViewTenderWiseVendor" />
+          <EntitySet Name="JobExecutedTrackings" EntityType="Model.JobExecutedTracking" />
         </EntityContainer>
         <EntityType Name="BusinessUnit">
           <Key>
@@ -2465,6 +2482,21 @@ warning 6002: The table/view 'GenxApp-Refactor-back.dbo.ViewTenderWiseVendor' do
           <Property Name="VendorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="JobExecutedTracking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ContractId" Type="Int32" />
+          <Property Name="JobId" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobExecutedId" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3104,6 +3136,22 @@ warning 6002: The table/view 'GenxApp-Refactor-back.dbo.ViewTenderWiseVendor' do
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="TenderId" ColumnName="TenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobExecutedTrackings">
+            <EntityTypeMapping TypeName="Model.JobExecutedTracking">
+              <MappingFragment StoreEntitySet="JobExecutedTracking">
+                <ScalarProperty Name="JobExecutedId" ColumnName="JobExecutedId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
