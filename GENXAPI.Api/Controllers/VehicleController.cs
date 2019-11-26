@@ -55,7 +55,7 @@ namespace GENXAPI.Api.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IHttpActionResult CreateVehicle([FromBody]Vehicle vehicle)
+        public IHttpActionResult CreateVehicle([FromBody]AML_Vehicles vehicle)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateVehicle(int id, [FromBody]Vehicle vehicle)
+        public IHttpActionResult UpdateVehicle(int id, [FromBody]AML_Vehicles vehicle)
         {
             try
             {

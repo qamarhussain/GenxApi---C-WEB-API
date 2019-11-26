@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class VehicleRepo : GenericCRUD<Vehicle>
+    public class VehicleRepo : GenericCRUD<AML_Vehicles>
     {
 
-        public IList<Vehicle> GetAllActive()
+        public IList<AML_Vehicles> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class TenderRepo : GenericCRUD<Tender>
+    public class TenderRepo : GenericCRUD<AML_Tender>
     {
 
-        public IList<Tender> GetAllActive()
+        public IList<AML_Tender> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

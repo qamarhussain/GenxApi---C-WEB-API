@@ -22,7 +22,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _customerRepo.AllIncluding(x => x.Tenders).ToList();
+                var result = _customerRepo.AllIncluding(x => x.AML_Tender).ToList();
                 return Ok(result);
             }
             catch (Exception)
@@ -56,7 +56,7 @@ namespace GENXAPI.Api.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IHttpActionResult CreateCustomer([FromBody]Customer customer)
+        public IHttpActionResult CreateCustomer([FromBody]AML_Customers customer)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateCustomer(int id, [FromBody]Customer customer)
+        public IHttpActionResult UpdateCustomer(int id, [FromBody]AML_Customers customer)
         {
             try
             {
@@ -89,13 +89,13 @@ namespace GENXAPI.Api.Controllers
                 customerModel.AccountCode = customer.AccountCode;
                 customerModel.AccountNo = customer.AccountNo;
                 customerModel.Address = customer.Address;
-                customerModel.BusinessLine = customer.BusinessLine;
+               // customerModel.AML_CustomerBusinessLine = customer.AML_CustomerBusinessLine;
                 customerModel.BusinessUnitId = customer.BusinessUnitId;
-                customerModel.City = customer.City;
+                customerModel.AML_City = customer.AML_City;
                 customerModel.CNIC = customer.CNIC;
                 customerModel.CompanyId = customer.CompanyId;
                 customerModel.ContactPerson = customer.ContactPerson;
-                customerModel.Country = customer.Country;
+                customerModel.AML_Country = customer.AML_Country;
                 customerModel.CreditLimit = customer.CreditLimit;
                 customerModel.Discount = customer.Discount;
                 customerModel.Email = customer.Email;
@@ -104,7 +104,7 @@ namespace GENXAPI.Api.Controllers
                 customerModel.Name = customer.Name;
                 customerModel.NTN = customer.NTN;
                 customerModel.RegDate = customer.RegDate;
-                customerModel.Region = customer.Region;
+                customerModel.AML_Region = customer.AML_Region;
                 customerModel.RegionId = customer.RegionId;
                 customerModel.Remarks = customer.Remarks;
                 customerModel.State = customer.State;

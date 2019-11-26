@@ -14,11 +14,23 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Module
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Module()
+        {
+            this.ModuleCategories = new HashSet<ModuleCategory>();
+            this.ModuleForms = new HashSet<ModuleForm>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<double> OrderBy { get; set; }
         public string Project { get; set; }
         public string Color { get; set; }
         public string Icon { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ModuleCategory> ModuleCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ModuleForm> ModuleForms { get; set; }
     }
 }

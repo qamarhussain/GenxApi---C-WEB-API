@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory.Repositories
 {
-    public class VendorRepo : GenericCRUD<Vendor>
+    public class VendorRepo : GenericCRUD<AML_Vendor>
     {
-        public IList<Vendor> GetAllActive()
+        public IList<AML_Vendor> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

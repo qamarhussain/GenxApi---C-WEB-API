@@ -55,7 +55,7 @@ namespace GENXAPI.Api.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IHttpActionResult CreateProvince([FromBody]Province province)
+        public IHttpActionResult CreateProvince([FromBody]AML_Province province)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateProvince(int id, [FromBody]Province province)
+        public IHttpActionResult UpdateProvince(int id, [FromBody]AML_Province province)
         {
             try
             {

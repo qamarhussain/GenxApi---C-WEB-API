@@ -36,7 +36,7 @@ namespace GENXAPI.Api.Controllers
                 var viewModel = new List<TenderCreateViewModel>();
                 //var result = _tenderRepo.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).ToList();
                 //var result = db.Tenders.AllIncluding(x=>x.Customer).ToList();
-                var result = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails).ToList();
+                var result = db.Tenders.AllIncluding(x => x.AML_Customers, y => y.AML_TenderDetail).ToList();
                 //foreach(var tender in result)
                 //{
                 //    TenderCreateViewModel tenderViewModel = new TenderCreateViewModel();
@@ -105,7 +105,7 @@ namespace GENXAPI.Api.Controllers
             try
             {
                 //var tender = _tenderRepo.AllIncluding(z => z.Customer).Where(m => m.Id == id).FirstOrDefault();
-                var tender = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z=>z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
+                var tender = db.Tenders.AllIncluding(x => x.AML_Customers, y => y.AML_TenderDetail, z=>z.AML_TenderChild).Where(m => m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();
@@ -115,20 +115,20 @@ namespace GENXAPI.Api.Controllers
                     TenderCreateViewModel tenderViewModel = new TenderCreateViewModel();
                     tenderViewModel.Id = tender.Id;
                     tenderViewModel.CustomerId = tender.CustomerId;
-                    tenderViewModel.CustomerName = tender.Customer.Name;
+                    tenderViewModel.CustomerName = tender.AML_Customers.Name;
                     tenderViewModel.IssuanceDate = tender.IssuanceDate;
                     tenderViewModel.TenderReference = tender.TenderReference;
                     tenderViewModel.TenderSource = tender.TenderSource;
                     tenderViewModel.TenderTerm = tender.TenderTerm;
                     tenderViewModel.StatusId = (byte)tender.StatusId;
                     tenderViewModel.TenderNo = tender.TenderNo;
-                    tenderViewModel.ProvinceId = tender.TenderDetails.FirstOrDefault() == null ? 0 : tender.TenderDetails.First().ProvinceId;
+                    tenderViewModel.ProvinceId = tender.AML_TenderDetail.FirstOrDefault() == null ? 0 : tender.AML_TenderDetail.First().ProvinceId;
                     #region Tender details
                     //var tenderDetailList = db.TenderDetails.Find(x => x.TenderId == tender.Id).ToList();
                     //tenderViewModel.TenderDetails = tenderDetailList;
-                    foreach (var items in tender.TenderDetails)
+                    foreach (var items in tender.AML_TenderDetail)
                     {
-                        TenderDetail tenderDetail = new TenderDetail();
+                        AML_TenderDetail tenderDetail = new AML_TenderDetail();
                         tenderDetail.Id = items.Id;
                         tenderDetail.TenderId = items.TenderId;
                         tenderDetail.CustomerId = items.CustomerId;
@@ -144,7 +144,7 @@ namespace GENXAPI.Api.Controllers
                     #endregion End Tender details
 
                     #region Tender Child.
-                    tenderViewModel.TenderChilds = tender.TenderChilds.ToList();
+                    tenderViewModel.TenderChilds = tender.AML_TenderChild.ToList();
                     //foreach (var items in tender.TenderChilds)
                     //{
                     //    TenderChildViewModel tenderChild = new TenderChildViewModel();
@@ -180,7 +180,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var tender = db.Tenders.AllIncluding(x => x.Customer, y => y.TenderDetails, z => z.TenderChilds).Where(m => m.Id == id).FirstOrDefault();
+                var tender = db.Tenders.AllIncluding(x => x.AML_Customers, y => y.AML_TenderDetail, z => z.AML_TenderChild).Where(m => m.Id == id).FirstOrDefault();
                 if (tender == null)
                 {
                     return NotFound();
@@ -196,13 +196,13 @@ namespace GENXAPI.Api.Controllers
                 tender.CompanyId = updateViewModel.CompanyId;
                 tender.BusinessUnitId = updateViewModel.BusinessUnitId;
                 tender.TenderNo = updateViewModel.TenderNo;
-                db.TenderDetails.RemoveRange(tender.TenderDetails.ToArray());
-                db.TenderChilds.RemoveRange(tender.TenderChilds.ToArray());
+                db.TenderDetails.RemoveRange(tender.AML_TenderDetail.ToArray());
+                db.TenderChilds.RemoveRange(tender.AML_TenderChild.ToArray());
                 #region Tender Detail.
-                var tenderDetailList = new List<TenderDetail>();
+                var tenderDetailList = new List<AML_TenderDetail>();
                 foreach (var items in updateViewModel.TenderDetails)
                 {
-                    TenderDetail tenderDetail = new TenderDetail();
+                    AML_TenderDetail tenderDetail = new AML_TenderDetail();
 
                     tenderDetail.TenderId = tender.Id;
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
@@ -215,21 +215,21 @@ namespace GENXAPI.Api.Controllers
                     tenderDetail.ProvinceName = items.ProvinceName;
                     tenderDetailList.Add(tenderDetail);
                 }
-                tender.TenderDetails = tenderDetailList;
+                tender.AML_TenderDetail = tenderDetailList;
                 #endregion
 
                 #region Tender Services.
-                var tenderChildList = new List<TenderChild>();
+                var tenderChildList = new List<AML_TenderChild>();
                 foreach (var items in updateViewModel.TenderChilds)
                 {
-                    TenderChild tenderChild = new TenderChild();
+                    AML_TenderChild tenderChild = new AML_TenderChild();
                     tenderChild.FleetServiceId = items.FleetServiceId;
                     tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;
                     tenderChild.TenderId = tender.Id;
                     tenderChildList.Add(tenderChild);
                 }
-                tender.TenderChilds = tenderChildList;
+                tender.AML_TenderChild = tenderChildList;
                 //var detailToDelete = db.TenderDetails.Find(x => x.TenderId == id).ToList();
                 //foreach(var item in detailToDelete)
                 //{
@@ -255,7 +255,7 @@ namespace GENXAPI.Api.Controllers
         [HttpPost]
         public IHttpActionResult TenderCreate([FromBody] TenderCreateViewModel createViewModel)
         {
-            Tender tender = new Tender();
+            AML_Tender tender = new AML_Tender();
             try
             {
                 tender.CustomerId = createViewModel.CustomerId;
@@ -273,10 +273,10 @@ namespace GENXAPI.Api.Controllers
                 tender.TenderNo = createViewModel.TenderNo;
                 db.Tenders.Add(tender);
                 #region Tender Detail.
-                var tenderDetailList = new List<TenderDetail>();
+                var tenderDetailList = new List<AML_TenderDetail>();
                 foreach (var items in createViewModel.TenderDetails)
                 {
-                    TenderDetail tenderDetail = new TenderDetail();
+                    AML_TenderDetail tenderDetail = new AML_TenderDetail();
 
                     tenderDetail.TenderId = tender.Id;
                     tenderDetail.CustomerId = Convert.ToInt32(tender.CustomerId);
@@ -293,10 +293,10 @@ namespace GENXAPI.Api.Controllers
                 #endregion
 
                 #region Tender Services.
-                var tenderChildList = new List<TenderChild>();
+                var tenderChildList = new List<AML_TenderChild>();
                 foreach (var items in createViewModel.TenderChilds)
                 {
-                    TenderChild tenderChild = new TenderChild();
+                    AML_TenderChild tenderChild = new AML_TenderChild();
                     tenderChild.FleetServiceId = items.Id;
                     tenderChild.ItemCode = items.ItemCode;
                     tenderChild.CustomerId = tender.CustomerId;

@@ -14,7 +14,12 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class FinancialYearDefination
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FinancialYearDefination()
+        {
+            this.FinancialYearDetails = new HashSet<FinancialYearDetail>();
+        }
+    
         public int CompanyId { get; set; }
         public int BusinessUnitId { get; set; }
         public string FYearTitle { get; set; }
@@ -22,8 +27,9 @@ namespace GENXAPI.Repisitory.Model
         public System.DateTime FYearEndDate { get; set; }
         public Nullable<bool> FYearActive { get; set; }
         public Nullable<bool> FYearLocked { get; set; }
-        public Nullable<byte> StatusId { get; set; }
     
-        public virtual Company Company { get; set; }
+        public virtual BusinessUnitsInfo BusinessUnitsInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinancialYearDetail> FinancialYearDetails { get; set; }
     }
 }

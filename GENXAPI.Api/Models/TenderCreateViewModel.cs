@@ -10,11 +10,11 @@ namespace GENXAPI.Api.Models
     {
         public TenderCreateViewModel()
         {
-            TenderDetails = new List<TenderDetail>();
-            TenderChilds = new List<TenderChild>();
+            TenderDetails = new List<AML_TenderDetail>();
+            TenderChilds = new List<AML_TenderChild>();
         }
-        public List<TenderDetail> TenderDetails { get; set; }
-        public List<TenderChild> TenderChilds { get; set; }
+        public List<AML_TenderDetail> TenderDetails { get; set; }
+        public List<AML_TenderChild> TenderChilds { get; set; }
 
         public int Id { get; set; }
         public string TenderReference { get; set; }

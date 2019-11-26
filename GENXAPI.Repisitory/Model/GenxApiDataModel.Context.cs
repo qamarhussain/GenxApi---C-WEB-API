@@ -12,6 +12,8 @@ namespace GENXAPI.Repisitory.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -25,28 +27,4650 @@ namespace GENXAPI.Repisitory.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AccountsType> AccountsTypes { get; set; }
+        public virtual DbSet<AccountVocherChild> AccountVocherChilds { get; set; }
+        public virtual DbSet<AccountVocherChildTemp> AccountVocherChildTemps { get; set; }
+        public virtual DbSet<AccountVocherMaster> AccountVocherMasters { get; set; }
+        public virtual DbSet<AccountVocherMasterTemp> AccountVocherMasterTemps { get; set; }
+        public virtual DbSet<AddServicesPerItem> AddServicesPerItems { get; set; }
+        public virtual DbSet<AML_BusinessUnits> AML_BusinessUnits { get; set; }
+        public virtual DbSet<AML_City> AML_City { get; set; }
+        public virtual DbSet<AML_Company> AML_Company { get; set; }
+        public virtual DbSet<AML_ContractCancelation> AML_ContractCancelation { get; set; }
+        public virtual DbSet<AML_Country> AML_Country { get; set; }
+        public virtual DbSet<AML_Currency> AML_Currency { get; set; }
+        public virtual DbSet<AML_CustomerBusinessLine> AML_CustomerBusinessLine { get; set; }
+        public virtual DbSet<AML_Customers> AML_Customers { get; set; }
+        public virtual DbSet<AML_Dispatch> AML_Dispatch { get; set; }
+        public virtual DbSet<AML_DispatchDetail> AML_DispatchDetail { get; set; }
+        public virtual DbSet<AML_ExecutedJob> AML_ExecutedJob { get; set; }
+        public virtual DbSet<AML_File> AML_File { get; set; }
+        public virtual DbSet<AML_FinancialYearDefination> AML_FinancialYearDefination { get; set; }
+        public virtual DbSet<AML_FleetService> AML_FleetService { get; set; }
+        public virtual DbSet<AML_GodownRack> AML_GodownRack { get; set; }
+        public virtual DbSet<AML_GodownRow> AML_GodownRow { get; set; }
+        public virtual DbSet<AML_GodownShelf> AML_GodownShelf { get; set; }
+        public virtual DbSet<AML_Godwom> AML_Godwom { get; set; }
+        public virtual DbSet<AML_GodwomType> AML_GodwomType { get; set; }
+        public virtual DbSet<AML_Item> AML_Item { get; set; }
+        public virtual DbSet<AML_ItemInformation> AML_ItemInformation { get; set; }
+        public virtual DbSet<AML_Job> AML_Job { get; set; }
+        public virtual DbSet<AML_JobChild> AML_JobChild { get; set; }
+        public virtual DbSet<AML_JobQuotationApproval> AML_JobQuotationApproval { get; set; }
+        public virtual DbSet<AML_Pallet> AML_Pallet { get; set; }
+        public virtual DbSet<AML_PickupOrder> AML_PickupOrder { get; set; }
+        public virtual DbSet<AML_PickupOrderChild> AML_PickupOrderChild { get; set; }
+        public virtual DbSet<AML_Province> AML_Province { get; set; }
+        public virtual DbSet<AML_Region> AML_Region { get; set; }
+        public virtual DbSet<AML_RegionalOffice> AML_RegionalOffice { get; set; }
+        public virtual DbSet<AML_ShipmentNote> AML_ShipmentNote { get; set; }
+        public virtual DbSet<AML_ShipmentNoteChild> AML_ShipmentNoteChild { get; set; }
+        public virtual DbSet<AML_Tender> AML_Tender { get; set; }
+        public virtual DbSet<AML_TenderChild> AML_TenderChild { get; set; }
+        public virtual DbSet<AML_TenderDetail> AML_TenderDetail { get; set; }
+        public virtual DbSet<AML_Units> AML_Units { get; set; }
+        public virtual DbSet<AML_Vehicles> AML_Vehicles { get; set; }
+        public virtual DbSet<AML_Vendor> AML_Vendor { get; set; }
+        public virtual DbSet<AML_VendorQuotation> AML_VendorQuotation { get; set; }
+        public virtual DbSet<AML_VendorQuotationChild> AML_VendorQuotationChild { get; set; }
+        public virtual DbSet<AML_Warehouse> AML_Warehouse { get; set; }
+        public virtual DbSet<AML_WarehouseTransection> AML_WarehouseTransection { get; set; }
+        public virtual DbSet<ApplicationSetting> ApplicationSettings { get; set; }
+        public virtual DbSet<Attendance> Attendances { get; set; }
+        public virtual DbSet<AttendanceAndOverTimeLock> AttendanceAndOverTimeLocks { get; set; }
+        public virtual DbSet<AttendanceDayMark> AttendanceDayMarks { get; set; }
+        public virtual DbSet<AttendanceDayMarkType> AttendanceDayMarkTypes { get; set; }
+        public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<BankAccountDetail> BankAccountDetails { get; set; }
+        public virtual DbSet<BankAccount> BankAccounts { get; set; }
+        public virtual DbSet<BillOfEntryChild> BillOfEntryChilds { get; set; }
+        public virtual DbSet<BillOfEntryMaster> BillOfEntryMasters { get; set; }
+        public virtual DbSet<BindItemsWithMachine> BindItemsWithMachines { get; set; }
+        public virtual DbSet<Block> Blocks { get; set; }
+        public virtual DbSet<BlockCutting> BlockCuttings { get; set; }
+        public virtual DbSet<BlockCuttingDetail> BlockCuttingDetails { get; set; }
+        public virtual DbSet<BlockProduction> BlockProductions { get; set; }
+        public virtual DbSet<BlockProductionDetail> BlockProductionDetails { get; set; }
+        public virtual DbSet<BlockWarehouse> BlockWarehouses { get; set; }
+        public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<BusinessUnit> BusinessUnits { get; set; }
-        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<BusinessUnitsInfo> BusinessUnitsInfoes { get; set; }
+        public virtual DbSet<ChartOfAccount> ChartOfAccounts { get; set; }
+        public virtual DbSet<CheqeueIssuedTo> CheqeueIssuedToes { get; set; }
+        public virtual DbSet<ChequeBookRecord> ChequeBookRecords { get; set; }
+        public virtual DbSet<ChequePaidSummary> ChequePaidSummaries { get; set; }
+        public virtual DbSet<ChequeReceivedFrom> ChequeReceivedFroms { get; set; }
+        public virtual DbSet<ChequeReceivedSummary> ChequeReceivedSummaries { get; set; }
+        public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
+        public virtual DbSet<CompanyVariable> CompanyVariables { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<CurrencyRate> CurrencyRates { get; set; }
+        public virtual DbSet<CustomerCare> CustomerCares { get; set; }
+        public virtual DbSet<CustomerCareDetail> CustomerCareDetails { get; set; }
+        public virtual DbSet<CustomerCareFeedBack> CustomerCareFeedBacks { get; set; }
+        public virtual DbSet<CustomerInvoiceChild> CustomerInvoiceChilds { get; set; }
+        public virtual DbSet<CustomerInvoiceMaster> CustomerInvoiceMasters { get; set; }
+        public virtual DbSet<CustomerInvoiceMasterDetail> CustomerInvoiceMasterDetails { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomersBusinessLink> CustomersBusinessLinks { get; set; }
+        public virtual DbSet<CustomerWiseCostingChild> CustomerWiseCostingChilds { get; set; }
+        public virtual DbSet<CustomerWiseCostingMaster> CustomerWiseCostingMasters { get; set; }
+        public virtual DbSet<DailyCashReceive> DailyCashReceives { get; set; }
+        public virtual DbSet<DefaultChartOfAccount> DefaultChartOfAccounts { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Designation> Designations { get; set; }
+        public virtual DbSet<DispatchPlan> DispatchPlans { get; set; }
+        public virtual DbSet<DispatchPlanDetail> DispatchPlanDetails { get; set; }
+        public virtual DbSet<DispatchPlanSchedule> DispatchPlanSchedules { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<EmployeeAttendanceType> EmployeeAttendanceTypes { get; set; }
+        public virtual DbSet<EmployeeHistory> EmployeeHistories { get; set; }
+        public virtual DbSet<EmployeeInfo> EmployeeInfoes { get; set; }
+        public virtual DbSet<EmployeeJobExperience> EmployeeJobExperiences { get; set; }
+        public virtual DbSet<EmployeeLeavesAllowed> EmployeeLeavesAlloweds { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public virtual DbSet<EmployeeTypeOverTime> EmployeeTypeOverTimes { get; set; }
         public virtual DbSet<FinancialYearDefination> FinancialYearDefinations { get; set; }
-        public virtual DbSet<FleetService> FleetServices { get; set; }
+        public virtual DbSet<FinancialYearDetail> FinancialYearDetails { get; set; }
+        public virtual DbSet<GatePass> GatePasses { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<InquiryDetail> InquiryDetails { get; set; }
+        public virtual DbSet<InquiryMaster> InquiryMasters { get; set; }
+        public virtual DbSet<inv_BinCartDefination> inv_BinCartDefination { get; set; }
+        public virtual DbSet<inv_Consumption> inv_Consumption { get; set; }
+        public virtual DbSet<inv_ConsumptionDetail> inv_ConsumptionDetail { get; set; }
+        public virtual DbSet<inv_ConsumptionItemLoad> inv_ConsumptionItemLoad { get; set; }
+        public virtual DbSet<inv_GatePass> inv_GatePass { get; set; }
+        public virtual DbSet<inv_GatePassDetail> inv_GatePassDetail { get; set; }
+        public virtual DbSet<inv_GatePassDetailItems> inv_GatePassDetailItems { get; set; }
+        public virtual DbSet<inv_GoodRecieveNote> inv_GoodRecieveNote { get; set; }
+        public virtual DbSet<inv_GoodRecieveNoteDetail> inv_GoodRecieveNoteDetail { get; set; }
+        public virtual DbSet<inv_GoodRecieveNoteDetailItems> inv_GoodRecieveNoteDetailItems { get; set; }
+        public virtual DbSet<inv_Invoice> inv_Invoice { get; set; }
+        public virtual DbSet<inv_ItemDetail> inv_ItemDetail { get; set; }
+        public virtual DbSet<inv_ItemPrices> inv_ItemPrices { get; set; }
+        public virtual DbSet<Inv_ItemsDefination> Inv_ItemsDefination { get; set; }
+        public virtual DbSet<inv_ItemVarientDefination> inv_ItemVarientDefination { get; set; }
+        public virtual DbSet<inv_ItemVarientDetail> inv_ItemVarientDetail { get; set; }
+        public virtual DbSet<inv_LetterOfCredit> inv_LetterOfCredit { get; set; }
+        public virtual DbSet<inv_LetterOfCreditTypes> inv_LetterOfCreditTypes { get; set; }
+        public virtual DbSet<inv_MaterialIssuanceReceipt> inv_MaterialIssuanceReceipt { get; set; }
+        public virtual DbSet<inv_MaterialIssuanceReceiptDetail> inv_MaterialIssuanceReceiptDetail { get; set; }
+        public virtual DbSet<inv_Miniwarehouse> inv_Miniwarehouse { get; set; }
+        public virtual DbSet<Inv_PostedVoucher> Inv_PostedVoucher { get; set; }
+        public virtual DbSet<inv_Priority> inv_Priority { get; set; }
+        public virtual DbSet<inv_PurchaseDemandNote> inv_PurchaseDemandNote { get; set; }
+        public virtual DbSet<inv_purchaseDemandNoteDetail> inv_purchaseDemandNoteDetail { get; set; }
+        public virtual DbSet<inv_PurchaseOrder> inv_PurchaseOrder { get; set; }
+        public virtual DbSet<inv_PurchaseOrderDetail> inv_PurchaseOrderDetail { get; set; }
+        public virtual DbSet<inv_purchaseRecognization> inv_purchaseRecognization { get; set; }
+        public virtual DbSet<inv_purchaseRecognizationDetail> inv_purchaseRecognizationDetail { get; set; }
+        public virtual DbSet<inv_PurchaseReturn> inv_PurchaseReturn { get; set; }
+        public virtual DbSet<inv_PurchaseReturnItemDetail> inv_PurchaseReturnItemDetail { get; set; }
+        public virtual DbSet<inv_StockLess> inv_StockLess { get; set; }
+        public virtual DbSet<inv_Tender> inv_Tender { get; set; }
+        public virtual DbSet<inv_TenderDetail> inv_TenderDetail { get; set; }
+        public virtual DbSet<inv_Units> inv_Units { get; set; }
+        public virtual DbSet<inv_VendorQuotation> inv_VendorQuotation { get; set; }
+        public virtual DbSet<inv_VendorQuotationDetail> inv_VendorQuotationDetail { get; set; }
+        public virtual DbSet<inv_Vendors> inv_Vendors { get; set; }
+        public virtual DbSet<inv_VendorsBusinessNature> inv_VendorsBusinessNature { get; set; }
+        public virtual DbSet<inv_VendorsOrgType> inv_VendorsOrgType { get; set; }
+        public virtual DbSet<inv_Warehouse> inv_Warehouse { get; set; }
+        public virtual DbSet<inv_WarehouseDefination> inv_WarehouseDefination { get; set; }
+        public virtual DbSet<inv_WareHouseLog> inv_WareHouseLog { get; set; }
+        public virtual DbSet<inv_WareHouseTransferSaleAudit> inv_WareHouseTransferSaleAudit { get; set; }
+        public virtual DbSet<inv_CurrencyDefination> inv_CurrencyDefination { get; set; }
+        public virtual DbSet<InvExpenseDefination> InvExpenseDefinations { get; set; }
+        public virtual DbSet<InvLatterOfCredit> InvLatterOfCredits { get; set; }
+        public virtual DbSet<InvLetterOfCreditDetail> InvLetterOfCreditDetails { get; set; }
+        public virtual DbSet<InvLetterOfCreditDocument> InvLetterOfCreditDocuments { get; set; }
+        public virtual DbSet<InvLetterOfCreditDocumentsUpload> InvLetterOfCreditDocumentsUploads { get; set; }
+        public virtual DbSet<InvLetterOfCreditExpsInfo> InvLetterOfCreditExpsInfoes { get; set; }
+        public virtual DbSet<ItemBusinessUnitLink> ItemBusinessUnitLinks { get; set; }
+        public virtual DbSet<ItemCosting> ItemCostings { get; set; }
+        public virtual DbSet<ItemCostingDetail> ItemCostingDetails { get; set; }
+        public virtual DbSet<ItemCostingItemDetail> ItemCostingItemDetails { get; set; }
+        public virtual DbSet<ItemImage> ItemImages { get; set; }
+        public virtual DbSet<ItemPrice> ItemPrices { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<ItemsDefination> ItemsDefinations { get; set; }
+        public virtual DbSet<LetterOfCreditType> LetterOfCreditTypes { get; set; }
+        public virtual DbSet<LoanInfo> LoanInfoes { get; set; }
+        public virtual DbSet<MachineDefination> MachineDefinations { get; set; }
+        public virtual DbSet<MachineFormula> MachineFormulas { get; set; }
+        public virtual DbSet<Manu_DefinePhase> Manu_DefinePhase { get; set; }
+        public virtual DbSet<Manuf_InquiryWiseRecipeDetail> Manuf_InquiryWiseRecipeDetail { get; set; }
+        public virtual DbSet<Manuf_InquiryWiseRecipeMaster> Manuf_InquiryWiseRecipeMaster { get; set; }
+        public virtual DbSet<Manuf_ItemWiseDepartments> Manuf_ItemWiseDepartments { get; set; }
+        public virtual DbSet<Manuf_NewDefineRecipeDetail> Manuf_NewDefineRecipeDetail { get; set; }
+        public virtual DbSet<Manuf_NewDefineRecipeMaster> Manuf_NewDefineRecipeMaster { get; set; }
+        public virtual DbSet<Manuf_DefineBatch> Manuf_DefineBatch { get; set; }
+        public virtual DbSet<Manuf_DefineRecipeDetail> Manuf_DefineRecipeDetail { get; set; }
+        public virtual DbSet<Manuf_DefineRecipeMaster> Manuf_DefineRecipeMaster { get; set; }
+        public virtual DbSet<Manuf_NewProduction> Manuf_NewProduction { get; set; }
+        public virtual DbSet<Manuf_PhaseStatus> Manuf_PhaseStatus { get; set; }
+        public virtual DbSet<Manuf_ProcedureDetail> Manuf_ProcedureDetail { get; set; }
+        public virtual DbSet<Manuf_ProcedureMaster> Manuf_ProcedureMaster { get; set; }
+        public virtual DbSet<Manuf_Production> Manuf_Production { get; set; }
+        public virtual DbSet<Manuf_ProductionDetail> Manuf_ProductionDetail { get; set; }
+        public virtual DbSet<Manuf_StepStatus> Manuf_StepStatus { get; set; }
+        public virtual DbSet<MaritalStatu> MaritalStatus { get; set; }
         public virtual DbSet<ModuleCategory> ModuleCategories { get; set; }
         public virtual DbSet<ModuleForm> ModuleForms { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
-        public virtual DbSet<Province> Provinces { get; set; }
+        public virtual DbSet<MonthlyInstallment> MonthlyInstallments { get; set; }
+        public virtual DbSet<OrderDelivery> OrderDeliveries { get; set; }
+        public virtual DbSet<OrderDeliveryDetail> OrderDeliveryDetails { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderStatusCurrent> OrderStatusCurrents { get; set; }
+        public virtual DbSet<PerformaInvoiceChild> PerformaInvoiceChilds { get; set; }
+        public virtual DbSet<PerformaInvoiceMaster> PerformaInvoiceMasters { get; set; }
+        public virtual DbSet<PrivilegesToRole> PrivilegesToRoles { get; set; }
+        public virtual DbSet<Ratio> Ratios { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<Registration_BusinessUnitLevel> Registration_BusinessUnitLevel { get; set; }
+        public virtual DbSet<Registration_CompanyLevel> Registration_CompanyLevel { get; set; }
+        public virtual DbSet<Registration_User> Registration_User { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RolesToUser> RolesToUsers { get; set; }
+        public virtual DbSet<SaleInvoice> SaleInvoices { get; set; }
+        public virtual DbSet<SaleReturnInvoice> SaleReturnInvoices { get; set; }
+        public virtual DbSet<SalesReturn> SalesReturns { get; set; }
+        public virtual DbSet<SalesReturnDetail> SalesReturnDetails { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<ShiftHistory> ShiftHistories { get; set; }
+        public virtual DbSet<ShiftInfo> ShiftInfoes { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<SizeType> SizeTypes { get; set; }
+        public virtual DbSet<SkipMonthlyInstallment> SkipMonthlyInstallments { get; set; }
+        public virtual DbSet<TransferedItemWarehouse> TransferedItemWarehouses { get; set; }
+        public virtual DbSet<TransferItemWareHouseAudit> TransferItemWareHouseAudits { get; set; }
+        public virtual DbSet<TransferStockInventoryToSale> TransferStockInventoryToSales { get; set; }
+        public virtual DbSet<TransferStockSalesToInventory> TransferStockSalesToInventories { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Vehicle> Vehicles { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
-        public virtual DbSet<VendorsBusinessNature> VendorsBusinessNatures { get; set; }
-        public virtual DbSet<VendorsOrgType> VendorsOrgTypes { get; set; }
-        public virtual DbSet<Tender> Tenders { get; set; }
-        public virtual DbSet<TenderChild> TenderChilds { get; set; }
-        public virtual DbSet<TenderDetail> TenderDetails { get; set; }
+        public virtual DbSet<VehicleRegistration> VehicleRegistrations { get; set; }
+        public virtual DbSet<VendorInvoiceChild> VendorInvoiceChilds { get; set; }
+        public virtual DbSet<VendorInvoiceMaster> VendorInvoiceMasters { get; set; }
+        public virtual DbSet<VendorInvoiceMasterDetail> VendorInvoiceMasterDetails { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<WarehouseDefination> WarehouseDefinations { get; set; }
+        public virtual DbSet<YearsDefination> YearsDefinations { get; set; }
+        public virtual DbSet<Zone> Zones { get; set; }
+        public virtual DbSet<AML_Users> AML_Users { get; set; }
+        public virtual DbSet<inv_DefaultCurrencyDefination> inv_DefaultCurrencyDefination { get; set; }
+        public virtual DbSet<inv_DefaultOrgType> inv_DefaultOrgType { get; set; }
+        public virtual DbSet<inv_DefaultPriority> inv_DefaultPriority { get; set; }
+        public virtual DbSet<inv_DefaultVendorsBusinessNature> inv_DefaultVendorsBusinessNature { get; set; }
+        public virtual DbSet<inv_TestViewForItemVarient> inv_TestViewForItemVarient { get; set; }
+        public virtual DbSet<inv_ViewGetWareHouseItemsTransferStock> inv_ViewGetWareHouseItemsTransferStock { get; set; }
+        public virtual DbSet<InvViewAvailableStock> InvViewAvailableStocks { get; set; }
+        public virtual DbSet<temp_Orders> temp_Orders { get; set; }
+        public virtual DbSet<tempOrdersDelivery> tempOrdersDeliveries { get; set; }
+        public virtual DbSet<TransferItemsInventoryToSale> TransferItemsInventoryToSales { get; set; }
+        public virtual DbSet<View_BatchWithCompeletItemName> View_BatchWithCompeletItemName { get; set; }
+        public virtual DbSet<View_BatchWithPhase> View_BatchWithPhase { get; set; }
+        public virtual DbSet<View_BusinessUnitCustomerRecievable> View_BusinessUnitCustomerRecievable { get; set; }
+        public virtual DbSet<View_BusinessUnitsByLogin> View_BusinessUnitsByLogin { get; set; }
+        public virtual DbSet<View_CustomerInvoiceDetails> View_CustomerInvoiceDetails { get; set; }
+        public virtual DbSet<View_CustomRecipe> View_CustomRecipe { get; set; }
+        public virtual DbSet<View_DashBoard_Availble_Stock> View_DashBoard_Availble_Stock { get; set; }
+        public virtual DbSet<View_Dashboard_Sales_NetAmount_OrderPerDay> View_Dashboard_Sales_NetAmount_OrderPerDay { get; set; }
+        public virtual DbSet<View_Dashboard_Sales_test> View_Dashboard_Sales_test { get; set; }
+        public virtual DbSet<View_DashBoardEmployeePresent> View_DashBoardEmployeePresent { get; set; }
+        public virtual DbSet<view_DashboardEmployeePresentDepartmentWiseNet> view_DashboardEmployeePresentDepartmentWiseNet { get; set; }
+        public virtual DbSet<View_DashBoardEmployeeTotal> View_DashBoardEmployeeTotal { get; set; }
+        public virtual DbSet<View_DashboardProductionPlanning> View_DashboardProductionPlanning { get; set; }
+        public virtual DbSet<View_DashBoardTodayEmpAttendance> View_DashBoardTodayEmpAttendance { get; set; }
+        public virtual DbSet<View_DashboardTransferItem> View_DashboardTransferItem { get; set; }
+        public virtual DbSet<View_DayBookDashboard> View_DayBookDashboard { get; set; }
+        public virtual DbSet<View_DepartmentWiseItemConsumption> View_DepartmentWiseItemConsumption { get; set; }
+        public virtual DbSet<View_DepartmentWiseRecipeSalesItem> View_DepartmentWiseRecipeSalesItem { get; set; }
+        public virtual DbSet<View_Deshboard_Sales_NetAmount_OrdersPerMonth> View_Deshboard_Sales_NetAmount_OrdersPerMonth { get; set; }
+        public virtual DbSet<View_Deshboard_Sales_NetAmount_PerMonth> View_Deshboard_Sales_NetAmount_PerMonth { get; set; }
+        public virtual DbSet<View_Deshboard_Sales_NetAmount_SalesPerDay> View_Deshboard_Sales_NetAmount_SalesPerDay { get; set; }
+        public virtual DbSet<View_Employee_Info_against_attendance> View_Employee_Info_against_attendance { get; set; }
+        public virtual DbSet<View_ForIncomeStatment> View_ForIncomeStatment { get; set; }
+        public virtual DbSet<View_GatePassInwardWithItemName> View_GatePassInwardWithItemName { get; set; }
+        public virtual DbSet<View_GetCurrentInfo_AllEmployees> View_GetCurrentInfo_AllEmployees { get; set; }
+        public virtual DbSet<View_GetCurrentInfo_AllEmployees_Reports> View_GetCurrentInfo_AllEmployees_Reports { get; set; }
+        public virtual DbSet<View_GetGetChartsOfAccountsFourthLevel> View_GetGetChartsOfAccountsFourthLevel { get; set; }
+        public virtual DbSet<View_GetGetChartsOfAccountsSecondLevel> View_GetGetChartsOfAccountsSecondLevel { get; set; }
+        public virtual DbSet<View_GetGetChartsOfAccountsThirdLevel> View_GetGetChartsOfAccountsThirdLevel { get; set; }
+        public virtual DbSet<View_GetItemCompleteInfoWithoutStock> View_GetItemCompleteInfoWithoutStock { get; set; }
+        public virtual DbSet<View_GetItemsCompleteInfo> View_GetItemsCompleteInfo { get; set; }
+        public virtual DbSet<View_GetItemsCompleteInfoWithOutStock> View_GetItemsCompleteInfoWithOutStock { get; set; }
+        public virtual DbSet<View_GetPurchaseInvoice> View_GetPurchaseInvoice { get; set; }
+        public virtual DbSet<View_GetSaleInvoice> View_GetSaleInvoice { get; set; }
+        public virtual DbSet<View_GetWareHouseItemDetailTransferStock> View_GetWareHouseItemDetailTransferStock { get; set; }
+        public virtual DbSet<View_GoodRecievNoteWithItemName> View_GoodRecievNoteWithItemName { get; set; }
+        public virtual DbSet<View_inv_GetItemsInfoInWareHouseForMoveStock> View_inv_GetItemsInfoInWareHouseForMoveStock { get; set; }
+        public virtual DbSet<View_Inv_GetSepratedColumnForItemDetialsOfC_S_B_Item> View_Inv_GetSepratedColumnForItemDetialsOfC_S_B_Item { get; set; }
+        public virtual DbSet<View_inv_GetSepratedRoomRackBinFromBinCartDefination> View_inv_GetSepratedRoomRackBinFromBinCartDefination { get; set; }
+        public virtual DbSet<View_inv_warehouseItemBalance> View_inv_warehouseItemBalance { get; set; }
+        public virtual DbSet<View_invGetItemDetailComplete> View_invGetItemDetailComplete { get; set; }
+        public virtual DbSet<View_invItemforpdn> View_invItemforpdn { get; set; }
+        public virtual DbSet<View_invItemforpdnApprovel> View_invItemforpdnApprovel { get; set; }
+        public virtual DbSet<View_InvPurchaseOrderWithItemName> View_InvPurchaseOrderWithItemName { get; set; }
+        public virtual DbSet<View_InvWarehouseBatch> View_InvWarehouseBatch { get; set; }
+        public virtual DbSet<View_InvWarehouseOpeningBalanceReport> View_InvWarehouseOpeningBalanceReport { get; set; }
+        public virtual DbSet<View_IssueProductionDepartment> View_IssueProductionDepartment { get; set; }
+        public virtual DbSet<View_ItemHistoryDashboard> View_ItemHistoryDashboard { get; set; }
+        public virtual DbSet<View_ItemPriceDetail> View_ItemPriceDetail { get; set; }
+        public virtual DbSet<View_ItemWiseCosting> View_ItemWiseCosting { get; set; }
+        public virtual DbSet<View_ItemWithoutRecipe> View_ItemWithoutRecipe { get; set; }
+        public virtual DbSet<View_LedgerBalanceDashboardFinancial> View_LedgerBalanceDashboardFinancial { get; set; }
+        public virtual DbSet<View_LoginInformation> View_LoginInformation { get; set; }
+        public virtual DbSet<View_ModuleFormInfo_ByRole> View_ModuleFormInfo_ByRole { get; set; }
+        public virtual DbSet<View_NaviagtionInfoByRole> View_NaviagtionInfoByRole { get; set; }
+        public virtual DbSet<View_NewItemConsumption> View_NewItemConsumption { get; set; }
+        public virtual DbSet<view_order_status_panding_complete> view_order_status_panding_complete { get; set; }
+        public virtual DbSet<View_OrderDeliveryDetailforEdit> View_OrderDeliveryDetailforEdit { get; set; }
+        public virtual DbSet<View_PendingJV> View_PendingJV { get; set; }
+        public virtual DbSet<View_PerformaColorSize> View_PerformaColorSize { get; set; }
+        public virtual DbSet<View_PerformaItemsQuantityDetails> View_PerformaItemsQuantityDetails { get; set; }
+        public virtual DbSet<View_PhaseStatusWithName> View_PhaseStatusWithName { get; set; }
+        public virtual DbSet<View_productionDetailWithItemName> View_productionDetailWithItemName { get; set; }
+        public virtual DbSet<View_productionInvoice> View_productionInvoice { get; set; }
+        public virtual DbSet<View_PurchaseInvoiceDetail_Report> View_PurchaseInvoiceDetail_Report { get; set; }
+        public virtual DbSet<View_PurchaseOrderPerDay> View_PurchaseOrderPerDay { get; set; }
+        public virtual DbSet<View_PurchaseOrderPerMonth> View_PurchaseOrderPerMonth { get; set; }
+        public virtual DbSet<View_PurchaseReturnWithItemName> View_PurchaseReturnWithItemName { get; set; }
+        public virtual DbSet<View_ReceipewithPrice> View_ReceipewithPrice { get; set; }
+        public virtual DbSet<View_RecievedProductionDepartment> View_RecievedProductionDepartment { get; set; }
+        public virtual DbSet<View_RecipeDetailWithItemName> View_RecipeDetailWithItemName { get; set; }
+        public virtual DbSet<View_RecipeHoldedItems> View_RecipeHoldedItems { get; set; }
+        public virtual DbSet<View_RecoWithItemName> View_RecoWithItemName { get; set; }
+        public virtual DbSet<View_Report_CustomerWiseSalesLedger> View_Report_CustomerWiseSalesLedger { get; set; }
+        public virtual DbSet<View_Report_DeliveryChallan> View_Report_DeliveryChallan { get; set; }
+        public virtual DbSet<View_Report_OrderTypeWiseSalesDetail> View_Report_OrderTypeWiseSalesDetail { get; set; }
+        public virtual DbSet<View_Report_WarehousNetBalanceItemWise> View_Report_WarehousNetBalanceItemWise { get; set; }
+        public virtual DbSet<View_reports_ledgerAccounts> View_reports_ledgerAccounts { get; set; }
+        public virtual DbSet<View_Reports_ToSupparesItemsSizeType> View_Reports_ToSupparesItemsSizeType { get; set; }
+        public virtual DbSet<View_ReportVoucher> View_ReportVoucher { get; set; }
+        public virtual DbSet<View_SaleReturnInvoiceDetail_Report> View_SaleReturnInvoiceDetail_Report { get; set; }
+        public virtual DbSet<View_SaleReturnInvoiceSummary_Reports> View_SaleReturnInvoiceSummary_Reports { get; set; }
+        public virtual DbSet<View_SalesTaxInvoice> View_SalesTaxInvoice { get; set; }
+        public virtual DbSet<View_StepStatusWithName> View_StepStatusWithName { get; set; }
+        public virtual DbSet<View_SubCategoryColor_Size> View_SubCategoryColor_Size { get; set; }
+        public virtual DbSet<view_sum_of_deliveredQuantity> view_sum_of_deliveredQuantity { get; set; }
+        public virtual DbSet<view_sum_of_deliveredQuantity_report> view_sum_of_deliveredQuantity_report { get; set; }
+        public virtual DbSet<View_Top10CustomersYearly> View_Top10CustomersYearly { get; set; }
+        public virtual DbSet<View_UpdateInquiry> View_UpdateInquiry { get; set; }
+        public virtual DbSet<View_UpdateRecipe> View_UpdateRecipe { get; set; }
+        public virtual DbSet<View_UserInfo> View_UserInfo { get; set; }
+        public virtual DbSet<View_VendorWithBusinessType> View_VendorWithBusinessType { get; set; }
+        public virtual DbSet<View_warehouseProductionDashboard> View_warehouseProductionDashboard { get; set; }
+        public virtual DbSet<ViewAvailableStock> ViewAvailableStocks { get; set; }
+        public virtual DbSet<ViewAvalibalStockByWarehouse> ViewAvalibalStockByWarehouses { get; set; }
+        public virtual DbSet<ViewCustomerCare> ViewCustomerCares { get; set; }
+        public virtual DbSet<ViewCustomerCareFeedBack> ViewCustomerCareFeedBacks { get; set; }
+        public virtual DbSet<ViewDailyProduction> ViewDailyProductions { get; set; }
+        public virtual DbSet<ViewDailySale> ViewDailySales { get; set; }
+        public virtual DbSet<ViewDailySale_Old> ViewDailySale_Old { get; set; }
+        public virtual DbSet<ViewOrderDelivery> ViewOrderDeliveries { get; set; }
+        public virtual DbSet<ViewRequiredProduction> ViewRequiredProductions { get; set; }
+        public virtual DbSet<ViewRequiredProduction_Old> ViewRequiredProduction_Old { get; set; }
+        public virtual DbSet<ViewRequiredProduction_Old2> ViewRequiredProduction_Old2 { get; set; }
+        public virtual DbSet<ViewRequiredProductionForPplanning> ViewRequiredProductionForPplannings { get; set; }
+        public virtual DbSet<ViewRunningOrder> ViewRunningOrders { get; set; }
+        public virtual DbSet<AML_VendorsOrgType> AML_VendorsOrgType { get; set; }
+        public virtual DbSet<AML_VendorsBusinessNature> AML_VendorsBusinessNature { get; set; }
+    
+        public virtual ObjectResult<ABackUp_WithOutConditions_Result> ABackUp_WithOutConditions()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ABackUp_WithOutConditions_Result>("ABackUp_WithOutConditions");
+        }
+    
+        public virtual int CopyAccountTypesFromDeAccountType(Nullable<int> businessUnitId, Nullable<int> compnayId)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var compnayIdParameter = compnayId.HasValue ?
+                new ObjectParameter("compnayId", compnayId) :
+                new ObjectParameter("compnayId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyAccountTypesFromDeAccountType", businessUnitIdParameter, compnayIdParameter);
+        }
+    
+        public virtual int CopyChartAccountAgainstFinancialYears(Nullable<int> companyId, Nullable<int> businessUnitId, string newFyear, string oldFyear)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var newFyearParameter = newFyear != null ?
+                new ObjectParameter("NewFyear", newFyear) :
+                new ObjectParameter("NewFyear", typeof(string));
+    
+            var oldFyearParameter = oldFyear != null ?
+                new ObjectParameter("oldFyear", oldFyear) :
+                new ObjectParameter("oldFyear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyChartAccountAgainstFinancialYears", companyIdParameter, businessUnitIdParameter, newFyearParameter, oldFyearParameter);
+        }
+    
+        public virtual int CopyChartAccountFromDefaultWhichIsNotPresentInChartAccount(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyChartAccountFromDefaultWhichIsNotPresentInChartAccount", companyIdParameter);
+        }
+    
+        public virtual int CopyChartOfAccountFromDefaultChartOfAccount(string userId, Nullable<System.DateTime> date, Nullable<int> compnayId, string fyear)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            var compnayIdParameter = compnayId.HasValue ?
+                new ObjectParameter("compnayId", compnayId) :
+                new ObjectParameter("compnayId", typeof(int));
+    
+            var fyearParameter = fyear != null ?
+                new ObjectParameter("fyear", fyear) :
+                new ObjectParameter("fyear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyChartOfAccountFromDefaultChartOfAccount", userIdParameter, dateParameter, compnayIdParameter, fyearParameter);
+        }
+    
+        public virtual int CopyInvCurrencyDefinationFromDefaultCurrency(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyInvCurrencyDefinationFromDefaultCurrency", companyIdParameter);
+        }
+    
+        public virtual int CopyInvPriorityFromDefault(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyInvPriorityFromDefault", companyIdParameter);
+        }
+    
+        public virtual int CopyInvvendorBusinessNatureFromDefault(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyInvvendorBusinessNatureFromDefault", companyIdParameter);
+        }
+    
+        public virtual int CopyInvvendorOrgTypeFromDefault(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyInvvendorOrgTypeFromDefault", companyIdParameter);
+        }
+    
+        public virtual int CopyJournalVoucherFromTempToOriginal(Nullable<int> companyId, Nullable<int> businessUnitId, string voucherId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var voucherIdParameter = voucherId != null ?
+                new ObjectParameter("VoucherId", voucherId) :
+                new ObjectParameter("VoucherId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CopyJournalVoucherFromTempToOriginal", companyIdParameter, businessUnitIdParameter, voucherIdParameter);
+        }
+    
+        public virtual ObjectResult<DailyCashSummaryBetweenDates_Result> DailyCashSummaryBetweenDates(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, string type)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("dateTo", dateTo) :
+                new ObjectParameter("dateTo", typeof(System.DateTime));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DailyCashSummaryBetweenDates_Result>("DailyCashSummaryBetweenDates", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<DashBoardTopEightSellingProducts_Result> DashBoardTopEightSellingProducts(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DashBoardTopEightSellingProducts_Result>("DashBoardTopEightSellingProducts", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual int DeleteAccountVoucherChildsForVouchersUpdate(Nullable<int> companyId, Nullable<int> businessUnitId, string voucherId, Nullable<int> transactionId, string voucherType)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var voucherIdParameter = voucherId != null ?
+                new ObjectParameter("voucherId", voucherId) :
+                new ObjectParameter("voucherId", typeof(string));
+    
+            var transactionIdParameter = transactionId.HasValue ?
+                new ObjectParameter("transactionId", transactionId) :
+                new ObjectParameter("transactionId", typeof(int));
+    
+            var voucherTypeParameter = voucherType != null ?
+                new ObjectParameter("voucherType", voucherType) :
+                new ObjectParameter("voucherType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteAccountVoucherChildsForVouchersUpdate", companyIdParameter, businessUnitIdParameter, voucherIdParameter, transactionIdParameter, voucherTypeParameter);
+        }
+    
+        public virtual int DeleteAllOrderDetailAgainstOrderId(Nullable<int> companyId, Nullable<int> businessUnitId, string orderId, string orderType)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("OrderId", orderId) :
+                new ObjectParameter("OrderId", typeof(string));
+    
+            var orderTypeParameter = orderType != null ?
+                new ObjectParameter("OrderType", orderType) :
+                new ObjectParameter("OrderType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteAllOrderDetailAgainstOrderId", companyIdParameter, businessUnitIdParameter, orderIdParameter, orderTypeParameter);
+        }
+    
+        public virtual int GetAccountAgingBalance(Nullable<int> businessUnitId, Nullable<int> companyid, Nullable<System.DateTime> startDate)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAccountAgingBalance", businessUnitIdParameter, companyidParameter, startDateParameter);
+        }
+    
+        public virtual int GetAgingBalanceOnDate(Nullable<int> businessUnitId, Nullable<int> companyid, string chartAccount, Nullable<System.DateTime> date)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var chartAccountParameter = chartAccount != null ?
+                new ObjectParameter("ChartAccount", chartAccount) :
+                new ObjectParameter("ChartAccount", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAgingBalanceOnDate", businessUnitIdParameter, companyidParameter, chartAccountParameter, dateParameter);
+        }
+    
+        public virtual int GetAgingBalanceOnDateForAccountsReceiveable(Nullable<int> businessUnitId, Nullable<int> companyid, string chartAccount, Nullable<System.DateTime> date)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var chartAccountParameter = chartAccount != null ?
+                new ObjectParameter("ChartAccount", chartAccount) :
+                new ObjectParameter("ChartAccount", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAgingBalanceOnDateForAccountsReceiveable", businessUnitIdParameter, companyidParameter, chartAccountParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<GetAgingBalancesAllBetweenDates_Result> GetAgingBalancesAllBetweenDates(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string chartOfAccountHead, Nullable<int> cOAAcountTypeId, string fyear)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var chartOfAccountHeadParameter = chartOfAccountHead != null ?
+                new ObjectParameter("ChartOfAccountHead", chartOfAccountHead) :
+                new ObjectParameter("ChartOfAccountHead", typeof(string));
+    
+            var cOAAcountTypeIdParameter = cOAAcountTypeId.HasValue ?
+                new ObjectParameter("COAAcountTypeId", cOAAcountTypeId) :
+                new ObjectParameter("COAAcountTypeId", typeof(int));
+    
+            var fyearParameter = fyear != null ?
+                new ObjectParameter("Fyear", fyear) :
+                new ObjectParameter("Fyear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgingBalancesAllBetweenDates_Result>("GetAgingBalancesAllBetweenDates", companyIdParameter, businessUnitIdParameter, startDateParameter, endDateParameter, chartOfAccountHeadParameter, cOAAcountTypeIdParameter, fyearParameter);
+        }
+    
+        public virtual ObjectResult<GetAllCashInHandAccountsFromChartAccounts_Result> GetAllCashInHandAccountsFromChartAccounts(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllCashInHandAccountsFromChartAccounts_Result>("GetAllCashInHandAccountsFromChartAccounts", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAllCashInHandAndBankAccountsFromChartAccounts_Result> GetAllCashInHandAndBankAccountsFromChartAccounts(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllCashInHandAndBankAccountsFromChartAccounts_Result>("GetAllCashInHandAndBankAccountsFromChartAccounts", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAllEmployeeShiftHistoryRecord_Result> GetAllEmployeeShiftHistoryRecord(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllEmployeeShiftHistoryRecord_Result>("GetAllEmployeeShiftHistoryRecord", companyIdParameter, businessUnitIdParameter, employeeIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAllItemsDefinationLinkWithBusinessUnit_Result> GetAllItemsDefinationLinkWithBusinessUnit(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItemsDefinationLinkWithBusinessUnit_Result>("GetAllItemsDefinationLinkWithBusinessUnit", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAllItemsLinkWithBusinessUnit_Result> GetAllItemsLinkWithBusinessUnit(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllItemsLinkWithBusinessUnit_Result>("GetAllItemsLinkWithBusinessUnit", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAllVarientsDefOnLoad_Result> GetAllVarientsDefOnLoad()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllVarientsDefOnLoad_Result>("GetAllVarientsDefOnLoad");
+        }
+    
+        public virtual int GetBalanceOfAgingOnDate(Nullable<int> businessUnitId, Nullable<int> companyid, string chartAccount, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string fyear)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var chartAccountParameter = chartAccount != null ?
+                new ObjectParameter("ChartAccount", chartAccount) :
+                new ObjectParameter("ChartAccount", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var fyearParameter = fyear != null ?
+                new ObjectParameter("Fyear", fyear) :
+                new ObjectParameter("Fyear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetBalanceOfAgingOnDate", businessUnitIdParameter, companyidParameter, chartAccountParameter, startDateParameter, endDateParameter, fyearParameter);
+        }
+    
+        public virtual ObjectResult<GetClosingBalance_AllChartOfAccount_Result> GetClosingBalance_AllChartOfAccount(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClosingBalance_AllChartOfAccount_Result>("GetClosingBalance_AllChartOfAccount", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<GetClosingBalance_AllChartOfAccountWidhDateRange_Qamar_Result> GetClosingBalance_AllChartOfAccountWidhDateRange_Qamar(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClosingBalance_AllChartOfAccountWidhDateRange_Qamar_Result>("GetClosingBalance_AllChartOfAccountWidhDateRange_Qamar", companyIdParameter, businessUnitIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<GetClosingBalancesOfFinancialYears_Result> GetClosingBalancesOfFinancialYears(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClosingBalancesOfFinancialYears_Result>("GetClosingBalancesOfFinancialYears", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCustomerAccountsBalancesOnDate_Result> GetCustomerAccountsBalancesOnDate(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string businessline)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var businesslineParameter = businessline != null ?
+                new ObjectParameter("businessline", businessline) :
+                new ObjectParameter("businessline", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerAccountsBalancesOnDate_Result>("GetCustomerAccountsBalancesOnDate", companyIdParameter, businessUnitIdParameter, startDateParameter, endDateParameter, businesslineParameter);
+        }
+    
+        public virtual ObjectResult<GetCustomerAccountsBalancesOnDateWithOutBillNo_Result> GetCustomerAccountsBalancesOnDateWithOutBillNo(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerAccountsBalancesOnDateWithOutBillNo_Result>("GetCustomerAccountsBalancesOnDateWithOutBillNo", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual int GetDatBaseBackup()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetDatBaseBackup");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxBatchId(Nullable<int> companyId, string date, Nullable<int> businessUnit)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            var businessUnitParameter = businessUnit.HasValue ?
+                new ObjectParameter("businessUnit", businessUnit) :
+                new ObjectParameter("businessUnit", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxBatchId", companyIdParameter, dateParameter, businessUnitParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxBillInvoiceId(Nullable<int> businessUnitId, Nullable<int> companyId, string stringToMatch)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var stringToMatchParameter = stringToMatch != null ?
+                new ObjectParameter("stringToMatch", stringToMatch) :
+                new ObjectParameter("stringToMatch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxBillInvoiceId", businessUnitIdParameter, companyIdParameter, stringToMatchParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxChartAccountId(string chartAccount, Nullable<int> companyId)
+        {
+            var chartAccountParameter = chartAccount != null ?
+                new ObjectParameter("chartAccount", chartAccount) :
+                new ObjectParameter("chartAccount", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxChartAccountId", chartAccountParameter, companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxChartAccountThirdHeadId(string chartAccount, Nullable<int> companyId)
+        {
+            var chartAccountParameter = chartAccount != null ?
+                new ObjectParameter("chartAccount", chartAccount) :
+                new ObjectParameter("chartAccount", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxChartAccountThirdHeadId", chartAccountParameter, companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxCustomerCareId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxCustomerCareId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxDeliveryId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxDeliveryId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxDispatchPlanId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxDispatchPlanId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxEmployeeId(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxEmployeeId", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxGatePassId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxGatePassId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxInv_WarehouseTransectionIdId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxInv_WarehouseTransectionIdId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxIssueItemBatchCode(Nullable<int> companyId, string itemId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxIssueItemBatchCode", companyIdParameter, itemIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemBatchCode(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemBatchCode", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemBatchCodeIn_inv_Warehouse(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> warehouseId, string itemId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("warehouseId", warehouseId) :
+                new ObjectParameter("warehouseId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemBatchCodeIn_inv_Warehouse", companyIdParameter, businessUnitIdParameter, warehouseIdParameter, itemIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemBrandId(Nullable<int> companyId, string categoryId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemBrandId", companyIdParameter, categoryIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemCatagoryId(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemCatagoryId", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemId(Nullable<int> companyId, string categoryIdAndSubCategoryIdAndBrandId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var categoryIdAndSubCategoryIdAndBrandIdParameter = categoryIdAndSubCategoryIdAndBrandId != null ?
+                new ObjectParameter("CategoryIdAndSubCategoryIdAndBrandId", categoryIdAndSubCategoryIdAndBrandId) :
+                new ObjectParameter("CategoryIdAndSubCategoryIdAndBrandId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemId", companyIdParameter, categoryIdAndSubCategoryIdAndBrandIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemsDefinationMasterCatagoryId(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemsDefinationMasterCatagoryId", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxItemSubCatagoryId(Nullable<int> companyId, string categoryId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxItemSubCatagoryId", companyIdParameter, categoryIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxJVTransectionIdId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxJVTransectionIdId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxJVVocherId(Nullable<int> businessUnitId, Nullable<int> companyId, string stringToMatch, string postedFrom)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var stringToMatchParameter = stringToMatch != null ?
+                new ObjectParameter("stringToMatch", stringToMatch) :
+                new ObjectParameter("stringToMatch", typeof(string));
+    
+            var postedFromParameter = postedFrom != null ?
+                new ObjectParameter("postedFrom", postedFrom) :
+                new ObjectParameter("postedFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxJVVocherId", businessUnitIdParameter, companyIdParameter, stringToMatchParameter, postedFromParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxOrderId(Nullable<int> companyId, Nullable<int> businessUnitId, string date, string orderType)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            var orderTypeParameter = orderType != null ?
+                new ObjectParameter("OrderType", orderType) :
+                new ObjectParameter("OrderType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxOrderId", companyIdParameter, businessUnitIdParameter, dateParameter, orderTypeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxPerformaId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxPerformaId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxPhaseId(Nullable<int> companyId, string stepid)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var stepidParameter = stepid != null ?
+                new ObjectParameter("stepid", stepid) :
+                new ObjectParameter("stepid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxPhaseId", companyIdParameter, stepidParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxProcedureId(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxProcedureId", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxProductionId(Nullable<int> companyId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxProductionId", companyIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxRecipeId(Nullable<int> companyId, string phaseid)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var phaseidParameter = phaseid != null ?
+                new ObjectParameter("phaseid", phaseid) :
+                new ObjectParameter("phaseid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxRecipeId", companyIdParameter, phaseidParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxSaleReturnId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxSaleReturnId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxSalesInvoiceId(Nullable<int> businessUnitId, Nullable<int> companyId, string stringToMatch)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var stringToMatchParameter = stringToMatch != null ?
+                new ObjectParameter("stringToMatch", stringToMatch) :
+                new ObjectParameter("stringToMatch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxSalesInvoiceId", businessUnitIdParameter, companyIdParameter, stringToMatchParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxSalesReturnInvoiceId(Nullable<int> businessUnitId, Nullable<int> companyId, string stringToMatch)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var stringToMatchParameter = stringToMatch != null ?
+                new ObjectParameter("stringToMatch", stringToMatch) :
+                new ObjectParameter("stringToMatch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxSalesReturnInvoiceId", businessUnitIdParameter, companyIdParameter, stringToMatchParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxSaleWarehouseTransectionIdId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxSaleWarehouseTransectionIdId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxStepId(Nullable<int> companyId, string proid)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var proidParameter = proid != null ?
+                new ObjectParameter("proid", proid) :
+                new ObjectParameter("proid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxStepId", companyIdParameter, proidParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxTransectionIdId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxTransectionIdId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxTransferStockId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxTransferStockId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetMaxVocherId(Nullable<int> businessUnitId, Nullable<int> companyId, string stringToMatch, string postedFrom)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var stringToMatchParameter = stringToMatch != null ?
+                new ObjectParameter("stringToMatch", stringToMatch) :
+                new ObjectParameter("stringToMatch", typeof(string));
+    
+            var postedFromParameter = postedFrom != null ?
+                new ObjectParameter("postedFrom", postedFrom) :
+                new ObjectParameter("postedFrom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetMaxVocherId", businessUnitIdParameter, companyIdParameter, stringToMatchParameter, postedFromParameter);
+        }
+    
+        public virtual ObjectResult<GetOpeningClosingByVocher_Result> GetOpeningClosingByVocher(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOpeningClosingByVocher_Result>("GetOpeningClosingByVocher", dateParameter);
+        }
+    
+        public virtual ObjectResult<GetStock_Cat_Sub_Cat_Result> GetStock_Cat_Sub_Cat()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStock_Cat_Sub_Cat_Result>("GetStock_Cat_Sub_Cat");
+        }
+    
+        public virtual ObjectResult<GetStockListOfPerformaForPDN_Result> GetStockListOfPerformaForPDN(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> inquiryId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var inquiryIdParameter = inquiryId.HasValue ?
+                new ObjectParameter("InquiryId", inquiryId) :
+                new ObjectParameter("InquiryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStockListOfPerformaForPDN_Result>("GetStockListOfPerformaForPDN", companyIdParameter, businessUnitIdParameter, inquiryIdParameter);
+        }
+    
+        public virtual ObjectResult<GetSum_Result> GetSum(string grnId, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var grnIdParameter = grnId != null ?
+                new ObjectParameter("GrnId", grnId) :
+                new ObjectParameter("GrnId", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSum_Result>("GetSum", grnIdParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<GetTop5SalesAgentForSalesDashboard_Result> GetTop5SalesAgentForSalesDashboard(Nullable<int> companyId, Nullable<int> businessUnitId, string startFYear, string endFYear)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var startFYearParameter = startFYear != null ?
+                new ObjectParameter("StartFYear", startFYear) :
+                new ObjectParameter("StartFYear", typeof(string));
+    
+            var endFYearParameter = endFYear != null ?
+                new ObjectParameter("EndFYear", endFYear) :
+                new ObjectParameter("EndFYear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTop5SalesAgentForSalesDashboard_Result>("GetTop5SalesAgentForSalesDashboard", companyIdParameter, businessUnitIdParameter, startFYearParameter, endFYearParameter);
+        }
+    
+        public virtual ObjectResult<GetTop8ItemParentHeadsForInventoryItemAdding_Result> GetTop8ItemParentHeadsForInventoryItemAdding(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTop8ItemParentHeadsForInventoryItemAdding_Result>("GetTop8ItemParentHeadsForInventoryItemAdding", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<GetVendorAccountsBalancesOnDate_Result> GetVendorAccountsBalancesOnDate(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetVendorAccountsBalancesOnDate_Result>("GetVendorAccountsBalancesOnDate", companyIdParameter, businessUnitIdParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<double>> GetViewAvailableStockOfItem(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> warehouseId, string itemId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("warehouseId", warehouseId) :
+                new ObjectParameter("warehouseId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetViewAvailableStockOfItem", companyIdParameter, businessUnitIdParameter, warehouseIdParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<IncomeStatement_Result> IncomeStatement(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("dateTo", dateTo) :
+                new ObjectParameter("dateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IncomeStatement_Result>("IncomeStatement", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<inv_GetAllItemsInChartOfAccount_Result> inv_GetAllItemsInChartOfAccount(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<inv_GetAllItemsInChartOfAccount_Result>("inv_GetAllItemsInChartOfAccount", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<inv_GetAllItemsInWareHouse_Result> inv_GetAllItemsInWareHouse(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> warehouseId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("WarehouseId", warehouseId) :
+                new ObjectParameter("WarehouseId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<inv_GetAllItemsInWareHouse_Result>("inv_GetAllItemsInWareHouse", companyIdParameter, businessUnitIdParameter, warehouseIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetApplicationParameters(Nullable<int> businessUnitId, Nullable<int> companyId, string parameterName)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var parameterNameParameter = parameterName != null ?
+                new ObjectParameter("parameterName", parameterName) :
+                new ObjectParameter("parameterName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetApplicationParameters", businessUnitIdParameter, companyIdParameter, parameterNameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxBinId(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> wareHouseId, string roomId, string rackId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            var roomIdParameter = roomId != null ?
+                new ObjectParameter("roomId", roomId) :
+                new ObjectParameter("roomId", typeof(string));
+    
+            var rackIdParameter = rackId != null ?
+                new ObjectParameter("rackId", rackId) :
+                new ObjectParameter("rackId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxBinId", companyIdParameter, businessUnitIdParameter, wareHouseIdParameter, roomIdParameter, rackIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxGatePassInwardId(Nullable<int> companyId, Nullable<int> businessUnitId, string gatePassInwardIdToMatch)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var gatePassInwardIdToMatchParameter = gatePassInwardIdToMatch != null ?
+                new ObjectParameter("GatePassInwardIdToMatch", gatePassInwardIdToMatch) :
+                new ObjectParameter("GatePassInwardIdToMatch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxGatePassInwardId", companyIdParameter, businessUnitIdParameter, gatePassInwardIdToMatchParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxLCId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxLCId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxMirID(Nullable<int> companyId, Nullable<int> businessUnitId, string mirId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var mirIdParameter = mirId != null ?
+                new ObjectParameter("mirId", mirId) :
+                new ObjectParameter("mirId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxMirID", companyIdParameter, businessUnitIdParameter, mirIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxRackId(Nullable<int> businessUnitId, Nullable<int> companyId, Nullable<int> wareHouseId, string roomId)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            var roomIdParameter = roomId != null ?
+                new ObjectParameter("roomId", roomId) :
+                new ObjectParameter("roomId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxRackId", businessUnitIdParameter, companyIdParameter, wareHouseIdParameter, roomIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxRoomId(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> wareHouseId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxRoomId", companyIdParameter, businessUnitIdParameter, wareHouseIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxTenderId(Nullable<int> companyId, Nullable<int> businessUnitId, string tenderIdToMatch)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var tenderIdToMatchParameter = tenderIdToMatch != null ?
+                new ObjectParameter("TenderIdToMatch", tenderIdToMatch) :
+                new ObjectParameter("TenderIdToMatch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxTenderId", companyIdParameter, businessUnitIdParameter, tenderIdToMatchParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxVendorId(Nullable<int> companyid)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxVendorId", companyidParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxWareHouseDefinationId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxWareHouseDefinationId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<inv_ItemsDefinationMasterCatagory_Result> inv_ItemsDefinationMasterCatagory(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<inv_ItemsDefinationMasterCatagory_Result>("inv_ItemsDefinationMasterCatagory", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_SaveWareHouseLogDataAndGetLogId(Nullable<int> businessUnitId, Nullable<int> companyId, string itemId, Nullable<int> wareHouseId, Nullable<int> wareHouseIdNew, string binId, string binIdNew, Nullable<double> quantity, string reason, Nullable<System.DateTime> createdon, string createdBy)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(string));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            var wareHouseIdNewParameter = wareHouseIdNew.HasValue ?
+                new ObjectParameter("wareHouseIdNew", wareHouseIdNew) :
+                new ObjectParameter("wareHouseIdNew", typeof(int));
+    
+            var binIdParameter = binId != null ?
+                new ObjectParameter("binId", binId) :
+                new ObjectParameter("binId", typeof(string));
+    
+            var binIdNewParameter = binIdNew != null ?
+                new ObjectParameter("binIdNew", binIdNew) :
+                new ObjectParameter("binIdNew", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(double));
+    
+            var reasonParameter = reason != null ?
+                new ObjectParameter("reason", reason) :
+                new ObjectParameter("reason", typeof(string));
+    
+            var createdonParameter = createdon.HasValue ?
+                new ObjectParameter("createdon", createdon) :
+                new ObjectParameter("createdon", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("createdBy", createdBy) :
+                new ObjectParameter("createdBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_SaveWareHouseLogDataAndGetLogId", businessUnitIdParameter, companyIdParameter, itemIdParameter, wareHouseIdParameter, wareHouseIdNewParameter, binIdParameter, binIdNewParameter, quantityParameter, reasonParameter, createdonParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_SP_Consumtion_GetLastest(Nullable<int> month, Nullable<int> companyId, Nullable<int> businessUnitsID)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitsIDParameter = businessUnitsID.HasValue ?
+                new ObjectParameter("BusinessUnitsID", businessUnitsID) :
+                new ObjectParameter("BusinessUnitsID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_SP_Consumtion_GetLastest", monthParameter, companyIdParameter, businessUnitsIDParameter);
+        }
+    
+        public virtual ObjectResult<inv_SP_DashBoardSearchPDN_Result> inv_SP_DashBoardSearchPDN(Nullable<int> companyId, Nullable<int> businessUbnitID, Nullable<System.DateTime> toDate, Nullable<System.DateTime> fromDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUbnitIDParameter = businessUbnitID.HasValue ?
+                new ObjectParameter("BusinessUbnitID", businessUbnitID) :
+                new ObjectParameter("BusinessUbnitID", typeof(int));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<inv_SP_DashBoardSearchPDN_Result>("inv_SP_DashBoardSearchPDN", companyIdParameter, businessUbnitIDParameter, toDateParameter, fromDateParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestDMPOIds(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestDMPOIds", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestGPIdS(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestGPIdS", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestGRNIds(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestGRNIds", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestLCIds(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestLCIds", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestMirIds(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestMirIds", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestMRRIdS(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestMRRIdS", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestPDNs(Nullable<int> comapnyID, Nullable<int> businessUnitID)
+        {
+            var comapnyIDParameter = comapnyID.HasValue ?
+                new ObjectParameter("ComapnyID", comapnyID) :
+                new ObjectParameter("ComapnyID", typeof(int));
+    
+            var businessUnitIDParameter = businessUnitID.HasValue ?
+                new ObjectParameter("BusinessUnitID", businessUnitID) :
+                new ObjectParameter("BusinessUnitID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestPDNs", comapnyIDParameter, businessUnitIDParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestPOIds(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestPOIds", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestPurschaseReturnId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestPurschaseReturnId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestQuotationIdS(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestQuotationIdS", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestRecognizationId(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestRecognizationId", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<string> inv_SP_GetLatestTenderIds(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("inv_SP_GetLatestTenderIds", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_Sp_GetMaxRequisionId(Nullable<int> companyId, Nullable<int> businessUnitId, string requsionId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var requsionIdParameter = requsionId != null ?
+                new ObjectParameter("RequsionId", requsionId) :
+                new ObjectParameter("RequsionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_Sp_GetMaxRequisionId", companyIdParameter, businessUnitIdParameter, requsionIdParameter);
+        }
+    
+        public virtual ObjectResult<inv_SP_SearchMIR_Result> inv_SP_SearchMIR(Nullable<int> companyId, Nullable<int> businessUnitID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIDParameter = businessUnitID.HasValue ?
+                new ObjectParameter("BusinessUnitID", businessUnitID) :
+                new ObjectParameter("BusinessUnitID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<inv_SP_SearchMIR_Result>("inv_SP_SearchMIR", companyIdParameter, businessUnitIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_spGetMaxPurchaseInvoiceId(Nullable<int> companyId, Nullable<int> businessUnitId, string piIdToMatch)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var piIdToMatchParameter = piIdToMatch != null ?
+                new ObjectParameter("PiIdToMatch", piIdToMatch) :
+                new ObjectParameter("PiIdToMatch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_spGetMaxPurchaseInvoiceId", companyIdParameter, businessUnitIdParameter, piIdToMatchParameter);
+        }
+    
+        public virtual int inv_UpdateBinName(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> wareHouseId, string id, string newname, string newDescription, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var newDescriptionParameter = newDescription != null ?
+                new ObjectParameter("newDescription", newDescription) :
+                new ObjectParameter("newDescription", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateBinName", companyIdParameter, businessUnitIdParameter, wareHouseIdParameter, idParameter, newnameParameter, newDescriptionParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateBrandName(Nullable<int> companyId, string id, string newname, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateBrandName", companyIdParameter, idParameter, newnameParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateItemDetail(Nullable<int> companyId, string id, string newname, Nullable<double> itemPrice, Nullable<int> minStock, Nullable<int> maxStock, string itemSize, Nullable<double> itemWeight, Nullable<double> itemWidth, Nullable<double> itemHeight, string accountCode, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var itemPriceParameter = itemPrice.HasValue ?
+                new ObjectParameter("itemPrice", itemPrice) :
+                new ObjectParameter("itemPrice", typeof(double));
+    
+            var minStockParameter = minStock.HasValue ?
+                new ObjectParameter("minStock", minStock) :
+                new ObjectParameter("minStock", typeof(int));
+    
+            var maxStockParameter = maxStock.HasValue ?
+                new ObjectParameter("maxStock", maxStock) :
+                new ObjectParameter("maxStock", typeof(int));
+    
+            var itemSizeParameter = itemSize != null ?
+                new ObjectParameter("itemSize", itemSize) :
+                new ObjectParameter("itemSize", typeof(string));
+    
+            var itemWeightParameter = itemWeight.HasValue ?
+                new ObjectParameter("itemWeight", itemWeight) :
+                new ObjectParameter("itemWeight", typeof(double));
+    
+            var itemWidthParameter = itemWidth.HasValue ?
+                new ObjectParameter("itemWidth", itemWidth) :
+                new ObjectParameter("itemWidth", typeof(double));
+    
+            var itemHeightParameter = itemHeight.HasValue ?
+                new ObjectParameter("itemHeight", itemHeight) :
+                new ObjectParameter("itemHeight", typeof(double));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("accountCode", accountCode) :
+                new ObjectParameter("accountCode", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateItemDetail", companyIdParameter, idParameter, newnameParameter, itemPriceParameter, minStockParameter, maxStockParameter, itemSizeParameter, itemWeightParameter, itemWidthParameter, itemHeightParameter, accountCodeParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateItemName(Nullable<int> companyId, string id, string newname, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateItemName", companyIdParameter, idParameter, newnameParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateMasterCategoryName(Nullable<int> companyId, string id, string newname, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateMasterCategoryName", companyIdParameter, idParameter, newnameParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateRackName(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> wareHouseId, string id, string newname, string newDescription, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var newDescriptionParameter = newDescription != null ?
+                new ObjectParameter("newDescription", newDescription) :
+                new ObjectParameter("newDescription", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateRackName", companyIdParameter, businessUnitIdParameter, wareHouseIdParameter, idParameter, newnameParameter, newDescriptionParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateRoomName(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> wareHouseId, string id, string newname, string newDescription, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var wareHouseIdParameter = wareHouseId.HasValue ?
+                new ObjectParameter("wareHouseId", wareHouseId) :
+                new ObjectParameter("wareHouseId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var newDescriptionParameter = newDescription != null ?
+                new ObjectParameter("newDescription", newDescription) :
+                new ObjectParameter("newDescription", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateRoomName", companyIdParameter, businessUnitIdParameter, wareHouseIdParameter, idParameter, newnameParameter, newDescriptionParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateSubCategoryName(Nullable<int> companyId, string id, string newname, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateSubCategoryName", companyIdParameter, idParameter, newnameParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateUnitName(Nullable<int> companyId, Nullable<int> id, string newname, string newAbbrevation, string lastmodifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var newAbbrevationParameter = newAbbrevation != null ?
+                new ObjectParameter("newAbbrevation", newAbbrevation) :
+                new ObjectParameter("newAbbrevation", typeof(string));
+    
+            var lastmodifiedByParameter = lastmodifiedBy != null ?
+                new ObjectParameter("LastmodifiedBy", lastmodifiedBy) :
+                new ObjectParameter("LastmodifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateUnitName", companyIdParameter, idParameter, newnameParameter, newAbbrevationParameter, lastmodifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateVarientName(Nullable<int> companyId, string id, string newname, Nullable<bool> newState, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            var newnameParameter = newname != null ?
+                new ObjectParameter("newname", newname) :
+                new ObjectParameter("newname", typeof(string));
+    
+            var newStateParameter = newState.HasValue ?
+                new ObjectParameter("newState", newState) :
+                new ObjectParameter("newState", typeof(bool));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("lastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("lastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("lastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("lastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateVarientName", companyIdParameter, idParameter, newnameParameter, newStateParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual int inv_UpdateWareHouseItemStockCreditColumn(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> warehouseId, Nullable<int> transactionId, string itemId, string binCartId, Nullable<double> creditValue)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("WarehouseId", warehouseId) :
+                new ObjectParameter("WarehouseId", typeof(int));
+    
+            var transactionIdParameter = transactionId.HasValue ?
+                new ObjectParameter("TransactionId", transactionId) :
+                new ObjectParameter("TransactionId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            var binCartIdParameter = binCartId != null ?
+                new ObjectParameter("BinCartId", binCartId) :
+                new ObjectParameter("BinCartId", typeof(string));
+    
+            var creditValueParameter = creditValue.HasValue ?
+                new ObjectParameter("CreditValue", creditValue) :
+                new ObjectParameter("CreditValue", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("inv_UpdateWareHouseItemStockCreditColumn", companyIdParameter, businessUnitIdParameter, warehouseIdParameter, transactionIdParameter, itemIdParameter, binCartIdParameter, creditValueParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxBrandId(Nullable<int> companyId, string categoryId, string subcategoryId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(string));
+    
+            var subcategoryIdParameter = subcategoryId != null ?
+                new ObjectParameter("SubcategoryId", subcategoryId) :
+                new ObjectParameter("SubcategoryId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxBrandId", companyIdParameter, categoryIdParameter, subcategoryIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InvGetMaxExpanseCategoryId(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InvGetMaxExpanseCategoryId", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InvGetMaxIExpsSubCatagoryId(Nullable<int> companyId, string expanseId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var expanseIdParameter = expanseId != null ?
+                new ObjectParameter("expanseId", expanseId) :
+                new ObjectParameter("expanseId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InvGetMaxIExpsSubCatagoryId", companyIdParameter, expanseIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxItemBrandId(Nullable<int> companyId, string categoryId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxItemBrandId", companyIdParameter, categoryIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxItemId(Nullable<int> companyId, string categoryId, string subcategoryId, string brandId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(string));
+    
+            var subcategoryIdParameter = subcategoryId != null ?
+                new ObjectParameter("SubcategoryId", subcategoryId) :
+                new ObjectParameter("SubcategoryId", typeof(string));
+    
+            var brandIdParameter = brandId != null ?
+                new ObjectParameter("brandId", brandId) :
+                new ObjectParameter("brandId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxItemId", companyIdParameter, categoryIdParameter, subcategoryIdParameter, brandIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> inv_GetMaxItemSubCatagoryId(Nullable<int> companyId, string categoryId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("inv_GetMaxItemSubCatagoryId", companyIdParameter, categoryIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InvGetMaxLetterOfCreditId(Nullable<int> companyId, Nullable<int> businessUnitId, string date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InvGetMaxLetterOfCreditId", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<InvPurchaseSummeryBetweenDateRange_Result> InvPurchaseSummeryBetweenDateRange(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvPurchaseSummeryBetweenDateRange_Result>("InvPurchaseSummeryBetweenDateRange", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<InvVandorWisePurchaseSummaryBetweenDates_Result> InvVandorWisePurchaseSummaryBetweenDates(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvVandorWisePurchaseSummaryBetweenDates_Result>("InvVandorWisePurchaseSummaryBetweenDates", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<InvWarehouseBalancePassingCompanyIdAndBusinessUnitIdAndDate_Result> InvWarehouseBalancePassingCompanyIdAndBusinessUnitIdAndDate(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> date)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvWarehouseBalancePassingCompanyIdAndBusinessUnitIdAndDate_Result>("InvWarehouseBalancePassingCompanyIdAndBusinessUnitIdAndDate", companyIdParameter, businessUnitIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<InvWarehouseItemInAndOutInWarehouseBetweenDate_Result> InvWarehouseItemInAndOutInWarehouseBetweenDate(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string itemId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("startDate", startDate) :
+                new ObjectParameter("startDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("endDate", endDate) :
+                new ObjectParameter("endDate", typeof(System.DateTime));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InvWarehouseItemInAndOutInWarehouseBetweenDate_Result>("InvWarehouseItemInAndOutInWarehouseBetweenDate", companyIdParameter, businessUnitIdParameter, startDateParameter, endDateParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<rehman_SearchPDN_Result> rehman_SearchPDN(Nullable<int> companyId, Nullable<int> businessUbnitID, Nullable<System.DateTime> toDate, Nullable<System.DateTime> fromDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUbnitIDParameter = businessUbnitID.HasValue ?
+                new ObjectParameter("BusinessUbnitID", businessUbnitID) :
+                new ObjectParameter("BusinessUbnitID", typeof(int));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rehman_SearchPDN_Result>("rehman_SearchPDN", companyIdParameter, businessUbnitIDParameter, toDateParameter, fromDateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SetAccountCodeForOldCustomer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SetAccountCodeForOldCustomer");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SetAccountCodeForOldItems()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SetAccountCodeForOldItems");
+        }
+    
+        public virtual ObjectResult<sp_AllBatchWithPhaseProcedure_Result> sp_AllBatchWithPhaseProcedure(Nullable<int> companyId, string itemId, Nullable<int> businessUnit)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(string));
+    
+            var businessUnitParameter = businessUnit.HasValue ?
+                new ObjectParameter("businessUnit", businessUnit) :
+                new ObjectParameter("businessUnit", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_AllBatchWithPhaseProcedure_Result>("sp_AllBatchWithPhaseProcedure", companyIdParameter, itemIdParameter, businessUnitParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Block_GetLastest(Nullable<int> companyId, Nullable<int> businessUnitsID)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitsIDParameter = businessUnitsID.HasValue ?
+                new ObjectParameter("BusinessUnitsID", businessUnitsID) :
+                new ObjectParameter("BusinessUnitsID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Block_GetLastest", companyIdParameter, businessUnitsIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_BlockCutting_GetLastest(Nullable<int> companyId, Nullable<int> businessUnitsID, string month, Nullable<int> year)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitsIDParameter = businessUnitsID.HasValue ?
+                new ObjectParameter("BusinessUnitsID", businessUnitsID) :
+                new ObjectParameter("BusinessUnitsID", typeof(int));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(string));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_BlockCutting_GetLastest", companyIdParameter, businessUnitsIDParameter, monthParameter, yearParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_BlockProduction_GetLastest(Nullable<int> companyId, Nullable<int> businessUnitsID, string month, Nullable<int> year)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitsIDParameter = businessUnitsID.HasValue ?
+                new ObjectParameter("BusinessUnitsID", businessUnitsID) :
+                new ObjectParameter("BusinessUnitsID", typeof(int));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(string));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_BlockProduction_GetLastest", companyIdParameter, businessUnitsIDParameter, monthParameter, yearParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_BlockWarehouse_GetLastest(Nullable<int> companyId, Nullable<int> businessUnitsID, string month, Nullable<int> date, string fyear)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitsIDParameter = businessUnitsID.HasValue ?
+                new ObjectParameter("BusinessUnitsID", businessUnitsID) :
+                new ObjectParameter("BusinessUnitsID", typeof(int));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(int));
+    
+            var fyearParameter = fyear != null ?
+                new ObjectParameter("Fyear", fyear) :
+                new ObjectParameter("Fyear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_BlockWarehouse_GetLastest", companyIdParameter, businessUnitsIDParameter, monthParameter, dateParameter, fyearParameter);
+        }
+    
+        public virtual int SP_Copy_Order_OrderStatusCurrent()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Copy_Order_OrderStatusCurrent");
+        }
+    
+        public virtual ObjectResult<sp_CustomerBusinessDetailsByItemCat_Result> sp_CustomerBusinessDetailsByItemCat(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> customerId, Nullable<System.DateTime> fromdate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(int));
+    
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_CustomerBusinessDetailsByItemCat_Result>("sp_CustomerBusinessDetailsByItemCat", companyIdParameter, businessUnitIdParameter, customerIdParameter, fromdateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_Dashboard_Sales_MonthWiseProjectedSale_Result> sp_Dashboard_Sales_MonthWiseProjectedSale(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Dashboard_Sales_MonthWiseProjectedSale_Result>("sp_Dashboard_Sales_MonthWiseProjectedSale", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_Dashboard_Sales_MonthWiseSale_Result> sp_Dashboard_Sales_MonthWiseSale(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Dashboard_Sales_MonthWiseSale_Result>("sp_Dashboard_Sales_MonthWiseSale", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Dashboard_Sales_PieChart_for_Sale_Small_PieCharts_Result> Sp_Dashboard_Sales_PieChart_for_Sale_Small_PieCharts(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Dashboard_Sales_PieChart_for_Sale_Small_PieCharts_Result>("Sp_Dashboard_Sales_PieChart_for_Sale_Small_PieCharts", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Dashboard_Sales_PieChart_Top5CustomerSales_Result> Sp_Dashboard_Sales_PieChart_Top5CustomerSales(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Dashboard_Sales_PieChart_Top5CustomerSales_Result>("Sp_Dashboard_Sales_PieChart_Top5CustomerSales", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_Result> Sp_Dashboard_Sales_Top4ItemComparison_Last3Months(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_Result>("Sp_Dashboard_Sales_Top4ItemComparison_Last3Months", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_New_Result> Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_New(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> financialyearStartDate, Nullable<System.DateTime> financialyearEndDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var financialyearStartDateParameter = financialyearStartDate.HasValue ?
+                new ObjectParameter("FinancialyearStartDate", financialyearStartDate) :
+                new ObjectParameter("FinancialyearStartDate", typeof(System.DateTime));
+    
+            var financialyearEndDateParameter = financialyearEndDate.HasValue ?
+                new ObjectParameter("FinancialyearEndDate", financialyearEndDate) :
+                new ObjectParameter("FinancialyearEndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_New_Result>("Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_New", companyIdParameter, businessUnitIdParameter, financialyearStartDateParameter, financialyearEndDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_OnPrice_Result> Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_OnPrice(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> financialyearStartDate, Nullable<System.DateTime> financialyearEndDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var financialyearStartDateParameter = financialyearStartDate.HasValue ?
+                new ObjectParameter("FinancialyearStartDate", financialyearStartDate) :
+                new ObjectParameter("FinancialyearStartDate", typeof(System.DateTime));
+    
+            var financialyearEndDateParameter = financialyearEndDate.HasValue ?
+                new ObjectParameter("FinancialyearEndDate", financialyearEndDate) :
+                new ObjectParameter("FinancialyearEndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_OnPrice_Result>("Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_OnPrice", companyIdParameter, businessUnitIdParameter, financialyearStartDateParameter, financialyearEndDateParameter);
+        }
+    
+        public virtual ObjectResult<SP_DashboardTransferItem_Result> SP_DashboardTransferItem(Nullable<int> companyId, Nullable<System.DateTime> toDate, Nullable<System.DateTime> fromDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DashboardTransferItem_Result>("SP_DashboardTransferItem", companyIdParameter, toDateParameter, fromDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_DashLedgerTransuctionDetails_Result> sp_DashLedgerTransuctionDetails(Nullable<int> companyId, Nullable<int> businessUnitId, string vocherId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var vocherIdParameter = vocherId != null ?
+                new ObjectParameter("VocherId", vocherId) :
+                new ObjectParameter("VocherId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DashLedgerTransuctionDetails_Result>("sp_DashLedgerTransuctionDetails", companyIdParameter, businessUnitIdParameter, vocherIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_DepartmentWiseItemConsumption_Result> Sp_DepartmentWiseItemConsumption(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_DepartmentWiseItemConsumption_Result>("Sp_DepartmentWiseItemConsumption", fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_EmployeeAttendaneAllCheckIn_Out_Result> Sp_EmployeeAttendaneAllCheckIn_Out(string employeeID)
+        {
+            var employeeIDParameter = employeeID != null ?
+                new ObjectParameter("EmployeeID", employeeID) :
+                new ObjectParameter("EmployeeID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_EmployeeAttendaneAllCheckIn_Out_Result>("Sp_EmployeeAttendaneAllCheckIn_Out", employeeIDParameter);
+        }
+    
+        public virtual ObjectResult<Sp_EmplyeeAtendanceFirstInAndLastOut_Result> Sp_EmplyeeAtendanceFirstInAndLastOut()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_EmplyeeAtendanceFirstInAndLastOut_Result>("Sp_EmplyeeAtendanceFirstInAndLastOut");
+        }
+    
+        public virtual ObjectResult<sp_GetAllTotal_Result> sp_GetAllTotal(string date, string voucherType)
+        {
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            var voucherTypeParameter = voucherType != null ?
+                new ObjectParameter("VoucherType", voucherType) :
+                new ObjectParameter("VoucherType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAllTotal_Result>("sp_GetAllTotal", dateParameter, voucherTypeParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAvailableStock_Dashboard_Result> sp_GetAvailableStock_Dashboard(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAvailableStock_Dashboard_Result>("sp_GetAvailableStock_Dashboard", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAvailableStock_DateRange_Furqan_Result> sp_GetAvailableStock_DateRange_Furqan(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAvailableStock_DateRange_Furqan_Result>("sp_GetAvailableStock_DateRange_Furqan", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAvailableStock_DateRange_New3_Result> sp_GetAvailableStock_DateRange_New3(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAvailableStock_DateRange_New3_Result>("sp_GetAvailableStock_DateRange_New3", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAvailableStock_DateRange_New4_Mul_Result> sp_GetAvailableStock_DateRange_New4_Mul(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAvailableStock_DateRange_New4_Mul_Result>("sp_GetAvailableStock_DateRange_New4_Mul", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_GetChartAccountCurrentBalance(Nullable<int> companyId, Nullable<int> businessUnitId, string chartAccount)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var chartAccountParameter = chartAccount != null ?
+                new ObjectParameter("ChartAccount", chartAccount) :
+                new ObjectParameter("ChartAccount", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetChartAccountCurrentBalance", companyIdParameter, businessUnitIdParameter, chartAccountParameter);
+        }
+    
+        public virtual ObjectResult<Sp_GetChartOfAccountsSecondLevel_Result> Sp_GetChartOfAccountsSecondLevel(Nullable<int> businessUnitId)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetChartOfAccountsSecondLevel_Result>("Sp_GetChartOfAccountsSecondLevel", businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetChartsOfAccountsLevelFourth_WithHeads_Result> SP_GetChartsOfAccountsLevelFourth_WithHeads(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetChartsOfAccountsLevelFourth_WithHeads_Result>("SP_GetChartsOfAccountsLevelFourth_WithHeads", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReport_Result> SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReport(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReport_Result>("SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReport", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Result> SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Result>("SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Customers_Result> SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Customers(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Customers_Result>("SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Customers", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetChartsOfAccountsLevelSecond_WithHeads_Result> SP_GetChartsOfAccountsLevelSecond_WithHeads(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetChartsOfAccountsLevelSecond_WithHeads_Result>("SP_GetChartsOfAccountsLevelSecond_WithHeads", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetChartsOfAccountsLevelThird_WithHeads_Result> SP_GetChartsOfAccountsLevelThird_WithHeads(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetChartsOfAccountsLevelThird_WithHeads_Result>("SP_GetChartsOfAccountsLevelThird_WithHeads", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_getClosingBalance_WithoutConditions_Result> sp_getClosingBalance_WithoutConditions(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, string accountCode)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("AccountCode", accountCode) :
+                new ObjectParameter("AccountCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getClosingBalance_WithoutConditions_Result>("sp_getClosingBalance_WithoutConditions", companyIdParameter, businessUnitIdParameter, dateFromParameter, accountCodeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_GetCompletedItemQuantity(string itemId, string performaId, Nullable<int> colorId, Nullable<int> sizeId)
+        {
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            var performaIdParameter = performaId != null ?
+                new ObjectParameter("PerformaId", performaId) :
+                new ObjectParameter("PerformaId", typeof(string));
+    
+            var colorIdParameter = colorId.HasValue ?
+                new ObjectParameter("ColorId", colorId) :
+                new ObjectParameter("ColorId", typeof(int));
+    
+            var sizeIdParameter = sizeId.HasValue ?
+                new ObjectParameter("SizeId", sizeId) :
+                new ObjectParameter("SizeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_GetCompletedItemQuantity", itemIdParameter, performaIdParameter, colorIdParameter, sizeIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_GetCurrentShift(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_GetCurrentShift", companyIdParameter, businessUnitIdParameter, employeeIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_GetCurrentShift_alreadyInEmp(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_GetCurrentShift_alreadyInEmp", companyIdParameter, businessUnitIdParameter, employeeIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCustomerForNewOrder_Result> sp_GetCustomerForNewOrder(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCustomerForNewOrder_Result>("sp_GetCustomerForNewOrder", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetItemCompleteHistoryDateRange_Result> SP_GetItemCompleteHistoryDateRange(Nullable<int> companyId, Nullable<int> businessUnitId, string itemId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetItemCompleteHistoryDateRange_Result>("SP_GetItemCompleteHistoryDateRange", companyIdParameter, businessUnitIdParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetItemDetialMirAndGrn_Result> sp_GetItemDetialMirAndGrn(Nullable<int> companyId, Nullable<int> businessUnitId, string itemId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetItemDetialMirAndGrn_Result>("sp_GetItemDetialMirAndGrn", companyIdParameter, businessUnitIdParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_getitemlastitemprice_Result> sp_getitemlastitemprice(Nullable<int> companyId, string itemID)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var itemIDParameter = itemID != null ?
+                new ObjectParameter("itemID", itemID) :
+                new ObjectParameter("itemID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getitemlastitemprice_Result>("sp_getitemlastitemprice", companyIdParameter, itemIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLedgerOP_Balc_ByDate_Qamar_Result> sp_GetLedgerOP_Balc_ByDate_Qamar(Nullable<System.DateTime> dateFrom, string accountCode, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("AccountCode", accountCode) :
+                new ObjectParameter("AccountCode", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLedgerOP_Balc_ByDate_Qamar_Result>("sp_GetLedgerOP_Balc_ByDate_Qamar", dateFromParameter, accountCodeParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_GetMaxPdnId(Nullable<int> companyId, Nullable<int> businessUnitId, string pdnId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var pdnIdParameter = pdnId != null ?
+                new ObjectParameter("pdnId", pdnId) :
+                new ObjectParameter("pdnId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_GetMaxPdnId", companyIdParameter, businessUnitIdParameter, pdnIdParameter);
+        }
+    
+        public virtual int Sp_GetMirPerDay(Nullable<int> companyId, Nullable<int> businessUnit)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitParameter = businessUnit.HasValue ?
+                new ObjectParameter("BusinessUnit", businessUnit) :
+                new ObjectParameter("BusinessUnit", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_GetMirPerDay", companyIdParameter, businessUnitParameter);
+        }
+    
+        public virtual int Sp_GetMirPerMonth(Nullable<int> companyId, Nullable<int> businessUnit)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitParameter = businessUnit.HasValue ?
+                new ObjectParameter("BusinessUnit", businessUnit) :
+                new ObjectParameter("BusinessUnit", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_GetMirPerMonth", companyIdParameter, businessUnitParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<double>> sp_GetOpeningBalance_Customer(Nullable<int> companyId, Nullable<int> businessUnitId, string acountCode)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var acountCodeParameter = acountCode != null ?
+                new ObjectParameter("acountCode", acountCode) :
+                new ObjectParameter("acountCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("sp_GetOpeningBalance_Customer", companyIdParameter, businessUnitIdParameter, acountCodeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_GetOpeningBalanceByDate(Nullable<System.DateTime> selectedDate, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var selectedDateParameter = selectedDate.HasValue ?
+                new ObjectParameter("selectedDate", selectedDate) :
+                new ObjectParameter("selectedDate", typeof(System.DateTime));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetOpeningBalanceByDate", selectedDateParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_GetTop5Vendors_Result> Sp_GetTop5Vendors(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetTop5Vendors_Result>("Sp_GetTop5Vendors", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual int SP_InterBankTransferBetweenDateRange_Report(Nullable<int> companyId, Nullable<int> businessUnitId, string firstCode, string secondCode, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var firstCodeParameter = firstCode != null ?
+                new ObjectParameter("FirstCode", firstCode) :
+                new ObjectParameter("FirstCode", typeof(string));
+    
+            var secondCodeParameter = secondCode != null ?
+                new ObjectParameter("SecondCode", secondCode) :
+                new ObjectParameter("SecondCode", typeof(string));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InterBankTransferBetweenDateRange_Report", companyIdParameter, businessUnitIdParameter, firstCodeParameter, secondCodeParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_Inv_AssetAccountCode(string itemId)
+        {
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_Inv_AssetAccountCode", itemIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_INV_CompleteItemHistoryBetweenDateRange_Result> SP_INV_CompleteItemHistoryBetweenDateRange(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_INV_CompleteItemHistoryBetweenDateRange_Result>("SP_INV_CompleteItemHistoryBetweenDateRange", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Inv_GetAvilableStock_DateRange_Result> Sp_Inv_GetAvilableStock_DateRange(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Inv_GetAvilableStock_DateRange_Result>("Sp_Inv_GetAvilableStock_DateRange", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_inv_getMaxGRNid(Nullable<int> companyId, Nullable<int> businessUnitId, string grnId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var grnIdParameter = grnId != null ?
+                new ObjectParameter("grnId", grnId) :
+                new ObjectParameter("grnId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_inv_getMaxGRNid", companyIdParameter, businessUnitIdParameter, grnIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Inv_TotalPurchase_Result> SP_Inv_TotalPurchase(Nullable<int> companyid, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Inv_TotalPurchase_Result>("SP_Inv_TotalPurchase", companyidParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual int sp_Inv_UpdateOpeningBalance(Nullable<int> companyId, Nullable<decimal> openingBalance, string itemId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var openingBalanceParameter = openingBalance.HasValue ?
+                new ObjectParameter("OpeningBalance", openingBalance) :
+                new ObjectParameter("OpeningBalance", typeof(decimal));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Inv_UpdateOpeningBalance", companyIdParameter, openingBalanceParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_invGetMaxPurchaseOrderId(Nullable<int> companyId, Nullable<int> businessUnitId, string recogzitionId, string tenderId, Nullable<int> vendorId, string quotationId, string purchaseOrderId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var recogzitionIdParameter = recogzitionId != null ?
+                new ObjectParameter("recogzitionId", recogzitionId) :
+                new ObjectParameter("recogzitionId", typeof(string));
+    
+            var tenderIdParameter = tenderId != null ?
+                new ObjectParameter("tenderId", tenderId) :
+                new ObjectParameter("tenderId", typeof(string));
+    
+            var vendorIdParameter = vendorId.HasValue ?
+                new ObjectParameter("vendorId", vendorId) :
+                new ObjectParameter("vendorId", typeof(int));
+    
+            var quotationIdParameter = quotationId != null ?
+                new ObjectParameter("quotationId", quotationId) :
+                new ObjectParameter("quotationId", typeof(string));
+    
+            var purchaseOrderIdParameter = purchaseOrderId != null ?
+                new ObjectParameter("purchaseOrderId", purchaseOrderId) :
+                new ObjectParameter("purchaseOrderId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_invGetMaxPurchaseOrderId", companyIdParameter, businessUnitIdParameter, recogzitionIdParameter, tenderIdParameter, vendorIdParameter, quotationIdParameter, purchaseOrderIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_invGetMaxPurchaseOrderIdByFarhad(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> vendorId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var vendorIdParameter = vendorId.HasValue ?
+                new ObjectParameter("vendorId", vendorId) :
+                new ObjectParameter("vendorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_invGetMaxPurchaseOrderIdByFarhad", companyIdParameter, businessUnitIdParameter, vendorIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_invGetMaxPurchaseReturnId(Nullable<int> companyId, Nullable<int> businessUnitId, string pattern)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var patternParameter = pattern != null ?
+                new ObjectParameter("pattern", pattern) :
+                new ObjectParameter("pattern", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_invGetMaxPurchaseReturnId", companyIdParameter, businessUnitIdParameter, patternParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_invGetMaxQuotatioId(Nullable<int> companyId, Nullable<int> businessUnitId, string recogzitionId, string tenderId, Nullable<int> vendorId, string quotationId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var recogzitionIdParameter = recogzitionId != null ?
+                new ObjectParameter("recogzitionId", recogzitionId) :
+                new ObjectParameter("recogzitionId", typeof(string));
+    
+            var tenderIdParameter = tenderId != null ?
+                new ObjectParameter("tenderId", tenderId) :
+                new ObjectParameter("tenderId", typeof(string));
+    
+            var vendorIdParameter = vendorId.HasValue ?
+                new ObjectParameter("vendorId", vendorId) :
+                new ObjectParameter("vendorId", typeof(int));
+    
+            var quotationIdParameter = quotationId != null ?
+                new ObjectParameter("quotationId", quotationId) :
+                new ObjectParameter("quotationId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_invGetMaxQuotatioId", companyIdParameter, businessUnitIdParameter, recogzitionIdParameter, tenderIdParameter, vendorIdParameter, quotationIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_InvGetMaxRequisionId(Nullable<int> companyId, Nullable<int> businessUnitId, string requsionId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var requsionIdParameter = requsionId != null ?
+                new ObjectParameter("RequsionId", requsionId) :
+                new ObjectParameter("RequsionId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_InvGetMaxRequisionId", companyIdParameter, businessUnitIdParameter, requsionIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ItemConsumption_Result> Sp_ItemConsumption(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ItemConsumption_Result>("Sp_ItemConsumption", fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_Ledger_Transaction_Details_Result> sp_Ledger_Transaction_Details(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, string accountCode, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("AccountCode", accountCode) :
+                new ObjectParameter("AccountCode", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Ledger_Transaction_Details_Result>("sp_Ledger_Transaction_Details", dateFromParameter, dateToParameter, accountCodeParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_ledger_WithOutConditions_Result> sp_ledger_WithOutConditions()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ledger_WithOutConditions_Result>("sp_ledger_WithOutConditions");
+        }
+    
+        public virtual ObjectResult<sp_LedgerBalanceAccountPayable_Result> sp_LedgerBalanceAccountPayable(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LedgerBalanceAccountPayable_Result>("sp_LedgerBalanceAccountPayable", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_LedgerBalanceAccountRecievable_Result> sp_LedgerBalanceAccountRecievable(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LedgerBalanceAccountRecievable_Result>("sp_LedgerBalanceAccountRecievable", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_NewItemConsumption_Result> Sp_NewItemConsumption(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_NewItemConsumption_Result>("Sp_NewItemConsumption", fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_OrderAndOrderDeliveryDetaileByOrderID_Result> Sp_OrderAndOrderDeliveryDetaileByOrderID(string orderID)
+        {
+            var orderIDParameter = orderID != null ?
+                new ObjectParameter("orderID", orderID) :
+                new ObjectParameter("orderID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OrderAndOrderDeliveryDetaileByOrderID_Result>("Sp_OrderAndOrderDeliveryDetaileByOrderID", orderIDParameter);
+        }
+    
+        public virtual ObjectResult<Sp_OrderStatusAgainstOrderID_Result> Sp_OrderStatusAgainstOrderID(string customerID)
+        {
+            var customerIDParameter = customerID != null ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OrderStatusAgainstOrderID_Result>("Sp_OrderStatusAgainstOrderID", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PendingIGPWithItemName_Result> Sp_PendingIGPWithItemName(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> formdate, Nullable<System.DateTime> todate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var formdateParameter = formdate.HasValue ?
+                new ObjectParameter("formdate", formdate) :
+                new ObjectParameter("formdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PendingIGPWithItemName_Result>("Sp_PendingIGPWithItemName", companyIdParameter, businessUnitIdParameter, formdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PendingPurchaseOrderWithItemName_Result> Sp_PendingPurchaseOrderWithItemName(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> formdate, Nullable<System.DateTime> todate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var formdateParameter = formdate.HasValue ?
+                new ObjectParameter("formdate", formdate) :
+                new ObjectParameter("formdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PendingPurchaseOrderWithItemName_Result>("Sp_PendingPurchaseOrderWithItemName", companyIdParameter, businessUnitIdParameter, formdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PendingRecoWithItemName_Result> Sp_PendingRecoWithItemName(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> formdate, Nullable<System.DateTime> todate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var formdateParameter = formdate.HasValue ?
+                new ObjectParameter("formdate", formdate) :
+                new ObjectParameter("formdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PendingRecoWithItemName_Result>("Sp_PendingRecoWithItemName", companyIdParameter, businessUnitIdParameter, formdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<sp_perMonthPurchase_Result> sp_perMonthPurchase(Nullable<int> companyId, Nullable<int> businessUbnitID, Nullable<System.DateTime> toDate, Nullable<System.DateTime> fromDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUbnitIDParameter = businessUbnitID.HasValue ?
+                new ObjectParameter("BusinessUbnitID", businessUbnitID) :
+                new ObjectParameter("BusinessUbnitID", typeof(int));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_perMonthPurchase_Result>("sp_perMonthPurchase", companyIdParameter, businessUbnitIDParameter, toDateParameter, fromDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_perMonthSales_Result> sp_perMonthSales(Nullable<int> companyId, Nullable<int> businessUbnitID, Nullable<System.DateTime> toDate, Nullable<System.DateTime> fromDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUbnitIDParameter = businessUbnitID.HasValue ?
+                new ObjectParameter("BusinessUbnitID", businessUbnitID) :
+                new ObjectParameter("BusinessUbnitID", typeof(int));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_perMonthSales_Result>("sp_perMonthSales", companyIdParameter, businessUbnitIDParameter, toDateParameter, fromDateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_PunchAttendance_alreadyIn_new(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId, string loginId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var loginIdParameter = loginId != null ?
+                new ObjectParameter("LoginId", loginId) :
+                new ObjectParameter("LoginId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_PunchAttendance_alreadyIn_new", companyIdParameter, businessUnitIdParameter, employeeIdParameter, loginIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_PunchAttendance_null_new(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId, string loginId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var loginIdParameter = loginId != null ?
+                new ObjectParameter("LoginId", loginId) :
+                new ObjectParameter("LoginId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_PunchAttendance_null_new", companyIdParameter, businessUnitIdParameter, employeeIdParameter, loginIdParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_PunchAttendance_null_new_byUmar(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId, string loginId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var loginIdParameter = loginId != null ?
+                new ObjectParameter("LoginId", loginId) :
+                new ObjectParameter("LoginId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_PunchAttendance_null_new_byUmar", companyIdParameter, businessUnitIdParameter, employeeIdParameter, loginIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Report_ProductionHistory_New_Result> Sp_Report_ProductionHistory_New(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> companyId, Nullable<int> businessUnit, string itemId)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitParameter = businessUnit.HasValue ?
+                new ObjectParameter("BusinessUnit", businessUnit) :
+                new ObjectParameter("BusinessUnit", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Report_ProductionHistory_New_Result>("Sp_Report_ProductionHistory_New", dateFromParameter, dateToParameter, companyIdParameter, businessUnitParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Report_ProductionHistory_OpeningBalance_Result> Sp_Report_ProductionHistory_OpeningBalance(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> companyId, string itemId)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var itemIdParameter = itemId != null ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Report_ProductionHistory_OpeningBalance_Result>("Sp_Report_ProductionHistory_OpeningBalance", dateFromParameter, dateToParameter, companyIdParameter, itemIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Report_WarehouseStockOpeningAndClosingBalnceBetweenDates_Result> Sp_Report_WarehouseStockOpeningAndClosingBalnceBetweenDates(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> companyUnitID)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var companyUnitIDParameter = companyUnitID.HasValue ?
+                new ObjectParameter("CompanyUnitID", companyUnitID) :
+                new ObjectParameter("CompanyUnitID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Report_WarehouseStockOpeningAndClosingBalnceBetweenDates_Result>("Sp_Report_WarehouseStockOpeningAndClosingBalnceBetweenDates", dateFromParameter, dateToParameter, companyUnitIDParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ReportInvWarehouseAvilableStock_Result> Sp_ReportInvWarehouseAvilableStock(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ReportInvWarehouseAvilableStock_Result>("Sp_ReportInvWarehouseAvilableStock", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<sp_reports_Cursor_AvailableStock_Result> sp_reports_Cursor_AvailableStock()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_reports_Cursor_AvailableStock_Result>("sp_reports_Cursor_AvailableStock");
+        }
+    
+        public virtual ObjectResult<sp_reports_Cursor_AvailableStock_New2_Result> sp_reports_Cursor_AvailableStock_New2(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_reports_Cursor_AvailableStock_New2_Result>("sp_reports_Cursor_AvailableStock_New2", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<sp_reports_Cursor_AvailableStock_New3_Mul_Result> sp_reports_Cursor_AvailableStock_New3_Mul(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_reports_Cursor_AvailableStock_New3_Mul_Result>("sp_reports_Cursor_AvailableStock_New3_Mul", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<sp_reports_getClosingBalance_DateFrom_Result> sp_reports_getClosingBalance_DateFrom(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, string accountCode)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("AccountCode", accountCode) :
+                new ObjectParameter("AccountCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_reports_getClosingBalance_DateFrom_Result>("sp_reports_getClosingBalance_DateFrom", companyIdParameter, businessUnitIdParameter, dateFromParameter, accountCodeParameter);
+        }
+    
+        public virtual ObjectResult<sp_reports_ledger_byDateRange_Result> sp_reports_ledger_byDateRange(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, string accountCode, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("AccountCode", accountCode) :
+                new ObjectParameter("AccountCode", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_reports_ledger_byDateRange_Result>("sp_reports_ledger_byDateRange", dateFromParameter, dateToParameter, accountCodeParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ReportsPandingPucrchaseOrders_Result> Sp_ReportsPandingPucrchaseOrders()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ReportsPandingPucrchaseOrders_Result>("Sp_ReportsPandingPucrchaseOrders");
+        }
+    
+        public virtual ObjectResult<Sp_ReportsPandingPurchases_Result> Sp_ReportsPandingPurchases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ReportsPandingPurchases_Result>("Sp_ReportsPandingPurchases");
+        }
+    
+        public virtual ObjectResult<Sp_ReportsPandingRequisitions_Result> Sp_ReportsPandingRequisitions()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ReportsPandingRequisitions_Result>("Sp_ReportsPandingRequisitions");
+        }
+    
+        public virtual ObjectResult<Sp_RequiredProductionByViews_Result> Sp_RequiredProductionByViews()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_RequiredProductionByViews_Result>("Sp_RequiredProductionByViews");
+        }
+    
+        public virtual ObjectResult<SP_SAlES_CompleteItemHistoryBetweenDateRange_Result> SP_SAlES_CompleteItemHistoryBetweenDateRange(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SAlES_CompleteItemHistoryBetweenDateRange_Result>("SP_SAlES_CompleteItemHistoryBetweenDateRange", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_salesTracking_Result> sp_salesTracking(Nullable<int> companyId, Nullable<int> businessUbnitID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUbnitIDParameter = businessUbnitID.HasValue ?
+                new ObjectParameter("BusinessUbnitID", businessUbnitID) :
+                new ObjectParameter("BusinessUbnitID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_salesTracking_Result>("sp_salesTracking", companyIdParameter, businessUbnitIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<sp_secondchartofaccout_Result> sp_secondchartofaccout(Nullable<int> companyId, string chartaccout)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var chartaccoutParameter = chartaccout != null ?
+                new ObjectParameter("chartaccout", chartaccout) :
+                new ObjectParameter("chartaccout", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_secondchartofaccout_Result>("sp_secondchartofaccout", companyIdParameter, chartaccoutParameter);
+        }
+    
+        public virtual ObjectResult<sp_thirdchartofaccout_Result> sp_thirdchartofaccout(Nullable<int> companyId, string chartaccout)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var chartaccoutParameter = chartaccout != null ?
+                new ObjectParameter("chartaccout", chartaccout) :
+                new ObjectParameter("chartaccout", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_thirdchartofaccout_Result>("sp_thirdchartofaccout", companyIdParameter, chartaccoutParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ToCustomersYearly_Result> Sp_ToCustomersYearly()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ToCustomersYearly_Result>("Sp_ToCustomersYearly");
+        }
+    
+        public virtual ObjectResult<Sp_Top10ItemInMIR_Result> Sp_Top10ItemInMIR(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Top10ItemInMIR_Result>("Sp_Top10ItemInMIR", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_Top10ItemInPurchase_Result> Sp_Top10ItemInPurchase(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Top10ItemInPurchase_Result>("Sp_Top10ItemInPurchase", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TopCustomersByDate_Result> Sp_TopCustomersByDate(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TopCustomersByDate_Result>("Sp_TopCustomersByDate", dateFromParameter, dateToParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TopCustomersPerMonth_Result> Sp_TopCustomersPerMonth(string year, string month, Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TopCustomersPerMonth_Result>("Sp_TopCustomersPerMonth", yearParameter, monthParameter, companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TopReturnedVendors_Result> Sp_TopReturnedVendors(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TopReturnedVendors_Result>("Sp_TopReturnedVendors", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TopSellingItemsBetweenDates_Result> Sp_TopSellingItemsBetweenDates(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TopSellingItemsBetweenDates_Result>("Sp_TopSellingItemsBetweenDates", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TopSellingItemsPerMonth_Result> Sp_TopSellingItemsPerMonth(Nullable<int> companyId, Nullable<int> businessUnitId, string year, string month)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TopSellingItemsPerMonth_Result>("Sp_TopSellingItemsPerMonth", companyIdParameter, businessUnitIdParameter, yearParameter, monthParameter);
+        }
+    
+        public virtual int sp_UpdateAccountCodeForTaxes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateAccountCodeForTaxes");
+        }
+    
+        public virtual int sp_UpdateChartAccountForCustomer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateChartAccountForCustomer");
+        }
+    
+        public virtual int SP_UpdateChartsOfAccounts(Nullable<int> companyid, string chartOfAccountId, string accountTitle, string accountType, string alias, string lastModifiedBy, string createdBy, Nullable<System.DateTime> craetedOn, Nullable<System.DateTime> lastModifiedOn, Nullable<double> openingBalance, string fyear)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            var chartOfAccountIdParameter = chartOfAccountId != null ?
+                new ObjectParameter("ChartOfAccountId", chartOfAccountId) :
+                new ObjectParameter("ChartOfAccountId", typeof(string));
+    
+            var accountTitleParameter = accountTitle != null ?
+                new ObjectParameter("AccountTitle", accountTitle) :
+                new ObjectParameter("AccountTitle", typeof(string));
+    
+            var accountTypeParameter = accountType != null ?
+                new ObjectParameter("AccountType", accountType) :
+                new ObjectParameter("AccountType", typeof(string));
+    
+            var aliasParameter = alias != null ?
+                new ObjectParameter("Alias", alias) :
+                new ObjectParameter("Alias", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("LastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("LastModifiedBy", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var craetedOnParameter = craetedOn.HasValue ?
+                new ObjectParameter("CraetedOn", craetedOn) :
+                new ObjectParameter("CraetedOn", typeof(System.DateTime));
+    
+            var lastModifiedOnParameter = lastModifiedOn.HasValue ?
+                new ObjectParameter("LastModifiedOn", lastModifiedOn) :
+                new ObjectParameter("LastModifiedOn", typeof(System.DateTime));
+    
+            var openingBalanceParameter = openingBalance.HasValue ?
+                new ObjectParameter("OpeningBalance", openingBalance) :
+                new ObjectParameter("OpeningBalance", typeof(double));
+    
+            var fyearParameter = fyear != null ?
+                new ObjectParameter("fyear", fyear) :
+                new ObjectParameter("fyear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateChartsOfAccounts", companyidParameter, chartOfAccountIdParameter, accountTitleParameter, accountTypeParameter, aliasParameter, lastModifiedByParameter, createdByParameter, craetedOnParameter, lastModifiedOnParameter, openingBalanceParameter, fyearParameter);
+        }
+    
+        public virtual ObjectResult<sp_voucher_details_Result> sp_voucher_details(string vocherId, Nullable<int> companyId, string accountCode)
+        {
+            var vocherIdParameter = vocherId != null ?
+                new ObjectParameter("VocherId", vocherId) :
+                new ObjectParameter("VocherId", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var accountCodeParameter = accountCode != null ?
+                new ObjectParameter("AccountCode", accountCode) :
+                new ObjectParameter("AccountCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_voucher_details_Result>("sp_voucher_details", vocherIdParameter, companyIdParameter, accountCodeParameter);
+        }
+    
+        public virtual int SpEmployeeAttendanceRegister(string companyId, string businessUnitId, string shiftId, string date)
+        {
+            var companyIdParameter = companyId != null ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(string));
+    
+            var businessUnitIdParameter = businessUnitId != null ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(string));
+    
+            var shiftIdParameter = shiftId != null ?
+                new ObjectParameter("ShiftId", shiftId) :
+                new ObjectParameter("ShiftId", typeof(string));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SpEmployeeAttendanceRegister", companyIdParameter, businessUnitIdParameter, shiftIdParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<SpEmployeeCurrentShifts_Result> SpEmployeeCurrentShifts(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpEmployeeCurrentShifts_Result>("SpEmployeeCurrentShifts", companyIdParameter, businessUnitIdParameter, employeeIdParameter);
+        }
+    
+        public virtual ObjectResult<SpEmployeeCurrentShiftsByDateRange_Result> SpEmployeeCurrentShiftsByDateRange(Nullable<int> companyId, Nullable<int> businessUnitId, string employeeId, Nullable<System.DateTime> attendanceDateFrom)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var attendanceDateFromParameter = attendanceDateFrom.HasValue ?
+                new ObjectParameter("AttendanceDateFrom", attendanceDateFrom) :
+                new ObjectParameter("AttendanceDateFrom", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpEmployeeCurrentShiftsByDateRange_Result>("SpEmployeeCurrentShiftsByDateRange", companyIdParameter, businessUnitIdParameter, employeeIdParameter, attendanceDateFromParameter);
+        }
+    
+        public virtual ObjectResult<SpEmployeeLeavesMonthYearCount_Result> SpEmployeeLeavesMonthYearCount(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<int> employeeTypeId, string employeeId, Nullable<int> employeeUid, Nullable<int> shiftId, Nullable<int> attendanceDayMarkTypeid, Nullable<System.DateTime> attendanceDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var employeeTypeIdParameter = employeeTypeId.HasValue ?
+                new ObjectParameter("EmployeeTypeId", employeeTypeId) :
+                new ObjectParameter("EmployeeTypeId", typeof(int));
+    
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(string));
+    
+            var employeeUidParameter = employeeUid.HasValue ?
+                new ObjectParameter("EmployeeUid", employeeUid) :
+                new ObjectParameter("EmployeeUid", typeof(int));
+    
+            var shiftIdParameter = shiftId.HasValue ?
+                new ObjectParameter("ShiftId", shiftId) :
+                new ObjectParameter("ShiftId", typeof(int));
+    
+            var attendanceDayMarkTypeidParameter = attendanceDayMarkTypeid.HasValue ?
+                new ObjectParameter("AttendanceDayMarkTypeid", attendanceDayMarkTypeid) :
+                new ObjectParameter("AttendanceDayMarkTypeid", typeof(int));
+    
+            var attendanceDateParameter = attendanceDate.HasValue ?
+                new ObjectParameter("AttendanceDate", attendanceDate) :
+                new ObjectParameter("AttendanceDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpEmployeeLeavesMonthYearCount_Result>("SpEmployeeLeavesMonthYearCount", companyIdParameter, businessUnitIdParameter, employeeTypeIdParameter, employeeIdParameter, employeeUidParameter, shiftIdParameter, attendanceDayMarkTypeidParameter, attendanceDateParameter);
+        }
+    
+        public virtual ObjectResult<SpGetBalanceForConsumptionReport_Result> SpGetBalanceForConsumptionReport(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpGetBalanceForConsumptionReport_Result>("SpGetBalanceForConsumptionReport", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual int SPgetInwardGatePassDetail(Nullable<int> companyId, Nullable<int> businessUnitId, ObjectParameter pendingInward, ObjectParameter completedInward, ObjectParameter totalGatePassInward)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPgetInwardGatePassDetail", companyIdParameter, businessUnitIdParameter, pendingInward, completedInward, totalGatePassInward);
+        }
+    
+        public virtual int SpgetPDNdetail(Nullable<int> companyId, Nullable<int> businessUnitId, ObjectParameter pendingPdn, ObjectParameter approvedPdn, ObjectParameter declinedPdn, ObjectParameter deliveredPdn, ObjectParameter compeletedPdn, ObjectParameter totalPdn)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SpgetPDNdetail", companyIdParameter, businessUnitIdParameter, pendingPdn, approvedPdn, declinedPdn, deliveredPdn, compeletedPdn, totalPdn);
+        }
+    
+        public virtual int SpGetPurchaseOrderDetail(Nullable<int> companyId, Nullable<int> businessUnitId, ObjectParameter pendingPurchaseOrder, ObjectParameter completePurchaseOrder, ObjectParameter totalPurchaseOrder)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SpGetPurchaseOrderDetail", companyIdParameter, businessUnitIdParameter, pendingPurchaseOrder, completePurchaseOrder, totalPurchaseOrder);
+        }
+    
+        public virtual ObjectResult<SPGetPurchaseOrderDetailPending_Result> SPGetPurchaseOrderDetailPending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPGetPurchaseOrderDetailPending_Result>("SPGetPurchaseOrderDetailPending");
+        }
+    
+        public virtual int SpgetQuotationdetail(Nullable<int> companyId, Nullable<int> businessUnitId, ObjectParameter pendingQuotation, ObjectParameter approvedQuotation, ObjectParameter declinedQuotation, ObjectParameter quotationPOG, ObjectParameter totalQuotation)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SpgetQuotationdetail", companyIdParameter, businessUnitIdParameter, pendingQuotation, approvedQuotation, declinedQuotation, quotationPOG, totalQuotation);
+        }
+    
+        public virtual ObjectResult<SP_IncomeStatementOnBasisOfDate_Result> SP_IncomeStatementOnBasisOfDate(Nullable<int> companyId, Nullable<int> businessUnitId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IncomeStatementOnBasisOfDate_Result>("SP_IncomeStatementOnBasisOfDate", companyIdParameter, businessUnitIdParameter);
+        }
+    
+        public virtual ObjectResult<SpInvGetBalanceForConsumptionReport_Result> SpInvGetBalanceForConsumptionReport(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("fromDate", fromDate) :
+                new ObjectParameter("fromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpInvGetBalanceForConsumptionReport_Result>("SpInvGetBalanceForConsumptionReport", companyIdParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<SP_TrialBalanceOnBasisOfDate_Result> SP_TrialBalanceOnBasisOfDate(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("dateTo", dateTo) :
+                new ObjectParameter("dateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TrialBalanceOnBasisOfDate_Result>("SP_TrialBalanceOnBasisOfDate", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<SP_TrialBalanceOnBasisOfDateAndChartOfAccounts_Result> SP_TrialBalanceOnBasisOfDateAndChartOfAccounts(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo, string startChartAccount, string endChartAccount)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("dateTo", dateTo) :
+                new ObjectParameter("dateTo", typeof(System.DateTime));
+    
+            var startChartAccountParameter = startChartAccount != null ?
+                new ObjectParameter("startChartAccount", startChartAccount) :
+                new ObjectParameter("startChartAccount", typeof(string));
+    
+            var endChartAccountParameter = endChartAccount != null ?
+                new ObjectParameter("endChartAccount", endChartAccount) :
+                new ObjectParameter("endChartAccount", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TrialBalanceOnBasisOfDateAndChartOfAccounts_Result>("SP_TrialBalanceOnBasisOfDateAndChartOfAccounts", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter, startChartAccountParameter, endChartAccountParameter);
+        }
+    
+        public virtual ObjectResult<TotalSaleMonthWise_Result> TotalSaleMonthWise(Nullable<int> reCompanyId, Nullable<int> reBusinessUnitId, string reOrderType, string reYear)
+        {
+            var reCompanyIdParameter = reCompanyId.HasValue ?
+                new ObjectParameter("ReCompanyId", reCompanyId) :
+                new ObjectParameter("ReCompanyId", typeof(int));
+    
+            var reBusinessUnitIdParameter = reBusinessUnitId.HasValue ?
+                new ObjectParameter("ReBusinessUnitId", reBusinessUnitId) :
+                new ObjectParameter("ReBusinessUnitId", typeof(int));
+    
+            var reOrderTypeParameter = reOrderType != null ?
+                new ObjectParameter("ReOrderType", reOrderType) :
+                new ObjectParameter("ReOrderType", typeof(string));
+    
+            var reYearParameter = reYear != null ?
+                new ObjectParameter("ReYear", reYear) :
+                new ObjectParameter("ReYear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TotalSaleMonthWise_Result>("TotalSaleMonthWise", reCompanyIdParameter, reBusinessUnitIdParameter, reOrderTypeParameter, reYearParameter);
+        }
+    
+        public virtual int TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturn(Nullable<int> companyid, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturn", companyidParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturnDetail_Result> TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturnDetail(Nullable<int> companyid, Nullable<int> businessUnitId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("Companyid", companyid) :
+                new ObjectParameter("Companyid", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturnDetail_Result>("TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturnDetail", companyidParameter, businessUnitIdParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual int UpdateCustomerCareStatus(Nullable<bool> st, string id)
+        {
+            var stParameter = st.HasValue ?
+                new ObjectParameter("st", st) :
+                new ObjectParameter("st", typeof(bool));
+    
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCustomerCareStatus", stParameter, idParameter);
+        }
+    
+        public virtual int UpdateOrderStatusInOrderTable(Nullable<int> businessUnitId, string orderType, string orderId)
+        {
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("businessUnitId", businessUnitId) :
+                new ObjectParameter("businessUnitId", typeof(int));
+    
+            var orderTypeParameter = orderType != null ?
+                new ObjectParameter("orderType", orderType) :
+                new ObjectParameter("orderType", typeof(string));
+    
+            var orderIdParameter = orderId != null ?
+                new ObjectParameter("orderId", orderId) :
+                new ObjectParameter("orderId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateOrderStatusInOrderTable", businessUnitIdParameter, orderTypeParameter, orderIdParameter);
+        }
+    
+        public virtual int VoucherIdUpdate()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("VoucherIdUpdate");
+        }
+    
+        public virtual ObjectResult<WarehouseProductHistoryBetweenDates_Result> WarehouseProductHistoryBetweenDates(Nullable<int> companyId, Nullable<int> businessUnitId, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var businessUnitIdParameter = businessUnitId.HasValue ?
+                new ObjectParameter("BusinessUnitId", businessUnitId) :
+                new ObjectParameter("BusinessUnitId", typeof(int));
+    
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseProductHistoryBetweenDates_Result>("WarehouseProductHistoryBetweenDates", companyIdParameter, businessUnitIdParameter, dateFromParameter, dateToParameter);
+        }
     }
 }

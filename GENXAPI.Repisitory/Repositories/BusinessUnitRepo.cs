@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class BusinessUnitRepo : GenericCRUD<BusinessUnit>
+    public class BusinessUnitRepo : GenericCRUD<AML_BusinessUnits>
     {
-        public IList<BusinessUnit> GetAllActive()
+        public IList<AML_BusinessUnits> GetAllActive()
         {
             var result = Find(m => m.StatusId == (byte)Status.Active);
             return result.ToList();

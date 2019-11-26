@@ -21,7 +21,7 @@ namespace GENXAPI.Api.Controllers
         {
             try
             {
-                var result = _cityRepo.AllIncluding(e => e.Province).ToList();
+                var result = _cityRepo.AllIncluding(e => e.ProvinceId).ToList();
                 return Ok(result);
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace GENXAPI.Api.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IHttpActionResult CreateCity([FromBody]City city)
+        public IHttpActionResult CreateCity([FromBody]AML_City city)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateCity(int id, [FromBody]City city)
+        public IHttpActionResult UpdateCity(int id, [FromBody]AML_City city)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace GENXAPI.Api.Controllers
                 {
                     cities.Add(new CityViewModel
                     {
-                        Id=item.Id,
+                        Id=item.CityId,
                         Name=item.Name
                     });
                 }

@@ -20,5 +20,8 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<System.Guid> modifiedBy { get; set; }
         public Nullable<System.DateTime> modifiedDate { get; set; }
+    
+        public virtual Registration_User Registration_User { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

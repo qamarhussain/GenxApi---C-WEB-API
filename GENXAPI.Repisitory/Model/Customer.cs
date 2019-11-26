@@ -17,17 +17,15 @@ namespace GENXAPI.Repisitory.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Tenders = new HashSet<Tender>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int Id { get; set; }
         public int CompanyId { get; set; }
-        public int BusinessUnitId { get; set; }
-        public Nullable<int> RegionId { get; set; }
-        public Nullable<int> ZoneId { get; set; }
+        public string Region { get; set; }
+        public string Zone { get; set; }
+        public int CustomerId { get; set; }
         public string Name { get; set; }
-        public string BusinessLine { get; set; }
-        public double Discount { get; set; }
+        public Nullable<double> Discount { get; set; }
         public string Type { get; set; }
         public string ContactPerson { get; set; }
         public string Phone { get; set; }
@@ -44,17 +42,28 @@ namespace GENXAPI.Repisitory.Model
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string Region { get; set; }
         public string Country { get; set; }
         public string LastModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<double> CreditLimit { get; set; }
-        public Nullable<byte> StatusId { get; set; }
-        public string Abbreviation { get; set; }
+        public string Item { get; set; }
+        public string Bank { get; set; }
+        public string SwiftCode { get; set; }
+        public string NotifyParty { get; set; }
+        public string NotifyAddress { get; set; }
+        public string DestinByAir { get; set; }
+        public string CountryByAir { get; set; }
+        public string DestinBySea { get; set; }
+        public string CountryBySea { get; set; }
+        public string FOB_CNF_CIF { get; set; }
+        public string NotifySea { get; set; }
+        public string NotifySeaAddress { get; set; }
+        public string WebSite { get; set; }
+        public string Designation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tender> Tenders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

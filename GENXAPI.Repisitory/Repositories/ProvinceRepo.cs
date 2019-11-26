@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class ProvinceRepo : GenericCRUD<Province>
+    public class ProvinceRepo : GenericCRUD<AML_Province>
     {
 
-        public IList<Province> GetAllActive()
+        public IList<AML_Province> GetAllActive()
         {
             var result = Find(m => m.StatusId == (byte)Status.Active);
             return result.ToList();

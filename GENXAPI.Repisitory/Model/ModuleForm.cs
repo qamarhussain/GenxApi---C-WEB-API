@@ -14,6 +14,12 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class ModuleForm
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ModuleForm()
+        {
+            this.PrivilegesToRoles = new HashSet<PrivilegesToRole>();
+        }
+    
         public int id { get; set; }
         public string formName { get; set; }
         public string formAlias { get; set; }
@@ -22,6 +28,10 @@ namespace GENXAPI.Repisitory.Model
         public Nullable<bool> Navigation { get; set; }
         public Nullable<double> OrderBy { get; set; }
         public string Project { get; set; }
-        public string IconClass { get; set; }
+    
+        public virtual ModuleCategory ModuleCategory { get; set; }
+        public virtual Module Module { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PrivilegesToRole> PrivilegesToRoles { get; set; }
     }
 }

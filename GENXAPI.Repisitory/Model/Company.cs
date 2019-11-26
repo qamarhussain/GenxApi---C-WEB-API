@@ -18,7 +18,9 @@ namespace GENXAPI.Repisitory.Model
         public Company()
         {
             this.BusinessUnits = new HashSet<BusinessUnit>();
-            this.FinancialYearDefinations = new HashSet<FinancialYearDefination>();
+            this.ItemsDefinations = new HashSet<ItemsDefination>();
+            this.Registration_BusinessUnitLevel = new HashSet<Registration_BusinessUnitLevel>();
+            this.Registration_CompanyLevel = new HashSet<Registration_CompanyLevel>();
         }
     
         public int CompanyId { get; set; }
@@ -39,11 +41,14 @@ namespace GENXAPI.Repisitory.Model
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
-        public Nullable<byte> StatusId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BusinessUnit> BusinessUnits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinancialYearDefination> FinancialYearDefinations { get; set; }
+        public virtual ICollection<ItemsDefination> ItemsDefinations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Registration_BusinessUnitLevel> Registration_BusinessUnitLevel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Registration_CompanyLevel> Registration_CompanyLevel { get; set; }
     }
 }

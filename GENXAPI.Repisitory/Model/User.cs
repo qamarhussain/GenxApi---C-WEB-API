@@ -28,6 +28,5 @@ namespace GENXAPI.Repisitory.Model
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
-        public string Password { get; set; }
     }
 }

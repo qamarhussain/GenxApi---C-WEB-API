@@ -52,7 +52,7 @@ namespace GENXAPI.Api.Controllers
         }
         
         [HttpPost]
-        public IHttpActionResult CreateUnit([FromBody]Unit unit)
+        public IHttpActionResult CreateUnit([FromBody]AML_Units unit)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateUnit(int id, [FromBody]Unit unit)
+        public IHttpActionResult UpdateUnit(int id, [FromBody]AML_Units unit)
         {
             try
             {

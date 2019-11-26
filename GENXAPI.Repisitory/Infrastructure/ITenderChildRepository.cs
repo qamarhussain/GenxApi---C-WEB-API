@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public interface ITenderChildRepository : IRepository<TenderChild>
+    public interface ITenderChildRepository : IRepository<AML_TenderChild>
     {
 
     }

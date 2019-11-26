@@ -8,9 +8,9 @@ using GENXAPI.Utilities;
 
 namespace GENXAPI.Repisitory
 {
-    public class CompanyRepo : GenericCRUD<Company>
+    public class CompanyRepo : GenericCRUD<AML_Company>
     {
-        public IList<Company> GetAllActive()
+        public IList<AML_Company> GetAllActive()
         {
             var result = Find(m => m.StatusId == (byte)Status.Active);
             return result.ToList();

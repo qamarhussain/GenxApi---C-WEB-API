@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class FleetServiceRepo : GenericCRUD<FleetService>
+    public class FleetServiceRepo : GenericCRUD<AML_FleetService>
     {
 
-        public IList<FleetService> GetAllActive()
+        public IList<AML_FleetService> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();
@@ -29,7 +29,7 @@ namespace GENXAPI.Repisitory
 
         }
 
-        public IList<FleetService> GetByIdCollection(List<int> ids)
+        public IList<AML_FleetService> GetByIdCollection(List<int> ids)
         {
             return GetAll().Where(x => ids.Contains(x.Id)).ToList();
         }

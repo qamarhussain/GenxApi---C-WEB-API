@@ -14,11 +14,23 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Role
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Role()
+        {
+            this.PrivilegesToRoles = new HashSet<PrivilegesToRole>();
+            this.RolesToUsers = new HashSet<RolesToUser>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<System.Guid> createdBy { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<System.Guid> modifiedBy { get; set; }
         public Nullable<System.DateTime> modifiedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PrivilegesToRole> PrivilegesToRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RolesToUser> RolesToUsers { get; set; }
     }
 }

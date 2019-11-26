@@ -2,7 +2,7 @@
 
 namespace GENXAPI.Repisitory
 {
-    public interface ITenderRepository : IRepository<Tender>
+    public interface ITenderRepository : IRepository<AML_Tender>
     {
 
     }

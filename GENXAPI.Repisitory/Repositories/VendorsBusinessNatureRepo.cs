@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class VendorBusinessNatureRepo : GenericCRUD<VendorsBusinessNature>
+    public class VendorBusinessNatureRepo : GenericCRUD<AML_VendorsBusinessNature>
     {
 
-        public IList<VendorsBusinessNature> GetAllActive()
+        public IList<AML_VendorsBusinessNature> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

@@ -55,7 +55,7 @@ namespace GENXAPI.Api.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IHttpActionResult CreateFleetService([FromBody]FleetService fleetService)
+        public IHttpActionResult CreateFleetService([FromBody]AML_FleetService fleetService)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace GENXAPI.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut]
-        public IHttpActionResult UpdateFleetService(int id, [FromBody]FleetService fleetService)
+        public IHttpActionResult UpdateFleetService(int id, [FromBody]AML_FleetService fleetService)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace GENXAPI.Api.Controllers
                         Id=item.Id,
                         ServiceName=item.ServiceName,
                         ServiceType=item.ServiceType,
-                        UnitOfMeasurement=item.UnitOfMeasurement
+                        UnitOfMeasurement=item.UnitOfMeasurement.ToString()
                     });
                 }
                 return Ok(fleetServices);

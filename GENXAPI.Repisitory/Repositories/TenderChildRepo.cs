@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class TenderChildRepo : GenericCRUD<TenderChild>
+    public class TenderChildRepo : GenericCRUD<AML_TenderChild>
     {
 
     }

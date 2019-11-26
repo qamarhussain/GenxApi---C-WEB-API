@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class CurrencyRepo : GenericCRUD<Currency>
+    public class CurrencyRepo : GenericCRUD<AML_Currency>
     {
 
-        public IList<Currency> GetAllActive()
+        public IList<AML_Currency> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

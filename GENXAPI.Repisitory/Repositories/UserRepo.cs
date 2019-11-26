@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class UserRepo : GenericCRUD<User>
+    public class UserRepo : GenericCRUD<AML_Users>
     {
-        public IList<User> GetAllActive()
+        public IList<AML_Users> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();
@@ -19,7 +19,7 @@ namespace GENXAPI.Repisitory
             return null;
         }
 
-        public User GetUser(string username, string password)
+        public AML_Users GetUser(string username, string password)
         {
            return Find(x => x.UserName == username && x.Password == password).FirstOrDefault();
         }

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class VendorOrgTypeRepo : GenericCRUD<VendorsOrgType>
+    public class VendorOrgTypeRepo : GenericCRUD<AML_VendorsOrgType>
     {
 
-        public IList<VendorsOrgType> GetAllActive()
+        public IList<AML_VendorsOrgType> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

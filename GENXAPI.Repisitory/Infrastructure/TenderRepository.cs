@@ -2,7 +2,7 @@
 
 namespace GENXAPI.Repisitory
 {
-    public class TenderRepository : Repository<Tender>, ITenderRepository
+    public class TenderRepository : Repository<AML_Tender>, ITenderRepository
     {
         public Entities context
         {

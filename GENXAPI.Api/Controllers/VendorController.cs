@@ -51,7 +51,7 @@ namespace GENXAPI.Api.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult CreateVendor([FromBody]Vendor vendor)
+        public IHttpActionResult CreateVendor([FromBody]AML_Vendor vendor)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace GENXAPI.Api.Controllers
             }
         }
         [HttpPut]
-        public IHttpActionResult UpdateVendor(int id, [FromBody]Vendor vendor)
+        public IHttpActionResult UpdateVendor(int id, [FromBody]AML_Vendor vendor)
         {
             try
             {
@@ -79,13 +79,13 @@ namespace GENXAPI.Api.Controllers
                 vendorModel.Phone = vendor.Phone;
                 vendorModel.AccountNo = vendor.AccountNo;
                 vendorModel.Address = vendor.Address;
-                vendorModel.City = vendor.City;
+                vendorModel.AML_City = vendor.AML_City;
                 vendorModel.CNIC = vendor.CNIC;
                 vendorModel.CompanyId = vendor.CompanyId;
                 vendorModel.ContactPerson = vendor.ContactPerson;
                 vendorModel.CopyStatus = vendor.CopyStatus;
-                vendorModel.Country = vendor.Country;
-                vendorModel.CurrencyId = vendor.CurrencyId;
+                vendorModel.AML_Country = vendor.AML_Country;
+                //vendorModel.CurrencyId = vendor.CurrencyId;
                 vendorModel.Email = vendor.Email;
                 vendorModel.FaxNo = vendor.FaxNo;
                 vendorModel.LastModifiedBy = vendor.LastModifiedBy;

@@ -14,15 +14,22 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Unit
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Unit()
+        {
+            this.Items = new HashSet<Item>();
+        }
+    
         public int CompanyId { get; set; }
         public Nullable<int> BusinessUnitId { get; set; }
-        public string Title { get; set; }
         public string UnitMeasure { get; set; }
-        public string Abbreviation { get; set; }
+        public string Abberivation { get; set; }
         public string LastModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime LastModifiedDate { get; set; }
-        public Nullable<byte> StatusId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

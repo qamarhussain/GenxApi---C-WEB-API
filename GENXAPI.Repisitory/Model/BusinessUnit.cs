@@ -14,6 +14,17 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class BusinessUnit
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BusinessUnit()
+        {
+            this.CustomerCares = new HashSet<CustomerCare>();
+            this.DispatchPlans = new HashSet<DispatchPlan>();
+            this.Orders = new HashSet<Order>();
+            this.Regions = new HashSet<Region>();
+            this.Warehouses = new HashSet<Warehouse>();
+            this.Zones = new HashSet<Zone>();
+        }
+    
         public int CompanyId { get; set; }
         public int BusinessUnitId { get; set; }
         public string Name { get; set; }
@@ -27,8 +38,19 @@ namespace GENXAPI.Repisitory.Model
         public string LastModifiedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
-        public Nullable<byte> StatusId { get; set; }
     
         public virtual Company Company { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerCare> CustomerCares { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DispatchPlan> DispatchPlans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Region> Regions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Warehouse> Warehouses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zone> Zones { get; set; }
     }
 }

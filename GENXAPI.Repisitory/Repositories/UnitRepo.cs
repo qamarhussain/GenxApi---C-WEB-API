@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class UnitRepo : GenericCRUD<Unit>
+    public class UnitRepo : GenericCRUD<AML_Units>
     {
 
-        public IList<Unit> GetAllActive()
+        public IList<AML_Units> GetAllActive()
         {
             var result = GetAll();
             return result.ToList();

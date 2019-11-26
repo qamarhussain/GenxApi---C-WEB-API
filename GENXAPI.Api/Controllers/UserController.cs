@@ -53,7 +53,7 @@ namespace GENXAPI.Api.Controllers
 
         // POST: api/User
         [HttpPost]
-        public IHttpActionResult CreateUser([FromBody]User user)
+        public IHttpActionResult CreateUser([FromBody]AML_Users user)
         {
             try
             {

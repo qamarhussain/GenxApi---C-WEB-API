@@ -4,39 +4,547 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd41223231d2462ca97b9d3febfcf19e" Name="Diagram1" ZoomLevel="84">
-        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="10" PointY="9.5" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="12" PointY="2.5" />
-        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="7.75" PointY="10.75" />
-        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="11" />
-        <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="0.75" PointY="14" />
-        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="10" PointY="14.125" />
-        <EntityTypeShape EntityType="Model.FleetService" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="2.75" PointY="14" />
-        <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="4.75" PointY="14" />
-        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="12.75" PointY="7" />
-        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="9.75" PointY="2.25" />
-        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="12.75" PointY="10" />
-        <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="12.75" PointY="13" />
-        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="14.75" PointY="2" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="14.75" PointY="6" />
-        <EntityTypeShape EntityType="Model.Vehicle" Width="1.5" PointX="5.25" PointY="9.5" />
-        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="14.75" PointY="11" />
-        <EntityTypeShape EntityType="Model.VendorsBusinessNature" Width="1.5" PointX="6.75" PointY="17" />
-        <EntityTypeShape EntityType="Model.VendorsOrgType" Width="1.5" PointX="16.75" PointY="2" />
-        <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
+      <Diagram DiagramId="cd41223231d2462ca97b9d3febfcf19e" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="Model.AccountsType" Width="1.5" PointX="9.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Model.AccountVocherChild" Width="1.5" PointX="7.5" PointY="51.375" />
+        <EntityTypeShape EntityType="Model.AccountVocherChildTemp" Width="1.5" PointX="7.5" PointY="83.125" />
+        <EntityTypeShape EntityType="Model.AccountVocherMaster" Width="1.5" PointX="5.25" PointY="51.375" />
+        <EntityTypeShape EntityType="Model.AccountVocherMasterTemp" Width="1.5" PointX="5.25" PointY="83" />
+        <EntityTypeShape EntityType="Model.AddServicesPerItem" Width="1.5" PointX="12.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.AML_BusinessUnits" Width="1.5" PointX="17" PointY="47.75" />
+        <EntityTypeShape EntityType="Model.AML_City" Width="1.5" PointX="22.25" PointY="40.625" />
+        <EntityTypeShape EntityType="Model.AML_Company" Width="1.5" PointX="14.75" PointY="40.375" />
+        <EntityTypeShape EntityType="Model.AML_ContractCancelation" Width="1.5" PointX="29" PointY="81.25" />
+        <EntityTypeShape EntityType="Model.AML_Country" Width="1.5" PointX="14.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.AML_Currency" Width="1.5" PointX="0.75" PointY="19.625" />
+        <EntityTypeShape EntityType="Model.AML_CustomerBusinessLine" Width="1.5" PointX="22.75" PointY="20.625" />
+        <EntityTypeShape EntityType="Model.AML_Customers" Width="1.5" PointX="24.5" PointY="44.125" />
+        <EntityTypeShape EntityType="Model.AML_Dispatch" Width="1.5" PointX="29" PointY="45.625" />
+        <EntityTypeShape EntityType="Model.AML_DispatchDetail" Width="1.5" PointX="34.25" PointY="43.875" />
+        <EntityTypeShape EntityType="Model.AML_ExecutedJob" Width="1.5" PointX="26.75" PointY="71.875" />
+        <EntityTypeShape EntityType="Model.AML_File" Width="1.5" PointX="24.75" PointY="20.625" />
+        <EntityTypeShape EntityType="Model.AML_FinancialYearDefination" Width="1.5" PointX="17" PointY="39.25" />
+        <EntityTypeShape EntityType="Model.AML_FleetService" Width="1.5" PointX="32" PointY="35.25" />
+        <EntityTypeShape EntityType="Model.AML_GodownRack" Width="1.5" PointX="26.75" PointY="24.5" />
+        <EntityTypeShape EntityType="Model.AML_GodownRow" Width="1.5" PointX="24.5" PointY="25.25" />
+        <EntityTypeShape EntityType="Model.AML_GodownShelf" Width="1.5" PointX="29" PointY="24.5" />
+        <EntityTypeShape EntityType="Model.AML_Godwom" Width="1.5" PointX="22.25" PointY="23.75" />
+        <EntityTypeShape EntityType="Model.AML_GodwomType" Width="1.5" PointX="20" PointY="22.625" />
+        <EntityTypeShape EntityType="Model.AML_Item" Width="1.5" PointX="26.75" PointY="40.375" />
+        <EntityTypeShape EntityType="Model.AML_ItemInformation" Width="1.5" PointX="29" PointY="39.25" />
+        <EntityTypeShape EntityType="Model.AML_Job" Width="1.5" PointX="29" PointY="54.625" />
+        <EntityTypeShape EntityType="Model.AML_JobChild" Width="1.5" PointX="34.25" PointY="56.375" />
+        <EntityTypeShape EntityType="Model.AML_JobQuotationApproval" Width="1.5" PointX="26.75" PointY="36.625" />
+        <EntityTypeShape EntityType="Model.AML_Pallet" Width="1.5" PointX="0.75" PointY="37.625" />
+        <EntityTypeShape EntityType="Model.AML_PickupOrder" Width="1.5" PointX="26.75" PointY="45.5" />
+        <EntityTypeShape EntityType="Model.AML_PickupOrderChild" Width="1.5" PointX="31.25" PointY="45.25" />
+        <EntityTypeShape EntityType="Model.AML_Province" Width="1.5" PointX="17.75" PointY="43.125" />
+        <EntityTypeShape EntityType="Model.AML_Region" Width="1.5" PointX="20" PointY="41" />
+        <EntityTypeShape EntityType="Model.AML_RegionalOffice" Width="1.5" PointX="24.5" PointY="57.375" />
+        <EntityTypeShape EntityType="Model.AML_ShipmentNote" Width="1.5" PointX="29" PointY="32.75" />
+        <EntityTypeShape EntityType="Model.AML_ShipmentNoteChild" Width="1.5" PointX="31.25" PointY="39.875" />
+        <EntityTypeShape EntityType="Model.AML_Tender" Width="1.5" PointX="26.75" PointY="65.125" />
+        <EntityTypeShape EntityType="Model.AML_TenderChild" Width="1.5" PointX="34.25" PointY="62" />
+        <EntityTypeShape EntityType="Model.AML_TenderDetail" Width="1.5" PointX="32" PointY="56.625" />
+        <EntityTypeShape EntityType="Model.AML_Units" Width="1.5" PointX="26.75" PointY="31.25" />
+        <EntityTypeShape EntityType="Model.AML_Vehicles" Width="1.5" PointX="32" PointY="62.25" />
+        <EntityTypeShape EntityType="Model.AML_Vendor" Width="1.5" PointX="24.5" PointY="35.375" />
+        <EntityTypeShape EntityType="Model.AML_VendorQuotation" Width="1.5" PointX="32" PointY="51.375" />
+        <EntityTypeShape EntityType="Model.AML_VendorQuotationChild" Width="1.5" PointX="34.25" PointY="48.25" />
+        <EntityTypeShape EntityType="Model.AML_Warehouse" Width="1.5" PointX="20" PointY="25.5" />
+        <EntityTypeShape EntityType="Model.AML_WarehouseTransection" Width="1.5" PointX="39.75" PointY="35.625" />
+        <EntityTypeShape EntityType="Model.ApplicationSetting" Width="1.5" PointX="7.75" PointY="25.625" />
+        <EntityTypeShape EntityType="Model.Attendance" Width="1.5" PointX="7.5" PointY="59" />
+        <EntityTypeShape EntityType="Model.AttendanceAndOverTimeLock" Width="1.5" PointX="39.75" PointY="41.625" />
+        <EntityTypeShape EntityType="Model.AttendanceDayMark" Width="1.5" PointX="31" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.AttendanceDayMarkType" Width="1.5" PointX="28.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Model.Bank" Width="1.5" PointX="5.25" PointY="88.375" />
+        <EntityTypeShape EntityType="Model.BankAccountDetail" Width="1.5" PointX="34" PointY="20.25" />
+        <EntityTypeShape EntityType="Model.BankAccount" Width="1.5" PointX="31.75" PointY="20" />
+        <EntityTypeShape EntityType="Model.BillOfEntryChild" Width="1.5" PointX="42" PointY="30.875" />
+        <EntityTypeShape EntityType="Model.BillOfEntryMaster" Width="1.5" PointX="39.75" PointY="31" />
+        <EntityTypeShape EntityType="Model.BindItemsWithMachine" Width="1.5" PointX="2.75" PointY="37.625" />
+        <EntityTypeShape EntityType="Model.Block" Width="1.5" PointX="28.75" PointY="19.5" />
+        <EntityTypeShape EntityType="Model.BlockCutting" Width="1.5" PointX="38.75" PointY="19.125" />
+        <EntityTypeShape EntityType="Model.BlockCuttingDetail" Width="1.5" PointX="41" PointY="18.875" />
+        <EntityTypeShape EntityType="Model.BlockProduction" Width="1.5" PointX="28.75" PointY="15.125" />
+        <EntityTypeShape EntityType="Model.BlockProductionDetail" Width="1.5" PointX="31" PointY="14.875" />
+        <EntityTypeShape EntityType="Model.BlockWarehouse" Width="1.5" PointX="41.75" PointY="23.625" />
+        <EntityTypeShape EntityType="Model.Branch" Width="1.5" PointX="8" PointY="64.25" />
+        <EntityTypeShape EntityType="Model.BusinessUnit" Width="1.5" PointX="9.75" PointY="29.25" />
+        <EntityTypeShape EntityType="Model.BusinessUnitsInfo" Width="1.5" PointX="3" PointY="64.5" />
+        <EntityTypeShape EntityType="Model.ChartOfAccount" Width="1.5" PointX="41.75" PointY="35.625" />
+        <EntityTypeShape EntityType="Model.CheqeueIssuedTo" Width="1.5" PointX="36.75" PointY="43.625" />
+        <EntityTypeShape EntityType="Model.ChequeBookRecord" Width="1.5" PointX="36.25" PointY="20.625" />
+        <EntityTypeShape EntityType="Model.ChequePaidSummary" Width="1.5" PointX="41.75" PointY="40.625" />
+        <EntityTypeShape EntityType="Model.ChequeReceivedFrom" Width="1.5" PointX="43.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.ChequeReceivedSummary" Width="1.5" PointX="43.75" PointY="7.625" />
+        <EntityTypeShape EntityType="Model.Color" Width="1.5" PointX="43.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="7.5" PointY="36.125" />
+        <EntityTypeShape EntityType="Model.CompanyInfo" Width="1.5" PointX="0.75" PointY="48.625" />
+        <EntityTypeShape EntityType="Model.CompanyVariable" Width="1.5" PointX="43.75" PointY="17.625" />
+        <EntityTypeShape EntityType="Model.Currency" Width="1.5" PointX="28.75" PointY="29.625" />
+        <EntityTypeShape EntityType="Model.CurrencyRate" Width="1.5" PointX="19.75" PointY="31.625" />
+        <EntityTypeShape EntityType="Model.CustomerCare" Width="1.5" PointX="12" PointY="23" />
+        <EntityTypeShape EntityType="Model.CustomerCareDetail" Width="1.5" PointX="14.25" PointY="25.625" />
+        <EntityTypeShape EntityType="Model.CustomerCareFeedBack" Width="1.5" PointX="14.25" PointY="21.25" />
+        <EntityTypeShape EntityType="Model.CustomerInvoiceChild" Width="1.5" PointX="26.25" PointY="14.875" />
+        <EntityTypeShape EntityType="Model.CustomerInvoiceMaster" Width="1.5" PointX="21.75" PointY="15.25" />
+        <EntityTypeShape EntityType="Model.CustomerInvoiceMasterDetail" Width="1.5" PointX="24" PointY="15.125" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="14.75" PointY="11" />
+        <EntityTypeShape EntityType="Model.CustomersBusinessLink" Width="1.5" PointX="4.75" PointY="37.625" />
+        <EntityTypeShape EntityType="Model.CustomerWiseCostingChild" Width="1.5" PointX="43.75" PointY="22.625" />
+        <EntityTypeShape EntityType="Model.CustomerWiseCostingMaster" Width="1.5" PointX="43.75" PointY="26.625" />
+        <EntityTypeShape EntityType="Model.DailyCashReceive" Width="1.5" PointX="43.75" PointY="35.625" />
+        <EntityTypeShape EntityType="Model.DefaultChartOfAccount" Width="1.5" PointX="43.75" PointY="40.625" />
+        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="3" PointY="28.875" />
+        <EntityTypeShape EntityType="Model.Designation" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="Model.DispatchPlan" Width="1.5" PointX="12" PointY="45.5" />
+        <EntityTypeShape EntityType="Model.DispatchPlanDetail" Width="1.5" PointX="19.25" PointY="34.25" />
+        <EntityTypeShape EntityType="Model.DispatchPlanSchedule" Width="1.5" PointX="43.75" PointY="43.625" />
+        <EntityTypeShape EntityType="Model.Document" Width="1.5" PointX="44.75" PointY="30.625" />
+        <EntityTypeShape EntityType="Model.EmployeeAttendanceType" Width="1.5" PointX="28.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.EmployeeHistory" Width="1.5" PointX="10.25" PointY="50.125" />
+        <EntityTypeShape EntityType="Model.EmployeeInfo" Width="1.5" PointX="3" PointY="47.25" />
+        <EntityTypeShape EntityType="Model.EmployeeJobExperience" Width="1.5" PointX="0.75" PointY="44.25" />
+        <EntityTypeShape EntityType="Model.EmployeeLeavesAllowed" Width="1.5" PointX="31" PointY="4.625" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="38.75" PointY="46.625" />
+        <EntityTypeShape EntityType="Model.EmployeeType" Width="1.5" PointX="3" PointY="79" />
+        <EntityTypeShape EntityType="Model.EmployeeTypeOverTime" Width="1.5" PointX="5.25" PointY="78.75" />
+        <EntityTypeShape EntityType="Model.FinancialYearDefination" Width="1.5" PointX="5.25" PointY="56.875" />
+        <EntityTypeShape EntityType="Model.FinancialYearDetail" Width="1.5" PointX="10.5" PointY="56.5" />
+        <EntityTypeShape EntityType="Model.GatePass" Width="1.5" PointX="40.75" PointY="46.625" />
+        <EntityTypeShape EntityType="Model.Gender" Width="1.5" PointX="0.75" PointY="55.75" />
+        <EntityTypeShape EntityType="Model.InquiryDetail" Width="1.5" PointX="41" PointY="13.875" />
+        <EntityTypeShape EntityType="Model.InquiryMaster" Width="1.5" PointX="38.75" PointY="14" />
+        <EntityTypeShape EntityType="Model.inv_BinCartDefination" Width="1.5" PointX="45.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.inv_Consumption" Width="1.5" PointX="38.75" PointY="9.875" />
+        <EntityTypeShape EntityType="Model.inv_ConsumptionDetail" Width="1.5" PointX="41" PointY="9.875" />
+        <EntityTypeShape EntityType="Model.inv_ConsumptionItemLoad" Width="1.5" PointX="45.75" PointY="7.625" />
+        <EntityTypeShape EntityType="Model.inv_GatePass" Width="1.5" PointX="8" PointY="89.625" />
+        <EntityTypeShape EntityType="Model.inv_GatePassDetail" Width="1.5" PointX="10.25" PointY="89.25" />
+        <EntityTypeShape EntityType="Model.inv_GatePassDetailItems" Width="1.5" PointX="12.5" PointY="12.125" />
+        <EntityTypeShape EntityType="Model.inv_GoodRecieveNote" Width="1.5" PointX="21.75" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.inv_GoodRecieveNoteDetail" Width="1.5" PointX="24" PointY="9.125" />
+        <EntityTypeShape EntityType="Model.inv_GoodRecieveNoteDetailItems" Width="1.5" PointX="26.25" PointY="9" />
+        <EntityTypeShape EntityType="Model.inv_Invoice" Width="1.5" PointX="45.75" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.inv_ItemDetail" Width="1.5" PointX="5.25" PointY="20.25" />
+        <EntityTypeShape EntityType="Model.inv_ItemPrices" Width="1.5" PointX="45.75" PointY="16.625" />
+        <EntityTypeShape EntityType="Model.Inv_ItemsDefination" Width="1.5" PointX="3" PointY="33.375" />
+        <EntityTypeShape EntityType="Model.inv_ItemVarientDefination" Width="1.5" PointX="45.75" PointY="20.625" />
+        <EntityTypeShape EntityType="Model.inv_ItemVarientDetail" Width="1.5" PointX="45.75" PointY="24.625" />
+        <EntityTypeShape EntityType="Model.inv_LetterOfCredit" Width="1.5" PointX="41" PointY="3" />
+        <EntityTypeShape EntityType="Model.inv_LetterOfCreditTypes" Width="1.5" PointX="38.75" PointY="4.375" />
+        <EntityTypeShape EntityType="Model.inv_MaterialIssuanceReceipt" Width="1.5" PointX="36.75" PointY="25.875" />
+        <EntityTypeShape EntityType="Model.inv_MaterialIssuanceReceiptDetail" Width="1.5" PointX="39" PointY="26" />
+        <EntityTypeShape EntityType="Model.inv_Miniwarehouse" Width="1.5" PointX="45.75" PointY="34.625" />
+        <EntityTypeShape EntityType="Model.Inv_PostedVoucher" Width="1.5" PointX="45.75" PointY="39.625" />
+        <EntityTypeShape EntityType="Model.inv_Priority" Width="1.5" PointX="45.75" PointY="42.625" />
+        <EntityTypeShape EntityType="Model.inv_PurchaseDemandNote" Width="1.5" PointX="5.25" PointY="27.75" />
+        <EntityTypeShape EntityType="Model.inv_purchaseDemandNoteDetail" Width="1.5" PointX="7.5" PointY="28.5" />
+        <EntityTypeShape EntityType="Model.inv_PurchaseOrder" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="Model.inv_PurchaseOrderDetail" Width="1.5" PointX="7.5" PointY="15.125" />
+        <EntityTypeShape EntityType="Model.inv_purchaseRecognization" Width="1.5" PointX="10.25" PointY="35.5" />
+        <EntityTypeShape EntityType="Model.inv_purchaseRecognizationDetail" Width="1.5" PointX="12.5" PointY="34.25" />
+        <EntityTypeShape EntityType="Model.inv_PurchaseReturn" Width="1.5" PointX="34.75" PointY="38" />
+        <EntityTypeShape EntityType="Model.inv_PurchaseReturnItemDetail" Width="1.5" PointX="37" PointY="37.875" />
+        <EntityTypeShape EntityType="Model.inv_StockLess" Width="1.5" PointX="42.75" PointY="47.625" />
+        <EntityTypeShape EntityType="Model.inv_Tender" Width="1.5" PointX="10.25" PointY="2.25" />
+        <EntityTypeShape EntityType="Model.inv_TenderDetail" Width="1.5" PointX="12.5" PointY="7.625" />
+        <EntityTypeShape EntityType="Model.inv_Units" Width="1.5" PointX="45.75" PointY="46.625" />
+        <EntityTypeShape EntityType="Model.inv_VendorQuotation" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="Model.inv_VendorQuotationDetail" Width="1.5" PointX="10.5" PointY="17.25" />
+        <EntityTypeShape EntityType="Model.inv_Vendors" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="Model.inv_VendorsBusinessNature" Width="1.5" PointX="46.75" PointY="28.625" />
+        <EntityTypeShape EntityType="Model.inv_VendorsOrgType" Width="1.5" PointX="47.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.inv_Warehouse" Width="1.5" PointX="10.5" PointY="63" />
+        <EntityTypeShape EntityType="Model.inv_WarehouseDefination" Width="1.5" PointX="5.25" PointY="64.25" />
+        <EntityTypeShape EntityType="Model.inv_WareHouseLog" Width="1.5" PointX="7.5" PointY="3.5" />
+        <EntityTypeShape EntityType="Model.inv_WareHouseTransferSaleAudit" Width="1.5" PointX="47.75" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.inv_CurrencyDefination" Width="1.5" PointX="5.25" PointY="73.875" />
+        <EntityTypeShape EntityType="Model.InvExpenseDefination" Width="1.5" PointX="3" PointY="87.625" />
+        <EntityTypeShape EntityType="Model.InvLatterOfCredit" Width="1.5" PointX="10.25" PointY="74.875" />
+        <EntityTypeShape EntityType="Model.InvLetterOfCreditDetail" Width="1.5" PointX="7.5" PointY="73.25" />
+        <EntityTypeShape EntityType="Model.InvLetterOfCreditDocument" Width="1.5" PointX="12.5" PointY="77.5" />
+        <EntityTypeShape EntityType="Model.InvLetterOfCreditDocumentsUpload" Width="1.5" PointX="47.75" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.InvLetterOfCreditExpsInfo" Width="1.5" PointX="5.25" PointY="60.375" />
+        <EntityTypeShape EntityType="Model.ItemBusinessUnitLink" Width="1.5" PointX="12" PointY="41" />
+        <EntityTypeShape EntityType="Model.ItemCosting" Width="1.5" PointX="21.75" PointY="3.375" />
+        <EntityTypeShape EntityType="Model.ItemCostingDetail" Width="1.5" PointX="24" PointY="2.875" />
+        <EntityTypeShape EntityType="Model.ItemCostingItemDetail" Width="1.5" PointX="26.25" PointY="3.125" />
+        <EntityTypeShape EntityType="Model.ItemImage" Width="1.5" PointX="22.25" PointY="53.875" />
+        <EntityTypeShape EntityType="Model.ItemPrice" Width="1.5" PointX="47.75" PointY="14.625" />
+        <EntityTypeShape EntityType="Model.Item" Width="1.5" PointX="20" PointY="46.625" />
+        <EntityTypeShape EntityType="Model.ItemsDefination" Width="1.5" PointX="9.75" PointY="40.25" />
+        <EntityTypeShape EntityType="Model.LetterOfCreditType" Width="1.5" PointX="3" PointY="91.375" />
+        <EntityTypeShape EntityType="Model.LoanInfo" Width="1.5" PointX="16.75" PointY="4.875" />
+        <EntityTypeShape EntityType="Model.MachineDefination" Width="1.5" PointX="12.75" PointY="49.625" />
+        <EntityTypeShape EntityType="Model.MachineFormula" Width="1.5" PointX="47.75" PointY="18.625" />
+        <EntityTypeShape EntityType="Model.Manu_DefinePhase" Width="1.5" PointX="47.75" PointY="22.625" />
+        <EntityTypeShape EntityType="Model.Manuf_InquiryWiseRecipeDetail" Width="1.5" PointX="37" PointY="32.875" />
+        <EntityTypeShape EntityType="Model.Manuf_InquiryWiseRecipeMaster" Width="1.5" PointX="34.75" PointY="32.875" />
+        <EntityTypeShape EntityType="Model.Manuf_ItemWiseDepartments" Width="1.5" PointX="47.75" PointY="32.625" />
+        <EntityTypeShape EntityType="Model.Manuf_NewDefineRecipeDetail" Width="1.5" PointX="36" PointY="13.875" />
+        <EntityTypeShape EntityType="Model.Manuf_NewDefineRecipeMaster" Width="1.5" PointX="33.75" PointY="14" />
+        <EntityTypeShape EntityType="Model.Manuf_DefineBatch" Width="1.5" PointX="47.75" PointY="36.625" />
+        <EntityTypeShape EntityType="Model.Manuf_DefineRecipeDetail" Width="1.5" PointX="36" PointY="8.875" />
+        <EntityTypeShape EntityType="Model.Manuf_DefineRecipeMaster" Width="1.5" PointX="33.75" PointY="9.125" />
+        <EntityTypeShape EntityType="Model.Manuf_NewProduction" Width="1.5" PointX="47.75" PointY="41.625" />
+        <EntityTypeShape EntityType="Model.Manuf_PhaseStatus" Width="1.5" PointX="47.75" PointY="47.625" />
+        <EntityTypeShape EntityType="Model.Manuf_ProcedureDetail" Width="1.5" PointX="48.75" PointY="27.625" />
+        <EntityTypeShape EntityType="Model.Manuf_ProcedureMaster" Width="1.5" PointX="44.75" PointY="50.625" />
+        <EntityTypeShape EntityType="Model.Manuf_Production" Width="1.5" PointX="33.75" PointY="2.875" />
+        <EntityTypeShape EntityType="Model.Manuf_ProductionDetail" Width="1.5" PointX="36" PointY="3" />
+        <EntityTypeShape EntityType="Model.Manuf_StepStatus" Width="1.5" PointX="49.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.MaritalStatu" Width="1.5" PointX="0.75" PointY="58.875" />
+        <EntityTypeShape EntityType="Model.ModuleCategory" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="Model.ModuleForm" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MonthlyInstallment" Width="1.5" PointX="19" PointY="7.125" />
+        <EntityTypeShape EntityType="Model.OrderDelivery" Width="1.5" PointX="19.25" PointY="13.375" />
+        <EntityTypeShape EntityType="Model.OrderDeliveryDetail" Width="1.5" PointX="24.5" PointY="30.375" />
+        <EntityTypeShape EntityType="Model.OrderDetail" Width="1.5" PointX="22.25" PointY="34.125" />
+        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="17" PointY="22" />
+        <EntityTypeShape EntityType="Model.OrderStatusCurrent" Width="1.5" PointX="19.25" PointY="18.75" />
+        <EntityTypeShape EntityType="Model.PerformaInvoiceChild" Width="1.5" PointX="34" PointY="27.5" />
+        <EntityTypeShape EntityType="Model.PerformaInvoiceMaster" Width="1.5" PointX="31.75" PointY="27" />
+        <EntityTypeShape EntityType="Model.PrivilegesToRole" Width="1.5" PointX="7.5" PointY="22.125" />
+        <EntityTypeShape EntityType="Model.Ratio" Width="1.5" PointX="17.75" PointY="53" />
+        <EntityTypeShape EntityType="Model.Region" Width="1.5" PointX="12" PointY="30.375" />
+        <EntityTypeShape EntityType="Model.Registration_BusinessUnitLevel" Width="1.5" PointX="9.75" PointY="46.25" />
+        <EntityTypeShape EntityType="Model.Registration_CompanyLevel" Width="1.5" PointX="7.5" PointY="46.375" />
+        <EntityTypeShape EntityType="Model.Registration_User" Width="1.5" PointX="5.25" PointY="45.75" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="5.25" PointY="41.5" />
+        <EntityTypeShape EntityType="Model.RolesToUser" Width="1.5" PointX="7.5" PointY="42.5" />
+        <EntityTypeShape EntityType="Model.SaleInvoice" Width="1.5" PointX="49.75" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.SaleReturnInvoice" Width="1.5" PointX="49.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Model.SalesReturn" Width="1.5" PointX="20" PointY="56.25" />
+        <EntityTypeShape EntityType="Model.SalesReturnDetail" Width="1.5" PointX="22.25" PointY="49" />
+        <EntityTypeShape EntityType="Model.Service" Width="1.5" PointX="49.75" PointY="18.625" />
+        <EntityTypeShape EntityType="Model.ShiftHistory" Width="1.5" PointX="7.5" PointY="69" />
+        <EntityTypeShape EntityType="Model.ShiftInfo" Width="1.5" PointX="5.25" PointY="68.125" />
+        <EntityTypeShape EntityType="Model.Size" Width="1.5" PointX="49.75" PointY="21.625" />
+        <EntityTypeShape EntityType="Model.SizeType" Width="1.5" PointX="49.75" PointY="31.625" />
+        <EntityTypeShape EntityType="Model.SkipMonthlyInstallment" Width="1.5" PointX="19" PointY="3.125" />
+        <EntityTypeShape EntityType="Model.TransferedItemWarehouse" Width="1.5" PointX="49.75" PointY="34.625" />
+        <EntityTypeShape EntityType="Model.TransferItemWareHouseAudit" Width="1.5" PointX="49.75" PointY="40.625" />
+        <EntityTypeShape EntityType="Model.TransferStockInventoryToSale" Width="1.5" PointX="49.75" PointY="44.625" />
+        <EntityTypeShape EntityType="Model.TransferStockSalesToInventory" Width="1.5" PointX="49.75" PointY="50.625" />
+        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="17.75" PointY="56.25" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="14.75" PointY="52.625" />
+        <EntityTypeShape EntityType="Model.VehicleRegistration" Width="1.5" PointX="50.75" PointY="25.625" />
+        <EntityTypeShape EntityType="Model.VendorInvoiceChild" Width="1.5" PointX="10.25" PointY="7.875" />
+        <EntityTypeShape EntityType="Model.VendorInvoiceMaster" Width="1.5" PointX="5.75" PointY="7.875" />
+        <EntityTypeShape EntityType="Model.VendorInvoiceMasterDetail" Width="1.5" PointX="8" PointY="8" />
+        <EntityTypeShape EntityType="Model.Warehouse" Width="1.5" PointX="15" PointY="30.75" />
+        <EntityTypeShape EntityType="Model.WarehouseDefination" Width="1.5" PointX="34.75" PointY="52.625" />
+        <EntityTypeShape EntityType="Model.YearsDefination" Width="1.5" PointX="21.75" PointY="31.625" />
+        <EntityTypeShape EntityType="Model.Zone" Width="1.5" PointX="17.25" PointY="30.125" />
+        <EntityTypeShape EntityType="Model.AML_Users" Width="1.5" PointX="40.75" PointY="52.625" />
+        <EntityTypeShape EntityType="Model.inv_DefaultCurrencyDefination" Width="1.5" PointX="46.75" PointY="52.625" />
+        <EntityTypeShape EntityType="Model.inv_DefaultOrgType" Width="1.5" PointX="51.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.inv_DefaultPriority" Width="1.5" PointX="51.75" PointY="5.625" />
+        <EntityTypeShape EntityType="Model.inv_DefaultVendorsBusinessNature" Width="1.5" PointX="51.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Model.inv_TestViewForItemVarient" Width="1.5" PointX="51.75" PointY="11.625" />
+        <EntityTypeShape EntityType="Model.inv_ViewGetWareHouseItemsTransferStock" Width="1.5" PointX="51.75" PointY="15.625" />
+        <EntityTypeShape EntityType="Model.InvViewAvailableStock" Width="1.5" PointX="51.75" PointY="19.625" />
+        <EntityTypeShape EntityType="Model.temp_Orders" Width="1.5" PointX="24.75" PointY="53.625" />
+        <EntityTypeShape EntityType="Model.tempOrdersDelivery" Width="1.5" PointX="51.75" PointY="29.625" />
+        <EntityTypeShape EntityType="Model.TransferItemsInventoryToSale" Width="1.5" PointX="51.75" PointY="32.625" />
+        <EntityTypeShape EntityType="Model.View_BatchWithCompeletItemName" Width="1.5" PointX="51.75" PointY="39.625" />
+        <EntityTypeShape EntityType="Model.View_BatchWithPhase" Width="1.5" PointX="51.75" PointY="43.625" />
+        <EntityTypeShape EntityType="Model.View_BusinessUnitCustomerRecievable" Width="1.5" PointX="51.75" PointY="47.625" />
+        <EntityTypeShape EntityType="Model.View_BusinessUnitsByLogin" Width="1.5" PointX="51.75" PointY="51.625" />
+        <EntityTypeShape EntityType="Model.View_CustomerInvoiceDetails" Width="1.5" PointX="52.75" PointY="24.625" />
+        <EntityTypeShape EntityType="Model.View_CustomRecipe" Width="1.5" PointX="36.75" PointY="54.625" />
+        <EntityTypeShape EntityType="Model.View_DashBoard_Availble_Stock" Width="1.5" PointX="42.75" PointY="54.625" />
+        <EntityTypeShape EntityType="Model.View_Dashboard_Sales_NetAmount_OrderPerDay" Width="1.5" PointX="51.75" PointY="54.625" />
+        <EntityTypeShape EntityType="Model.View_Dashboard_Sales_test" Width="1.5" PointX="53.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.View_DashBoardEmployeePresent" Width="1.5" PointX="53.75" PointY="5.625" />
+        <EntityTypeShape EntityType="Model.view_DashboardEmployeePresentDepartmentWiseNet" Width="1.5" PointX="53.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Model.View_DashBoardEmployeeTotal" Width="1.5" PointX="53.75" PointY="11.625" />
+        <EntityTypeShape EntityType="Model.View_DashboardProductionPlanning" Width="1.5" PointX="53.75" PointY="14.625" />
+        <EntityTypeShape EntityType="Model.View_DashBoardTodayEmpAttendance" Width="1.5" PointX="53.75" PointY="18.625" />
+        <EntityTypeShape EntityType="Model.View_DashboardTransferItem" Width="1.5" PointX="53.75" PointY="28.625" />
+        <EntityTypeShape EntityType="Model.View_DayBookDashboard" Width="1.5" PointX="53.75" PointY="33.625" />
+        <EntityTypeShape EntityType="Model.View_DepartmentWiseItemConsumption" Width="1.5" PointX="53.75" PointY="37.625" />
+        <EntityTypeShape EntityType="Model.View_DepartmentWiseRecipeSalesItem" Width="1.5" PointX="53.75" PointY="40.625" />
+        <EntityTypeShape EntityType="Model.View_Deshboard_Sales_NetAmount_OrdersPerMonth" Width="1.5" PointX="53.75" PointY="44.625" />
+        <EntityTypeShape EntityType="Model.View_Deshboard_Sales_NetAmount_PerMonth" Width="1.5" PointX="53.75" PointY="47.625" />
+        <EntityTypeShape EntityType="Model.View_Deshboard_Sales_NetAmount_SalesPerDay" Width="1.5" PointX="53.75" PointY="50.625" />
+        <EntityTypeShape EntityType="Model.View_Employee_Info_against_attendance" Width="1.5" PointX="53.75" PointY="53.625" />
+        <EntityTypeShape EntityType="Model.View_ForIncomeStatment" Width="1.5" PointX="54.75" PointY="22.625" />
+        <EntityTypeShape EntityType="Model.View_GatePassInwardWithItemName" Width="1.5" PointX="44.75" PointY="56.625" />
+        <EntityTypeShape EntityType="Model.View_GetCurrentInfo_AllEmployees" Width="1.5" PointX="46.75" PointY="56.625" />
+        <EntityTypeShape EntityType="Model.View_GetCurrentInfo_AllEmployees_Reports" Width="1.5" PointX="48.75" PointY="56.625" />
+        <EntityTypeShape EntityType="Model.View_GetGetChartsOfAccountsFourthLevel" Width="1.5" PointX="55.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.View_GetGetChartsOfAccountsSecondLevel" Width="1.5" PointX="55.75" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.View_GetGetChartsOfAccountsThirdLevel" Width="1.5" PointX="55.75" PointY="9.625" />
+        <EntityTypeShape EntityType="Model.View_GetItemCompleteInfoWithoutStock" Width="1.5" PointX="55.75" PointY="12.625" />
+        <EntityTypeShape EntityType="Model.View_GetItemsCompleteInfo" Width="1.5" PointX="12.75" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.View_GetItemsCompleteInfoWithOutStock" Width="1.5" PointX="14.75" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.View_GetPurchaseInvoice" Width="1.5" PointX="55.75" PointY="26.625" />
+        <EntityTypeShape EntityType="Model.View_GetSaleInvoice" Width="1.5" PointX="55.75" PointY="31.625" />
+        <EntityTypeShape EntityType="Model.View_GetWareHouseItemDetailTransferStock" Width="1.5" PointX="55.75" PointY="36.625" />
+        <EntityTypeShape EntityType="Model.View_GoodRecievNoteWithItemName" Width="1.5" PointX="55.75" PointY="39.625" />
+        <EntityTypeShape EntityType="Model.View_inv_GetItemsInfoInWareHouseForMoveStock" Width="1.5" PointX="38.75" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.View_Inv_GetSepratedColumnForItemDetialsOfC_S_B_Item" Width="1.5" PointX="55.75" PointY="43.625" />
+        <EntityTypeShape EntityType="Model.View_inv_GetSepratedRoomRackBinFromBinCartDefination" Width="1.5" PointX="55.75" PointY="49.625" />
+        <EntityTypeShape EntityType="Model.View_inv_warehouseItemBalance" Width="1.5" PointX="50.75" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.View_invGetItemDetailComplete" Width="1.5" PointX="55.75" PointY="54.625" />
+        <EntityTypeShape EntityType="Model.View_invItemforpdn" Width="1.5" PointX="55.75" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.View_invItemforpdnApprovel" Width="1.5" PointX="56.75" PointY="21.625" />
+        <EntityTypeShape EntityType="Model.View_InvPurchaseOrderWithItemName" Width="1.5" PointX="52.75" PointY="58.625" />
+        <EntityTypeShape EntityType="Model.View_InvWarehouseBatch" Width="1.5" PointX="57.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.View_InvWarehouseOpeningBalanceReport" Width="1.5" PointX="57.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Model.View_IssueProductionDepartment" Width="1.5" PointX="57.75" PointY="12.625" />
+        <EntityTypeShape EntityType="Model.View_ItemHistoryDashboard" Width="1.5" PointX="57.75" PointY="26.625" />
+        <EntityTypeShape EntityType="Model.View_ItemPriceDetail" Width="1.5" PointX="57.75" PointY="31.625" />
+        <EntityTypeShape EntityType="Model.View_ItemWiseCosting" Width="1.5" PointX="57.75" PointY="35.625" />
+        <EntityTypeShape EntityType="Model.View_ItemWithoutRecipe" Width="1.5" PointX="57.75" PointY="39.625" />
+        <EntityTypeShape EntityType="Model.View_LedgerBalanceDashboardFinancial" Width="1.5" PointX="57.75" PointY="18.625" />
+        <EntityTypeShape EntityType="Model.View_LoginInformation" Width="1.5" PointX="40.75" PointY="59.625" />
+        <EntityTypeShape EntityType="Model.View_ModuleFormInfo_ByRole" Width="1.5" PointX="57.75" PointY="43.625" />
+        <EntityTypeShape EntityType="Model.View_NaviagtionInfoByRole" Width="1.5" PointX="57.75" PointY="47.625" />
+        <EntityTypeShape EntityType="Model.View_NewItemConsumption" Width="1.5" PointX="57.75" PointY="51.625" />
+        <EntityTypeShape EntityType="Model.view_order_status_panding_complete" Width="1.5" PointX="57.75" PointY="55.625" />
+        <EntityTypeShape EntityType="Model.View_OrderDeliveryDetailforEdit" Width="1.5" PointX="57.75" PointY="59.625" />
+        <EntityTypeShape EntityType="Model.View_PendingJV" Width="1.5" PointX="16.75" PointY="60.625" />
+        <EntityTypeShape EntityType="Model.View_PerformaColorSize" Width="1.5" PointX="18.75" PointY="60.625" />
+        <EntityTypeShape EntityType="Model.View_PerformaItemsQuantityDetails" Width="1.5" PointX="58.75" PointY="21.625" />
+        <EntityTypeShape EntityType="Model.View_PhaseStatusWithName" Width="1.5" PointX="20.75" PointY="60.625" />
+        <EntityTypeShape EntityType="Model.View_productionDetailWithItemName" Width="1.5" PointX="42.75" PointY="60.625" />
+        <EntityTypeShape EntityType="Model.View_productionInvoice" Width="1.5" PointX="59.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.View_PurchaseInvoiceDetail_Report" Width="1.5" PointX="59.75" PointY="7.625" />
+        <EntityTypeShape EntityType="Model.View_PurchaseOrderPerDay" Width="1.5" PointX="59.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Model.View_PurchaseOrderPerMonth" Width="1.5" PointX="59.75" PointY="16.625" />
+        <EntityTypeShape EntityType="Model.View_PurchaseReturnWithItemName" Width="1.5" PointX="59.75" PointY="26.625" />
+        <EntityTypeShape EntityType="Model.View_ReceipewithPrice" Width="1.5" PointX="26.75" PointY="61.625" />
+        <EntityTypeShape EntityType="Model.View_RecievedProductionDepartment" Width="1.5" PointX="59.75" PointY="30.625" />
+        <EntityTypeShape EntityType="Model.View_RecipeDetailWithItemName" Width="1.5" PointX="28.75" PointY="61.625" />
+        <EntityTypeShape EntityType="Model.View_RecipeHoldedItems" Width="1.5" PointX="59.75" PointY="36.625" />
+        <EntityTypeShape EntityType="Model.View_RecoWithItemName" Width="1.5" PointX="36.75" PointY="61.625" />
+        <EntityTypeShape EntityType="Model.View_Report_CustomerWiseSalesLedger" Width="1.5" PointX="59.75" PointY="40.625" />
+        <EntityTypeShape EntityType="Model.View_Report_DeliveryChallan" Width="1.5" PointX="59.75" PointY="44.625" />
+        <EntityTypeShape EntityType="Model.View_Report_OrderTypeWiseSalesDetail" Width="1.5" PointX="44.75" PointY="61.625" />
+        <EntityTypeShape EntityType="Model.View_Report_WarehousNetBalanceItemWise" Width="1.5" PointX="59.75" PointY="53.625" />
+        <EntityTypeShape EntityType="Model.View_reports_ledgerAccounts" Width="1.5" PointX="54.75" PointY="61.625" />
+        <EntityTypeShape EntityType="Model.View_Reports_ToSupparesItemsSizeType" Width="1.5" PointX="30.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.View_ReportVoucher" Width="1.5" PointX="59.75" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.View_SaleReturnInvoiceDetail_Report" Width="1.5" PointX="60.75" PointY="19.625" />
+        <EntityTypeShape EntityType="Model.View_SaleReturnInvoiceSummary_Reports" Width="1.5" PointX="22.75" PointY="62.625" />
+        <EntityTypeShape EntityType="Model.View_SalesTaxInvoice" Width="1.5" PointX="50.75" PointY="62.625" />
+        <EntityTypeShape EntityType="Model.View_StepStatusWithName" Width="1.5" PointX="61.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.View_SubCategoryColor_Size" Width="1.5" PointX="61.75" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.view_sum_of_deliveredQuantity" Width="1.5" PointX="61.75" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.view_sum_of_deliveredQuantity_report" Width="1.5" PointX="61.75" PointY="14.625" />
+        <EntityTypeShape EntityType="Model.View_Top10CustomersYearly" Width="1.5" PointX="61.75" PointY="24.625" />
+        <EntityTypeShape EntityType="Model.View_UpdateInquiry" Width="1.5" PointX="61.75" PointY="27.625" />
+        <EntityTypeShape EntityType="Model.View_UpdateRecipe" Width="1.5" PointX="61.75" PointY="32.625" />
+        <EntityTypeShape EntityType="Model.View_UserInfo" Width="1.5" PointX="61.75" PointY="37.625" />
+        <EntityTypeShape EntityType="Model.View_VendorWithBusinessType" Width="1.5" PointX="61.75" PointY="42.625" />
+        <EntityTypeShape EntityType="Model.View_warehouseProductionDashboard" Width="1.5" PointX="61.75" PointY="50.625" />
+        <EntityTypeShape EntityType="Model.ViewAvailableStock" Width="1.5" PointX="61.75" PointY="54.625" />
+        <EntityTypeShape EntityType="Model.ViewAvalibalStockByWarehouse" Width="1.5" PointX="61.75" PointY="58.625" />
+        <EntityTypeShape EntityType="Model.ViewCustomerCare" Width="1.5" PointX="61.75" PointY="61.625" />
+        <EntityTypeShape EntityType="Model.ViewCustomerCareFeedBack" Width="1.5" PointX="18.75" PointY="64.625" />
+        <EntityTypeShape EntityType="Model.ViewDailyProduction" Width="1.5" PointX="62.75" PointY="19.625" />
+        <EntityTypeShape EntityType="Model.ViewDailySale" Width="1.5" PointX="38.75" PointY="64.625" />
+        <EntityTypeShape EntityType="Model.ViewDailySale_Old" Width="1.5" PointX="40.75" PointY="64.625" />
+        <EntityTypeShape EntityType="Model.ViewOrderDelivery" Width="1.5" PointX="63.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.ViewRequiredProduction" Width="1.5" PointX="63.75" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.ViewRequiredProduction_Old" Width="1.5" PointX="63.75" PointY="9.625" />
+        <EntityTypeShape EntityType="Model.ViewRequiredProduction_Old2" Width="1.5" PointX="63.75" PointY="12.625" />
+        <EntityTypeShape EntityType="Model.ViewRequiredProductionForPplanning" Width="1.5" PointX="63.75" PointY="15.625" />
+        <EntityTypeShape EntityType="Model.ViewRunningOrder" Width="1.5" PointX="63.75" PointY="22.625" />
+        <AssociationConnector Association="Model.FK_AccountVocherChild_AccountVocherMaster" />
+        <AssociationConnector Association="Model.FK_AccountVocherChildTemp_AccountVocherMasterTemp" />
+        <AssociationConnector Association="Model.FK_AccountVocherMaster_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_AccountVocherMasterTemp_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_AML_BusinessUnits_AML_Company" />
+        <AssociationConnector Association="Model.FK_AML_City_AML_Region" />
         <AssociationConnector Association="Model.FK_City_Province" />
-        <AssociationConnector Association="Model.FK_FinancialYearDefination_Company" />
-        <EntityTypeShape EntityType="Model.Tender" Width="1.5" PointX="3" PointY="21.125" />
-        <EntityTypeShape EntityType="Model.TenderChild" Width="1.5" PointX="9.5" PointY="18.25" />
-        <EntityTypeShape EntityType="Model.TenderDetail" Width="1.5" PointX="5.25" PointY="25.75" />
+        <AssociationConnector Association="Model.FK_Customers_City" />
+        <AssociationConnector Association="Model.FK_PickupOrder_City" />
+        <AssociationConnector Association="Model.FK_RegionalOffice_City" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City" />
+        <AssociationConnector Association="Model.FK_TenderDetail_City1" />
+        <AssociationConnector Association="Model.FK_Vendor_City" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_City" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_City1" />
+        <AssociationConnector Association="Model.FK_AML_FinancialYearDefination_AML_Company" />
+        <AssociationConnector Association="Model.FK_AML_Region_AML_Company" />
+        <AssociationConnector Association="Model.FK_ContractCancelation_Tender" />
+        <AssociationConnector Association="Model.FK_Dispatch_Customers" />
+        <AssociationConnector Association="Model.FK_ExecutedJob_Customers" />
+        <AssociationConnector Association="Model.FK_Item_Customers" />
+        <AssociationConnector Association="Model.FK_Job_Customers" />
+        <AssociationConnector Association="Model.FK_PickupOrder_Customers" />
         <AssociationConnector Association="Model.FK_Tender_Customers" />
+        <AssociationConnector Association="Model.FK_Dispatch_PickupOrder" />
+        <AssociationConnector Association="Model.FK_DispatchDetail_Dispatch" />
+        <AssociationConnector Association="Model.FK_DispatchDetail_ItemInformation" />
+        <AssociationConnector Association="Model.FK_FleetService_Units" />
         <AssociationConnector Association="Model.FK_TenderChild_FleetService" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_FleetService" />
+        <AssociationConnector Association="Model.FK_GodownRack_GodownRow1" />
+        <AssociationConnector Association="Model.FK_GodownRack_Godwom1" />
+        <AssociationConnector Association="Model.FK_GodownShelf_GodownRack" />
+        <AssociationConnector Association="Model.FK_GodownRow_Godwom" />
+        <AssociationConnector Association="Model.FK_GodownRack_Godwom" />
+        <AssociationConnector Association="Model.FK_GodownRack_Warehouse" />
+        <AssociationConnector Association="Model.FK_ShipmentNoteChild_GodownShelf" />
+        <AssociationConnector Association="Model.FK_Godwom_GodwomType" />
+        <AssociationConnector Association="Model.FK_Godwom_Warehouse" />
+        <AssociationConnector Association="Model.FK_ItemInformation_Item" />
+        <AssociationConnector Association="Model.FK_ItemInformation_Units" />
+        <AssociationConnector Association="Model.FK_PickupOrderChild_ItemInformation" />
+        <AssociationConnector Association="Model.FK_ShipmentNoteChild_ItemInformation" />
+        <AssociationConnector Association="Model.FK_Job_Tender" />
+        <AssociationConnector Association="Model.FK_JobChild_Job" />
+        <AssociationConnector Association="Model.FK_JobChild_RegionalOffice" />
+        <AssociationConnector Association="Model.FK_JobQuotationApproval_Vendor" />
+        <AssociationConnector Association="Model.FK_PickupOrderChildId_PickupOrder" />
+        <AssociationConnector Association="Model.FK_PickupOrderChild_Units" />
+        <AssociationConnector Association="Model.FK_AML_Region_AML_Region" />
+        <AssociationConnector Association="Model.FK_TenderDetail_Province" />
+        <AssociationConnector Association="Model.FK_AML_TenderDetail_AML_Region" />
+        <AssociationConnector Association="Model.FK_AML_Vendor_AML_Region" />
+        <AssociationConnector Association="Model.FK_ShipmentNote_Warehouse" />
+        <AssociationConnector Association="Model.FK_ShipmentNoteChild_ShipmentNote" />
         <AssociationConnector Association="Model.FK_TenderChild_Tender" />
         <AssociationConnector Association="Model.FK_TenderDetail_Tender" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Tender" />
         <AssociationConnector Association="Model.FK_TenderChild_TenderDetail" />
         <AssociationConnector Association="Model.FK_TenderChild_Vehicles" />
+        <AssociationConnector Association="Model.FK_VendorQuotation_Vendor" />
+        <AssociationConnector Association="Model.FK_VendorQuotationChild_VendorQuotation" />
+        <AssociationConnector Association="Model.FK_Attendance_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_Attendance_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_Attendance_ShiftInfo" />
+        <AssociationConnector Association="Model.FK_AttendanceDayMark_AttendanceDayMarkTypes" />
+        <AssociationConnector Association="Model.FK_EmployeeLeavesAllowed_AttendanceDayMarkTypes" />
+        <AssociationConnector Association="Model.FK_Bank_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_BankAccountDetail_BankAccounts" />
+        <AssociationConnector Association="Model.FK_ChequeBookRecord_BankAccountDetail" />
+        <AssociationConnector Association="Model.FK_BillOfEntryChild_BillOfEntryMaster" />
+        <AssociationConnector Association="Model.FK_BlockProductionDetail_Block" />
+        <AssociationConnector Association="Model.FK_BlockCuttingDetail_BlockCutting" />
+        <AssociationConnector Association="Model.FK_BlockProductionDetail_BlockProduction" />
+        <AssociationConnector Association="Model.FK_EmployeeHistory_Branches" />
+        <AssociationConnector Association="Model.FK_BusinessUnits_Company" />
+        <AssociationConnector Association="Model.FK_CustomerCare_BusinessUnits" />
+        <AssociationConnector Association="Model.FK_DispatchPlan_BusinessUnits" />
+        <AssociationConnector Association="Model.FK_Orders_BusinessUnits1" />
+        <AssociationConnector Association="Model.FK_Region_BusinessUnits" />
+        <AssociationConnector Association="Model.FK_Warehouse_BusinessUnits1" />
+        <AssociationConnector Association="Model.FK_Zone_BusinessUnits" />
+        <AssociationConnector Association="Model.FK_BusinessUnitsInfo_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_FinancialYearDefination_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_InvLatterOfCredit_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_InvLetterOfCreditExpsInfo_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_invWarehouseDefination_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_ShiftInfo_BusinessUnitsInfo" />
+        <AssociationConnector Association="Model.FK_ItemsDefination_Company" />
+        <AssociationConnector Association="Model.FK_Registration_BusinessUnitLevel_Company" />
+        <AssociationConnector Association="Model.FK_Registration_CompanyLevel_Company" />
+        <AssociationConnector Association="Model.FK_Department_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_Designation_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_EmployeeInfo_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_EmployeeType_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_Inv_ItemsDefination_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_InvExpenseDefination_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_LetterOfCreditTypes_CompanyInfo" />
+        <AssociationConnector Association="Model.FK_CustomerCareDetail_CustomerCare1" />
+        <AssociationConnector Association="Model.FK_CustomerCareFeedBack_CustomerCare" />
+        <AssociationConnector Association="Model.FK_CustomerInvoiceChild_CustomerInvoiceMasterDetail" />
+        <AssociationConnector Association="Model.FK_CustomerInvoiceMasterDetail_CustomerInvoiceMaster" />
+        <AssociationConnector Association="Model.FK_Orders_Customers" />
+        <AssociationConnector Association="Model.FK_inv_PurchaseDemandNote_Department" />
+        <AssociationConnector Association="Model.FK_DispatchPlanDetail_DispatchPlan" />
+        <AssociationConnector Association="Model.FK_DispatchPlanDetail_Orders" />
+        <AssociationConnector Association="Model.FK_EmployeeLeavesAllowed_EmployeeLeaveTypes" />
+        <AssociationConnector Association="Model.FK_EmployeeHistory_EmployeeInfo" />
+        <AssociationConnector Association="Model.FK_EmployeeInfo_EmployeeJobExperience" />
+        <AssociationConnector Association="Model.FK_EmployeeInfo_Gender" />
+        <AssociationConnector Association="Model.FK_EmployeeInfo_MaritalStatus" />
+        <AssociationConnector Association="Model.FK_Registration_User_EmployeeInfo" />
+        <AssociationConnector Association="Model.FK_EmployeeTypeOverTime_EmployeeType" />
+        <AssociationConnector Association="Model.FK_FinancialYearDetail_FinancialYearDefination" />
+        <AssociationConnector Association="Model.FK_FinancialYearDetail_Registration_User" />
+        <AssociationConnector Association="Model.FK_InquiryDetail_InquiryMaster" />
+        <AssociationConnector Association="Model.FK_inv_ConsumptionDetail_inv_Consumption" />
+        <AssociationConnector Association="Model.FK_inv_GatePassDetail_inv_GatePass1" />
+        <AssociationConnector Association="Model.FK_inv_GatePassDetailItems_inv_GatePassDetail" />
+        <AssociationConnector Association="Model.FK_inv_GatePassDetailItems_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_GoodRecieveNoteDetail_inv_GoodRecieveNote1" />
+        <AssociationConnector Association="Model.FK_inv_GoodRecieveNoteDetailItems_inv_GoodRecieveNoteDetail1" />
+        <AssociationConnector Association="Model.FK_inv_purchaseDemandNoteDetail_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_PurchaseOrderDetail_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_purchaseRecognizationDetail_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_TenderDetail_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_VendorQuotationDetail_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_Warehouse_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_WareHouseLog_inv_ItemDetail" />
+        <AssociationConnector Association="Model.FK_inv_LetterOfCredit_inv_LetterOfCreditTypes" />
+        <AssociationConnector Association="Model.FK_inv_MaterialIssuanceReceiptDetail_inv_MaterialIssuanceReceipt" />
+        <AssociationConnector Association="Model.FK_inv_purchaseDemandNoteDetail_inv_PurchaseDemandNote" />
+        <AssociationConnector Association="Model.FK_inv_PurchaseOrder_inv_Vendors" />
+        <AssociationConnector Association="Model.FK_inv_PurchaseOrderDetail_inv_PurchaseOrder" />
+        <AssociationConnector Association="Model.FK_inv_PurchaseOrderDetail_inv_Vendors" />
+        <AssociationConnector Association="Model.FK_inv_purchaseRecognizationDetail_inv_purchaseRecognization" />
+        <AssociationConnector Association="Model.FK_inv_PurchaseReturnItemDetail_inv_PurchaseReturn" />
+        <AssociationConnector Association="Model.FK_inv_TenderDetail_inv_Tender" />
+        <AssociationConnector Association="Model.FK_inv_VendorQuotation_inv_Vendors" />
+        <AssociationConnector Association="Model.FK_inv_VendorQuotationDetail_inv_VendorQuotation1" />
+        <AssociationConnector Association="Model.FK_inv_Warehouse_inv_WarehouseDefination" />
+        <AssociationConnector Association="Model.FK_InvLatterOfCredit_inv_CurrencyDefination" />
+        <AssociationConnector Association="Model.FK_InvLetterOfCreditDetail_inv_CurrencyDefination" />
+        <AssociationConnector Association="Model.FK_InvLetterOfCreditDetail_InvExpenseDefination1" />
+        <AssociationConnector Association="Model.FK_InvLatterOfCredit_LetterOfCreditTypes" />
+        <AssociationConnector Association="Model.FK_InvLetterOfCreditDocuments_InvLatterOfCredit" />
+        <AssociationConnector Association="Model.FK_InvLetterOfCreditDetail_InvLetterOfCreditExpsInfo" />
+        <AssociationConnector Association="Model.FK_ItemBusinessUnitLink_ItemsDefination" />
+        <AssociationConnector Association="Model.FK_ItemCostingDetail_ItemCosting" />
+        <AssociationConnector Association="Model.FK_ItemCostingItemDetail_ItemCostingDetail" />
+        <AssociationConnector Association="Model.FK_ItemImage_Items" />
+        <AssociationConnector Association="Model.FK_Items_ItemsDefination" />
+        <AssociationConnector Association="Model.FK_Items_Ratios" />
+        <AssociationConnector Association="Model.FK_Items_Units" />
+        <AssociationConnector Association="Model.FK_OrderDeliveryDetail_Items" />
+        <AssociationConnector Association="Model.FK_OrderDetail_Items" />
+        <AssociationConnector Association="Model.FK_SalesReturnDetails_Items" />
+        <AssociationConnector Association="Model.FK_Warehouse_Items1" />
+        <AssociationConnector Association="Model.FK_OrderDetail_ItemsDefination" />
+        <AssociationConnector Association="Model.FK_MonthlyInstallment_LoanInfo" />
+        <AssociationConnector Association="Model.FK_SkipMonthlyInstallment_LoanInfo" />
+        <AssociationConnector Association="Model.FK_Manuf_InquiryWiseRecipeDetail_Manuf_InquiryWiseRecipeMaster" />
+        <AssociationConnector Association="Model.FK_Manuf_NewDefineRecipeDetail_Manuf_NewDefineRecipeMaster" />
+        <AssociationConnector Association="Model.FK_Manuf_DefineRecipeDetail_Manuf_DefineRecipeMaster" />
+        <AssociationConnector Association="Model.FK_Manuf_ProductionDetail_Manuf_Production" />
+        <AssociationConnector Association="Model.FK_ModuleCategory_Modules" />
+        <AssociationConnector Association="Model.FK_ModuleForms_ModuleCategory" />
+        <AssociationConnector Association="Model.FK_ModuleForms_Modules" />
+        <AssociationConnector Association="Model.FK_PrivilegesToRole_ModuleForms" />
+        <AssociationConnector Association="Model.FK_OrderDelivery_Orders" />
+        <AssociationConnector Association="Model.FK_OrderDeliveryDetail_OrderDelivery1" />
+        <AssociationConnector Association="Model.FK_OrderDeliveryDetail_OrderDetail1" />
+        <AssociationConnector Association="Model.FK_OrderDetail_Orders1" />
+        <AssociationConnector Association="Model.FK_OrderStatusCurrent_Orders1" />
+        <AssociationConnector Association="Model.FK_PerformaInvoiceChild_PerformaInvoiceMaster" />
+        <AssociationConnector Association="Model.FK_PrivilegesToRole_Roles" />
+        <AssociationConnector Association="Model.FK_Zone_Region1" />
+        <AssociationConnector Association="Model.FK_Registration_BusinessUnitLevel_Registration_CompanyLevel" />
+        <AssociationConnector Association="Model.FK_Registration_BusinessUnitLevel_Registration_User" />
+        <AssociationConnector Association="Model.FK_Registration_CompanyLevel_Registration_User" />
+        <AssociationConnector Association="Model.FK_RolesToUser_Registration_User" />
+        <AssociationConnector Association="Model.FK_RolesToUser_Roles" />
+        <AssociationConnector Association="Model.FK_SalesReturnDetails_SalesReturn" />
+        <AssociationConnector Association="Model.FK_ShiftHistory_ShiftInfo" />
+        <AssociationConnector Association="Model.FK_VendorInvoiceChild_VendorInvoiceMasterDetail" />
+        <AssociationConnector Association="Model.FK_VendorInvoiceMasterDetail_VendorInvoiceMaster" />
+        <EntityTypeShape EntityType="Model.AML_VendorsOrgType" Width="1.5" PointX="64.375" PointY="26.75" />
+        <EntityTypeShape EntityType="Model.AML_VendorsBusinessNature" Width="1.5" PointX="64.375" PointY="30.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

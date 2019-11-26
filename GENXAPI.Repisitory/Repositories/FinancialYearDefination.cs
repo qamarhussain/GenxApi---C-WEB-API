@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GENXAPI.Repisitory
 {
-    public class FinancialYearDefinationRepo : GenericCRUD<FinancialYearDefination>
+    public class FinancialYearDefinationRepo : GenericCRUD<AML_FinancialYearDefination>
     {
         public IList<DropdownListDto> GetKeyPairValue()
         {

@@ -14,14 +14,10 @@ namespace GENXAPI.Repisitory.Model
     
     public partial class Currency
     {
-        public int Id { get; set; }
-        public Nullable<double> CurrencyRate { get; set; }
-        public string Name { get; set; }
+        public int CurrencyId { get; set; }
+        public string CountryName { get; set; }
+        public string CurrencyName { get; set; }
+        public string Code { get; set; }
         public string Symbol { get; set; }
-        public Nullable<System.DateTime> LastModifiedDate { get; set; }
-        public Nullable<int> LastModifiedBy { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public byte StatusId { get; set; }
     }
 }

@@ -68,30 +68,354 @@
     <Compile Include="Infrastructure\TenderDetailRepository.cs" />
     <Compile Include="Infrastructure\TenderRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Model\ABackUp_WithOutConditions_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountsType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountVocherChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountVocherChildTemp.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountVocherMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AccountVocherMasterTemp.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AddServicesPerItem.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_BusinessUnits.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_City.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Company.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_ContractCancelation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Country.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Currency.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_CustomerBusinessLine.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Customers.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Dispatch.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_DispatchDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_ExecutedJob.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_File.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_FinancialYearDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_FleetService.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_GodownRack.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_GodownRow.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_GodownShelf.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Godwom.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_GodwomType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Item.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_ItemInformation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Job.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_JobChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_JobQuotationApproval.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Pallet.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_PickupOrder.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_PickupOrderChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Province.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Region.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_RegionalOffice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_ShipmentNote.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_ShipmentNoteChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Tender.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_TenderChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_TenderDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Units.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Users.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Vehicles.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Vendor.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_VendorQuotation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_VendorQuotationChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_VendorsBusinessNature.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_VendorsOrgType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_Warehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AML_WarehouseTransection.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ApplicationSetting.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Attendance.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AttendanceAndOverTimeLock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AttendanceDayMark.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AttendanceDayMarkType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Bank.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BankAccount.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BankAccountDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\BillOfEntryChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BillOfEntryMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BindItemsWithMachine.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Block.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BlockCutting.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BlockCuttingDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BlockProduction.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BlockProductionDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BlockWarehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Branch.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\BusinessUnit.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\City.cs">
+    <Compile Include="Model\BusinessUnitsInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChartOfAccount.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CheqeueIssuedTo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChequeBookRecord.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChequePaidSummary.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChequeReceivedFrom.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChequeReceivedSummary.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Color.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Company.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Country.cs">
+    <Compile Include="Model\CompanyInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CompanyVariable.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Currency.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CurrencyRate.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Customer.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomerCare.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerCareDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerCareFeedBack.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerInvoiceChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerInvoiceMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerInvoiceMasterDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomersBusinessLink.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerWiseCostingChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerWiseCostingMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DailyCashReceive.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DailyCashSummaryBetweenDates_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DashBoardTopEightSellingProducts_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DefaultChartOfAccount.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Department.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Designation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DispatchPlan.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DispatchPlanDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DispatchPlanSchedule.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Document.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DropdownListDto.cs" />
+    <Compile Include="Model\Employee.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeAttendanceType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeHistory.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeJobExperience.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeLeavesAllowed.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeTypeOverTime.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\FinancialYearDefination.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\FleetService.cs">
+    <Compile Include="Model\FinancialYearDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GatePass.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Gender.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GenxApiDataModel.Context.cs">
@@ -109,6 +433,360 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GenxApiDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\GetAgingBalancesAllBetweenDates_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllCashInHandAccountsFromChartAccounts_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllCashInHandAndBankAccountsFromChartAccounts_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllEmployeeShiftHistoryRecord_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllItemsDefinationLinkWithBusinessUnit_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllItemsLinkWithBusinessUnit_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllVarientsDefOnLoad_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetClosingBalancesOfFinancialYears_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetClosingBalance_AllChartOfAccountWidhDateRange_Qamar_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetClosingBalance_AllChartOfAccount_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetCustomerAccountsBalancesOnDateWithOutBillNo_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetCustomerAccountsBalancesOnDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetOpeningClosingByVocher_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetStockListOfPerformaForPDN_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetStock_Cat_Sub_Cat_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetSum_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetTop5SalesAgentForSalesDashboard_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetTop8ItemParentHeadsForInventoryItemAdding_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetVendorAccountsBalancesOnDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IncomeStatement_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InquiryDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InquiryMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvExpenseDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvLatterOfCredit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvLetterOfCreditDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvLetterOfCreditDocument.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvLetterOfCreditDocumentsUpload.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvLetterOfCreditExpsInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvPurchaseSummeryBetweenDateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvVandorWisePurchaseSummaryBetweenDates_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvViewAvailableStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvWarehouseBalancePassingCompanyIdAndBusinessUnitIdAndDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvWarehouseItemInAndOutInWarehouseBetweenDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_BinCartDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Consumption.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ConsumptionDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ConsumptionItemLoad.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_CurrencyDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_DefaultCurrencyDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_DefaultOrgType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_DefaultPriority.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_DefaultVendorsBusinessNature.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GatePass.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GatePassDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GatePassDetailItems.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GetAllItemsInChartOfAccount_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GetAllItemsInWareHouse_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GoodRecieveNote.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GoodRecieveNoteDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_GoodRecieveNoteDetailItems.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Invoice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ItemDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ItemPrices.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Inv_ItemsDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ItemsDefinationMasterCatagory_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ItemVarientDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ItemVarientDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_LetterOfCredit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_LetterOfCreditTypes.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_MaterialIssuanceReceipt.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_MaterialIssuanceReceiptDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Miniwarehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Inv_PostedVoucher.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Priority.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_PurchaseDemandNote.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_purchaseDemandNoteDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_PurchaseOrder.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_PurchaseOrderDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_purchaseRecognization.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_purchaseRecognizationDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_PurchaseReturn.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_PurchaseReturnItemDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_SP_DashBoardSearchPDN_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_SP_SearchMIR_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_StockLess.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Tender.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_TenderDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_TestViewForItemVarient.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Units.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_VendorQuotation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_VendorQuotationDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Vendors.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_VendorsBusinessNature.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_VendorsOrgType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_ViewGetWareHouseItemsTransferStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_Warehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_WarehouseDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_WareHouseLog.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\inv_WareHouseTransferSaleAudit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Item.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemBusinessUnitLink.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemCosting.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemCostingDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemCostingItemDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemImage.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemPrice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ItemsDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LetterOfCreditType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LoanInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MachineDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MachineFormula.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_DefineBatch.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_DefineRecipeDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_DefineRecipeMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_InquiryWiseRecipeDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_InquiryWiseRecipeMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_ItemWiseDepartments.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_NewDefineRecipeDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_NewDefineRecipeMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_NewProduction.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_PhaseStatus.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_ProcedureDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_ProcedureMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_Production.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_ProductionDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manuf_StepStatus.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Manu_DefinePhase.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MaritalStatu.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Module.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
@@ -118,7 +796,49 @@
     <Compile Include="Model\ModuleForm.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Province.cs">
+    <Compile Include="Model\MonthlyInstallment.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Order.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OrderDelivery.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OrderDeliveryDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OrderDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OrderStatusCurrent.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PerformaInvoiceChild.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PerformaInvoiceMaster.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PrivilegesToRole.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Ratio.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Region.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Registration_BusinessUnitLevel.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Registration_CompanyLevel.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Registration_User.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\rehman_SearchPDN_Result.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Role.cs">
@@ -127,13 +847,313 @@
     <Compile Include="Model\RolesToUser.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Tender.cs">
+    <Compile Include="Model\SaleInvoice.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\TenderChild.cs">
+    <Compile Include="Model\SaleReturnInvoice.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\TenderDetail.cs">
+    <Compile Include="Model\SalesReturn.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SalesReturnDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Service.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ShiftHistory.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ShiftInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Size.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SizeType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SkipMonthlyInstallment.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpEmployeeCurrentShiftsByDateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpEmployeeCurrentShifts_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpEmployeeLeavesMonthYearCount_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpGetBalanceForConsumptionReport_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SPGetPurchaseOrderDetailPending_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpInvGetBalanceForConsumptionReport_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_AllBatchWithPhaseProcedure_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_CustomerBusinessDetailsByItemCat_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_DashboardTransferItem_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_Dashboard_Sales_MonthWiseProjectedSale_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_Dashboard_Sales_MonthWiseSale_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Dashboard_Sales_PieChart_for_Sale_Small_PieCharts_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Dashboard_Sales_PieChart_Top5CustomerSales_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_New_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_OnPrice_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Dashboard_Sales_Top4ItemComparison_Last3Months_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_DashLedgerTransuctionDetails_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_DepartmentWiseItemConsumption_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_EmployeeAttendaneAllCheckIn_Out_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_EmplyeeAtendanceFirstInAndLastOut_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetAllTotal_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetAvailableStock_Dashboard_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetAvailableStock_DateRange_Furqan_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetAvailableStock_DateRange_New3_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetAvailableStock_DateRange_New4_Mul_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_GetChartOfAccountsSecondLevel_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Customers_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReportWithOutItems_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetChartsOfAccountsLevelFourth_WithHeads_ForReport_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetChartsOfAccountsLevelFourth_WithHeads_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetChartsOfAccountsLevelSecond_WithHeads_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetChartsOfAccountsLevelThird_WithHeads_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_getClosingBalance_WithoutConditions_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetCustomerForNewOrder_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GetItemCompleteHistoryDateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetItemDetialMirAndGrn_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_getitemlastitemprice_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_GetLedgerOP_Balc_ByDate_Qamar_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_GetTop5Vendors_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_IncomeStatementOnBasisOfDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_INV_CompleteItemHistoryBetweenDateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Inv_GetAvilableStock_DateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Inv_TotalPurchase_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_ItemConsumption_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_LedgerBalanceAccountPayable_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_LedgerBalanceAccountRecievable_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_Ledger_Transaction_Details_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_ledger_WithOutConditions_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_NewItemConsumption_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_OrderAndOrderDeliveryDetaileByOrderID_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_OrderStatusAgainstOrderID_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_PendingIGPWithItemName_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_PendingPurchaseOrderWithItemName_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_PendingRecoWithItemName_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_perMonthPurchase_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_perMonthSales_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_ReportInvWarehouseAvilableStock_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_ReportsPandingPucrchaseOrders_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_ReportsPandingPurchases_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_ReportsPandingRequisitions_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_reports_Cursor_AvailableStock_New2_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_reports_Cursor_AvailableStock_New3_Mul_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_reports_Cursor_AvailableStock_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_reports_getClosingBalance_DateFrom_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_reports_ledger_byDateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Report_ProductionHistory_New_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Report_ProductionHistory_OpeningBalance_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Report_WarehouseStockOpeningAndClosingBalnceBetweenDates_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_RequiredProductionByViews_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_salesTracking_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_SAlES_CompleteItemHistoryBetweenDateRange_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_secondchartofaccout_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_thirdchartofaccout_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_ToCustomersYearly_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Top10ItemInMIR_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_Top10ItemInPurchase_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_TopCustomersByDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_TopCustomersPerMonth_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_TopReturnedVendors_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_TopSellingItemsBetweenDates_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sp_TopSellingItemsPerMonth_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TrialBalanceOnBasisOfDateAndChartOfAccounts_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_TrialBalanceOnBasisOfDate_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_voucher_details_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tempOrdersDelivery.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\temp_Orders.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TotalSaleMonthWise_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TotalSaleOrderWiseWithSaleAndSaleReturnAndOldStockReturnDetail_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TransferedItemWarehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TransferItemsInventoryToSale.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TransferItemWareHouseAudit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TransferStockInventoryToSale.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TransferStockSalesToInventory.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Unit.cs">
@@ -142,16 +1162,349 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Vehicle.cs">
+    <Compile Include="Model\VehicleRegistration.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Vendor.cs">
+    <Compile Include="Model\VendorInvoiceChild.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\VendorsBusinessNature.cs">
+    <Compile Include="Model\VendorInvoiceMaster.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\VendorsOrgType.cs">
+    <Compile Include="Model\VendorInvoiceMasterDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewAvailableStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewAvalibalStockByWarehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewCustomerCare.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewCustomerCareFeedBack.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewDailyProduction.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewDailySale.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewDailySale_Old.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewOrderDelivery.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewRequiredProduction.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewRequiredProductionForPplanning.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewRequiredProduction_Old.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewRequiredProduction_Old2.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ViewRunningOrder.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_BatchWithCompeletItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_BatchWithPhase.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_BusinessUnitCustomerRecievable.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_BusinessUnitsByLogin.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_CustomerInvoiceDetails.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_CustomRecipe.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DashBoardEmployeePresent.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\view_DashboardEmployeePresentDepartmentWiseNet.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DashBoardEmployeeTotal.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DashboardProductionPlanning.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DashBoardTodayEmpAttendance.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DashboardTransferItem.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DashBoard_Availble_Stock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Dashboard_Sales_NetAmount_OrderPerDay.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Dashboard_Sales_test.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DayBookDashboard.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DepartmentWiseItemConsumption.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_DepartmentWiseRecipeSalesItem.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Deshboard_Sales_NetAmount_OrdersPerMonth.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Deshboard_Sales_NetAmount_PerMonth.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Deshboard_Sales_NetAmount_SalesPerDay.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Employee_Info_against_attendance.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ForIncomeStatment.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GatePassInwardWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetCurrentInfo_AllEmployees.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetCurrentInfo_AllEmployees_Reports.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetGetChartsOfAccountsFourthLevel.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetGetChartsOfAccountsSecondLevel.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetGetChartsOfAccountsThirdLevel.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetItemCompleteInfoWithoutStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetItemsCompleteInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetItemsCompleteInfoWithOutStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetPurchaseInvoice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetSaleInvoice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GetWareHouseItemDetailTransferStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_GoodRecievNoteWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_invGetItemDetailComplete.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_invItemforpdn.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_invItemforpdnApprovel.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_InvPurchaseOrderWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_InvWarehouseBatch.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_InvWarehouseOpeningBalanceReport.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_inv_GetItemsInfoInWareHouseForMoveStock.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Inv_GetSepratedColumnForItemDetialsOfC_S_B_Item.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_inv_GetSepratedRoomRackBinFromBinCartDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_inv_warehouseItemBalance.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_IssueProductionDepartment.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ItemHistoryDashboard.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ItemPriceDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ItemWiseCosting.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ItemWithoutRecipe.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_LedgerBalanceDashboardFinancial.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_LoginInformation.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ModuleFormInfo_ByRole.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_NaviagtionInfoByRole.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_NewItemConsumption.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_OrderDeliveryDetailforEdit.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\view_order_status_panding_complete.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PendingJV.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PerformaColorSize.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PerformaItemsQuantityDetails.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PhaseStatusWithName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_productionDetailWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_productionInvoice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PurchaseInvoiceDetail_Report.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PurchaseOrderPerDay.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PurchaseOrderPerMonth.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PurchaseReturnWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ReceipewithPrice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_RecievedProductionDepartment.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_RecipeDetailWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_RecipeHoldedItems.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_RecoWithItemName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_reports_ledgerAccounts.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Reports_ToSupparesItemsSizeType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_ReportVoucher.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Report_CustomerWiseSalesLedger.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Report_DeliveryChallan.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Report_OrderTypeWiseSalesDetail.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Report_WarehousNetBalanceItemWise.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_SaleReturnInvoiceDetail_Report.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_SaleReturnInvoiceSummary_Reports.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_SalesTaxInvoice.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_StepStatusWithName.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_SubCategoryColor_Size.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\view_sum_of_deliveredQuantity.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\view_sum_of_deliveredQuantity_report.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Top10CustomersYearly.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_UpdateInquiry.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_UpdateRecipe.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_UserInfo.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_VendorWithBusinessType.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_warehouseProductionDashboard.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Warehouse.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WarehouseDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WarehouseProductHistoryBetweenDates_Result.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\YearsDefination.cs">
+      <DependentUpon>GenxApiDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Zone.cs">
       <DependentUpon>GenxApiDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
